@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* ตัวอย่างใน styles.css หรือ styles.scss */
+@media screen and (max-width: 600px) {
+    /* ปรับสไตล์สำหรับหน้าจอที่มีความกว้างไม่เกิน 600px */
+    body {
+      font-size: 14px;
+    }
+  }
+  
+  @media screen and (min-width: 601px) and (max-width: 1024px) {
+    /* ปรับสไตล์สำหรับหน้าจอที่มีความกว้างระหว่าง 601px ถึง 1024px */
+    body {
+      font-size: 16px;
+    }
+  }
+  
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    // overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอน */
+    font-family: "Roboto", sans-serif;
+      
+}
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+}
