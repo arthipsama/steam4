@@ -1,16 +1,22 @@
-// backend/app.js (หรือ server.js)
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-const roomRouter = require('./room'); // ตรวจสอบชื่อไฟล์ที่สามารถเป็นไปได้
-
 const app = express();
+const roomRouter = require('./room' ,'./login' ,); 
 
-app.use(bodyParser.json());
-app.use(cors());
 
-// ตรวจสอบว่าคุณได้ให้บริการเส้นทาง '/api/room' หรือไม่
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions)); // ให้ใช้ cors ก่อนการใช้ Router
+
+app.use(express.static('public'));
 app.use('/api', roomRouter);
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

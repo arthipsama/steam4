@@ -22,6 +22,18 @@ router.get('/room', (req, res) => {
   });
 });
 
+// Define API routes for room operations
+router.get('/login', (req, res) => {
+  pool.query('SELECT * FROM room1', (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});
+
 // Other room-related routes go here...
 
 module.exports = router;

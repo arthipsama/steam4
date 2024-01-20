@@ -11,7 +11,8 @@ import { RoomDTO } from '../models/room.model';
 })
 export class RoomService  {
 
-  private apiUrl = 'https://test-back-js.onrender.com/api/room'; // URL ของ Node.js API
+private apiUrl = 'http://localhost:3000/api/login';
+// private apiUrl = 'https://test-back-js.onrender.com/api/room';
 
   constructor(private http: HttpClient) {}
 
