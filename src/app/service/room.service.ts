@@ -11,7 +11,7 @@ import { RoomDTO } from '../models/room.model';
 })
 export class RoomService  {
 
-  private apiUrl = 'http://localhost:3000/api/room'; // URL ของ Node.js API
+  private apiUrl = 'http://localhost:10000/api/room'; // URL ของ Node.js API
 
   constructor(private http: HttpClient) {}
 
