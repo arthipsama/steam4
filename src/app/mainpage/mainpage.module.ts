@@ -2,14 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainpageComponent } from './mainpage.component';
 import { ShareModule } from '../share/share.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
 @NgModule({
-  declarations: [MainpageComponent],
+  declarations: [],
   imports: [
     CommonModule,
-    ShareModule
+    ShareModule,
+    HttpClientModule,
   ]
 })
 export class MainpageModule { }
