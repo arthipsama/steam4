@@ -16,6 +16,8 @@ export class MainpageComponent implements OnInit {
   ngOnInit() {
     this.roomService.getRooms().subscribe((data) => {
       this.rooms = data;
+      console.log(this.rooms);
+      
     });
   }
 }
