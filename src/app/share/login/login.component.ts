@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RoomDTO } from 'src/app/models/room.model';
+import { userData } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -9,13 +11,15 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
+  user: any []=[];
+
   constructor(private fb: FormBuilder,
               private service: AuthService){
 
   }
 
-  ngonit(){
-
+  ngOnInit(){
+    this.initForm();
   }  
 
   initForm(){
@@ -26,9 +30,9 @@ export class LoginComponent {
   }
 
   submit(){
-    console.log(this.loginForm);
-    
-    this.service.postlogin(this.loginForm).subscribe(x=>{
+    // var username = this.loginForm.value.username;
+    // var password = this.loginForm.value.password;
+    this.service.postlogin(this.loginForm.value).subscribe(x=>{
 
     })
   }

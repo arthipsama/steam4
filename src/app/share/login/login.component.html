@@ -5,8 +5,8 @@
             <h4 class="text">Log In</h4>
             <div class="">
                 <form [formGroup]="loginForm">
-                    <input class="username form-control" type="text" formControlName="username" placeholder="username"><br>
-                    <input class="password form-control" type="text" formControlName="password" placeholder="password">
+                    <input class="username" type="text" formControlName="username" placeholder="username"><br>
+                    <input class="password" type="text" formControlName="password" placeholder="password">
                 </form>
                 <div class="bottom">
                     <a href="" class="goRegister">Need an account?</a>
@@ -17,3 +17,7 @@
         <p></p>
     </div>
 </div>
+
+<div *ngFor="let item of user">
+    <h2>{{ item.UserName }}</h2>
+  </div>
