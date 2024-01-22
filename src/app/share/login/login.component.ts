@@ -30,10 +30,11 @@ export class LoginComponent {
   }
 
   submit(){
-    // var username = this.loginForm.value.username;
-    // var password = this.loginForm.value.password;
-    this.service.postlogin(this.loginForm.value).subscribe(x=>{
-
+    var username = this.loginForm.value.username;
+    var password = this.loginForm.value.password;
+    
+    this.service.postlogin(username, password).subscribe(x=>{
+      console.log(x);
     })
   }
 }

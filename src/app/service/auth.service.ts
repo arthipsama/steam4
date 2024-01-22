@@ -10,7 +10,7 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/api/login';
   constructor(private http: HttpClient) { }
 
-  postlogin(data: any){
-    return this.http.post<any>(this.apiUrl, data)
+  postlogin(username: any, password: any){
+    return this.http.post<any>(this.apiUrl, {username: username, password: password})
   }
 }
