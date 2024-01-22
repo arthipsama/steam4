@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { ShareModule } from './share/share.module';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { MainpageModule } from './mainpage/mainpage.module';
 
 @NgModule({
   declarations: [
@@ -18,8 +16,7 @@ import { MainpageModule } from './mainpage/mainpage.module';
     BrowserModule,
     AppRoutingModule,
     ShareModule,
-    HttpClientModule,
-
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

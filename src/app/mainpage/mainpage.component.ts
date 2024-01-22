@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomService } from '../service/room.service';
 import { RoomDTO } from '../models/room.model';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -16,6 +17,8 @@ export class MainpageComponent implements OnInit {
   ngOnInit() {
     this.roomService.getRooms().subscribe((data) => {
       this.rooms = data;
+      console.log(this.rooms);
+      
     });
   }
 }
