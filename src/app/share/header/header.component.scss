@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+$fontAwesomeIntegrity: 'sha512-XXX' !default;
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
+header {
+  display: flex;
+  // padding: 40px;
+  // background-color: #2a36b1; /* สีพื้นหลังของ Header */
+  color: white; /* สีข้อความ */
+  justify-content: center; /* ให้ระยะห่างระหว่าง .logo, .search-box, .user-icon, และ .cart-icon เท่าๆ กัน */
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 120px; /* ขนาดของ Logo */
+      height: auto;
+    }
+  }
+    
+    .user-icon,
+    .cart-icon {
+      display: flex;
+      align-items: center;
+    }
+  
+    .user-icon {
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  
+    .cart-icon {
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+  
+  .subheader {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    background-color: #311b92	;
+  
+    span {
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      position: sticky;
+    }
+  }
+
+  a[href] {
+    color: inherit; // ให้ลิงก์ใช้สีเดิมของตัวอักษร
+    text-decoration: none; // ไม่ให้มีขีดเส้นใต้
+  }
+  
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+
+  input {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+  }
+
+  .search-button {
+      background-color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 5px;
+      margin-left: 10px;
+
+      .icon-search {
+          color: white;
+          // Add your icon styles here
+      }
+  }
+}
+
+  
