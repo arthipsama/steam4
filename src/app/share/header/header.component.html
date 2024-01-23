@@ -1,1 +1,41 @@
-<p>header works!</p>
+<header
+  style="background-image: url('../assets/Banner.jpg'); background-size: cover; background-position: center; padding: 40px; color: white; display: flex; justify-content: center;">
+  <div class="logo" style="margin-right: 60px;">
+    <a href="/mainpage">
+      <img src="../assets/logo.png" alt="ชื่อโลโก้" style="width: 200px;">
+    </a>
+  </div>
+
+  <div class="search-bar" style="width: 690px;">
+    <input type="text" placeholder="ค้นหา..." style="margin-left: 8px;">
+    <button class="search-button" (click)="searchProducts()">
+      <i class="fas fa-search" style="margin-right: 8px;"></i>
+    </button>
+  </div>
+
+  <div class="cart-icon" style="margin-left: 60px;">
+    <div class="user-icon">
+      <button routerLink="/cart" class="btn">
+        <i style="font-size: 24px; color: white;" class="fas fa-cart-plus"></i>
+        <div style="font-size: 10px;" class="badge bg-primary">{{cartItemsCount }}</div>
+      </button>
+      <!-- <a routerLink="/login">
+                <i class="bi bi-person"></i>
+            </a> -->
+      <a href="login" class="btn" *ngIf="loging == false">
+        <i style="font-size: 24px; color: white;" class="fas fa-user"></i>
+      </a>
+      <div class="" *ngIf="loging">
+        <a href="/profile"><i style="font-size: 24px; color: white;" class="fas fa-user"> : {{nameUser}}</i></a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="subheader">
+  <a routerLink="/products/productsAll" (click)="nextProducts()"><span>สินค้าทั้งหมด</span></a>
+  <a routerLink="/howtobuy"><span>วิธีสั่งซื้อ</span></a>
+  <a routerLink="/payment"><span>แจ้งชำระเงิน</span></a>
+  <a routerLink="/contact"><span>ติดต่อเรา</span></a>
+  <a routerLink="/articles"><span>บทความ</span></a>
+</div>
