@@ -6,5 +6,5 @@ export interface userData {
     lastname: string;
     phonenumber: string;
     email: string;
-    roleid: string
+    roleid: string;
   }
