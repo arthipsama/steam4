@@ -13,4 +13,9 @@ export class AuthService {
   postlogin(username: any, password: any){
     return this.http.post<any>(this.apiUrl, {username: username, password: password})
   }
+
+  postregister(username:any, password:any, firstname:any, lastname:any, phoneNumber:any, email:any, contact:any){
+    var api = 'http://localhost:3000/api/register'
+    return this.http.post<any>(api, {username:username, password:password, firstname:firstname, lastname:lastname, phoneNumber:phoneNumber, email:email, contact:contact})
+  }
 }

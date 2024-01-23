@@ -12,54 +12,43 @@ const pool = new Pool({
 });
 
 router.post('/login', (req, res) => {
-  const {username} = req.body;
-  const {password} = req.body;
-  // const trueUsername = "'" + username + "'";
-   
+  const { username, password } = req.body;
+
   const query = 'SELECT * FROM "public"."User" WHERE "UserName" = $1 AND "Password" = $2';
   pool.query(query, [username, password], (err, result) => {
-     if (err) {
-       console.error('Error executing query', err);
-       res.status(500).json({ error: 'Internal Server Error' });
-       return;
-     }
-     if (result.rows.length === 0) {
-       res.json(null);
-     } else {
-       res.json(result.rows[0]);
-     }
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    if (result.rows.length === 0) {
+      res.json(null);
+    } else {
+      res.json(result.rows[0]);
+    }
   });
- });
- 
- module.exports = router;
-// router.post('/login', (req, res) => {
-//   pool.query('SELECT * FROM "public"."User" WHERE User', (err, result) => {
-//     if (err) {
-//       console.error('Error executing query', err);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//       return;
-//     }
-//     res.json(result.rows);
-//   });
-// });
-// module.exports = router;
+});
+
+module.exports = router;
 
 
-// router.post('/login', (req, res) => {
-//   const { username, password } = req.body;
-//   pool.query('SELECT * FROM user WHERE username = $1 AND password = $2', [username, password], (err, result) => {
-//      if (err) {
-//        console.error('Error executing query', err);
-//        res.status(500).json({ error: 'Internal Server Error' });
-//        return;
-//      }
-//      if (result.rowCount === 0) {
-//        res.status(401).json({ error: 'Invalid username or password' });
-//      } else {
-//        res.json(result.rows[0]);
-//      }
-//   });
-//  });
-  
-// Other room-related routes go here...
+router.post('/register', (req, res) => {
+  const { username, password, firstname, lastname, phonenumber, email, contact } = req.body;
+
+  if (!username && !password && !firstname && !lastname) {
+    const query = 'INSERT INTO "public"."User" ("UserName", "Password", "FirstName", "LastName", "PhoneNumber", "Email", "Contact", roleid) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+    pool.query(query, [username, password, firstname, lastname, phonenumber, email, contact, '1'], (err, result) => {
+      if (err) {
+        console.error('Error executing query', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+      res.json({ message: 'User registered successfully' });
+    });
+  } else {
+    res.status(400).json({ error: 'Username cannot be null' });
+    return;
+  }
+});
+
 
