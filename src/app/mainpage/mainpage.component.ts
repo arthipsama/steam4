@@ -11,7 +11,7 @@ import { AuthService } from '../service/auth.service';
 export class MainpageComponent implements OnInit {
 
   rooms: any[] = [];
-
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
   constructor(private roomService: RoomService) {}
 
   ngOnInit() {

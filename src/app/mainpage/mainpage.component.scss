@@ -1,0 +1,65 @@
+/* -------------------------------menu item----------------------------------- */
+
+.container {
+    // background-color: #2a36b1; // กำหนดสีพื้นหลังของ container
+    color: #fff; // กำหนดสีของตัวอักษร
+  }
+  
+  .list-group-item {
+    background-color: #2a36b1; // กำหนดสีพื้นหลังของ list-group-item
+    border-color: #fff; // กำหนดสีเส้นขอบของ list-group-item
+    color: #fff; // กำหนดสีของตัวอักษร
+  }
+  
+  .row {
+    margin-right: 0; // กำหนดให้ไม่มี margin-right สำหรับ row
+  }
+  
+  .col-md-2 {
+    margin-right: 15px; // กำหนด margin-right สำหรับ col-md-2
+  }
+  
+  .text-white {
+    color: #fff !important; // ใส่ !important เพื่อทำให้สีของตัวอักษรมีผลทันที
+  }
+  
+  .list-group {
+    background-color: #1a237e; // กำหนดสีพื้นหลังของ list-group
+  }
+  
+  .list-group-item {
+    cursor: pointer; /* เพิ่ม cursor เมื่อนำเมาส์ไป hover */
+    transition: background-color 0.3s; /* เพิ่ม transition effect */
+  
+    &:hover {
+      background-color: #fff; /* เปลี่ยนสี background เมื่อ hover */
+      color: #000; /* เปลี่ยนสีตัวอักษรเมื่อ hover */
+    }
+  }
+  
+  
+  /* ------------------------------------------------------------------------------- */
+  
+  
+  
+  /* -------------------------------Product Recommand---------------------------------- */
+  .product-container {
+    text-align: center;
+  }
+  
+  .product-container img {
+    width: 100%; /* ทำให้รูปภาพทั้งหมดมีขนาดเท่ากัน */
+    width: 250px; /* กำหนดขนาดสูงสุดของรูปภาพ */
+    height: 150px; /* ทำให้รูปภาพปรับขนาดตามอัตราส่วน */
+  }
+  
+  .caption {
+    margin-top: 10px;
+    
+  }
+  
+  .recommand_image {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  /* ------------------------------------------------------------------------------- */

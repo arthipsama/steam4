@@ -1,15 +1,85 @@
 <app-header></app-header>
 
-<p>mainpage works!</p>
-<p>mainpage works!</p>
-<p>mainpage works!</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-md-2"> <!-- ใส่ margin-right เพื่อขยับไปทางด้านขวา -->
+      <h4 class="text-white">หมวดหมู่สินค้า</h4>
+      <ul class="list-group">
+        <li class="list-group-item" routerLink="/products/steamwallet">บัตรเติมเงิน/บัตรเติมเกม</li>
+        <li class="list-group-item" routerLink="/products/game-items">คีย์เกม/ไอเทมในเกม</li>
+        <li class="list-group-item" routerLink="/products/steam-id">ไอดีเกมสตรีม</li>
+        <li class="list-group-item" routerLink="/products/programs">โปรแกรม</li>
+        <!-- เพิ่ม Li ui ที่คุณต้องการที่นี่ -->
+      </ul>      
+    </div>
+    
+    <div class="col row">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="margin-bottom: 10px; font-size: 20px;">รูปภาพแนะนำ</div>
+        <div *ngIf="images">
+          <ngb-carousel>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="images[0]" alt="Random first slide" />
+              </div>
+              <div class="carousel-caption">
+                <h3>First slide label</h3>
+                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="images[1]" alt="Random second slide" />
+              </div>
+              <div class="carousel-caption">
+                <h3>Second slide label</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="images[2]" alt="Random third slide" />
+              </div>
+              <div class="carousel-caption">
+                <h3>Third slide label</h3>
+                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </div>
+      </div>
+      
+      <div style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-top: 50px;">
+        <div style="margin-bottom: 10px; font-size: 20px;">สินค้ายอดฮิต</div>
+        <div style="display: flex; justify-content: space-around;">
+          <div class="product-container">
+            <img src="../assets/Game/GTA.jpg" alt="Product 1" class="recommand_image"/>
+            <div class="caption">
+              <h3>Product 1</h3>
+              <p>Description for Product 1.</p>
+            </div>
+          </div>
+          <div class="product-container">
+            <img src="../assets/Game/Elden.jpg" alt="Product 2" class="recommand_image" />
+            <div class="caption">
+              <h3>Product 2</h3>
+              <p>Description for Product 2.</p>
+            </div>
+          </div>
+          <div class="product-container">
+            <img src="../assets/Game/Party.jpg" alt="Product 3" class="recommand_image" />
+            <div class="caption">
+              <h3>Product 3</h3>
+              <p>Description for Product 3.</p>
+            </div>
+          </div>
+        </div>
+        
 
-
-<div *ngFor="let room of rooms">
-  <h2>{{ room.type_room }}</h2>
+        <div style="margin-bottom: 10px; margin-top: 50px;  font-size: 20px;">ฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกห</div>
+      </div>
+    </div>
+    
+  </div>
 </div>
-
-<a href="/login">login</a>
-
-
 <app-footer></app-footer>

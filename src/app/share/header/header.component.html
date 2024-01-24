@@ -15,18 +15,20 @@
 
   <div class="cart-icon" style="margin-left: 60px;">
     <div class="user-icon">
-      <button routerLink="/cart" class="btn">
+      <a href="login" class="btn" *ngIf="loging == false">
+        <i style="font-size: 24px; color: white;" class="fas fa-cart-plus"></i>
+        <div style="font-size: 10px;" class="badge bg-primary"></div>
+      </a>
+      <a href="cart" class="btn" *ngIf="loging">
         <i style="font-size: 24px; color: white;" class="fas fa-cart-plus"></i>
         <div style="font-size: 10px;" class="badge bg-primary">{{cartItemsCount }}</div>
-      </button>
-      <!-- <a routerLink="/login">
-                <i class="bi bi-person"></i>
-            </a> -->
+      </a>
+
       <a href="login" class="btn" *ngIf="loging == false">
         <i style="font-size: 24px; color: white;" class="fas fa-user"></i>
       </a>
       <div class="" *ngIf="loging">
-        <a href="/profile"><i style="font-size: 24px; color: white;" class="fas fa-user"> : {{nameUser}}</i></a>
+        <a href="profile"><i style="font-size: 24px; color: white;" class="fas fa-user"> : {{userData.FirstName}}</i></a>
       </div>
     </div>
   </div>
