@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RoomDTO } from 'src/app/models/room.model';
 import { userData } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/service/auth.service';
@@ -11,10 +12,10 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  user: any []=[];
-
+  userData: any;
   constructor(private fb: FormBuilder,
-              private service: AuthService){
+              private service: AuthService,
+              private router: Router){
 
   }
 
@@ -34,7 +35,15 @@ export class LoginComponent {
     var password = this.loginForm.value.password;
     
     this.service.postlogin(username, password).subscribe(x=>{
-      console.log(x);
+      this.userData = x;
+      if(this.userData){
+        this.router.navigate(['/mainpage']);
+        this.service.outputUserData(this.userData)
+        localStorage.setItem('userData', JSON.stringify(this.userData));
+      }
+      else{
+        console.log("login ไม่สำเร็จ");
+      }
     })
   }
 }

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { LoginComponent } from './share/login/login.component';
 import { RegisterComponent } from './share/register/register.component';
+import { CartComponent } from './share/cart/cart.component';
+import { ProfileComponent } from './share/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,14 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'cart',
+    component: CartComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   },
   {
     path: '', redirectTo: 'mainpage', pathMatch: 'full'

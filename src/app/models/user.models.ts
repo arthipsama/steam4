@@ -1,10 +1,10 @@
 export interface userData {
-    id: string;
-    username: string;
+    userid: string;
+    UserName: string;
     password: string;
-    firstname: string;
-    lastname: string;
-    phonenumber: string;
-    email: string;
+    FirstName: string;
+    LastName: string;
+    PhoneNumber: string;
+    Email: string;
     roleid: string;
   }
