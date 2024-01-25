@@ -1,1 +1,32 @@
 <app-header></app-header>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-2"></div>
+        <div class="col-2 md-2">
+            <ul class="list-group">
+                <a href="/profile" class="list-group-item">ข้อมูลส่วนตัว</a>
+                <a href="/profile" class="list-group-item">คีย์เกม/ไอเทมในเกม</a>
+                <a href="/profile" class="list-group-item">ประวัติการสั่งซื้อ</a>
+                <li class="list-group-item" (click)="logout()">ออกจากระบบ</li>
+            </ul>
+        </div>
+        <div class="col-8">
+            <form [formGroup]="profileForm">
+                <div class="" style="margin-left: 20px; width: 50%;">
+                    <p class="p">Firstname</p>
+                    <input class="firstname form-control" type="text" formControlName="firstname"><br>
+                    <p class="p">Lastname</p>
+                    <input class="lastname form-control" type="text" formControlName="lastname"><br>
+                    <p class="p">PhoneNumber</p>
+                    <input class="phoneNumber form-control" type="text" formControlName="phoneNumber"><br>
+                    <p class="p">Email</p>
+                    <input class="email form-control" type="text" formControlName="email"><br>
+                    <p class="p">Contact</p>
+                    <input class="contact form-control" type="text" formControlName="contact"><br>
+                </div>
+            </form>
+            <button type="button" class="button btn btn" (click)="save()">submit</button>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

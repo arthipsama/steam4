@@ -1,0 +1,49 @@
+.fullpage{
+    display: flex;
+    justify-content: center;
+    font-style: italic
+}
+
+.cardlogin{
+    background-color: #f8f8f8;
+    border: 1px solid #d6d6d6;
+}
+
+.text{
+    display: flex;
+    justify-content: center;
+    padding-top: 55px;
+}
+
+.body{
+    height: 450px;
+    width: 500px;
+}
+
+.username{
+
+    margin: 20px 0 0 60px; 
+    width: 70%;
+}
+
+.password{
+    margin: 0 0 20px 60px; 
+    width: 70%;
+}
+
+.bottom{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 80px 0 60px;
+}
+
+.button{
+    width: 75px;
+    background-color: #ff4500;
+    color: white;
+    font-weight: bold;
+}
+
+.goRegister{
+    text-decoration: none;
+}

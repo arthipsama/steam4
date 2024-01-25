@@ -39,7 +39,7 @@ export class LoginComponent {
       if(this.userData){
         this.router.navigate(['/mainpage']);
         this.service.outputUserData(this.userData)
-        localStorage.setItem('userData', JSON.stringify(this.userData));
+        sessionStorage.setItem('userData', JSON.stringify(this.userData));
       }
       else{
         console.log("login ไม่สำเร็จ");
