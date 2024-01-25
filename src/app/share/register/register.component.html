@@ -2,20 +2,28 @@
 <div class="fullpage">
     <div class="body row">
         <p></p>
-        <div class="cardlogin col">
-            <h4 class="text">register</h4>
+        <div class="cardregister col-12">
+            <h4 class="text">Register</h4><br>
+            <div class="" style="border: 1px solid rgb(202, 202, 202); width: 700px; margin-left: 30px;"></div><br>
             <div class="">
                 <form [formGroup]="registerForm">
-                    <input class="username" type="text" formControlName="username" placeholder="username"><br>
-                    <input class="password" type="text" formControlName="password" placeholder="password"><br>
-                    <input class="firstname" type="text" formControlName="firstname" placeholder="firstname"><br>
-                    <input class="lastname" type="text" formControlName="lastname" placeholder="lastname"><br>
-                    <input class="phonNumber" type="text" formControlName="phoNumber" placeholder="phonNumber"><br>
-                    <input class="email" type="text" formControlName="email" placeholder="email"><br>
-                    <input class="contact" type="text" formControlName="contact" placeholder="contact">
+                    <div class="" style="display: flex;">
+                        <div class="col-6" style="margin-left: 20px; width: 45%;">
+                            <input class="username form-control" type="text" formControlName="username" placeholder="username"><br>
+                            <input class="password form-control" type="text" formControlName="password" placeholder="password"><br>
+                            <input class="firstname form-control" type="text" formControlName="firstname" placeholder="firstname"><br>
+                            <input class="lastname form-control" type="text" formControlName="lastname" placeholder="lastname"><br>
+                        </div>
+    
+                        <div class="col-6" style="margin-left: 20px; width: 45%;">
+                            <input class="phoneNumber form-control" type="text" formControlName="phoneNumber" placeholder="phoneNumber"><br>
+                            <input class="email form-control" type="text" formControlName="email" placeholder="email"><br>
+                            <input class="contact form-control" type="text" formControlName="contact" placeholder="contact">
+                        </div>
+                    </div>
                 </form>
                 <div class="bottom">
-                    <a href="/login" class="goRegister">back</a>
+                    <a href="/login" class="goRegister">I have account</a>
                     <button type="button" class="button btn btn" (click)="submit()">reigster</button>    
                 </div>
             </div>
@@ -23,3 +31,4 @@
         <p></p>
     </div>
 </div>
+<app-footer></app-footer>

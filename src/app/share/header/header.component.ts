@@ -19,12 +19,11 @@ export class HeaderComponent implements OnInit{
   }
 
   ngOnInit(): void {      
-    let storedUserData = localStorage.getItem('userData');
+    let storedUserData = sessionStorage.getItem('userData');
     if (storedUserData) {
         this.userData = JSON.parse(storedUserData);
         this.loging = true;
     }
-    console.log(this.userData);
   }
 
   searchProducts() {

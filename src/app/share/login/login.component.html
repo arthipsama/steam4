@@ -6,16 +6,16 @@
             <h4 class="text">Log In</h4>
             <div class="">
                 <form [formGroup]="loginForm">
-                    <input class="username" type="text" formControlName="username" placeholder="username"><br>
-                    <input class="password" type="text" formControlName="password" placeholder="password">
+                    <input class="username form-control" type="text" formControlName="username" placeholder="username"><br>
+                    <input class="password form-control" type="password" formControlName="password" placeholder="password">
                 </form>
                 <div class="bottom">
                     <a href="register" class="goRegister">Need an account?</a>
-                    <button type="button" class="button btn btn" (click)="submit()">Log In
-                    </button>    
+                    <button type="button" class="button btn btn" (click)="submit()">Log In</button>    
                 </div>
             </div>
         </div>
         <p></p>
     </div>
 </div>
+<app-footer></app-footer>

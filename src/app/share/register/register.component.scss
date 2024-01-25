@@ -1,0 +1,40 @@
+.fullpage{
+    display: flex;
+    justify-content: center;
+    font-style: italic
+}
+
+.cardregister{
+    background-color: #f8f8f8;
+    border: 1px solid #d6d6d6;
+}
+
+.text{
+    display: flex;
+    justify-content: center;
+    padding-top: 55px;
+}
+
+.body{
+    height: 550px;
+    width: 800px;
+}
+
+
+
+.bottom{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px 0 30px;
+}
+
+.button{
+    width: 85px;
+    background-color: #ff4500;
+    color: white;
+    font-weight: bold;
+}
+
+.goRegister{
+    text-decoration: none;
+}
