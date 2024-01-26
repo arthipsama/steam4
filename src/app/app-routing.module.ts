@@ -5,6 +5,7 @@ import { LoginComponent } from './share/login/login.component';
 import { RegisterComponent } from './share/register/register.component';
 import { CartComponent } from './share/cart/cart.component';
 import { ProfileComponent } from './share/profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent
   },
   {
     path: '', redirectTo: 'mainpage', pathMatch: 'full'

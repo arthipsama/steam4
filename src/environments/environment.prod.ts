@@ -8,7 +8,7 @@ export const environment = {
   USERTOKEN_KEY: 'authf649fc9a5f55',
   USERPROFILE_KEY: 'authf649fc9a5f56',
   isMockEnabled: true,
-  apiUrl: 'https://trainee-api.binarycore.online/api',
+  apiUrl: 'http://localhost:3000/api',
   appThemeName: 'Metronic',
   appPurchaseUrl: 'https://1.envato.market/EA4JP',
   appHTMLIntegration: 'https://preview.keenthemes.com/metronic8/demo2/documentation/base/helpers/flex-layouts.html',

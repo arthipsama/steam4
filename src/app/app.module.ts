@@ -7,18 +7,23 @@ import { MainpageComponent } from './mainpage/mainpage.component';
 import { ShareModule } from './share/share.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
+import { AdminComponent } from './admin/admin.component';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainpageComponent
+    MainpageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ShareModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
