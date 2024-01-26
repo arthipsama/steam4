@@ -21,9 +21,18 @@ export class AuthService {
 
   postregister(username:string, password:string, firstname:string, lastname:string, phoneNumber:string, email:string, contact:string){
     var api = 'http://localhost:3000/api/register'
-    console.log(username, password, firstname, lastname, phoneNumber, email, contact);
     
     return this.http.post<any>(api, {username:username, password:password, firstname:firstname, lastname:lastname, phoneNumber:phoneNumber, email:email, contact:contact})
+  }
+
+  editProfile(userid:string, firstname:string, lastname:string, phoneNumber:string, email:string, contact:string){
+    var api = 'http://localhost:3000/api/editProfile'
+    return this.http.put(api, {userid:userid, firstname:firstname, lastname:lastname, phoneNumber:phoneNumber, email:email, contact:contact})
+  }
+
+  UserData(userid:any){
+    var api = 'http://localhost:3000/api/getUserData'
+    return this.http.post<any>(api, {userid:userid})
   }
 
   outputUserData(userData: userData){

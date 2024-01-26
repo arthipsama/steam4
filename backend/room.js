@@ -1,4 +1,3 @@
-// backend/room.js
 const { Pool } = require('pg');
 const express = require('express');
 const router = express.Router();
