@@ -1,32 +1,57 @@
 <!-- topnavbar -->
 <div class="topnav shadow p-1">
-    <a>Admin Dashboard</a>
-    <span class="menu" (click)="openNav(true)"><i class="bi bi-list"></i></span>
+  <div class="left-content">
+      <a>Admin Dashboard</a>
+        <!-- ช่องค้นหา -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search...">
+    <button type="button" (click)="handleSearchClick()"><i class="bi bi-search"></i></button>
+</div>
+
+  </div>
+
+  <!-- ไอคอน User ต่อท้ายชิดขวาสุด -->
+  <div class="right-content">
+    <span class="notification-icon" (click)="handleNotificationClick()">
+      <i class="bi bi-bell"></i>
+  </span>
+      <span class="user-icon"><i class="bi bi-person"></i></span>
+  </div>
+  <!-- ปุ่มเมนู -->
+  <span class="menu" (click)="openNav(true)"><i class="bi bi-list"></i></span>
 </div>
 <!-- topnavbar -->
 
-<!-- left sidebar nav  -->
 
+<!-- left sidebar nav  -->
 <div  class="sidebar shadow p-2"  id="sidebar"  [ngStyle]="responsiveMenu">
     <ul>
-        <li><a routerLink="/admin/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-        <li><a routerLink="/admin/order"><i class="bi bi-card-text"></i> Order</a></li>
+        <li routerLinkActive="active-link"><a routerLink="/admin/dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li routerLinkActive="active-link"><a routerLink="/admin/order"><i class="bi bi-card-text"></i> Order</a></li>
         <li>
-            <a href="#"><i class="bi bi-bag"></i> Products <i class="bi bi-arrow-right icon"></i></a>
+            <a routerLink="#" (click)="toggleArrowAndBagIconsProducts()">
+              <i [ngClass]="arrowIconClassProducts"></i>
+              <i [ngClass]="bagIconClassProducts"></i> Products
+            </a>
             <ul class="dropdow-container">
-                <li><a routerLink="/admin/product">Product List</a></li>
-                <li><a routerLink="#">Product Categories</a></li>
+              <li routerLinkActive="active-link"><a routerLink="/admin/product">Product List</a></li>
+              <li routerLinkActive="active-link"><a routerLink="#">Product Categories</a></li>
             </ul>
-        </li>
-        <li><a routerLink="/admin/user"><i class="bi bi-person-gear"></i> User</a></li>
-        <li>
-            <a routerLink="#"><i class="bi bi-tag"></i> Other <i class="bi bi-arrow-right icon"></i></a>
+          </li>
+          
+          <li routerLinkActive="active-link"><a routerLink="/admin/user"><i class="bi bi-person-gear"></i> User</a></li>
+          
+          <li>
+            <a routerLink="#" (click)="toggleArrowAndTagIconsOther()">
+              <i [ngClass]="arrowIconClassOther"></i>
+              <i [ngClass]="tagIconClassOther"></i> Other
+            </a>
             <ul class="dropdow-container">
-                <li><a routerLink="/admin/new">Content Game</a></li>
-                <li><a routerLink="/admin/contact">Contact</a></li>
+              <li routerLinkActive="active-link"><a routerLink="/admin/new">Content Game</a></li>
+              <li routerLinkActive="active-link"><a routerLink="/admin/contact">Contact</a></li>
             </ul>
-        </li>
-        <li><a routerLink="/login"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
+          </li>          
+        <li routerLinkActive="active-link"><a routerLink="/login"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
 
     </ul>
 </div>
@@ -39,6 +64,15 @@
 </div>
 
 <!-- main content  -->
+
+
+
+
+
+
+
+
+
 
 
 <link rel="icon" type="image/x-icon" href="favicon.ico">

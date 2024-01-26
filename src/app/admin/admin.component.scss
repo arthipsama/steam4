@@ -1,33 +1,84 @@
 
-/* topnav css  */
+/* topnav css */
 .topnav {
     width: 100%;
     position: fixed;
-    top:0;
+    top: 0;
     left: 0;
     overflow: hidden;
     background-color: #fff;
     border-bottom: 1px solid rgb(128, 128, 128);
-}
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-.topnav a {
-    float: left;
-    text-align: center;
-    font-size: 17px;
-    font-weight: bold;
-    padding: 14px 16px;
-}
+    .left-content {
+        display: flex;
+        align-items: center;
 
-.menu {
-    float: right;
-    margin-right: 10px;
-    margin-top: 10px;
-    font-size: 30px;
-    cursor: pointer;
-    color: #000;
-    display: none;
+        a {
+            float: left;
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+            padding: 14px 16px;
+        }
+
+        .notification-icon,
+        .user-icon {
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+
+        input {
+            padding: 5px;
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 5px;
+            cursor: pointer;
+        }
+    }
+
+    .right-content {
+        display: flex;
+        align-items: center;
+
+        a {
+            margin-right: 10px;
+        }
+    }
+
+    .menu {
+        float: right;
+        margin-right: 10px;
+        margin-top: 10px;
+        font-size: 30px;
+        cursor: pointer;
+        color: #000;
+        display: none;
+    }
+
+    @media screen and (max-width: 500px) {
+        .left-content,
+        .right-content {
+            display: none;
+        }
+
+        .menu {
+            display: block;
+        }
+    }
 }
-/* topnav css  */
+/* topnav css */
+
 
 /* left sidebar nav  */
 
@@ -109,3 +160,11 @@ ul>li>a.active{
     }
 
 }
+
+/* sidebar.component.scss */
+
+.active-link {
+    background-color: darkkhaki;
+    color: white; /* สีตัวอักษรหัวข้อ */
+  }
+  
