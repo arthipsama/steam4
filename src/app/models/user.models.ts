@@ -1,7 +1,7 @@
 export interface userData {
     userid: string;
     UserName: string;
-    password: string;
+    Password: string;
     FirstName: string;
     LastName: string;
     PhoneNumber: string;
