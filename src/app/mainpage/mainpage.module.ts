@@ -13,7 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     ShareModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
   ]
 })
 export class MainpageModule { }

@@ -19,6 +19,4 @@ private apiUrl = 'http://localhost:3000/api/room';
   getRooms(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
-  
-
 }
