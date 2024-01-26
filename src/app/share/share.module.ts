@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CardProductComponent } from './card-product/card-product.component';
 
 
 
@@ -18,7 +19,8 @@ import { ProfileComponent } from './profile/profile.component';
     LoginComponent,
     RegisterComponent,
     CartComponent,
-    ProfileComponent
+    ProfileComponent,
+    CardProductComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { ProfileComponent } from './profile/profile.component';
   exports:[
     HeaderComponent,
     FooterComponent,
+    CardProductComponent
   ]
 })
 export class ShareModule { }
