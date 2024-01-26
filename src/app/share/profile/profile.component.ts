@@ -24,21 +24,25 @@ export class ProfileComponent {
     if (storedUserData) {
       this.userData = JSON.parse(storedUserData);
     }
-    this.initForm()
+
+    this.service.UserData(this.userData.userid).subscribe(x=>{
+      this.newUserData = x[0];
+      this.initForm()
+    })
   }
 
   initForm() {
     this.profileForm = this.fb.group({
-      firstname: this.userData.FirstName,
-      lastname: this.userData.LastName,
-      phoneNumber: this.userData.PhoneNumber,
-      email: [this.userData.Email, Validators.email],
-      contact: this.userData.Contact
+      firstname: this.newUserData.FirstName,
+      lastname: this.newUserData.LastName,
+      phoneNumber: this.newUserData.PhoneNumber,
+      email: [this.newUserData.Email, Validators.email],
+      contact: this.newUserData.Contact
     })
   }
 
   logout() {
-    sessionStorage.removeItem('userData');
+    localStorage.removeItem('userData');
     this.router.navigate(['/mainpage']);
   }
 
@@ -50,11 +54,7 @@ export class ProfileComponent {
     var email = this.profileForm.value.email;
     var contact = this.profileForm.value.contact;
     this.service.editProfile(userid, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
-      console.log('edit เสร็จ');  
-    })
-    this.service.UserData(this.userData.userid).subscribe(x=>{
-      this.newUserData = x;
-      
+      console.log('edit สำเสร็จ');  
     })
   }
 }
