@@ -10,20 +10,20 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
-  userData!: userData;
-  profileForm! : FormGroup;
+  userData: any;
+  profileForm!: FormGroup;
+  newUserData!: userData;
 
   constructor(private router: Router,
-              private fb: FormBuilder,
-              private service: AuthService){
+    private fb: FormBuilder,
+    private service: AuthService) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
     let storedUserData = sessionStorage.getItem('userData');
     if (storedUserData) {
       this.userData = JSON.parse(storedUserData);
     }
-    console.log(this.userData);
     this.initForm()
   }
 
@@ -33,17 +33,28 @@ export class ProfileComponent {
       lastname: this.userData.LastName,
       phoneNumber: this.userData.PhoneNumber,
       email: [this.userData.Email, Validators.email],
-      contact: this.userData.contact
+      contact: this.userData.Contact
     })
   }
 
-
-  logout(){
+  logout() {
     sessionStorage.removeItem('userData');
     this.router.navigate(['/mainpage']);
   }
 
-  save(){
-    
+  save() {
+    var userid = this.userData.userid;
+    var firstname = this.profileForm.value.firstname;
+    var lastname = this.profileForm.value.lastname;
+    var phoneNumber = this.profileForm.value.phoneNumber;
+    var email = this.profileForm.value.email;
+    var contact = this.profileForm.value.contact;
+    this.service.editProfile(userid, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
+      console.log('edit เสร็จ');  
+    })
+    this.service.UserData(this.userData.userid).subscribe(x=>{
+      this.newUserData = x;
+      
+    })
   }
 }

@@ -3,6 +3,7 @@ const cors = require('cors');
 const app = express();
 const roomRouter = require('./room'); 
 const authRouter = require('./auth');
+const userRouter = require('./user');
 
 const corsOptions = {
   origin: '*',
@@ -14,6 +15,7 @@ app.use(cors(corsOptions)); // ให้ใช้ cors ก่อนการใ�
 app.use(express.static('public'));
 app.use('/api', roomRouter);
 app.use('/api', authRouter);
+app.use('/api', userRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

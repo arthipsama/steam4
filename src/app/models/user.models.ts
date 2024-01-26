@@ -6,6 +6,6 @@ export interface userData {
     LastName: string;
     PhoneNumber: string;
     Email: string;
-    contact: string;
+    Contact: string;
     roleid: string;
   }
