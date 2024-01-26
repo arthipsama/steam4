@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
 import { AdminModule } from './admin/admin.module';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { AdminModule } from './admin/admin.module';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    AdminModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
