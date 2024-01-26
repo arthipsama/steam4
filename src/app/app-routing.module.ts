@@ -6,6 +6,12 @@ import { RegisterComponent } from './share/register/register.component';
 import { CartComponent } from './share/cart/cart.component';
 import { ProfileComponent } from './share/profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
+import { AccountComponent } from './admin/account/account.component';
+import { ContactComponent } from './admin/contact/contact.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { NewComponent } from './admin/new/new.component';
+import { OrderComponent } from './admin/order/order.component';
+import { ProductComponent } from './admin/product/product.component';
 
 const routes: Routes = [
   {
@@ -30,7 +36,16 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminComponent
+    component: AdminComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'user', component: AccountComponent },
+      { path: 'product', component: ProductComponent },
+      { path: 'new', component: NewComponent },
+      { path: 'order', component: OrderComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+    ]
   },
   {
     path: '', redirectTo: 'mainpage', pathMatch: 'full'
