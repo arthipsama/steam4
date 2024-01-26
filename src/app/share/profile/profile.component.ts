@@ -20,7 +20,7 @@ export class ProfileComponent {
   }
 
   ngOnInit() {
-    let storedUserData = sessionStorage.getItem('userData');
+    let storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
       this.userData = JSON.parse(storedUserData);
     }
