@@ -6,6 +6,8 @@ import { RegisterComponent } from './share/register/register.component';
 import { CartComponent } from './share/cart/cart.component';
 import { ProfileComponent } from './share/profile/profile.component';
 import { CardProductComponent } from './share/card-product/card-product.component';
+import { AdminComponent } from './admin/admin.component';
+
 
 const routes: Routes = [
   {
@@ -31,6 +33,10 @@ const routes: Routes = [
   {
     path: 'product',
     component: CardProductComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent
   },
   {
     path: '', redirectTo: 'mainpage', pathMatch: 'full'
