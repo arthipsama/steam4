@@ -8,7 +8,6 @@ import { ShareModule } from './share/share.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { AdminComponent } from './admin/admin.component';
 import { AdminModule } from './admin/admin.module';
 
 @NgModule({
@@ -24,6 +23,7 @@ import { AdminModule } from './admin/admin.module';
     NgbModule,
     FormsModule,
     AdminModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
