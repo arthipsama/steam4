@@ -13,6 +13,7 @@ import { OrderComponent } from './order/order.component';
 import { ContactComponent } from './contact/contact.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
+import { SettingComponent } from './setting/setting.component';
 
 
 
@@ -24,7 +25,8 @@ import { AppRoutingModule } from '../app-routing.module';
     ProductComponent,
     NewComponent,
     OrderComponent,
-    ContactComponent
+    ContactComponent,
+    SettingComponent
   ],
   imports: [
     CommonModule,

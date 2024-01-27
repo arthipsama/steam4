@@ -13,6 +13,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { NewComponent } from './admin/new/new.component';
 import { OrderComponent } from './admin/order/order.component';
 import { ProductComponent } from './admin/product/product.component';
+import { SettingComponent } from './admin/setting/setting.component';
 
 
 const routes: Routes = [
@@ -50,6 +51,7 @@ const routes: Routes = [
       { path: 'new', component: NewComponent },
       { path: 'order', component: OrderComponent },
       { path: 'contact', component: ContactComponent },
+      { path: 'setting', component: SettingComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
   },
