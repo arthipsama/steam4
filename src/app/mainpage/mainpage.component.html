@@ -11,7 +11,6 @@
         <li class="list-group-item" routerLink="/products/programs">โปรแกรม</li>
       </ul>      
     </div> -->
-    <app-card-product (productChanged)="receiveProduct($event)"></app-card-product>
 
     <!-- <div class="" *ngFor="let product of products" >
       <app-card-product  (productChanged)="product"></app-card-product>
@@ -53,8 +52,11 @@
         </div>
       </div>
       <div style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-top: 50px;">
-      <div style="margin-bottom: 10px; font-size: 20px;">สินค้ายอดฮิต</div>
-        <div style="display: flex; justify-content: space-around;">
+      <div style="margin-bottom: 10px; font-size: 20px;">BESTSELLERS</div>
+
+      <app-card-product></app-card-product>
+
+        <!-- <div style="display: flex; justify-content: space-around;">
           <div class="product-container">
             <img src="../assets/Game/GTA.jpg" alt="Product 1" class="recommand_image"/>
             <div class="caption">
@@ -76,10 +78,9 @@
               <p>Description for Product 3.</p>
             </div>
           </div>
-        </div>
+        </div> -->
 
 
-        <div style="margin-bottom: 10px; margin-top: 50px;  font-size: 20px;">ฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกหฟหกฟหกหฟกฟหกห</div>
       </div>
     </div>
     

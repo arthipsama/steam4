@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CardProductComponent } from './card-product/card-product.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 
@@ -20,7 +21,8 @@ import { CardProductComponent } from './card-product/card-product.component';
     RegisterComponent,
     CartComponent,
     ProfileComponent,
-    CardProductComponent
+    CardProductComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,

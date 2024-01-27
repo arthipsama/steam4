@@ -7,12 +7,14 @@ import { CartComponent } from './share/cart/cart.component';
 import { ProfileComponent } from './share/profile/profile.component';
 import { CardProductComponent } from './share/card-product/card-product.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProductDetailComponent } from './share/product-detail/product-detail.component';
 import { AccountComponent } from './admin/account/account.component';
 import { ContactComponent } from './admin/contact/contact.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { NewComponent } from './admin/new/new.component';
 import { OrderComponent } from './admin/order/order.component';
 import { ProductComponent } from './admin/product/product.component';
+
 
 
 const routes: Routes = [
@@ -37,8 +39,8 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'product',
-    component: CardProductComponent
+    path: 'product-detail',
+    component: ProductDetailComponent
   },
   {
     path: 'admin',
