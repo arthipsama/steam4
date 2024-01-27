@@ -12,7 +12,8 @@ import { productData } from '../models/product.model';
 export class MainpageComponent implements OnInit {
 
   rooms: any[] = [];
-  images = [941, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  
+  images = ['https://s.isanook.com/ga/0/ud/222/1112777/steamsale(5).jpg', 'https://s.isanook.com/ga/0/ud/222/1112777/steamsale(5).jpg', 'https://s.isanook.com/ga/0/ud/222/1112777/steamsale(5).jpg'];
   products!: productData[];
 
   constructor(private roomService: RoomService) {}
@@ -24,9 +25,4 @@ export class MainpageComponent implements OnInit {
     // });
   }
 
-  receiveProduct(product: productData[]) {
-    this.products = product;
-    console.log(this.products);
-    
-}
 }

@@ -7,6 +7,7 @@ import { CartComponent } from './share/cart/cart.component';
 import { ProfileComponent } from './share/profile/profile.component';
 import { CardProductComponent } from './share/card-product/card-product.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProductDetailComponent } from './share/product-detail/product-detail.component';
 
 
 const routes: Routes = [
@@ -31,8 +32,8 @@ const routes: Routes = [
     component: ProfileComponent
   },
   {
-    path: 'product',
-    component: CardProductComponent
+    path: 'product-detail',
+    component: ProductDetailComponent
   },
   {
     path: 'admin',
