@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RoomDTO } from 'src/app/models/room.model';
 import { userData } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/service/auth.service';
+import { ColorService } from 'src/app/service/color.service';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +16,20 @@ export class LoginComponent {
   userData: any;
   constructor(private fb: FormBuilder,
               private service: AuthService,
-              private router: Router){
+              private router: Router,
+              private colorService: ColorService ,
+              private renderer: Renderer2 , 
+              private el: ElementRef){
 
   }
 
   ngOnInit(){
     this.initForm();
+    this.colorService.backgroundColor$.subscribe((color) => {
+      // ใช้ Renderer2 เพื่อตั้งค่าสีพื้นหลังของ body
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
+    });
+
   }  
 
   initForm(){

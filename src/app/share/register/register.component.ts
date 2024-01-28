@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
+import { ColorService } from 'src/app/service/color.service';
 
 @Component({
   selector: 'app-register',
@@ -12,12 +13,19 @@ export class RegisterComponent {
   user: any[] = [];
 
   constructor(private fb: FormBuilder,
-    private service: AuthService) {
+    private service: AuthService,
+    private colorService: ColorService ,
+    private renderer: Renderer2 , 
+    private el: ElementRef) {
 
   }
 
   ngOnInit() {
     this.initForm();
+    this.colorService.backgroundColor$.subscribe((color) => {
+      // ใช้ Renderer2 เพื่อตั้งค่าสีพื้นหลังของ body
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
+    });
   }
 
   initForm() {
