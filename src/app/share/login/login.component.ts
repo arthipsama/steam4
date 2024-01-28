@@ -1,10 +1,12 @@
 import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RoomDTO } from 'src/app/models/room.model';
 import { userData } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/service/auth.service';
 import { ColorService } from 'src/app/service/color.service';
+import { PopUpComponent } from '../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-login',
@@ -14,12 +16,14 @@ import { ColorService } from 'src/app/service/color.service';
 export class LoginComponent {
   loginForm!: FormGroup;
   userData: any;
+  login: boolean = false;
   constructor(private fb: FormBuilder,
               private service: AuthService,
               private router: Router,
               private colorService: ColorService ,
               private renderer: Renderer2 , 
-              private el: ElementRef){
+              private el: ElementRef,
+              private dialogRef: MatDialog){
 
   }
 
@@ -51,7 +55,7 @@ export class LoginComponent {
         localStorage.setItem('userData', JSON.stringify(this.userData));
       }
       else{
-        console.log("login ไม่สำเร็จ");
+        this.login = true;
       }
     })
   }
