@@ -1,4 +1,79 @@
-.img{
-    width: 780; 
-    height: 420px; 
+.allPage{
+    margin-top: 20px; 
+    margin-bottom: 50px; 
+    display: flex; 
+    justify-content: center;
+}
+
+.imgProduct{
+    width: 100%; 
+    height: 80%; 
+    border-top-right-radius: 14px; 
+    border-top-left-radius: 14px
+}
+
+.testPlatform{
+    width: 50px; 
+    height: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 18px; 
+    border: 1px solid rgb(255, 145, 0);
+}
+
+.textEditon{
+    color: #ffffff; 
+    border-radius: 18px; 
+    border: 1px solid rgb(255, 145, 0); 
+    width: 30%; 
+    height: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.leftSite{
+    color: #eeeeee; 
+    display: flex; 
+    justify-content: 
+    center; margin: 10px 0 10px 0;
+}
+
+.textNameProduct{
+    display: flex; 
+    justify-content: 
+    center; font-size: 24px; 
+    color: #ffffff; 
+    font-weight: bold; 
+    margin-top: 10px;
+}
+
+.textDes{
+    display: flex; 
+    justify-content: center; 
+    font-size: 12px; 
+    color: #ffffff;
+}
+
+.textPrice{
+    display: flex; 
+    justify-content: center; 
+    font-size: 44px; 
+    color: #ffffff; 
+    font-weight: bold; 
+    margin-top: 50px;
+}
+
+.buy{
+    background: linear-gradient(rgb(251, 142, 49) 0%, rgb(255, 108, 0) 100%); 
+    color: #ffffff; 
+    width: 274px; 
+    height: 55px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    border-radius: 24px; 
+    margin-top: 10px;
+    cursor: pointer;
 }

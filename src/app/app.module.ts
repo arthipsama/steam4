@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { AdminModule } from './admin/admin.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AdminModule } from './admin/admin.module';
     HttpClientModule,
     NgbModule,
     FormsModule,
-    AdminModule
+    AdminModule,
+    BrowserAnimationsModule
     
   ],
   providers: [],

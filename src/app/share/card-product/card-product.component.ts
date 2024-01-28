@@ -23,8 +23,9 @@ export class CardProductComponent {
 
   test(index:any){
     // this.productChanged.emit(this.product[index]);
-    this.service.setProductData(this.product[index])
-    this.router.navigate(['/product-detail']);
+    localStorage.setItem('productData', JSON.stringify(this.product[index]));
+    this.router.navigate(['/product-detail'+'/'+this.product[index].ProductName]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     // localStorage.setItem('productData', JSON.stringify(this.product[index]));
   }
 }

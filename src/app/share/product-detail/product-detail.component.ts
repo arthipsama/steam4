@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { productData } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -15,13 +16,13 @@ export class ProductDetailComponent {
   }
 
   ngOnInit(){
-    this.service.getProdectData$().subscribe(x=>{
-      this.product = x;
-    })
+    const storedProduct = localStorage.getItem('productData');
+    if (storedProduct) {
+        this.product = JSON.parse(storedProduct);
+    }
+  }
 
-    // let storedUserData = localStorage.getItem('productData');
-    // if (storedUserData) {
-    //     this.productData = JSON.parse(storedUserData);
-    // }
+  buyProduct(){
+    
   }
 }

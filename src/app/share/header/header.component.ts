@@ -31,4 +31,8 @@ export class HeaderComponent implements OnInit{
 
   nextProducts() {
   }
+
+  logout(){
+    localStorage.removeItem('userData');
+  }
 }

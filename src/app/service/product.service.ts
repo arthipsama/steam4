@@ -7,7 +7,6 @@ import { productData } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  private productData = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient) { }
 
@@ -15,12 +14,4 @@ export class ProductService {
     var api = 'http://localhost:3000/api/product'
     return this.http.get(api);
   }
-
-  setProductData(productDetail: productData){
-    this.productData.next(productDetail);
-  }
-
-  getProdectData$(): Observable<any> {
-    return this.productData.asObservable();
- }
 }

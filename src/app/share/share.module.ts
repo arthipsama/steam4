@@ -10,7 +10,8 @@ import { CartComponent } from './cart/cart.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CardProductComponent } from './card-product/card-product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopUpComponent } from './pop-up/pop-up.component';
 
 
 @NgModule({
@@ -22,12 +23,14 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
     CartComponent,
     ProfileComponent,
     CardProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    PopUpComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatDialogModule
   ],
   exports:[
     HeaderComponent,
