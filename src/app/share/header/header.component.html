@@ -2,7 +2,7 @@
   style="background-color: rgb(51, 51, 51); background-size: cover; background-position: center; padding: 40px; color: white; display: flex; justify-content: center;">
   <div class="logo" style="margin-right: 60px;">
     <a href="/mainpage">
-      <img src="../assets/logo.png" alt="ชื่อโลโก้" style="width: 200px;">
+      <img src="../assets/testlogo.png" alt="ชื่อโลโก้" style="height: 90px; width: auto;">
     </a>
   </div>
 
@@ -16,24 +16,26 @@
   <div class="cart-icon" style="margin-left: 60px;">
     <div class="user-icon">
       <a href="login" class="btn" *ngIf="loging == false">
-        <i style="font-size: 24px; color: white;" class="fas fa-cart-plus"></i>
+        <i style="font-size: 20px; color: white;" class="fas fa-cart-plus"></i>
         <div style="font-size: 10px;" class="badge bg-primary"></div>
       </a>
       <a href="cart" class="btn" *ngIf="loging">
-        <i style="font-size: 24px; color: white;" class="fas fa-cart-plus"></i>
+        <i style="font-size: 20px; color: white;" class="fas fa-cart-plus"></i>
         <div style="font-size: 10px;" class="badge bg-primary">{{cartItemsCount }}</div>
       </a>
 
       <a href="login" class="btn" *ngIf="loging == false">
-        <i style="font-size: 24px; color: white;" class="fas fa-user"></i>
-      </a>
+        <i style="font-size: 20px; color: white;" class="fas fa-user"></i>
+        <span style="font-size: inherit; color: white; margin-left: 7px;">Sign in</span>
+      </a>      
       <div class="" *ngIf="loging">
-        <a href="profile"><i style="font-size: 24px; color: white;" class="fas fa-user"> :
-            {{userData.FirstName}}</i></a>
+        <i style="font-size: 20px; color: white;" class="fas fa-user"></i>
+        <span style="font-size: inherit; color: white; margin-left: 7px;">
+          {{userData.FirstName}}</span>
       </div>
 
       <div class="dropdown" *ngIf="loging == false">
-        <i class="dropbtn fas fa-bars" style="margin-left: 15px; font-size: 27px;">
+        <i class="dropbtn fas fa-bars" style="margin-left: 15px; font-size: 26px;">
           <div class="dropdown-content">
             <a href="login">ข้อมูลส่วนตัว</a>
             <a href="login">คีย์เกม/ไอเทมในเกม</a>
