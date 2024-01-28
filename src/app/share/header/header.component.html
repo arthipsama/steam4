@@ -28,7 +28,31 @@
         <i style="font-size: 24px; color: white;" class="fas fa-user"></i>
       </a>
       <div class="" *ngIf="loging">
-        <a href="profile"><i style="font-size: 24px; color: white;" class="fas fa-user"> : {{userData.FirstName}}</i></a>
+        <a href="profile"><i style="font-size: 24px; color: white;" class="fas fa-user"> :
+            {{userData.FirstName}}</i></a>
+      </div>
+
+      <div class="dropdown" *ngIf="loging == false">
+        <i class="dropbtn fas fa-bars" style="margin-left: 15px; font-size: 27px;">
+          <div class="dropdown-content">
+            <a href="login">ข้อมูลส่วนตัว</a>
+            <a href="login">คีย์เกม/ไอเทมในเกม</a>
+            <a href="login">ประวัติการสั่งซื้อ</a>
+            <a href="mainpage" (click)="logout()">ออกจากระบบ</a>
+          </div>
+        </i>
+      </div>
+
+      <div class="dropdown" *ngIf="loging">
+        <i class="dropbtn fas fa-bars" style="margin-left: 15px; font-size: 27px;">
+          <div class="dropdown-content">
+            <a href="profile">ข้อมูลส่วนตัว</a>
+            <a href="#">คีย์เกม/ไอเทมในเกม</a>
+            <a href="#">ประวัติการสั่งซื้อ</a>
+            <a href="mainpage" (click)="logout()">ออกจากระบบ</a>
+          </div>
+        </i>
+
       </div>
     </div>
   </div>
