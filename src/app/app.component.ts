@@ -14,4 +14,5 @@ export class AppComponent {
   ngOnInit(): void {
     this.colorService.setBackgroundColor('#272727');
   }
+  
 }
