@@ -14,4 +14,11 @@ export class ProductService {
     var api = 'http://localhost:3000/api/product'
     return this.http.get(api);
   }
+
+  orders(userid:any){
+    var api = 'http://localhost:3000/api/orders'
+    console.log(userid);
+    
+    return this.http.post<any>(api, {userid:userid});
+  }
 }
