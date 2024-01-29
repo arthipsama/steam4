@@ -44,6 +44,7 @@
 .side-header h3, side-head span {
     color: #fff;
     font-weight: 400;
+    margin-top: 15px;
 }
 
 .side-content {
@@ -206,11 +207,12 @@ header {
 .header-menu .notify-icon {
     margin-right: 2rem;
     position: relative;
+    cursor: pointer;
 }
 
 .header-menu label span,
 .notify-icon span:first-child {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
 }
 
 .notify-icon span:last-child {
@@ -224,14 +226,47 @@ header {
     border-radius: 50%;
     right: -5px;
     top: -5px;
-    color: #fff;
+    color: black;
     font-size: .8rem;
     font-weight: 500;
 }
 
+
+/* SCSS notify-icon animation */
+  
+.notify-icon .notify {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #4CAF50; /* สีพื้นหลังของ notify */
+    color: #fff; /* สีข้อความของ notify */
+    border-radius: 50%;
+    padding: 5px 10px;
+    animation: notifyAnimation 0.5s ease-in-out; /* เพิ่ม CSS Animation */
+  }
+  
+  @keyframes notifyAnimation {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  
+.notify-icon .notify.bg-beautiful {
+    background-image: linear-gradient(to right, #4CAF50, #66BB6A); /* เปลี่ยนสีพื้นหลังเป็นสีเขียวอ่อน */
+    padding: 5px 10px; /* ปรับขนาดของพื้นหลังและข้อความ */
+    font-size: 10px; /* ขนาดตัวเลข */
+    font-weight: bold; /* ตัวหนา */
+    width: 1em; /* ขนาดของพื้นหลัง */
+    text-align: center; /* จัดตำแหน่งตัวเลขกลางแนว */
+  }
+  
 .user {
     display: flex;
     align-items: center;
+    font-size: 22px;
 }
 
 .user div, .client-img {
@@ -533,3 +568,5 @@ table tbody tr {
     color: red;
     font-style:initial;
 }
+  
+  

@@ -44,5 +44,9 @@ export class AdminComponent implements OnInit {
       });
   }
   
+  formatNumber(value: number): string {
+    // ถ้าตัวเลขมากกว่า 99 ให้แสดง "99+"
+    return value > 99 ? '99+' : value.toString();
+  }
 
 }
