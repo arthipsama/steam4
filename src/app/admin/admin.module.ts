@@ -14,6 +14,11 @@ import { ContactComponent } from './contact/contact.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
 import { SettingComponent } from './setting/setting.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -35,6 +40,13 @@ import { SettingComponent } from './setting/setting.component';
     NgbModule,
     BrowserModule,
     AppRoutingModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    NgxChartsModule,
+    
+    
   ]
 })
 export class AdminModule { }

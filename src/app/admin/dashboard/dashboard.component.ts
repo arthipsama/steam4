@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  
 
 
 }

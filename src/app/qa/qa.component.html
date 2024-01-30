@@ -1,0 +1,74 @@
+<app-header></app-header>
+
+<div class="container" style="margin-bottom: 30px;">
+    <div class="row mt-5">
+
+      <div class="col row">
+        <div style="display: flex; flex-direction: column;">
+          <div class="row">
+            <!-- <h3 style="text-align: center;">คำถามที่พบเจอบ่อย</h3> -->
+       
+            <div class="product-container" style="margin-bottom: 15px;">
+              <div class="image-container">
+                <img src="../assets/qa.png" class="recommand_image" />
+              </div>
+            </div>
+            
+            <div class="wrapper">
+              <!-- <kendo-expansionpanel title="Default Animation">
+                The name “Colombia” is derived from the last name of the Italian
+                navigator Christopher Columbus. It was conceived by the Venezuelan
+                revolutionary Francisco de Miranda as a reference to all of the New
+                World, but especially to those portions under Spanish law. The name was
+                later adopted by the Republic of Colombia of 1819, formed from the
+                territories of the old Viceroyalty of New Granada (modern-day Colombia,
+                Panama, Venezuela, Ecuador, and northwest Brazil).
+              </kendo-expansionpanel> -->
+
+              <kendo-expansionpanel title="เว็บไซต์มีบริการอะไรบ้าง" [animation]="duration">
+                เว็บไซต์ SAMA SHOP ของเรามีบริการขายสินค้า บัตร Steam Wallet , KeyGame และ ID GAME ของค่าย STEAM
+              </kendo-expansionpanel>
+
+              <kendo-expansionpanel title="ขั้นตอนการจัดส่ง" [animation]="duration">
+                <span>หลังจากลูกค้าได้ทำการ </span>
+                <!-- <span routerLink="/howtobuy"><strong>แจ้งชำระเงิน</strong></span>  -->
+                <a routerLink="/payment"><span><strong>แจ้งชำระเงิน</strong></span></a>
+                <span> และรอสถานะสินค้าแจ้งว่า "สำเร็จแล้ว" รอรับสินค้าที่หน้า </span>
+                <!-- <span> การสั่งซื้อ </span> -->
+                <a routerLink="/#"><span><strong>รายการสั่งซื้อ</strong></span></a>
+                <span> ของลูกค้าเองได้ครับ (หากเกิดปัญหาหรือไม่เจอสามารถทักแชท messenger เพจของทางเว็บไซต์ได้เลยครับ )</span>
+                <span></span>
+              </kendo-expansionpanel>
+
+              <kendo-expansionpanel title="สถานะสินค้ามีอะไรบ้าง" [animation]="duration">
+                มี 3 สถานะ = 1) รอการตรวจสอบ , 2) ตรวจสอบสำเร็จ และ 3) ตรวจสอบไม่สำเร็จ (โดยจะมีแจ้งเหตุผลด้วย)
+              </kendo-expansionpanel>
+
+              <kendo-expansionpanel title="การรับประกันสินค้า" [animation]="duration">
+                <span style="font-size: 14px;"><strong>สินค้าประเภทที่รับประกัน</strong></span><br>
+                <span style="font-size: 12px;">ID GAME (ระยะเวลา 14 วัน)</span>
+                <br><br><br>
+                <span style="font-size: 14px;"><strong>สินค้าประเภทที่ไม่รับประกัน</strong></span><br>
+                <span style="font-size: 12px;">Steam Wallet , Key Game และ โปรแกรม</span>                
+              </kendo-expansionpanel>
+
+              <kendo-expansionpanel title="เปลี่ยน - คืนสินค้าอย่างไร" [animation]="duration">
+                หากเกิดปัญหาลูกค้าสามารถแจ้งรายละเอียดมาได้ที่ แชท messenger เพจของทางเว็บไซต์ และรอทางแอดมินตรวจสอบ
+               คาดว่าใช้เวลาการตรวจสอบไม่เกิน 3-7 วัน (ไม่มีวันหยุด)
+              </kendo-expansionpanel>
+        
+              <!-- <kendo-expansionpanel title="No Animation" [animation]="false">
+                The origin of the name of Ecuador is from Spain. When the Spaniards
+                colonized the land they called it “el ecuador” which translated means
+                “the equator”.
+              </kendo-expansionpanel> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    </div>
+</div>
+
+<app-footer></app-footer>

@@ -75,17 +75,97 @@
                     [class.active]="isActive('/admin/setting')"></span>
                 </label>
                 
-            <div class="notify-icon">
-                <span class="las la-envelope"></span>
-                <span class="notify bg-beautiful">{{ formatNumber(4) }}</span>
+                <div class="notify-icon" (click)="toggleDropdown1()">
+                    <div>
+                    <span class="las la-envelope"></span>
+                    <span class="notify bg-beautiful">{{ formatNumber(4) }}</span>
+                </div>
+
+                <div class="dropdown" *ngIf="isDropdownOpen1">
+                    <div class="test1">
+                        <div class="scroll-container">
+                            <div class="row">
+                                <div class="image-container">
+                                    <img src="../assets/testlogo.png" alt="รูปภาพ">
+                                </div>
+                                <div class="content">
+                                    <h3>มีข้อความส่งถึงคุณ!</h3>
+                                    <h4>ผมอยากได้เกมอื่นๆเพิ่มเติม</h4>
+                                    <h5>1/22/2023, 7:22:36 PM</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="image-container">
+                                    <img src="../assets/testlogo.png" alt="รูปภาพ">
+                                </div>
+                                <div class="content">
+                                    <h3>มีข้อความส่งถึงคุณ!</h3>
+                                    <h4>ผมอยากได้เกมอื่นๆเพิ่มเติม</h4>
+                                    <h5>1/23/2023, 7:22:36 PM</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="image-container">
+                                    <img src="../assets/testlogo.png" alt="รูปภาพ">
+                                </div>
+                                <div class="content">
+                                    <h3>มีข้อความส่งถึงคุณ!</h3>
+                                    <h4>ผมอยากได้เกมอื่นๆเพิ่มเติม</h4>
+                                    <h5>1/24/2023, 7:22:36 PM</h5>
+                                </div>
+                            </div>
+                                    <!-- เพิ่มเนื่อหาตรงนี้ -->
+                        </div>                        
+                    </div>
+                    <button class="remove-all" (click)="removeAllItems()">MARK ALL AS READ <span class="las la-trash"></span></button>
+                </div>
             </div>
             
-            <div class="notify-icon">
+            <div class="notify-icon" (click)="toggleDropdown2()">
+                <div>
                 <span class="las la-bell"></span>
-                <span class="notify bg-beautiful">{{ formatNumber(105) }}</span>
+                <span class="notify bg-beautiful">{{ formatNumber(105) }}</span></div>
+
+                <div class="dropdown" *ngIf="isDropdownOpen2">
+                    <div class="test1">
+                        <div class="scroll-container">
+                            <div class="row">
+                                <div class="image-container">
+                                    <img src="../assets/testlogo.png" alt="รูปภาพ">
+                                </div>
+                                <div class="content">
+                                    <h3>เพิ่มข้อมูล Products!</h3>
+                                    <h4>ผมอยากได้เกมอื่นๆเพิ่มเติม</h4>
+                                    <h5>1/22/2023, 7:22:36 PM</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="image-container">
+                                    <img src="../assets/testlogo.png" alt="รูปภาพ">
+                                </div>
+                                <div class="content">
+                                    <h3>แก้ไขข้อมูล User!</h3>
+                                    <h4>ผมอยากได้เกมอื่นๆเพิ่มเติม</h4>
+                                    <h5>1/23/2023, 7:22:36 PM</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="image-container">
+                                    <img src="../assets/testlogo.png" alt="รูปภาพ">
+                                </div>
+                                <div class="content">
+                                    <h3>เพิ่มข้อมูล Products!!</h3>
+                                    <h4>ผมอยากได้เกมอื่นๆเพิ่มเติม</h4>
+                                    <h5>1/24/2023, 7:22:36 PM</h5>
+                                </div>
+                            </div>
+                                    <!-- เพิ่มเนื่อหาตรงนี้ -->
+                        </div>                        
+                    </div>
+                    <button class="remove-all" (click)="removeAllItems()">MARK ALL AS READ <span class="las la-trash"></span></button>
+                </div>
+
             </div>
-  
-  
                 
                 <div class="user">
                     <div class="bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>

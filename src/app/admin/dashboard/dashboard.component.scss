@@ -531,3 +531,47 @@ table tbody tr {
     font-size: calc(100% + 2px); /* Increase font size by 2px on hover */
     color: blueviolet;
 }
+
+.page-content1 {
+    background-color: #f1f4f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px; /* ระยะห่างระหว่าง cards */
+  }
+  
+  .mat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mat-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  .mat-card-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  
+  /* ให้ขึ้นบรรทัดใหม่ทุกรายการที่เป็นลำดับที่ 5 */
+  .mat-card:nth-child(5n) {
+    flex-basis: 100%; /* เต็มแถว */
+    margin-right: 0;
+  }
+  
+
+  @import "~@fortawesome/fontawesome-free/css/all.css";
+
+  
