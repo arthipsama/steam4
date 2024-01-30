@@ -15,6 +15,7 @@ import { NewComponent } from './admin/new/new.component';
 import { OrderComponent } from './admin/order/order.component';
 import { ProductComponent } from './admin/product/product.component';
 import { SettingComponent } from './admin/setting/setting.component';
+import { QaComponent } from './qa/qa.component';
 
 
 
@@ -42,6 +43,10 @@ const routes: Routes = [
   {
     path: 'product-detail/:id',
     component: ProductDetailComponent
+  },
+  {
+    path: 'questions',
+    component: QaComponent
   },
   {
     path: 'admin',

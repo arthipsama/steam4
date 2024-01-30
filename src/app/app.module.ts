@@ -15,12 +15,18 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LayoutModule } from '@progress/kendo-angular-layout';
+import { DropDownButtonModule } from '@progress/kendo-angular-buttons';
+import { QaModule } from './qa/qa.module';
+import { QaComponent } from './qa/qa.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MainpageComponent,
+    QaComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +42,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatToolbarModule,
     MatButtonModule,
     NgxChartsModule,
+    LayoutModule,
+    DropDownButtonModule,
     
   ],
   providers: [],

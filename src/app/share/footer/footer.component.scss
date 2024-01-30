@@ -8,11 +8,13 @@ body {
 
     display: flex;
     flex-direction: column;
-    background-color: #311b92;
+    background: rgb(234, 155, 43);
+    color: rgb(247, 247, 247);
   }
   
   footer {
-    background-color: #311b92;
+    background: rgb(234, 155, 43);
+    color: rgb(247, 247, 247);
     color:  white;
     padding: 20px;
     margin-top: auto; /* ให้ footer อยู่ด้านล่างสุด */
@@ -89,8 +91,9 @@ ul{
   list-style: none;
 }
 .footer{
-  background-color: #311b92;
-    padding: 70px 0;
+  background: #FF8C00;
+  color: rgb(247, 247, 247);
+  padding: 70px 0;
 }
 .footer-col{
    width: 25%;
@@ -173,7 +176,7 @@ ul{
     position: fixed;
     bottom: 20px;
     right: 20px; /* ทำให้ปุ่มอยู่ด้านขวา และห่างจากขอบขวา 20px */
-    background-color: #673ab7;
+    background-color: orange;
     color: white;
     border: none;
     border-radius: 50%;
@@ -185,6 +188,6 @@ ul{
   }
   
   .scroll-to-top-btn:hover {
-    background-color: white;
+    background-color: orangered;
   }
   
