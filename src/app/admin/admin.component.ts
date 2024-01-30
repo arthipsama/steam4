@@ -49,4 +49,31 @@ export class AdminComponent implements OnInit {
     return value > 99 ? '99+' : value.toString();
   }
 
+  isDropdownOpen1 = false;
+  isDropdownOpen2 = false;
+
+  toggleDropdown1() {
+    this.isDropdownOpen1 = !this.isDropdownOpen1;
+  
+    // ถ้า toggleDropdown1 ทำงานให้ปิด dropdown ของ toggleDropdown2
+    if (this.isDropdownOpen1) {
+      this.isDropdownOpen2 = false;
+    }
+  }
+  
+  toggleDropdown2() {
+    this.isDropdownOpen2 = !this.isDropdownOpen2;
+  
+    // ถ้า toggleDropdown2 ทำงานให้ปิด dropdown ของ toggleDropdown1
+    if (this.isDropdownOpen2) {
+      this.isDropdownOpen1 = false;
+    }
+  }
+
+  removeAllItems() {
+    // ทำตามที่ต้องการเมื่อคลิกที่ปุ่ม "Remove All"
+    // ตัวอย่าง: this.items = [];
+}
+
+  
 }
