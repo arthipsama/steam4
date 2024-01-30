@@ -531,3 +531,11 @@ table tbody tr {
     font-size: calc(100% + 2px); /* Increase font size by 2px on hover */
     color: blueviolet;
 }
+
+.content {
+    padding: 16px;
+  }
+  
+  .content > mat-card {
+    width: 200px;
+  }
