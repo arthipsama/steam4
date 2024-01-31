@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600&display=swap');
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
 
 :root {
     --main-color: #22BAA0;
@@ -442,8 +444,13 @@ table tbody tr {
 }
 
 .client-info h4 {
-    color: #555;
+    color: black;
     font-size: .95rem;
+    margin-bottom: 5px;
+}
+.client-info h5 {
+    color: #555;
+    font-size: .75rem;
 }
 
 .client-info small {
@@ -531,3 +538,12 @@ table tbody tr {
     font-size: calc(100% + 2px); /* Increase font size by 2px on hover */
     color: blueviolet;
 }
+
+.long-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+    
+  
+  
