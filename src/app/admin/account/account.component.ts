@@ -5,6 +5,7 @@ import { userData } from 'src/app/models/user.models';
 import { Router } from '@angular/router';
 import { Observable, delay, of } from 'rxjs';
 import { RoomService } from 'src/app/service/room.service';
+import { AlertServiceService } from 'src/app/service/alert-service.service';
 
 
 @Component({
@@ -18,6 +19,8 @@ export class AccountComponent implements OnInit {
   constructor(private dialog: MatDialog,
     private router: Router,
     private room: RoomService,
+    private alert: AlertServiceService,
+    
     ) { }
 
   user: userData[] = [];
@@ -33,7 +36,7 @@ export class AccountComponent implements OnInit {
 
 
   handleTrashClick(){
-    
+    this.alert.onDeleteWithConfirmation();
   }
 
   handleTest(user: userData) {

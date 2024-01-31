@@ -125,6 +125,28 @@ export class AlertServiceService {
     });
   }
 
+  onDeleteWithConfirmation(): Promise<boolean> {
+    return new Promise((resolve) => {
+      Swal.fire({
+        title: 'คุณต้องการลบข้อมูลหรือไม่?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'ใช่',
+        cancelButtonText: 'ไม่',
+        confirmButtonColor: '#d33',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // กรณีเลือก "ใช่"
+          this.onSuccess('ลบรายการข้อมูลสำเร็จ');
+          resolve(true);
+        } else {
+          // กรณีเลือก "ไม่"
+          resolve(false);
+        }
+      });
+    });
+  }
+
   
 
   
