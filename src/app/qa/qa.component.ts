@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { ColorService } from '../service/color.service';
+import { RoomService } from '../service/room.service';
 
 @Component({
   selector: 'app-qa',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private roomService: RoomService , 
+    private colorService: ColorService ,
+    private renderer: Renderer2 , 
+    private el: ElementRef,
+    ) {}
 
   ngOnInit(): void {
+
+    this.colorService.backgroundColor$.subscribe((color) => {
+      // ใช้ Renderer2 เพื่อตั้งค่าสีพื้นหลังของ body
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
+    });
+
   }
 
   public duration = 500;
