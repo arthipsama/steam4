@@ -20,13 +20,15 @@
                     <select name="" id="">
                         <option value="">ID</option>
                     </select>
-                    <button style="background-color: #00A86B;">Add record</button>
+                    <button style="background-color: #00A86B; margin-right: 10px" (click)="openUserDialog()">
+                        <span class="las la-user-plus" style="color:whitesmoke; font-size: 16px;"></span>
+                        Add User</button>
                 </div>
 
                 <div class="browse">
                    <input type="search" placeholder="Search" class="record-search">
                     <select name="" id="">
-                        <option value="">Role</option>
+                        <option value="">All</option>
                         <option value="">Admin</option>
                         <option value="">User</option>
                     </select>
@@ -48,38 +50,48 @@
                     <tbody>
                         <ng-container *ngFor="let user of users">
                           <tr>
-                            <td>{{ user.userId }}</td>
+                            <td>{{ user.userid }}</td>
                             <td>
                               <div class="client">
                                 <div class="client-img bg-img" [style.background-image]="'url(' + getImagePath(user.role) + ')'"></div>
                                 <div class="client-info">
-                                  <h4>{{ user.username }}</h4>
+                                  <h4>{{ user.UserName }}</h4>
                                   <h5 style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                    {{ user.email }}</h5>
+                                    {{ user.Email }}</h5>
                                 </div>
                               </div>
                             </td>
-                            <td>{{ user.firstName }}</td>
-                            <td>{{ user.phone }}</td>
+                            <td>{{ user.FirstName }}</td>
+                            <td>{{ user.PhoneNumber }}</td>
                             <td>{{ user.role }}</td>
                             <td>
                               <div class="actions">
-                                <span class="las la-trash"></span>
+                                <span class=""></span>
+                                <span class=""></span>
+                                <button class="icon-button" (click)="handleUsersCogClick()">
+                                    <span class="las la-users-cog"></span>
+                                  </button>
+                                  
+                                  <button class="icon-button" (click)="handleTrashClick()">
+                                    <span class="las la-trash"></span>
+                                  </button>
+                                  
                               </div>
                             </td>
                           </tr>
                         </ng-container>
                       </tbody>
                 </table>
+
+                
                 
                 
             </div>
 
         </div>
-
-        
     
     </div>
+
     
     
 </main>

@@ -1,0 +1,77 @@
+<!-- your-dialog.component.html -->
+
+<h1 mat-dialog-title>Add User Detail</h1>
+<div mat-dialog-content>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <!-- Left Column: Display Image -->
+    <div style="flex: 1; margin-right: 20px;">
+      <img src="../assets/role/user.png" alt="User Image" style="width: 100%;">
+      <button mat-icon-button mat-dialog-close style="position: absolute; top: 10px; right: 10px;">
+        <mat-icon style="font-size: 14px;">close</mat-icon>
+      </button>      
+    </div>
+
+<!-- Right Column: User Information Form -->
+<div style="flex: 2;">
+    <form [formGroup]="userForm">
+      <mat-form-field style="width: 100%">
+        <mat-label style="font-size: 12px;">Username</mat-label>
+        <input matInput formControlName="UserName">
+        <mat-error *ngIf="userForm.get('UserName')?.hasError('required')">Username is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field style="width: 100%">
+        <mat-label style="font-size: 12px;">Password</mat-label>
+        <input matInput formControlName="Password" type="{{ hidePassword ? 'password' : 'text' }}">
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+          {{ hidePassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+        <mat-error *ngIf="userForm.get('Password')?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
+      
+  
+      <mat-form-field style="width: 100%">
+        <mat-label style="font-size: 12px;">Email</mat-label>
+        <input matInput formControlName="Email">
+        <mat-error *ngIf="userForm.get('Email')?.hasError('required')">Email is required</mat-error>
+        <mat-error *ngIf="userForm.get('Email')?.hasError('email')">Invalid email format</mat-error>
+      </mat-form-field>
+  
+      <div>
+        <mat-form-field style="width: 100%;">
+          <mat-label style="font-size: 12px;">First Name</mat-label>
+          <input matInput formControlName="FirstName">
+        </mat-form-field>
+  
+        <mat-form-field style="width: 100%;">
+          <mat-label style="font-size: 12px;">Phone</mat-label>
+          <input matInput formControlName="PhoneNumber">
+        </mat-form-field>
+      </div>
+  
+      <mat-form-field style="width: 100%">
+        <mat-label style="font-size: 12px;">Role</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="user">User</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.get('role')?.hasError('required')">Role is required</mat-error>
+    </mat-form-field>
+    </form>
+  
+    <div style="display: flex; justify-content: flex-end; align-items: center;">
+        <!-- Reset Button -->
+        <button mat-button color="warn" (click)="onReset()">Reset</button>
+      
+        <!-- Save Button -->
+        <button mat-button color="success" (click)="onSave()" [disabled]="userForm.invalid">
+          Save
+        </button>
+      </div>
+      
+  </div>
+  
+  
+
+  </div>
+</div>

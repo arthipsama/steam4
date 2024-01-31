@@ -1,11 +1,14 @@
 export interface userData {
     userid: string;
     UserName: string;
-    Password: string;
+    Password?: string;
     FirstName: string;
     LastName: string;
-    PhoneNumber: string;
+    PhoneNumber?: string;
     Email: string;
-    Contact: string;
-    roleid: string;
+    Contact?: string;
+    roleid?: string;
+    role: string;
   }
+
+  

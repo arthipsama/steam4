@@ -528,7 +528,10 @@ table tbody tr {
     table {
         width: 900px;
     }
+
 }
+
+
 
 .clickable {
     transition: font-size 0.3s ease; /* Add transition for smooth effect */
@@ -545,5 +548,18 @@ table tbody tr {
     white-space: pre-wrap;
   }
     
+  .icon-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 90%; /* ทำให้มีรูปร่างเป็นวงกลม */
+
+  }
+  
+//   .icon-button:hover {
+//     background-color: #FFA07A ;
+//   }
+  
+  
   
   

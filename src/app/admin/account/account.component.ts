@@ -1,4 +1,8 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpUserComponent } from './pop-up-user/pop-up-user.component';
+import { userData } from 'src/app/models/user.models';
+
 
 @Component({
   selector: 'app-account',
@@ -7,33 +11,38 @@ import { Component, Input } from '@angular/core';
 })
 export class AccountComponent {
 
+  constructor(private dialog: MatDialog) { }
 
-  users = [
+
+  users: userData[] = [
     {
-      userId: '#5033',
+      userid: '#5033',
       // imagePath: '../assets/role/user.png',
-      username: 'Jassa1',
-      email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
-      firstName: 'Arthip',
-      phone: '0987129295',
+      UserName: 'Jassa1',
+      Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
+      FirstName: 'Arthip',
+      LastName: 'Srain',
+      PhoneNumber: '0987129295',
       role: 'USER'
     },
     {
-      userId: '#5034',
+      userid: '#5034',
       // imagePath: '../assets/role/admin.png', // แก้ที่นี้ให้ตรงกับที่คุณต้องการ
-      username: 'Jassa2',
-      email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
-      firstName: 'Arthip',
-      phone: '0987129295',
+      UserName: 'Jassa2',
+      Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
+      FirstName: 'Arthip',
+      PhoneNumber: '0987129295',
+      LastName: 'Srain',
       role: 'ADMIN'
     },
     {
-      userId: '#5035',
+      userid: '#5035',
       // imagePath: '../assets/role/user.png', // แก้ที่นี้ให้ตรงกับที่คุณต้องการ
-      username: 'Jassa3',
-      email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
-      firstName: 'Arthip',
-      phone: '0987129295',
+      UserName: 'Jassa3',
+      Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
+      FirstName: 'Arthip',
+      LastName: 'Srain',
+      PhoneNumber: '0987129295',
       role: 'USER'
     },
     // เพิ่มข้อมูลอื่น ๆ ตามต้องการ
@@ -42,6 +51,26 @@ export class AccountComponent {
   getImagePath(role: string): string {
     return role === 'ADMIN' ? '../assets/role/admin.png' : '../assets/role/user.png';
   }
+
+  handleUsersCogClick(){
+
+  }
+
+  handleTrashClick(){
+    
+  }
+
+  openUserDialog(): void {
+    const dialogRef = this.dialog.open(PopUpUserComponent, {
+      width: '650px', // กำหนดขนาด Dialog ตามต้องการ
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
+    });
+  }
+  
   
   
 }
