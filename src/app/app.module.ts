@@ -26,7 +26,7 @@ import { QaComponent } from './qa/qa.component';
   declarations: [
     AppComponent,
     MainpageComponent,
-    QaComponent
+    QaComponent,
   ],
   imports: [
     BrowserModule,

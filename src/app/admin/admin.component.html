@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                   <a routerLink="/admin/contact" [class.active]="isActive('/admin/contact')">
+                   <a routerLink="/admin/contact" [class.active]="isActive('/admin/contact') ">
                         <span class="las la-envelope"></span>
                         <small>Mailbox</small>
                     </a>
@@ -56,6 +56,7 @@
                          <small>Setting</small>
                      </a>
                  </li>
+                 
 
             </ul>
         </div>
@@ -69,12 +70,15 @@
             <label for="menu-toggle">
                 <span class="las la-bars"></span>
             </label>
+            <!-- <i class="las la-exclamation-circle"> Admin Panel Samashop</i> -->
+                    
             <div class="header-menu">
+                <i class="las la-clock" style="margin-right: 30px;" (click)="refreshDateTime()">
+                    {{ currentDateTime.format('dddd, MMMM DD YYYY HH:mm') }}</i>
                 <label for="settings-toggle">
                     <span class="las la-cog" routerLink="/admin/setting" 
                     [class.active]="isActive('/admin/setting')"></span>
                 </label>
-                
                 <div class="notify-icon" (click)="toggleDropdown1()">
                     <div>
                     <span class="las la-envelope"></span>

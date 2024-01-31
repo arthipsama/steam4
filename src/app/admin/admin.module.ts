@@ -4,7 +4,7 @@ import { AdminComponent } from './admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShareModule } from '../share/share.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AccountComponent } from './account/account.component';
 import { ProductComponent } from './product/product.component';
@@ -19,6 +19,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PopUpUserComponent } from './account/pop-up-user/pop-up-user.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { AccountDetailComponent } from './account/account-detail/account-detail.component';
+import { FooterAdminComponent } from './footer-admin/footer-admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -31,7 +42,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NewComponent,
     OrderComponent,
     ContactComponent,
-    SettingComponent
+    SettingComponent,
+    PopUpUserComponent,
+    AccountDetailComponent,
+    FooterAdminComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +59,16 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatToolbarModule,
     MatButtonModule,
     NgxChartsModule,
-    
+    PopoverModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    BrowserAnimationsModule
     
   ]
 })
