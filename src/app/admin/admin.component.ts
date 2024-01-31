@@ -4,6 +4,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { AlertServiceService } from '../service/alert-service.service';
 import { RoomService } from '../service/room.service';
 import { userData } from '../models/user.models';
+import * as moment from 'moment-timezone';
+
 
 @Component({
   selector: 'app-admin',
@@ -11,7 +13,9 @@ import { userData } from '../models/user.models';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+  currentDateTime: any;
   user: userData[] = [];
+
   constructor(private el:ElementRef , 
     private colorService: ColorService,
     private router: Router,
@@ -25,11 +29,27 @@ export class AdminComponent implements OnInit {
         window.scrollTo(0, 0);
       }
     });
+
+    this.currentDateTime = moment.tz(moment(), 'Asia/Bangkok');
   }
   
   ngOnInit(): void {
     this.user = this.room.getuser();
 
+    this.updateDateTime(); // อัปเดตค่าเวลาเริ่มต้น
+
+    // ใช้ setInterval เพื่ออัปเดตค่าทุก 2 นาที
+    setInterval(() => {
+      this.updateDateTime();
+    }, 120000); // 2 นาที = 120000 มิลลิวินาที
+  }
+
+  updateDateTime() {
+    this.currentDateTime = moment.tz(moment(), 'Asia/Bangkok');
+  }
+
+  refreshDateTime() {
+    this.updateDateTime(); // เรียก updateDateTime เพื่อรีเฟรชค่าเวลา
   }
 
   isActive(route: string): boolean {
