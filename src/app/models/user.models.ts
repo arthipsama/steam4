@@ -8,7 +8,7 @@ export interface userData {
     Email: string;
     Contact?: string;
     roleid?: string;
-    role: string;
+    Role: string;
   }
 
   

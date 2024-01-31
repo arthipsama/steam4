@@ -12,8 +12,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PopUpUserComponent {
 
 
-  data: any; // ประกาศตัวแปร data ให้เหมือนกับที่คุณใช้
-
   // สร้าง FormGroup พร้อมกับ Validation
   userForm: FormGroup = this.fb.group({
     UserName: ['', [Validators.required]],
@@ -24,7 +22,9 @@ export class PopUpUserComponent {
     role: ['', [Validators.required]]
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+    public dialogRef: MatDialogRef<PopUpUserComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onNoClick(): void {
     
@@ -51,6 +51,10 @@ hidePassword: boolean = true;
 // เพิ่มในส่วน methods
 togglePasswordVisibility() {
   this.hidePassword = !this.hidePassword;
+}
+
+onCloseClick(): void {
+  this.dialogRef.close();
 }
 
 

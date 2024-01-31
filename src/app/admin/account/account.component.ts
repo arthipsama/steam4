@@ -1,7 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpUserComponent } from './pop-up-user/pop-up-user.component';
 import { userData } from 'src/app/models/user.models';
+import { Router } from '@angular/router';
+import { Observable, delay, of } from 'rxjs';
+import { RoomService } from 'src/app/service/room.service';
 
 
 @Component({
@@ -9,55 +12,35 @@ import { userData } from 'src/app/models/user.models';
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })
-export class AccountComponent {
-
-  constructor(private dialog: MatDialog) { }
+export class AccountComponent implements OnInit {
 
 
-  users: userData[] = [
-    {
-      userid: '#5033',
-      // imagePath: '../assets/role/user.png',
-      UserName: 'Jassa1',
-      Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
-      FirstName: 'Arthip',
-      LastName: 'Srain',
-      PhoneNumber: '0987129295',
-      role: 'USER'
-    },
-    {
-      userid: '#5034',
-      // imagePath: '../assets/role/admin.png', // แก้ที่นี้ให้ตรงกับที่คุณต้องการ
-      UserName: 'Jassa2',
-      Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
-      FirstName: 'Arthip',
-      PhoneNumber: '0987129295',
-      LastName: 'Srain',
-      role: 'ADMIN'
-    },
-    {
-      userid: '#5035',
-      // imagePath: '../assets/role/user.png', // แก้ที่นี้ให้ตรงกับที่คุณต้องการ
-      UserName: 'Jassa3',
-      Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
-      FirstName: 'Arthip',
-      LastName: 'Srain',
-      PhoneNumber: '0987129295',
-      role: 'USER'
-    },
-    // เพิ่มข้อมูลอื่น ๆ ตามต้องการ
-  ];
+  constructor(private dialog: MatDialog,
+    private router: Router,
+    private room: RoomService,
+    ) { }
 
-  getImagePath(role: string): string {
-    return role === 'ADMIN' ? '../assets/role/admin.png' : '../assets/role/user.png';
+  user: userData[] = [];
+
+  ngOnInit(): void {
+    this.user = this.room.getuser();
+    // this.recordCount = this.user.length;
+    }
+
+
+  getImagePath(Role: string): string {
+    return Role === 'ADMIN' ? '../assets/role/admin.png' : '../assets/role/user.png';
   }
 
-  handleUsersCogClick(){
-
-  }
 
   handleTrashClick(){
     
+  }
+
+  handleTest(user: userData) {
+    // ส่ง userid ไปยังหน้า account-detail
+    this.router.navigate(['/admin/user-detail', user.userid]);
+    // this.userSelected.emit(user);
   }
 
   openUserDialog(): void {
@@ -70,6 +53,12 @@ export class AccountComponent {
       console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
     });
   }
+
+  isActive(route: string, userid?: string): boolean {
+    return this.router.isActive(route + userid, true);
+  }
+  
+  
   
   
   

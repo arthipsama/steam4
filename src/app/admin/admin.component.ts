@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { ColorService } from '../service/color.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { AlertServiceService } from '../service/alert-service.service';
+import { RoomService } from '../service/room.service';
+import { userData } from '../models/user.models';
 
 @Component({
   selector: 'app-admin',
@@ -9,11 +11,12 @@ import { AlertServiceService } from '../service/alert-service.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-
+  user: userData[] = [];
   constructor(private el:ElementRef , 
     private colorService: ColorService,
     private router: Router,
     private alertService: AlertServiceService,
+    private room: RoomService,
     ){
 
     this.router.events.subscribe(event => {
@@ -25,7 +28,7 @@ export class AdminComponent implements OnInit {
   }
   
   ngOnInit(): void {
-
+    this.user = this.room.getuser();
 
   }
 

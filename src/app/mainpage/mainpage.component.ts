@@ -1,7 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { RoomService } from '../service/room.service';
-import { RoomDTO } from '../models/room.model';
-import { AuthService } from '../service/auth.service';
 import { productData } from '../models/product.model';
 import { ColorService } from '../service/color.service';
 

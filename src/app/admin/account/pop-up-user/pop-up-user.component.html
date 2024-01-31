@@ -1,14 +1,13 @@
 <!-- your-dialog.component.html -->
 
-<h1 mat-dialog-title>Add User Detail</h1>
+<h1 mat-dialog-title style="background-color: #90EE90;">Add User Detail</h1>
 <div mat-dialog-content>
   <div style="display: flex; align-items: center; justify-content: space-between;">
     <!-- Left Column: Display Image -->
     <div style="flex: 1; margin-right: 20px;">
       <img src="../assets/role/user.png" alt="User Image" style="width: 100%;">
-      <button mat-icon-button mat-dialog-close style="position: absolute; top: 10px; right: 10px;">
-        <mat-icon style="font-size: 14px;">close</mat-icon>
-      </button>      
+        <mat-icon style="font-size: 14px; position: absolute; top: 25px; right: 20px;"
+        (click)="onCloseClick()">close</mat-icon>
     </div>
 
 <!-- Right Column: User Information Form -->
@@ -20,15 +19,15 @@
         <mat-error *ngIf="userForm.get('UserName')?.hasError('required')">Username is required</mat-error>
       </mat-form-field>
   
-      <mat-form-field style="width: 100%">
-        <mat-label style="font-size: 12px;">Password</mat-label>
-        <input matInput formControlName="Password" type="{{ hidePassword ? 'password' : 'text' }}">
-        <mat-icon matSuffix (click)="togglePasswordVisibility()">
-          {{ hidePassword ? 'visibility_off' : 'visibility' }}
-        </mat-icon>
-        <mat-error *ngIf="userForm.get('Password')?.hasError('required')">Password is required</mat-error>
-      </mat-form-field>
-      
+<mat-form-field style="width: 100%">
+  <mat-label style="font-size: 12px;">Password</mat-label>
+  <input matInput formControlName="Password" type="{{ hidePassword ? 'password' : 'text' }}">
+  <mat-icon matSuffix (click)="togglePasswordVisibility()">
+    {{ hidePassword ? 'visibility_off' : 'visibility' }}
+  </mat-icon>
+  <mat-error *ngIf="userForm.get('Password')?.hasError('required')">Password is required</mat-error>
+</mat-form-field>
+
   
       <mat-form-field style="width: 100%">
         <mat-label style="font-size: 12px;">Email</mat-label>

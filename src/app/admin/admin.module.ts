@@ -27,6 +27,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AccountDetailComponent } from './account/account-detail/account-detail.component';
+import { FooterAdminComponent } from './footer-admin/footer-admin.component';
 
 
 
@@ -40,7 +42,9 @@ import { MatIconModule } from '@angular/material/icon';
     OrderComponent,
     ContactComponent,
     SettingComponent,
-    PopUpUserComponent
+    PopUpUserComponent,
+    AccountDetailComponent,
+    FooterAdminComponent
   ],
   imports: [
     CommonModule,
