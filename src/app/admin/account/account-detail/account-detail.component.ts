@@ -24,6 +24,8 @@ export class AccountDetailComponent implements OnInit {
   userData:any | userData;
   displayEmail!: string;
   animationState: string = 'start';
+  userForm!: FormGroup;
+
 
   constructor( 
     private route: ActivatedRoute , 
@@ -33,7 +35,19 @@ export class AccountDetailComponent implements OnInit {
     private fb: FormBuilder,
     private location: Location
     
-    ) { }
+    ) {
+
+      this.userForm = this.fb.group({
+        firstName: ['', Validators.required],
+        lastName: [''],
+        email: ['', [Validators.required, Validators.email]],
+        phoneNumber: ['', Validators.required],
+        password:['', Validators.required],
+        role:['', Validators.required],
+        contact:['', Validators.required],
+        // ... เพิ่มฟิลด์อื่น ๆ ตามต้องการ
+      });
+     }
 
 
   ngOnInit(): void {
@@ -41,16 +55,25 @@ export class AccountDetailComponent implements OnInit {
     let userid  = this.route.snapshot.paramMap.get('id');
     console.log("uses id is",userid)
 
-    userid && this.room.getuserbyid(userid).subscribe((res)=>{
+    userid && this.room.getuserbyid(userid).subscribe((res) => {
       this.userData = res;
       this.displayEmail = res!.Email!;
-
-      console.log(res)
-
+      console.log(res);
     
+      // ตรวจสอบว่า userForm ถูกสร้างแล้ว
+      if (this.userForm) {
+        this.userForm.patchValue({
+          firstName: this.userData?.FirstName,
+          lastName: this.userData?.LastName,
+          email: this.userData?.Email,
+          phoneNumber: this.userData?.PhoneNumber,
+          password: this.userData?.Password,
+          role: this.userData?.Role,
+          contact: this.userData?.Contact,
+          // ... กำหนดค่าเริ่มต้นของฟิลด์อื่น ๆ
+        });
+      }
     });
-
-    
   }  
 
   showPassword: boolean = false;
@@ -60,13 +83,14 @@ export class AccountDetailComponent implements OnInit {
     this.showPassword = !this.showPassword;
     
   }
-  isSaveButtonDisabled(): boolean {
-    return !this.userData || 
-           !this.userData.FirstName || 
-           !this.userData.Email || 
-           !this.userData.PhoneNumber ||
-           !this.userData.Password;
+
+isSaveButtonDisabled(): boolean {
+  return !this.userForm.get('firstName')?.value ||
+         !this.userForm.get('email')?.value ||
+         !this.userForm.get('phoneNumber')?.value ||
+         !this.userForm.get('password')?.value;
 }
+
 
 // userForm: FormGroup = this.fb.group({
 //   FirstName: ['', Validators.required],
@@ -81,25 +105,18 @@ onSave() {
   // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
   if (this.isValidFormData()) {
     // ทำบันทึกข้อมูล
-    const formData = {
-      FirstName: this.userData.FirstName,
-      LastName: this.userData.LastName,
-      Email: this.userData.Email,
-      PhoneNumber: this.userData.PhoneNumber,
-      Password: this.userData.Password,
-      Role: this.userData.Role
-    };
     this.animationState = this.animationState === 'start' ? 'end' : 'start';
 
-    console.log('Data to be saved:', formData);
-    this.alertService.onSuccess('บันทึกข้อมูลสำเร็จ', '/admin/user');
-
+    console.log('Data to be saved:', this.userForm.value);
     // ทำตามที่คุณต้องการเพิ่มเติม
+    this.alertService.onSuccess('บันทึกข้อมูลสำเร็จ', '/admin/user');
   } else {
     console.log('Invalid Form');
     // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
   }
 }
+
+
 
 onCancel() {
   // ให้ย้อนกลับไปหน้าก่อนหน้านี้
