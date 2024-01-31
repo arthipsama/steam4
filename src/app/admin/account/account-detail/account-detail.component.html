@@ -2,11 +2,16 @@
         
     <div class="page-header">
         <h1>Account-Setting</h1>
-        <small>
+        <!-- <small>
             <span routerLink="/admin/dashboard" class="clickable">Home </span> /
             <span routerLink="/admin/user" class="clickable"> User</span> 
             / Setting
+        </small> -->
+        <small>
+            <a href="/admin/dashboard" class="clickable">Home</a> /
+            <a href="/admin/user" class="clickable">User</a> / Setting
         </small>
+        
     </div>
     
     <div class="page-content">
@@ -22,7 +27,7 @@
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
                             </div>
                             <h5 class="user-name">{{ userData?.UserName }}</h5>
-                            <h6 class="user-email">{{ userData?.Email }}</h6>
+                            <h6 class="user-email">{{ displayEmail  }}</h6>
                         </div>
                         <div class="about">
                             <h5>About Contact</h5>
@@ -41,30 +46,30 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group" style="margin-bottom: 10px;">
-                                <label for="fullName">Firstname</label>
-                                <input type="text" class="form-control" id="fullName" placeholder="Enter Firstname"
-                                [(ngModel)]="userData.FirstName">
+                                <label for="fullName">Firstname <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="fullName" placeholder="{{userData.FirstName}}"
+                                    [(ngModel)]="userData.FirstName" required>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
-                                <label for="website">Lastname</label>
-                                <input type="url" class="form-control" id="website" placeholder="Enter Lastname"
-                                [(ngModel)]="userData.LirstName">
+                                <label for="website">Lastname </label>
+                                <input type="url" class="form-control" id="website" placeholder=""
+                                [(ngModel)]="userData.LastName">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group" style="margin-bottom: 20px;">
-                                <label for="eMail">Email</label>
-                                <input type="email" class="form-control" id="eMail" placeholder="Enter email ID"
-                                [(ngModel)]="userData.Email">
+                                <label for="eMail">Email <span class="required">*</span></label>
+                                <input type="email" class="form-control" id="eMail" placeholder=""
+                                [(ngModel)]="userData.Email" required>
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="text" class="form-control" id="phone" placeholder="Enter phone number"
-                                [(ngModel)]="userData.PhoneNumber">
+                                <label for="phone">Phone <span class="required">*</span></label>
+                                <input type="text" class="form-control" id="phone" placeholder=""
+                                [(ngModel)]="userData.PhoneNumber" required>
                             </div>
                         </div>
                     </div>
@@ -74,10 +79,24 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group" style="margin-bottom: 10px;">
-                                <label for="Street">Password</label>
-                                <input type="name" class="form-control" id="Street" placeholder="Enter Password"
-                                [(ngModel)]="userData.Password">
-                            </div>
+                                <label for="Street">Password <span class="required">*</span></label>
+                                <div class="input-group">
+                                  <input 
+                                    type="{{ showPassword ? 'text' : 'password' }}" 
+                                    class="form-control" 
+                                    id="Street" 
+                                    placeholder=""
+                                    [(ngModel)]="userData.Password" required>
+
+                                    <button 
+                                      class="btn btn-outline-primary" 
+                                      type="button" 
+                                      (click)="togglePasswordVisibility()">
+                                      <i class="{{ showPassword ? 'las la-eye-slash' : 'las la-eye' }}"></i>
+                                    </button>
+                                </div>
+                              </div>
+                              
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
@@ -86,7 +105,7 @@
                         </div>
                         <div class="mb-4 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group" style="margin-bottom: 15px;">
-                                <label for="ciTy">Role</label>
+                                <label for="ciTy">Role </label>
                                 <select class="form-control" id="" [(ngModel)]="userData.Role">
                                     <option value="USER">USER</option>
                                     <option value="ADMIN">ADMIN</option>
@@ -100,9 +119,13 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="text-right d-flex justify-content-end">
                                 <button type="button" id="cancelButton" name="cancelButton" 
-                                class="btn btn-secondary ml-auto">Cancel</button>
-                                <button type="button" id="updateButton" name="updateButton" 
-                                class="btn btn-success ml-auto" style="margin-left: 8px;">Save</button>
+                                class="btn btn-secondary ml-auto"
+                                [routerLink]="['/admin/user']">Cancel</button>                        
+                                <button [@rotateAnimation]="animationState" class="btn btn-success ml-auto" style="margin-left: 8px;"
+                                (click)="onSave()" [disabled]="isSaveButtonDisabled()">
+                            Save
+                        </button>
+                        
                             </div>                            
                         </div>
                     </div>

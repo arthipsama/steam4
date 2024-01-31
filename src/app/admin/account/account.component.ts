@@ -27,7 +27,6 @@ export class AccountComponent implements OnInit {
     // this.recordCount = this.user.length;
     }
 
-
   getImagePath(Role: string): string {
     return Role === 'ADMIN' ? '../assets/role/admin.png' : '../assets/role/user.png';
   }

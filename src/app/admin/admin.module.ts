@@ -29,6 +29,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AccountDetailComponent } from './account/account-detail/account-detail.component';
 import { FooterAdminComponent } from './footer-admin/footer-admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -66,7 +67,8 @@ import { FooterAdminComponent } from './footer-admin/footer-admin.component';
     MatOptionModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    BrowserAnimationsModule
     
   ]
 })

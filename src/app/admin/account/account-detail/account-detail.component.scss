@@ -582,3 +582,14 @@ table tbody tr {
     font-size: calc(100% + 2px); /* Increase font size by 2px on hover */
     color: blueviolet;
 }
+/* ลบเส้นขีดใต้ของลิงก์ */
+a {
+    text-decoration: none;
+    color: #74767d;
+  }
+  
+  /* เพิ่มสีที่ต้องการเมื่อเม้าส์ hover ที่ลิงก์ */
+  a:hover {
+    color: #007bff; /* สีตามที่คุณต้องการเมื่อ hover */
+  }
+  
