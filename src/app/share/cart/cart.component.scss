@@ -71,3 +71,34 @@
     border-radius: 24px; 
     cursor: pointer;
 }
+
+.pay1{
+   width: 150px;
+   height: 100px;
+   border-radius: 14px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border: 1px solid #ffffff;
+   margin: 0 0 15px 20px;
+}
+
+.pay1:hover{
+   outline: 1px solid rgb(251, 142, 49);
+   transform: scale(1.01);
+   transition: transform 0.1s ease-in-out;
+   cursor: pointer;
+}
+
+.pay{
+   background: linear-gradient(rgb(251, 142, 49) 0%, rgb(255, 108, 0) 100%); 
+   color: #ffffff; 
+   width: 200px; 
+   height: 40px; 
+   display: flex; 
+   justify-content: center; 
+   align-items: center; 
+   border-radius: 24px; 
+   margin-top: 10px;
+   cursor: pointer;
+}

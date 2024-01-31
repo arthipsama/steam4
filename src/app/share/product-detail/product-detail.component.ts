@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { productData } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -11,8 +11,8 @@ import { ProductService } from 'src/app/service/product.service';
 export class ProductDetailComponent {
 
   product! :productData;
-  productData!: productData;
-  constructor(private service: ProductService){
+  constructor(private service: ProductService,
+              private router: Router){
   }
 
   ngOnInit(){
@@ -23,6 +23,10 @@ export class ProductDetailComponent {
   }
 
   buyProduct(){
+    console.log(this.product);
     
+    
+    this.router.navigate(['/cart']);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

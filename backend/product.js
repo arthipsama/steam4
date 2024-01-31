@@ -20,24 +20,6 @@ router.get('/product', (req, res) => {
   });
 });
 
-// router.post('/orders', (req, res) => {
-//   const { userid } = req.body;
-//   pool.query('SELECT * FROM public."Orders" WHERE userid = $1', [userid], (err, result) => {
-//     if (err) {
-//       console.error('Error executing query', err);
-//       res.status(500).json({ error: 'Internal Server Error' });
-//       return;
-//     }
-//     if (result.rowCount > 0) {
-//       res.json(result.rows);
-//     } else {
-//       res.json(null);
-//     }
-//   });
-// });
-
-// Other room-related routes go here...
-
 module.exports = router;
 
 router.post('/orders', (req, res) => {
@@ -67,5 +49,17 @@ router.post('/orders', (req, res) => {
         res.json(insertResult.rows[0]);
       });
     }
+  });
+});
+
+router.post('/cart', (req, res) => {
+  const { userid } = req.body;
+  pool.query('select p.productid, p."ImgProduct" , p."ProductName", p.price, p."Description", od."quantity" from public."Product" p left join public."OrdersDetails" od on p.productid = od.productid left join public."Orders" o on od.ordersid = o.ordersid where o."userid" = $1', [userid], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
   });
 });
