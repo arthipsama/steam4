@@ -72,21 +72,56 @@
             Billing & Payment
         </div>
         <div class="col-12"
-            style="background-color: #333333; width: 100%; height: auto; border-bottom-left-radius: 14px; border-bottom-right-radius: 14px; display: flex;">
+            style="background-color: #333333; width: 100%; height: auto; display: flex;">
             <div class="col-7">
-                <div class="">
-                    check you cart
-                    <div class="" style="border-style: solid;"></div>
+                <div class="" style="background-color: #3b3b3b; width: 740px; height: auto; margin-left: 100px; border-radius: 14px; margin-top: 30px;">
+                    <h6 style="color: #ffffff; font-size: 17px; margin-left: 20px; padding-top: 15px;">Check you Cart</h6>
+                    <hr class="" style="color: rgb(255, 255, 255); margin: 0 20px 0 20px;">
+                    <div class="col-12" style="display: flex; justify-content: center; padding: 15px 10px 15px 0; color: #ffffff;">
+                        <div class="col-7"></div>
+                        <div class="col-2" style="margin-right: 15px;">Price</div>
+                        <div class="col-2">Quantity</div>
+                        <div class="col-2">Row Total</div>
+                    </div>
+                    <div class="" *ngFor="let items of userProducts; let i = index">
+                        <div class="col-12" style="width: auto;background-color: #333333; margin: 0 20px 0 20px; border-radius: 14px; display: flex;">
+                            <img class="col-2" src="{{items.ImgProduct}}" style="width: 130px; height: 90px; border-radius: 14px;">
+                            <div class="col-11" style="color: #ffffff; display: flex; align-items: center;">
+                                <div class="col-4" style="margin-left: 20px;">{{items.ProductName}}</div>
+                                <div class="col-3">$ {{items.price}}</div>
+                                <div class="col-2">{{items.quantity}}</div>
+                                <div class="col-2" style="margin-left: 5px;">$ {{rowTotal[i]}}</div>
+                            </div>
+                        </div>
+                        <br style="background-color: #333333;">
+                    </div>
                 </div>
 
-                <div class="">
-                    billing address
-                    <div class="" style="border-style: solid;"></div>
-                </div>
+                <div class="" style="background-color: #3b3b3b; width: 740px; height: 190px; margin-left: 100px; border-radius: 14px; margin-top: 30px; color: #ffffff; ">
+                    <h6 style="font-size: 17px; margin-left: 20px; padding-top: 15px;">Choose payment method</h6>
+                    <hr class="" style="color: rgb(255, 255, 255); margin: 0 0 0 20px;"><br>
+                    <div class="pay1">ธนาคารอะไรสักอย่าง</div>
+                </div><br>
             </div>
 
-            <div class="col-3">
-                you don't have any billing address
+            <div class="col-3" style="width: 300px; height: 230px; background-color: #3b3b3b; margin: 30px 0 0 160px; padding-top: 20px; color: #ffffff; border-radius: 14px;">
+                <h6 style="font-size: 17px; display: flex; justify-content: center;">Order summary</h6>
+                <div class="" style="display: flex; align-items: center; justify-content: space-between; margin: 0 15px 0 15px;">
+                    <h6 style="font-size: 14px">Subtotal</h6>
+                    <h6 style="font-size: 14px">${{totalprice}}</h6>
+                </div>
+                <div class="" style="display: flex; align-items: center; justify-content: space-between; margin: 0 15px 0 15px;">
+                    <h6 style="font-size: 14px">Tax included</h6>
+                    <h6 style="font-size: 14px">$0.00</h6>
+                </div>
+                <hr class="" style="color: rgb(255, 255, 255); margin: 0 15px 0 15px;"><br>
+                <div class="" style="display: flex; align-items: center; justify-content: space-between; margin: 0 15px 0 15px;">
+                    <h6 style="font-size: 14px">Grand total</h6>
+                    <h6 style="font-size: 14px">${{totalprice}}</h6>
+                </div>
+                <div class="" style="display: flex; justify-content: center;" (click)="payProduct()">
+                    <h4 class="pay">Pay product</h4>
+                </div>
             </div>
         </div>
     </div>

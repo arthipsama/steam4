@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit{
   loging:boolean = false;
   userData!: userData;
   productnum:number = 0;
+
   constructor(private serviceProduct: ProductService) {
   }
 
@@ -31,7 +32,6 @@ export class HeaderComponent implements OnInit{
         if (x && x.length > 0) {
           x.forEach((num:any) => {
             this.productnum++
-            console.log(num);
           });
          }
       })

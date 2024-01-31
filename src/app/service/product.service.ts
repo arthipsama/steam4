@@ -17,8 +17,11 @@ export class ProductService {
 
   orders(userid:any){
     var api = 'http://localhost:3000/api/orders'
-    console.log(userid);
-    
     return this.http.post<any>(api, {userid:userid});
+  }
+
+  cart(userid: any){
+    var api = 'http://localhost:3000/api/cart'
+    return this.http.post<any>(api, {userid: userid});
   }
 }
