@@ -78,19 +78,21 @@
                     <h6 style="color: #ffffff; font-size: 17px; margin-left: 20px; padding-top: 15px;">Check you Cart</h6>
                     <hr class="" style="color: rgb(255, 255, 255); margin: 0 20px 0 20px;">
                     <div class="col-12" style="display: flex; justify-content: center; padding: 15px 10px 15px 0; color: #ffffff;">
-                        <div class="col-7"></div>
-                        <div class="col-2" style="margin-right: 15px;">Price</div>
+                        <div class="col-5"></div>
+                        <div class="col-2" style="margin-left: 25px;">Price</div>
                         <div class="col-2">Quantity</div>
                         <div class="col-2">Row Total</div>
+                        <div class="col-1"></div>
                     </div>
                     <div class="" *ngFor="let items of userProducts; let i = index">
                         <div class="col-12" style="width: auto;background-color: #333333; margin: 0 20px 0 20px; border-radius: 14px; display: flex;">
                             <img class="col-2" src="{{items.ImgProduct}}" style="width: 130px; height: 90px; border-radius: 14px;">
-                            <div class="col-11" style="color: #ffffff; display: flex; align-items: center;">
-                                <div class="col-4" style="margin-left: 20px;">{{items.ProductName}}</div>
-                                <div class="col-3">$ {{items.price}}</div>
+                            <div class="col-10" style="color: #ffffff; display: flex; align-items: center;">
+                                <div class="col-3" style="margin-left: 20px;">{{items.ProductName}}</div>
+                                <div class="col-3">${{items.price}}</div>
                                 <div class="col-2">{{items.quantity}}</div>
-                                <div class="col-2" style="margin-left: 5px;">$ {{rowTotal[i]}}</div>
+                                <div class="col-2" style="margin-left: 5px;">${{rowTotal[i]}}</div>
+                                <i class="col-1 fas fa-trash trash" (click)="deleteProduct(i)"></i>
                             </div>
                         </div>
                         <br style="background-color: #333333;">
@@ -125,5 +127,5 @@
             </div>
         </div>
     </div>
-</div>
+</div><br>
 <app-footer></app-footer>

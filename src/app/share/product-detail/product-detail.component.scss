@@ -62,7 +62,7 @@
     font-size: 44px; 
     color: #ffffff; 
     font-weight: bold; 
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .buy{
@@ -77,3 +77,33 @@
     margin-top: 10px;
     cursor: pointer;
 }
+
+ .head {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+.minus{
+    color: white;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.plus{
+    margin-left: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+ .input {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 15px;
+    background-color: #333333;
+    border: 1px solid rgb(251, 142, 49);
+    color: rgb(251, 142, 49);
+ }
