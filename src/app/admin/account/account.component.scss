@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600&display=swap');
+
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
 
 :root {
     --main-color: #22BAA0;
@@ -262,6 +264,7 @@ main {
 .page-content {
     padding: 1.3rem 1rem;
     background: #f1f4f9;
+    height: 100vh;
 }
 
 .analytics {
@@ -442,8 +445,13 @@ table tbody tr {
 }
 
 .client-info h4 {
-    color: #555;
+    color: black;
     font-size: .95rem;
+    margin-bottom: 5px;
+}
+.client-info h5 {
+    color: #555;
+    font-size: .75rem;
 }
 
 .client-info small {
@@ -521,7 +529,10 @@ table tbody tr {
     table {
         width: 900px;
     }
+
 }
+
+
 
 .clickable {
     transition: font-size 0.3s ease; /* Add transition for smooth effect */
@@ -531,3 +542,25 @@ table tbody tr {
     font-size: calc(100% + 2px); /* Increase font size by 2px on hover */
     color: blueviolet;
 }
+
+.long-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+    
+  .icon-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 90%; /* ทำให้มีรูปร่างเป็นวงกลม */
+
+  }
+  
+//   .icon-button:hover {
+//     background-color: #FFA07A ;
+//   }
+  
+  
+  
+  

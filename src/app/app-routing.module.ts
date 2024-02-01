@@ -15,6 +15,8 @@ import { NewComponent } from './admin/new/new.component';
 import { OrderComponent } from './admin/order/order.component';
 import { ProductComponent } from './admin/product/product.component';
 import { SettingComponent } from './admin/setting/setting.component';
+import { QaComponent } from './qa/qa.component';
+import { AccountDetailComponent } from './admin/account/account-detail/account-detail.component';
 
 
 
@@ -44,11 +46,16 @@ const routes: Routes = [
     component: ProductDetailComponent
   },
   {
+    path: 'questions',
+    component: QaComponent
+  },
+  {
     path: 'admin',
     component: AdminComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'user', component: AccountComponent },
+      { path: 'user-detail/:id', component: AccountDetailComponent},
       { path: 'product', component: ProductComponent },
       { path: 'new', component: NewComponent },
       { path: 'order', component: OrderComponent },

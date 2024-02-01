@@ -1,18 +1,67 @@
-// @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600&display=swap');
 
-:root {
-    --main-color: #22BAA0;
-    --color-dark: #34425A;
-    --text-grey: #B0B0B0;
+
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+body {
+    margin: 0;
+    padding-top: 40px;
+    color: #2e323c;
+    background: #f5f6fa;
+    position: relative;
+    height: 100%;
+}
+.account-settings .user-profile {
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+}
+.account-settings .user-profile .user-avatar img {
+    width: 90px;
+    height: 90px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+.account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #9fa8b9;
+}
+.account-settings .about {
+    margin: 2rem 0 0 0;
+    text-align: center;
+}
+.account-settings .about h5 {
+    margin: 0 0 15px 0;
+    color: #007ae1;
+}
+.account-settings .about p {
+    font-size: 0.825rem;
+}
+.form-control {
+    border: 1px solid #cfd1d8;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: .825rem;
+    background: #ffffff;
+    color: #2e323c;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style-type: none;
-    box-sizing: border-box;
-    font-family: 'Merriweather', sans-serif;
+.card {
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
 }
 
 #menu-toggle {
@@ -29,6 +78,7 @@
     z-index: 100;
     background: var(--color-dark);
     transition: left 300ms;
+    background-color: #072f4f;
 }
 
 .side-header {
@@ -262,7 +312,7 @@ main {
 .page-content {
     padding: 1.3rem 1rem;
     background: #f1f4f9;
-    // height: 100vh;
+    height: 100vh;
 }
 
 .analytics {
@@ -532,47 +582,14 @@ table tbody tr {
     font-size: calc(100% + 2px); /* Increase font size by 2px on hover */
     color: blueviolet;
 }
-
-.page-content1 {
-    background-color: #f1f4f9;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* ลบเส้นขีดใต้ของลิงก์ */
+a {
+    text-decoration: none;
+    color: #74767d;
   }
   
-  .content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px; /* ระยะห่างระหว่าง cards */
+  /* เพิ่มสีที่ต้องการเมื่อเม้าส์ hover ที่ลิงก์ */
+  a:hover {
+    color: #007bff; /* สีตามที่คุณต้องการเมื่อ hover */
   }
-  
-  .mat-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .mat-card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-grow: 1;
-  }
-  
-  .mat-card-actions {
-    display: flex;
-    justify-content: center;
-  }
-  
-  
-  /* ให้ขึ้นบรรทัดใหม่ทุกรายการที่เป็นลำดับที่ 5 */
-  .mat-card:nth-child(5n) {
-    flex-basis: 100%; /* เต็มแถว */
-    margin-right: 0;
-  }
-  
-
-  @import "~@fortawesome/fontawesome-free/css/all.css";
-
   
