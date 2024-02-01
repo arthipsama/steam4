@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { productData } from 'src/app/models/product.model';
 import { userData } from 'src/app/models/user.models';
+import { ColorService } from 'src/app/service/color.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -17,11 +18,18 @@ export class CartComponent {
   totalprice:any;
 
   constructor(private router: Router,
-              private service: ProductService){
+              private service: ProductService,
+              private colorService: ColorService ,
+              private renderer: Renderer2, 
+              private el: ElementRef){
 
   }
 
   ngOnInit(){
+    this.colorService.backgroundColor$.subscribe((color) => {
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
+    });
+    
     let storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
         this.userData = JSON.parse(storedUserData);

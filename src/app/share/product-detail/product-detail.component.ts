@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { productData } from 'src/app/models/product.model';
 import { userData } from 'src/app/models/user.models';
+import { ColorService } from 'src/app/service/color.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -15,10 +16,17 @@ export class ProductDetailComponent {
   quantity: number = 1;
 
   constructor(private service: ProductService,
-    private router: Router) {
+              private router: Router,
+              private colorService: ColorService ,
+              private renderer: Renderer2, 
+              private el: ElementRef) {
   }
 
   ngOnInit() {
+    this.colorService.backgroundColor$.subscribe((color) => {
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
+    });
+
     const storedProduct = localStorage.getItem('productData');
     if (storedProduct) {
       this.product = JSON.parse(storedProduct);
