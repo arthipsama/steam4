@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { userData } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/service/auth.service';
+import { ColorService } from 'src/app/service/color.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,11 +16,18 @@ export class ProfileComponent {
   newUserData!: userData;
 
   constructor(private router: Router,
-    private fb: FormBuilder,
-    private service: AuthService) {
+              private fb: FormBuilder,
+              private service: AuthService,
+              private colorService: ColorService ,
+              private renderer: Renderer2, 
+              private el: ElementRef) {
   }
 
   ngOnInit() {
+    this.colorService.backgroundColor$.subscribe((color) => {
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
+    });
+
     let storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
       this.userData = JSON.parse(storedUserData);

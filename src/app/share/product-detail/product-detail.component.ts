@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { productData } from 'src/app/models/product.model';
+import { userData } from 'src/app/models/user.models';
+import { ColorService } from 'src/app/service/color.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -9,24 +11,52 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent {
+  userData!: userData;
+  product!: productData;
+  quantity: number = 1;
 
-  product! :productData;
   constructor(private service: ProductService,
-              private router: Router){
+              private router: Router,
+              private colorService: ColorService ,
+              private renderer: Renderer2, 
+              private el: ElementRef) {
   }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.colorService.backgroundColor$.subscribe((color) => {
+      this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
+    });
+
     const storedProduct = localStorage.getItem('productData');
     if (storedProduct) {
-        this.product = JSON.parse(storedProduct);
+      this.product = JSON.parse(storedProduct);
+    }
+    let storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+      this.userData = JSON.parse(storedUserData);
     }
   }
 
-  buyProduct(){
-    console.log(this.product);
-    
-    
-    this.router.navigate(['/cart']);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  decreaseQuantity(): void {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
+
+  increaseQuantity(): void {
+    if(this.product.quantity > this.quantity){
+      this.quantity++;
+    }
+  }
+
+  buyProduct() {
+    var userid = this.userData.userid;
+    var productid = this.product.productid;
+    var Quantity = this.quantity;
+    var price = this.product.price * this.quantity
+    this.service.addCart(userid, productid, Quantity, price).subscribe(x=>{
+      this.router.navigate(['/cart']);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
   }
 }
