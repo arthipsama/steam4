@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -36,6 +36,7 @@ import { PopUpComponent } from './pop-up/pop-up.component';
     HeaderComponent,
     FooterComponent,
     CardProductComponent
-  ]
+  ],
+  schemas:[ CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ShareModule { }

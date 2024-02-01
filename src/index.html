@@ -14,6 +14,36 @@
 </head>
 <body class="mat-typography">
 
+  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <df-messenger
+    project-id="steamgamechatbot"
+    agent-id="b2039796-755b-4f77-8d3d-6e4f56f5b8b6"
+    language-code="th"
+    max-query-length="-1">
+    <df-messenger-chat-bubble
+     chat-title="CHAT BOT">
+    </df-messenger-chat-bubble>
+  </df-messenger>
+  <style>
+    df-messenger {
+      z-index: 999;
+      position: fixed;
+      bottom: 90px;
+      right: 16px;
+      --df-messenger-titlebar-background : orange ;
+      --df-messenger-chat-window-width : 350px ;
+      --df-messenger-chat-bubble-size	 : 56px ;
+      --df-messenger-titlebar-font-color : whitesmoke;
+      --df-messenger-titlebar-subtitle-font-color : white;
+      --df-messenger-send-icon-color : orange;
+      --f-messenger-chat-bubble-color : orange;
+
+      
+    }
+  </style>
+
+
   <app-root></app-root>
 </body>
 </html>
