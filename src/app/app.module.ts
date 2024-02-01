@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +19,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
 import { DropDownButtonModule } from '@progress/kendo-angular-buttons';
 import { QaModule } from './qa/qa.module';
 import { QaComponent } from './qa/qa.component';
-
+import { DialogModule } from '@angular/cdk/dialog';
 
 
 @NgModule({
@@ -47,6 +47,7 @@ import { QaComponent } from './qa/qa.component';
     
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[ CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
