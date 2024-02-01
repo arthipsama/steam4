@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { productData } from 'src/app/models/product.model';
 import { userData } from 'src/app/models/user.models';
@@ -45,5 +45,15 @@ export class CartComponent {
 
   payProduct(){
     
+  }
+
+  deleteProduct(i:any){
+    this.service.deleteProduct(this.userProducts[i].productid, this.userProducts[i].ordersid).subscribe(x=>{
+      if(x){
+        this.service.cart(this.userData.userid).subscribe(pd=>{
+          this.userProducts = pd;
+        })
+      }
+    })
   }
 }
