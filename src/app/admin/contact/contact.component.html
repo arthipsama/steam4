@@ -34,32 +34,31 @@
                 <table width="100%">
                     <thead>
                         <tr>
-                            <th style="width: 350px;"><span class="las la-sort"></span> Contact ID</th>
-                            <th style="width: 400px;"><span class="las la-sort"></span> CLIENT</th>
-                            <th style="width: 450px;"><span class="las la-sort"></span> NAME</th>
-                            <th style="width: 450px;"><span class="las la-sort"></span> SUBJECT</th>
-
-                            <th style="width: 350px;"><span class="las la-sort"></span> ACTIONS</th>
+                          <th style="width: 15%;"><span class="las la-sort"></span> Cot ID</th>
+                          <th style="width: 20%;"><span class="las la-sort"></span> CLIENT</th>
+                          <th style="width: 15%;"><span class="las la-sort"></span> NAME</th>
+                          <th style="width: 40%;"><span class="las la-sort"></span> SUBJECT</th>
+                          <th style="width: 10%;"><span class="las la-sort"></span> ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
                         <ng-container *ngFor="let contact of contact">
                           <tr [ngClass]="{'read-row': contact.read}">
                             <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                               # {{ contact.contactmeid }}</td>
+                               # {{ +contact.contactmeid }}</td>
                             <td>
                               <div class="client">
-                                <div class="client-img bg-img" [style.background-image]="contact.user ? 'url(' + getImagePath(contact.user.Role) + ')' : 'url(../assets/role/user.png)'"></div>                                <div class="client-info">
-                                  <h4 style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                <div class="client-img bg-img" [style.background-image]="contact.user ? 'url(' + getImagePath(contact.user.Role) + ')' : 'url(../assets/role/ghost.png)'"></div>                                <div class="client-info">
+                                  <h4 style="max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     {{ contact.user?.UserName || 'GHOST USER' }}</h4>
-                                  <h5 style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                  <h5 style="max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     {{ contact.email }}</h5>
                                 </div>
                               </div>
                             </td>
-                            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <td style="max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 {{ contact.textname }}</td>
-                            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 {{ contact.subject }}</td>
                             <td>
                               <div class="actions">
