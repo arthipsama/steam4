@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+<df-messenger
+  project-id="steamgamechatbot"
+  agent-id="b2039796-755b-4f77-8d3d-6e4f56f5b8b6"
+  language-code="th"
+  max-query-length="-1">
+  <df-messenger-chat-bubble
+   chat-title="Sama Bot"
+   chat-title-icon="../assets/chatbot.png"
+   placeholder-text="เริ่มพูดคุยกันได้เลยครับ.."
+   request-auth-text="dd"
+   bot-actor-image="../assets/testlogo.png"
+   bot-writing-image="../assets/dot.gif"
+
+
+   >
+  </df-messenger-chat-bubble>
+</df-messenger>
+<style>
+  df-messenger {
+    z-index: 999;
+    position: fixed;
+    bottom: 90px;
+    right: 16px;
+    --df-messenger-titlebar-background : orange ;
+    --df-messenger-chat-window-width : 350px ;
+    --df-messenger-chat-bubble-size	 : 56px ;
+    --df-messenger-titlebar-font-color : whitesmoke;
+    --df-messenger-titlebar-subtitle-font-color : white;
+    --df-messenger-send-icon-color : orange;
+    --f-messenger-chat-bubble-color : orange;
+    --df-messenger-titlebar-padding: 5px 15px ;
+    --df-messenger-chat-scroll-button-font-size: 8px;
+    --df-messenger-chat-scroll-button-font-color: orange;
+    --df-messenger-chat-scroll-button-background: none ;
+    --df-messenger-chat-padding:6px ;
+    --df-messenger-message-bot-writing-image-width: 56px ;
+    --df-messenger-chat-bubble-background: black ;
+    --df-messenger-chat-icon-size	 : 5px ;
+    --df-messenger-chat-bubble-chat-icon-size	 : 5px ;
+    
+  }
+</style>

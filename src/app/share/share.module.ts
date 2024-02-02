@@ -12,6 +12,8 @@ import { CardProductComponent } from './card-product/card-product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { PopUpComponent } from './pop-up/pop-up.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 
 @NgModule({
@@ -24,14 +26,17 @@ import { PopUpComponent } from './pop-up/pop-up.component';
     ProfileComponent,
     CardProductComponent,
     ProductDetailComponent,
-    PopUpComponent
+    PopUpComponent,
+    ChatbotComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    BrowserModule,
+    
   ],
   exports:[
     HeaderComponent,

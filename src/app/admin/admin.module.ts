@@ -30,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AccountDetailComponent } from './account/account-detail/account-detail.component';
 import { FooterAdminComponent } from './footer-admin/footer-admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopUpContactComponent } from './contact/pop-up-contact/pop-up-contact.component';
 
 
 
@@ -45,7 +46,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SettingComponent,
     PopUpUserComponent,
     AccountDetailComponent,
-    FooterAdminComponent
+    FooterAdminComponent,
+    PopUpContactComponent
   ],
   imports: [
     CommonModule,

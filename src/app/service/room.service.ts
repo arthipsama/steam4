@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, delay, finalize, of } from 'rxjs';
 import { LoaderService } from './loader.service';
 import { RoomDTO } from '../models/room.model';
 import { userData } from '../models/user.models';
+import { ContactMeDTO } from '../models/contactme.model';
 
 
 @Injectable({
@@ -28,7 +29,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       // imagePath: '../assets/role/user.png',
       UserName: 'Jassa1',
       Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
-      FirstName: 'Arthip',
+      FirstName: 'ArthipArthipArthipArthipArthipArthipArthipArthipArthipArthipArthipArthipArthip',
       LastName: 'Srain',
       PhoneNumber: '0987129295',
       Role: 'USER',
@@ -63,12 +64,56 @@ private apiUrl = 'http://localhost:3000/api/room';
   ];
 
 
+  contact: ContactMeDTO[] = [
+    {
+      contactmeid: 1 ,
+      userid: 5033,
+      textname: 'Jassa1',
+      email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
+      read: false,
+      subject: 'อยากให้จัดโปรโมชั่นบ่อยๆ',
+      textmessage: '1852 บ้านสินธร ซอยจุ๋แซ้บๆ',
+      user: this.users.find(user => user.userid === '5033'),
+    },
+    {
+      contactmeid: 2 ,
+      userid: null,
+      textname: 'Jassa2',
+      email: 'jassa@jassa.orgjassa',
+      read: true,
+      subject: 'เกมน้อยไป',
+      textmessage: '1853 บ้านสินธร ซอยจุ๋แซ้บๆ',
+      user: this.users.find(user => user.userid === null),
+    },
+    {
+      contactmeid: 3 ,
+      userid: 5035,
+      textname: 'Jassa3',
+      email: 'jassa@jassa.orgjassa',
+      read: false,
+      subject: 'อยากได้เกมราคาถูก',
+      textmessage: '1854 บ้านสินธร ชาบูปิ้งย่าง',
+      user: this.users.find(user => user.userid === '5035'),
+    },
+    // เพิ่มข้อมูลอื่น ๆ ตามต้องการ
+  ];
+
+
   getuser() {
     return this.users;
   }
 
+  getcontact() {
+    return this.contact;
+  }
+
   getuserbyid(id: string): Observable<userData | undefined> {
     const product = this.users.find(p => p.userid === id);
+    return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
+  }
+
+  getcontactbyid(id: string): Observable<ContactMeDTO | undefined> {
+    const product = this.contact.find(p => p.contactmeid === +id);
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
   }
 
