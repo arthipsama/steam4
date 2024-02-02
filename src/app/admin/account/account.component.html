@@ -50,20 +50,25 @@
                     <tbody>
                         <ng-container *ngFor="let user of user">
                           <tr>
-                            <td>{{ user.userid }}</td>
+                            <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                # {{ user.userid }}</td>
                             <td>
                               <div class="client">
                                 <div class="client-img bg-img" [style.background-image]="'url(' + getImagePath(user.Role) + ')'"></div>
                                 <div class="client-info">
-                                  <h4>{{ user.UserName }}</h4>
+                                  <h4 style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{ user.UserName }}</h4>
                                   <h5 style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     {{ user.Email }}</h5>
                                 </div>
                               </div>
                             </td>
-                            <td>{{ user.FirstName }}</td>
-                            <td>{{ user.PhoneNumber }}</td>
-                            <td>{{ user.Role }}</td>
+                            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                {{ user.FirstName }}</td>
+                            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                {{ user.PhoneNumber }}</td>
+                            <td style="max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                {{ user.Role }}</td>
                             <td>
                               <div class="actions">
                                 <span class=""></span>
@@ -71,8 +76,6 @@
                                 <button class="icon-button" [routerLink]="['/admin/user-detail', user.userid]" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
                                   <span class="las la-users-cog"></span>
                                 </button>
-                                            
-                                  
                                   <button class="icon-button" (click)="handleTrashClick()">
                                     <span class="las la-trash"></span>
                                   </button>
