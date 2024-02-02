@@ -72,6 +72,8 @@ onSave() {
       read: true
     };
 
+    this.alert.withOutTranslate.onSuccessRe();
+
     console.log('Updated Contact:', updatedContact);
   }
 }
