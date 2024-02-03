@@ -116,7 +116,9 @@ onSave() {
   }
 }
 
-
+getImagePath(Role: string): string {
+  return Role === 'ADMIN' ? '../assets/role/admin.png' : '../assets/role/user.png';
+}
 
 onCancel() {
   // ให้ย้อนกลับไปหน้าก่อนหน้านี้
