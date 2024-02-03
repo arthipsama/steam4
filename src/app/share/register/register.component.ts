@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { ColorService } from 'src/app/service/color.service';
 
@@ -13,10 +14,11 @@ export class RegisterComponent {
   user: any[] = [];
 
   constructor(private fb: FormBuilder,
-    private service: AuthService,
-    private colorService: ColorService ,
-    private renderer: Renderer2 , 
-    private el: ElementRef) {
+              private service: AuthService,
+              private colorService: ColorService ,
+              private renderer: Renderer2 , 
+              private el: ElementRef,
+              private router: Router) {
 
   }
 
@@ -30,10 +32,10 @@ export class RegisterComponent {
 
   initForm() {
     this.registerForm = this.fb.group({
-      username: "",
-      password: "",
-      firstname: "",
-      lastname: "",
+      username: ["", Validators.required],
+      password: ["", Validators.required],
+      firstname: ["", Validators.required],
+      lastname: ["", Validators.required],
       phoneNumber: "",
       email: ["", Validators.email],
       contact: ""
@@ -48,11 +50,15 @@ export class RegisterComponent {
     var phoneNumber = this.registerForm.value.phoneNumber;
     var email = this.registerForm.value.email;
     var contact = this.registerForm.value.contact;
+    if (this.registerForm.valid) {
       this.service.postregister(username, password, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
         if (x) {
+          this.router.navigate(['/login']);
           console.log(x, "register สำเร็จ");
         }
       })
+    } else {
+      console.log('ข้อมูลไม่ถูกต้อง');
+    }
   }
-
 }
