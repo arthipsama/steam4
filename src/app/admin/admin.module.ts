@@ -31,6 +31,8 @@ import { AccountDetailComponent } from './account/account-detail/account-detail.
 import { FooterAdminComponent } from './footer-admin/footer-admin.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopUpContactComponent } from './contact/pop-up-contact/pop-up-contact.component';
+import { PopUpProductComponent } from './product/pop-up-product/pop-up-product.component';
+import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 
 
 
@@ -47,7 +49,9 @@ import { PopUpContactComponent } from './contact/pop-up-contact/pop-up-contact.c
     PopUpUserComponent,
     AccountDetailComponent,
     FooterAdminComponent,
-    PopUpContactComponent
+    PopUpContactComponent,
+    PopUpProductComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,

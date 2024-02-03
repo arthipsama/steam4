@@ -57,6 +57,7 @@ const routes: Routes = [
       { path: 'user', component: AccountComponent },
       { path: 'user-detail/:id', component: AccountDetailComponent},
       { path: 'product', component: ProductComponent },
+      { path: 'product-detail/:id', component: ProductDetailComponent},
       { path: 'new', component: NewComponent },
       { path: 'order', component: OrderComponent },
       { path: 'contact', component: ContactComponent },

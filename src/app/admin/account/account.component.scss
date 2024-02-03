@@ -262,10 +262,17 @@ main {
 }
 
 .page-content {
+    grid-template-rows: 1fr auto; /* สร้างเส้นกริดสองเส้น, 1fr คือ 1 fraction หรือ 100% ของพื้นที่ที่เหลือ, auto คือ ความสูงที่จำเป็น */
+    min-height: 100vh; /* ให้สูงเท่ากับ viewport height ทั้งหมด */
     padding: 1.3rem 1rem;
     background: #f1f4f9;
-    height: 100vh;
 }
+
+// .page-content1 {
+//     padding: 1.3rem 1rem;
+//     background: #f1f4f9;
+//     height: 100vh;
+// }
 
 .analytics {
     display: grid;
@@ -384,8 +391,19 @@ input, button, select {
     font-weight: 600;
 }
 
+.browse button {
+    background: var(--main-color);
+    color: #fff;
+    height: 37px;
+    border-radius: 4px;
+    padding: 0rem 1rem;
+    border: none;
+    font-weight: 600;
+}
+
+
 .browse input {
-    width: 150px;
+    width: 200px;
 }
 
 .browse select {
@@ -557,10 +575,16 @@ table tbody tr {
 
   }
   
-//   .icon-button:hover {
-//     background-color: #FFA07A ;
-//   }
+  .D123 {
+    z-index: 9999;
+  }
   
-  
+
+  @media only screen and (max-width: 768px) {
+    main {
+      display: flex;
+      flex-direction: column;
+    }
+  }
   
   

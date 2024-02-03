@@ -3,9 +3,9 @@
 <!-- page-header.component.html -->
 
 <div class="page-header">
-    <h1>UserList</h1>
+    <h1>User</h1>
     <small>
-        <span routerLink="/admin/dashboard" class="clickable">Home</span> / User
+        <span routerLink="/admin/dashboard" class="clickable">Home</span> / user
     </small>
 </div>
 
@@ -16,13 +16,12 @@
 
             <div class="record-header">
                 <div class="add">
-                    <span>Entries</span>
+                  <h2>User List</h2>
+                    <!-- <span>Entries</span>
                     <select name="" id="">
                         <option value="">ID</option>
-                    </select>
-                    <button style="background-color: #00A86B; margin-right: 10px" (click)="openUserDialog()">
-                        <span class="las la-user-plus" style="color:whitesmoke; font-size: 16px;"></span>
-                        Add User</button>
+                    </select> -->
+
                 </div>
 
                 <div class="browse">
@@ -32,6 +31,9 @@
                         <option value="">Admin</option>
                         <option value="">User</option>
                     </select>
+                    <button style="background-color: #00A86B; margin-right: 10px" (click)="openUserDialog()">
+                      <span class="las la-user-plus" style="color:whitesmoke; font-size: 16px;"></span>
+                      Add User..</button>
                 </div>
             </div>
 
@@ -71,8 +73,8 @@
                                 {{ user.Role }}</td>
                             <td>
                               <div class="actions">
-                                <span class=""></span>
-                                <span class=""></span>
+                                <!-- <span class=""></span>
+                                <span class=""></span> -->
                                 <button class="icon-button" [routerLink]="['/admin/user-detail', user.userid]" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
                                   <span class="las la-users-cog"></span>
                                 </button>
@@ -89,15 +91,16 @@
 
                 
                 
-                
             </div>
 
         </div>
     
     </div>
-    <app-footer-admin></app-footer-admin>
-    
     
 </main>
+
+<app-footer-admin></app-footer-admin>
+
+
 
 <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
