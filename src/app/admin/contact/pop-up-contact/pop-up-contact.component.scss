@@ -1,0 +1,22 @@
+/* ใส่ CSS เพื่อปรับแต่ง Angular Material Dialog */
+::ng-deep .mat-dialog-container {
+    transform: translate(-0%, -0%);
+  }
+  
+  /* ใส่ CSS เพื่อปรับแต่งขนาดและสีของปุ่มปิด Dialog */
+  ::ng-deep .mat-dialog-container button[mat-dialog-close] {
+    background-color: transparent; /* สีพื้นหลัง透ลาด */
+    font-size: 20px; /* ปรับขนาดของไอคอน */
+    color: green; /* สีของไอคอน */
+  }
+  
+
+  .custom-close-button:hover {
+    background-color: transparent;
+  }
+  
+  .custom-close-button:hover mat-icon {
+    color: black;
+  }
+  
+  

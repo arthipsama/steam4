@@ -52,8 +52,13 @@ export class AdminComponent implements OnInit {
     this.updateDateTime(); // เรียก updateDateTime เพื่อรีเฟรชค่าเวลา
   }
 
+
   isActive(route: string): boolean {
-    return this.router.isActive(route, true);
+    const currentUrl = this.router.url;
+    const targetUrl = this.router.createUrlTree([route]).toString();
+
+    // เปรียบเทียบ URL ในรูปของสตริง
+    return currentUrl !== '/' && currentUrl.includes(targetUrl);
   }
   
   logout() {
