@@ -99,10 +99,29 @@
                     </div>
                 </div>
 
-                <div class="" style="background-color: #3b3b3b; width: 740px; height: 190px; margin-left: 100px; border-radius: 14px; margin-top: 30px; color: #ffffff; ">
+                <div class="" style="background-color: #3b3b3b; width: 740px; height: auto; margin-left: 100px; border-radius: 14px; margin-top: 30px; color: #ffffff; ">
                     <h6 style="font-size: 17px; margin-left: 20px; padding-top: 15px;">Choose payment method</h6>
                     <hr class="" style="color: rgb(255, 255, 255); margin: 0 0 0 20px;"><br>
-                    <div class="pay1">ธนาคารอะไรสักอย่าง</div>
+                    <div class="" style="display: flex;">
+                        <!-- <img src="https://storage.googleapis.com/techsauce-prod/ugc/uploads/2020/4/scb.jpg" class="pay1">
+                        <img src="https://lh3.googleusercontent.com/proxy/UHbWgn33XXLy_YFi__7pCnLMptbeyIlsEu1T-n9LQHz-zLZm1b6ne7ZDSdI6oecwdS5a_qr85FQBZTNsfQHVrRHKOpF9bCcoHyssTWKp1RJ1pILUJXWV6R32me8hhLhU" class="pay1">
+                        <img src="https://image.bangkokbiznews.com/image/kt/media/image/news/2015/08/28/663116/640x390_663116_1440754940.jpg?x-image-process=style/LG" class="pay1">
+                        <img src="https://i0.wp.com/www.innwhy.com/wp-content/uploads/2017/09/184.jpg?resize=500%2C300" class="pay1"> -->
+
+                        <img src="https://s.isanook.com/mn/0/ud/78/390929/monscb100659.jpg" class="pay1" (click)="bank1()">
+                        <img src="https://moneyexpo.net/wp-content/uploads/2023/06/BBL.jpg" class="pay1" (click)="bank2()">
+                        <img src="https://www.prachachat.net/wp-content/uploads/2020/02/kasikorn-bank.jpg" class="pay1" (click)="bank3()">
+                        <img src="https://www.zoombusinessnews.com/wp-content/uploads/2023/12/60253ee776cff515f021f14ca15679fb_small.jpg" class="pay1" (click)="bank4()">
+                    </div>
+                    <div class="col-12" style="display: flex;">
+                        <div class="col-8" *ngIf="payto == 1" style="margin-left: 27px;">
+                            โอนเงินตามนี้นะSCB
+                        </div>
+                        <div class="col-4">
+                            <input type="file" accept=".jpg,.png,.gif" *ngIf="payto" style="margin: 0 0 10px 27px;" (change)="previewImage($event)">
+                            <img style="width: 200px; height: 200px; margin: 0 0 20px 0;" [src]="imagePreview" *ngIf="imagePreview">
+                        </div>
+                    </div>
                 </div><br>
             </div>
 
