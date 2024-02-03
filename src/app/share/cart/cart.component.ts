@@ -16,6 +16,8 @@ export class CartComponent {
   userProducts: any;
   rowTotal:any;
   totalprice:any;
+  payto!: number
+  imagePreview!: string;
 
   constructor(private router: Router,
               private service: ProductService,
@@ -63,5 +65,38 @@ export class CartComponent {
         })
       }
     })
+  }
+
+  bank1(){
+    this.payto = 1;
+    console.log(this.payto);
+  }
+
+  bank2(){
+    this.payto = 2;
+    console.log(this.payto);
+
+  }
+
+  bank3(){
+    this.payto = 3;
+    console.log(this.payto);
+
+  }
+
+  bank4(){
+    this.payto = 4;
+    console.log(this.payto);
+
+  }
+
+
+  previewImage(event:any){
+      var reader = new FileReader();
+      reader.onload = () => {
+          this.imagePreview = reader.result as string;
+          console.log(this.imagePreview);
+      }
+      reader.readAsDataURL(event.target.files[0]);
   }
 }
