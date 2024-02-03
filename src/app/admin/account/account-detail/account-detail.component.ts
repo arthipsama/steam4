@@ -44,7 +44,7 @@ export class AccountDetailComponent implements OnInit {
         phoneNumber: ['', Validators.required],
         password:['', Validators.required],
         role:['', Validators.required],
-        contact:['', Validators.required],
+        contact:[''],
         // ... เพิ่มฟิลด์อื่น ๆ ตามต้องการ
       });
      }
