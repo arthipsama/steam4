@@ -1,30 +1,36 @@
 <main>
         
     <div class="page-header">
-        <h1>Orders</h1>
+        <h1>Orders Page</h1>
         <small>
             <span routerLink="/admin/dashboard" class="clickable">Home</span> / orders
         </small>
     </div>
     
     <div class="page-content">
-        
+    
         <div class="records table-responsive">
 
             <div class="record-header">
                 <div class="add">
-                    <span>Entries</span>
+                  <h2>Orders List</h2>
+                    <!-- <span>Entries</span>
                     <select name="" id="">
                         <option value="">ID</option>
-                    </select>
-                    <button style="background-color: #00A86B;">Add record</button>
+                    </select> -->
                 </div>
 
                 <div class="browse">
                    <input type="search" placeholder="Search" class="record-search">
-                    <select name="" id="">
-                        <option value="">Status</option>
-                    </select>
+                   <select name="" id="">
+                    <option value="">All</option>
+                    <option value="">Waiting to Check</option>
+                    <option value="">Passed</option>
+                    <option value="">Incorrect</option>
+                </select>
+                    <!-- <button style="background-color: #00A86B; margin-right: 10px" (click)="openUserDialog()">
+                      <span class="las la-box" style="color:whitesmoke; font-size: 16px;"></span>
+                      Add Product</button> -->
                 </div>
             </div>
 
@@ -32,269 +38,66 @@
                 <table width="100%">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th><span class="las la-sort"></span> CLIENT</th>
-                            <th><span class="las la-sort"></span> TOTAL</th>
-                            <th><span class="las la-sort"></span> ISSUED DATE</th>
-                            <th><span class="las la-sort"></span> BALANCE</th>
-                            <th><span class="las la-sort"></span> ACTIONS</th>
+                          <th style="width: 15%;"><span class="las la-sort"></span> ORDER ID</th>
+                          <th style="width: 25%;"><span class="las la-sort"></span> CLIENT</th>
+                          <th style="width: 15%;"><span class="las la-sort"></span> DATE ORDER</th>
+                          <th style="width: 20%;"><span class="las la-sort"></span> TOTAL PRICE</th>
+                          <th style="width: 15%;"><span class="las la-sort"></span> STATUS</th>
+                          <th style="width: 10%;"><span class="las la-sort"></span> ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
+                      <ng-container *ngFor="let order of orders">
                         <tr>
-                            <td>#5033</td>
-                            <td>
-                                <div class="client">
-                                   <div class="client-img bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>
-                                    <div class="client-info">
-                                        <h4>Jassa</h4>
-                                        <small>jassa@jassa.org</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                $3171
-                            </td>
-                            <td>
-                                19 April, 2022
-                            </td>
-                            <td>
-                                -$205
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <span class="lab la-telegram-plane"></span>
-                                    <span class="las la-eye"></span>
-                                    <span class="las la-ellipsis-v"></span>
-                                </div>
-                            </td>
+                          <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                              # {{ order.ordersid }}</td>
+                          <td>
+                            <div class="client">
+                              <div class="client-img bg-img" [style.background-image]="'url(' + getImagePath(order.user.Role) + ')'"></div>
+                              <div class="client-info">
+                                <h4 style="max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                  {{ order.user.UserName }}</h4>
+                                <h5 style="max-width: 330px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                  {{ order.user.Email }}</h5>
+                              </div>
+                            </div>
+                          </td>
+                          <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            {{ order.CreateDate | date: 'dd MMMM yyyy HH:mm:ss' }}</td>
+                          <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            {{ order.totalprice | currency:'THB':'symbol':'1.2-2' }}
+                          </td>    
+                                                                          
+                          <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            <ng-container *ngIf="order.paymentstatus === 'checked'; else waitOrIncorrect">
+                              <i class="las la-check-square rounded-icon" style="background-color: #ADFF2F; color: black;" > checked</i>
+                            </ng-container>
+                            <ng-template #waitOrIncorrect>
+                              <ng-container *ngIf="order.paymentstatus === 'wait'; else incorrect">
+                                <i class="las la-sync-alt rounded-icon" style="background-color: #A9A9A9; color: whitesmoke;"> wait</i>
+                              </ng-container>
+                              <ng-template #incorrect>
+                                <i class="las la-window-close rounded-icon" style="background-color: #DC143C; color: whitesmoke;"> incorrect</i>
+                              </ng-template>
+                            </ng-template>
+                          </td>
+                          
+                                              
+                          <td>
+                            <div class="actions">
+                              <button class="icon-button" [routerLink]="['/admin/order-admin-detail', order.ordersid]" 
+                              [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+                                <span class="lab la-steam"></span>
+                              </button>
+                              <button class="icon-button" (click)="handleTrashClick()">
+                                <span class="las la-trash"></span>
+                              </button>
+                            </div>
+                          </td>
                         </tr>
-                        <tr>
-                            <td>#5033</td>
-                            <td>
-                                <div class="client">
-                                   <div class="client-img bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>
-                                    <div class="client-info">
-                                        <h4>Jassa</h4>
-                                        <small>jassa@jassa</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                $3171
-                            </td>
-                            <td>
-                                19 April, 2022
-                            </td>
-                            <td>
-                                -$205
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <span class="lab la-telegram-plane"></span>
-                                    <span class="las la-eye"></span>
-                                    <span class="las la-ellipsis-v"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#5033</td>
-                            <td>
-                                <div class="client">
-                                   <div class="client-img bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>
-                                    <div class="client-info">
-                                        <h4>Jassa</h4>
-                                        <small>jassa@jassa</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                $2171
-                            </td>
-                            <td>
-                                19 April, 2022
-                            </td>
-                            <td>
-                                <span class="paid">Paid</span>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <span class="lab la-telegram-plane"></span>
-                                    <span class="las la-eye"></span>
-                                    <span class="las la-ellipsis-v"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#5033</td>
-                            <td>
-                                <div class="client">
-                                   <div class="client-img bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>
-                                    <div class="client-info">
-                                        <h4>Jassa</h4>
-                                        <small>jassa@jassa.org</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                $3171
-                            </td>
-                            <td>
-                                19 April, 2022
-                            </td>
-                            <td>
-                                -$205
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <span class="lab la-telegram-plane"></span>
-                                    <span class="las la-eye"></span>
-                                    <span class="las la-ellipsis-v"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#5033</td>
-                            <td>
-                                <div class="client">
-                                   <div class="client-img bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>
-                                    <div class="client-info">
-                                        <h4>Jassa</h4>
-                                        <small>jassa@jassa</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                $3171
-                            </td>
-                            <td>
-                                19 April, 2022
-                            </td>
-                            <td>
-                                <span class="paid">Paid</span>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <span class="lab la-telegram-plane"></span>
-                                    <span class="las la-eye"></span>
-                                    <span class="las la-ellipsis-v"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#5033</td>
-                            <td>
-                                <div class="client">
-                                   <div class="client-img bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>
-                                    <div class="client-info">
-                                        <h4>Jassa</h4>
-                                        <small>jassa@jassa</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                $2171
-                            </td>
-                            <td>
-                                19 April, 2022
-                            </td>
-                            <td>
-                                <span class="paid">Paid</span>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <span class="lab la-telegram-plane"></span>
-                                    <span class="las la-eye"></span>
-                                    <span class="las la-ellipsis-v"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#5033</td>
-                            <td>
-                                <div class="client">
-                                   <div class="client-img bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>
-                                    <div class="client-info">
-                                        <h4>Jassa</h4>
-                                        <small>jassa@jassa.org</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                $3171
-                            </td>
-                            <td>
-                                19 April, 2022
-                            </td>
-                            <td>
-                                -$205
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <span class="lab la-telegram-plane"></span>
-                                    <span class="las la-eye"></span>
-                                    <span class="las la-ellipsis-v"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#5033</td>
-                            <td>
-                                <div class="client">
-                                   <div class="client-img bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>
-                                    <div class="client-info">
-                                        <h4>Jassa</h4>
-                                        <small>jassa@jassa</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                $3171
-                            </td>
-                            <td>
-                                19 April, 2022
-                            </td>
-                            <td>
-                                -$205
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <span class="lab la-telegram-plane"></span>
-                                    <span class="las la-eye"></span>
-                                    <span class="las la-ellipsis-v"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#5033</td>
-                            <td>
-                                <div class="client">
-                                   <div class="client-img bg-img" style="background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g)"></div>
-                                    <div class="client-info">
-                                        <h4>Jassa</h4>
-                                        <small>jassa@jassa</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                $2171
-                            </td>
-                            <td>
-                                19 April, 2022
-                            </td>
-                            <td>
-                                <span class="paid">Paid</span>
-                            </td>
-                            <td>
-                                <div class="actions">
-                                    <span class="lab la-telegram-plane"></span>
-                                    <span class="las la-eye"></span>
-                                    <span class="las la-ellipsis-v"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
+                      </ng-container>
+                      
+                      </tbody>
                 </table>
             </div>
 

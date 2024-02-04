@@ -1,0 +1,80 @@
+<form [formGroup]="userForm">
+<h1 mat-dialog-title style="background-color: #90EE90;">Add Product Detail</h1>
+<div mat-dialog-content>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <!-- Left Column: Display Image -->
+    <div style="flex: 1; margin-right: 20px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+      <h3>แนบรูปภาพ <span style="color: red;">*</span></h3>
+      <img [src]="selectedImage || '../assets//NoUpload1.jpg'" alt="User Image" 
+      style="width: 60%; width: 200px; height: 200px;">
+      <input type="file" formControlName="Image" (change)="onImageChange($event)" style="margin-top: 10px;">
+        <mat-icon style="font-size: 14px; position: absolute; top: 25px; right: 20px;"
+        (click)="onCloseClick()">close</mat-icon>
+    </div>
+
+<!-- Right Column: User Information Form -->
+<div style="flex: 2;">
+
+      <mat-form-field style="width: 100%">
+        <mat-label style="font-size: 12px;">Product Name </mat-label>
+        <input matInput formControlName="ProductName">
+        <mat-error *ngIf="userForm.get('ProductName')?.hasError('required')">Product Name is required</mat-error>
+      </mat-form-field>
+
+      <div style="display: flex; justify-content: space-between;">
+      <mat-form-field style="width: 49%">
+        <mat-label style="font-size: 12px;">Category Product </mat-label>
+        <mat-select formControlName="categoryproductid" [(value)]="selectedCategoryId">
+          <mat-option *ngFor="let category of categoryproduct" [value]="category.categoryproductid">
+            {{ category.CategoryProductName }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.get('Category')?.hasError('required')">Category is required</mat-error>
+      </mat-form-field>
+
+      <mat-form-field style="width: 49%;">
+        <mat-label style="font-size: 12px;">Quantity </mat-label>
+        <input matInput formControlName="Quantity">
+        <mat-error *ngIf="userForm.get('Quantity')?.hasError('required')">Quantity is required</mat-error>
+      </mat-form-field>
+    </div>
+      
+  
+      <div style="display: flex; justify-content: space-between;">
+        <mat-form-field style="width: 49%;">
+          <mat-label style="font-size: 12px;">Price </mat-label>
+          <input matInput formControlName="Price">
+          <mat-error *ngIf="userForm.get('Price')?.hasError('required')">Price is required</mat-error>
+          <mat-error *ngIf="userForm.get('Price')?.hasError('pattern')">Invalid price format</mat-error>
+        </mat-form-field>
+      
+        <mat-form-field style="width: 49%;">
+          <mat-label style="font-size: 12px;">Full Price </mat-label>
+          <input matInput formControlName="Fullprice">
+          <mat-error *ngIf="userForm.get('Fullprice')?.hasError('pattern')">Invalid price format</mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field style="width: 100%">
+        <mat-label style="font-size: 12px;">Desciption </mat-label>
+        <textarea matInput formControlName="Desciption" rows="5"></textarea>
+      </mat-form-field>
+
+  
+    <div style="display: flex; justify-content: flex-end; align-items: center;">
+        <!-- Reset Button -->
+        <button mat-button color="warn" (click)="onReset()">Reset</button>
+    
+        <!-- Save Button -->
+        <button mat-button color="success" (click)="onSave()" [disabled]="userForm.invalid">
+          Save
+        </button>
+      </div>
+      
+  </div>
+  
+  
+
+  </div>
+</div>
+</form>

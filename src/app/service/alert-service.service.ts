@@ -22,6 +22,21 @@ export class AlertServiceService {
       });
     },
 
+    onSuccessRe() {
+      Swal.fire({
+        title: 'Success!',
+        text: 'บันทึกรายการข้อมูลสำเร็จ',
+        icon: 'success',
+        confirmButtonText: 'Okay',
+      }).then(() => {
+        setTimeout(() => {
+          // Reload the page after a delay
+          window.location.reload();
+        }, 500); // 0.5 second delay
+      });
+    },
+    
+
     onProducts() {
      Swal.fire({
         title: 'Success!',
@@ -36,14 +51,26 @@ export class AlertServiceService {
     }
     ,
     
-    
-
     onDelete() {
       Swal.fire({
         title: 'Error!',
         text: 'ลบรายการข้อมูลสำเร็จ',
         icon: 'error',
         confirmButtonText: 'Okay',
+      });
+    },
+
+    onDeleteRe() {
+      Swal.fire({
+        title: 'Error!',
+        text: 'ลบรายการข้อมูลสำเร็จ',
+        icon: 'error',
+        confirmButtonText: 'Okay',
+      }).then(() => {
+        setTimeout(() => {
+          // Reload the page after a delay
+          window.location.reload();
+        }, 500); // 0.5 second delay
       });
     },
 

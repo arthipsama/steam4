@@ -1,4 +1,6 @@
-// @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600&display=swap');
+
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
 
 :root {
     --main-color: #22BAA0;
@@ -259,10 +261,17 @@ main {
     color: #74767d;
 }
 
+// .page-content {
+//     padding: 1.3rem 1rem;
+//     background: #f1f4f9;
+//     height: 100vh;
+// }
+
 .page-content {
+    grid-template-rows: 1fr auto; /* สร้างเส้นกริดสองเส้น, 1fr คือ 1 fraction หรือ 100% ของพื้นที่ที่เหลือ, auto คือ ความสูงที่จำเป็น */
+    min-height: 100vh; /* ให้สูงเท่ากับ viewport height ทั้งหมด */
     padding: 1.3rem 1rem;
     background: #f1f4f9;
-    height: 100vh;
 }
 
 .analytics {
@@ -383,11 +392,11 @@ input, button, select {
 }
 
 .browse input {
-    width: 150px;
+    width: 250px;
 }
 
 .browse select {
-    width: 100px;
+    width: 150px;
 }
 
 .table-responsive {
@@ -443,8 +452,13 @@ table tbody tr {
 }
 
 .client-info h4 {
-    color: #555;
+    color: black;
     font-size: .95rem;
+    margin-bottom: 5px;
+}
+.client-info h5 {
+    color: #555;
+    font-size: .75rem;
 }
 
 .client-info small {
@@ -522,7 +536,10 @@ table tbody tr {
     table {
         width: 900px;
     }
+
 }
+
+
 
 .clickable {
     transition: font-size 0.3s ease; /* Add transition for smooth effect */
@@ -532,3 +549,36 @@ table tbody tr {
     font-size: calc(100% + 2px); /* Increase font size by 2px on hover */
     color: blueviolet;
 }
+
+.long-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+    
+  .icon-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 90%; /* ทำให้มีรูปร่างเป็นวงกลม */
+
+  }
+  
+//   .icon-button:hover {
+//     background-color: #FFA07A ;
+//   }
+  
+.custom-table th:last-child,
+.custom-table td:last-child {
+  text-align: right;
+}
+  
+  
+.rounded-icon {
+    width: 99px;
+    padding: 7px;
+    border-radius: 19px;
+    text-align: center;
+  }
+  
+  

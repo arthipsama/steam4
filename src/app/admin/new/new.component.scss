@@ -1,4 +1,6 @@
-// @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600&display=swap');
+
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
 
 :root {
     --main-color: #22BAA0;
@@ -79,9 +81,9 @@
 
 .bg-img {
     background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 50%;
-    background-size: cover;
+    background-size: 100% 100%;
+    // border-radius: 50%;
+
 }
 
 .profile-img {
@@ -234,8 +236,8 @@ header {
 }
 
 .user div, .client-img {
-    height: 40px;
-    width: 40px;
+    height: 140px;
+    width: 140px;
     margin-right: 1rem;
 }
 
@@ -259,10 +261,17 @@ main {
     color: #74767d;
 }
 
+// .page-content {
+//     padding: 1.3rem 1rem;
+//     background: #f1f4f9;
+//     height: 100vh;
+// }
+
 .page-content {
+    grid-template-rows: 1fr auto; /* สร้างเส้นกริดสองเส้น, 1fr คือ 1 fraction หรือ 100% ของพื้นที่ที่เหลือ, auto คือ ความสูงที่จำเป็น */
+    min-height: 100vh; /* ให้สูงเท่ากับ viewport height ทั้งหมด */
     padding: 1.3rem 1rem;
     background: #f1f4f9;
-    height: 100vh;
 }
 
 .analytics {
@@ -382,8 +391,18 @@ input, button, select {
     font-weight: 600;
 }
 
+.browse button {
+    background: var(--main-color);
+    color: #fff;
+    height: 37px;
+    border-radius: 4px;
+    padding: 0rem 1rem;
+    border: none;
+    font-weight: 600;
+}
+
 .browse input {
-    width: 150px;
+    width: 200px;
 }
 
 .browse select {
@@ -437,14 +456,19 @@ table tbody tr {
 
 .client-img {
     margin-right: .5rem;
-    border: 2px solid #b0b0b0;
-    height: 45px;
-    width: 45px;
+    // border: 2px solid #b0b0b0;
+    height: 105px;
+    width: 105px;
 }
 
 .client-info h4 {
-    color: #555;
+    color: black;
     font-size: .95rem;
+    margin-bottom: 5px;
+}
+.client-info h5 {
+    color: #555;
+    font-size: .75rem;
 }
 
 .client-info small {
@@ -522,7 +546,10 @@ table tbody tr {
     table {
         width: 900px;
     }
+
 }
+
+
 
 .clickable {
     transition: font-size 0.3s ease; /* Add transition for smooth effect */
@@ -532,3 +559,29 @@ table tbody tr {
     font-size: calc(100% + 2px); /* Increase font size by 2px on hover */
     color: blueviolet;
 }
+
+.long-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+    
+  .icon-button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 90%; /* ทำให้มีรูปร่างเป็นวงกลม */
+
+  }
+  
+//   .icon-button:hover {
+//     background-color: #FFA07A ;
+//   }
+  
+.out-of-stock {
+    background-color: #ffd8d8; /* เลือกสีที่ต้องการสำหรับแถว Out of Stock */
+  }
+  
+  
+  
+  

@@ -44,7 +44,7 @@ export class AccountDetailComponent implements OnInit {
         phoneNumber: ['', Validators.required],
         password:['', Validators.required],
         role:['', Validators.required],
-        contact:['', Validators.required],
+        contact:[''],
         // ... เพิ่มฟิลด์อื่น ๆ ตามต้องการ
       });
      }
@@ -116,7 +116,9 @@ onSave() {
   }
 }
 
-
+getImagePath(Role: string): string {
+  return Role === 'ADMIN' ? '../assets/role/admin.png' : '../assets/role/user.png';
+}
 
 onCancel() {
   // ให้ย้อนกลับไปหน้าก่อนหน้านี้

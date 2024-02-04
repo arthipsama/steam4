@@ -261,10 +261,17 @@ main {
     color: #74767d;
 }
 
+// .page-content {
+//     padding: 1.3rem 1rem;
+//     background: #f1f4f9;
+//     height: 100vh;
+// }
+
 .page-content {
+    grid-template-rows: 1fr auto; /* สร้างเส้นกริดสองเส้น, 1fr คือ 1 fraction หรือ 100% ของพื้นที่ที่เหลือ, auto คือ ความสูงที่จำเป็น */
+    min-height: 100vh; /* ให้สูงเท่ากับ viewport height ทั้งหมด */
     padding: 1.3rem 1rem;
     background: #f1f4f9;
-    height: 100vh;
 }
 
 .analytics {
@@ -385,7 +392,7 @@ input, button, select {
 }
 
 .browse input {
-    width: 150px;
+    width: 200px;
 }
 
 .browse select {

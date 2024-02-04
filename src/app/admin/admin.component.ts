@@ -102,6 +102,5 @@ export class AdminComponent implements OnInit {
     // ทำตามที่ต้องการเมื่อคลิกที่ปุ่ม "Remove All"
     // ตัวอย่าง: this.items = [];
 }
-
   
 }
