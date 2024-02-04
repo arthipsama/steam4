@@ -111,11 +111,12 @@
                             <div class="form-group" style="margin-bottom: 15px;">
                                 <label for="ciTy">Category Product </label>
                                 <select class="form-control" id="" formControlName="categoryproductid">
-                                    <option value="1">keygame</option>
-                                    <option value="2">steamwallet</option>
-                                    <option value="3">idgame</option>
-                                    <option value="4">program</option>
-                                </select>
+                                    <option *ngFor="let category of categoryproduct$ | async" [value]="category.categoryproductid">
+                                      {{ category.CategoryProductName }}
+                                    </option>
+                                  </select>
+                                  
+                                  
                             </div>                            
                         </div>
                         

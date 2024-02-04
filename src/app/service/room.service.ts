@@ -189,6 +189,11 @@ private apiUrl = 'http://localhost:3000/api/room';
     return this.product;
   }
 
+  getcategory(): Observable<category[]> {
+    return of(this.categoryproduct);
+  }
+  
+
   getuserbyid(id: string): Observable<userData | undefined> {
     const product = this.users.find(p => p.userid === id);
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call

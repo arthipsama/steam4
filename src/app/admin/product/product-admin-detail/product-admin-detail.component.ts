@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { category, productData } from 'src/app/models/product.model';
 import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { RoomService } from 'src/app/service/room.service';
@@ -23,7 +24,8 @@ import { RoomService } from 'src/app/service/room.service';
 export class ProductAdminDetailComponent implements OnInit {
   // userData:any | userData;
   productsData:any | productData;
-  categoryproduct: category[] = [];
+  categoryproduct$: Observable<category[]> = new Observable<category[]>();
+
   displayEmail!: string;
   animationState: string = 'start';
   userForm!: FormGroup;
@@ -59,11 +61,13 @@ export class ProductAdminDetailComponent implements OnInit {
     
       productid && this.room.getproductbyid(productid).subscribe((res) => {
         this.productsData = res;
-          console.log(res);
+          console.log('ข้อมูลเกม' ,res);
 
               // เก็บค่า ImgProduct ต้นฉบับ
-    this.originalImgProduct = this.productsData?.ImgProduct;
-        
+        this.originalImgProduct = this.productsData?.ImgProduct;
+
+        this.categoryproduct$ = this.room.getcategory();
+
         // ตรวจสอบว่า userForm ถูกสร้างแล้ว
         if (this.userForm) {
           this.userForm.patchValue({
@@ -77,16 +81,9 @@ export class ProductAdminDetailComponent implements OnInit {
             // ... กำหนดค่าเริ่มต้นของฟิลด์อื่น ๆ
           });
         }
-      });
-    }
-    
+      });     
 
-  showPassword: boolean = false;
-  // Method to toggle password visibility
-  togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
-    
-  }
+    }
 
 isSaveButtonDisabled(): boolean {
   return this.userForm.invalid;
@@ -98,10 +95,6 @@ onSave() {
     // ทำบันทึกข้อมูล
     this.animationState = this.animationState === 'start' ? 'end' : 'start';
 
-    // ถ้าไม่มีการเปลี่ยนรูปก็ให้แสดงค่าเดิมออกมา imgProductToSave
-    // const imgProductToSave = this.selectedFile || this.originalImgProduct;
-    // console.log('Data to be Image:', imgProductToSave);
-
     // เพิ่มค่ารูปที่แปลงเป็น base64 ไปยัง this.userForm.value
     const formDataWithImage = {
       ...this.userForm.value,
@@ -111,7 +104,7 @@ onSave() {
     console.log('Data to be saved:', formDataWithImage);
 
     // ทำตามที่คุณต้องการเพิ่มเติม
-    // this.alertService.onSuccess('บันทึกข้อมูลสำเร็จ', '/admin/product');
+    this.alertService.onSuccess('บันทึกข้อมูลสำเร็จ', '/admin/product');
   } else {
     console.log('Invalid Form');
     // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
@@ -126,15 +119,15 @@ onCancel() {
 
 // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
 isValidFormData(): boolean {
+  const formValue = this.userForm.value;
   return (
-    // this.productsData.imgProduct &&
-    this.productsData.ProductName &&
-    this.productsData.price &&
-    this.productsData.quantity 
-    &&
-    this.productsData.categoryproductid
+    formValue.ProductName &&
+    formValue.price &&
+    formValue.categoryproductid &&
+    (formValue.quantity !== undefined || this.productsData?.quantity === 0)
   );
 }
+
 
 selectedFile: string | undefined;
 
