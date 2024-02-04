@@ -14,6 +14,7 @@ export class ProductDetailComponent {
   userData!: userData;
   product!: productData;
   quantity: number = 1;
+  percent!: number;
 
   constructor(private service: ProductService,
               private router: Router,
@@ -30,12 +31,21 @@ export class ProductDetailComponent {
     const storedProduct = localStorage.getItem('productData');
     if (storedProduct) {
       this.product = JSON.parse(storedProduct);
+      this.discountProduct();
     }
     let storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
       this.userData = JSON.parse(storedUserData);
     }
   }
+
+  discountProduct(){
+    if (this.product.saleprice) {
+      const discountPercentage = ((this.product.price - this.product.saleprice) / this.product.price) * 100;
+      this.percent = Math.round(discountPercentage);
+    }
+  };
+  
 
   decreaseQuantity(): void {
     if (this.quantity > 1) {
@@ -53,7 +63,12 @@ export class ProductDetailComponent {
     var userid = this.userData.userid;
     var productid = this.product.productid;
     var Quantity = this.quantity;
-    var price = this.product.price * this.quantity
+    if(this.product.saleprice){
+      var price = this.product.saleprice * this.quantity
+    }else{
+      var price = this.product.price * this.quantity
+    }
+    
     this.service.addCart(userid, productid, Quantity, price).subscribe(x=>{
       this.router.navigate(['/cart']);
       window.scrollTo({ top: 0, behavior: 'smooth' });

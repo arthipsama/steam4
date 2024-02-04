@@ -6,4 +6,5 @@ export interface productData {
     Description: string;
     quantity: number;
     categoryproductid: number;
+    saleprice: number;
 }
