@@ -8,6 +8,7 @@ import { userData } from '../models/user.models';
 import { ContactMeDTO } from '../models/contactme.model';
 import { category, productData } from '../models/product.model';
 import { ContentDTO } from '../models/content.model';
+import { OrderDTO, OrderDetailDTO } from '../models/order.model';
 
 
 @Injectable({
@@ -31,8 +32,8 @@ private apiUrl = 'http://localhost:3000/api/room';
       // imagePath: '../assets/role/user.png',
       UserName: 'Jassa1',
       Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
-      FirstName: 'ArthipArthipArthipArthipArthipArthipArthipArthipArthipArthipArthipArthipArthip',
-      LastName: 'Srain',
+      FirstName: 'ArthipArthipArthipArthipArthipArthipArthipArthi',
+      LastName: 'asdasdasSS1',
       PhoneNumber: '0987129295',
       Role: 'USER',
       Password:'123',
@@ -42,10 +43,10 @@ private apiUrl = 'http://localhost:3000/api/room';
       userid: '5034',
       // imagePath: '../assets/role/admin.png', // แก้ที่นี้ให้ตรงกับที่คุณต้องการ
       UserName: 'Jassa2',
-      Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
-      FirstName: 'Arthip',
+      Email: 'jassa@jassa.orgjassa',
+      FirstName: 'Jassa3',
       PhoneNumber: '0987129295',
-      LastName: 'Srain',
+      LastName: 'S1d1d',
       Role: 'ADMIN',
       Password:'123',
       Contact:'1853 บ้านสินธร ซอยจุ๋แซ้บๆ',
@@ -54,13 +55,25 @@ private apiUrl = 'http://localhost:3000/api/room';
       userid: '5035',
       // imagePath: '../assets/role/user.png', // แก้ที่นี้ให้ตรงกับที่คุณต้องการ
       UserName: 'Jassa3',
-      Email: 'jassa@jassa.orgjassa@jassajassajassajassajassaasdasdasdasdasd',
+      Email: 'jassa@jassa.th',
+      FirstName: 'Jassa3',
+      LastName: 'SSS',
+      PhoneNumber: '0987129295',
+      Role: 'USER',
+      Password:'123',
+      Contact:'1854 บ้านสินธร ชาบูปิ้งย่าง',
+    },
+    {
+      userid: '5036',
+      // imagePath: '../assets/role/user.png', // แก้ที่นี้ให้ตรงกับที่คุณต้องการ
+      UserName: 'Arthipsama',
+      Email: 'arthip@gmail.com',
       FirstName: 'Arthip',
       LastName: 'Srain',
       PhoneNumber: '0987129295',
       Role: 'USER',
       Password:'123',
-      Contact:'1854 บ้านสินธร ชาบูปิ้งย่าง',
+      Contact:'ฟิวเจอร์ หลังซอยวัด',
     },
     // เพิ่มข้อมูลอื่น ๆ ตามต้องการ
   ];
@@ -210,6 +223,113 @@ private apiUrl = 'http://localhost:3000/api/room';
 
   ];
 
+
+  Orders: OrderDTO[] = [
+    {
+      ordersid: 1,
+      userid: 5033,
+      user: this.users.find(user => user.userid === '5033') || {} as userData,
+      totalprice: '1500',
+      productcode: '00001',
+      image: '../assets/สลิป/1.jpg',
+      paymentstatus: 'wait',
+      remark: '',
+      CreateBy: 'Jassa1',
+      CreateDate: new Date(),
+      UpdateBy: '',
+      UpdateDate: null,
+    },
+    {
+      ordersid: 2,
+      userid: 5034,
+      user: this.users.find(user => user.userid === '5034') || {} as userData,
+      totalprice: '500',
+      productcode: '00002',
+      image: '../assets/สลิป/1.jpg',
+      paymentstatus: 'checked',
+      remark: '',
+      CreateBy: 'Jassa2',
+      CreateDate: new Date(),
+      UpdateBy: '',
+      UpdateDate: null,
+    },
+    {
+      ordersid: 3,
+      userid: 5035,
+      user: this.users.find(user => user.userid === '5035') || {} as userData,
+      totalprice: '200',
+      productcode: '00003',
+      image: '../assets/สลิป/1.jpg',
+      paymentstatus: 'incorrect',
+      remark: '',
+      CreateBy: 'Jassa3',
+      CreateDate: new Date(),
+      UpdateBy: '',
+      UpdateDate: null,
+    },
+    // ... ข้อมูลอื่น ๆ
+  ];
+
+  
+  OrdersDetail: OrderDetailDTO[] = [
+    {
+      orderdetailid: 1,
+      ordersid: 1,
+      orders: this.Orders.find(Order => Order.ordersid === 1) || {} as OrderDTO,
+      productid: 1,
+      product: this.product.find(product => product.productid === '1') || {} as productData,
+      quantity: '2',
+      price: '718',
+      CreateBy: 'Jassa1',
+      CreateDate: new Date(),
+      UpdateBy: '',
+      UpdateDate: null,
+    },
+
+    {
+      orderdetailid: 2,
+      ordersid: 1,
+      orders: this.Orders.find(Order => Order.ordersid === 1) || {} as OrderDTO,
+      productid: 3,
+      product: this.product.find(product => product.productid === '3') || {} as productData,
+      quantity: '4',
+      price: '1,836',
+      CreateBy: 'Jassa1',
+      CreateDate: new Date(),
+      UpdateBy: '',
+      UpdateDate: null,
+    },
+    {
+      orderdetailid: 3,
+      ordersid: 2,
+      orders: this.Orders.find(Order => Order.ordersid === 2) || {} as OrderDTO,
+      productid: 4,
+      product: this.product.find(product => product.productid === '4') || {} as productData,
+      quantity: '3',
+      price: '1,555',
+      CreateBy: 'Jassa2',
+      CreateDate: new Date(),
+      UpdateBy: '',
+      UpdateDate: null,
+    },
+    {
+      orderdetailid: 4,
+      ordersid: 3,
+      orders: this.Orders.find(Order => Order.ordersid === 3) || {} as OrderDTO,
+      productid: 2,
+      product: this.product.find(product => product.productid === '2') || {} as productData,
+      quantity: '1',
+      price: '239',
+      CreateBy: 'Jassa3',
+      CreateDate: new Date(),
+      UpdateBy: '',
+      UpdateDate: null,
+    },
+
+    // ... ข้อมูลอื่น ๆ
+  ];
+
+
   getuser() {
     return this.users;
   }
@@ -228,6 +348,14 @@ private apiUrl = 'http://localhost:3000/api/room';
 
   getcontent() {
     return this.content;
+  }
+
+  getOrders() {
+    return this.Orders;
+  }
+
+  getOrdersDetail() {
+    return this.OrdersDetail;
   }
   
 

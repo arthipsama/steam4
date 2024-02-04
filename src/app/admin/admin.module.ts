@@ -35,6 +35,7 @@ import { PopUpProductComponent } from './product/pop-up-product/pop-up-product.c
 import { ProductAdminDetailComponent } from './product/product-admin-detail/product-admin-detail.component';
 import { PopUpContentComponent } from './new/pop-up-content/pop-up-content.component';
 import { ContentAdminDetailComponent } from './new/content-admin-detail/content-admin-detail.component';
+import { OrderAdminDetailComponent } from './order/order-admin-detail/order-admin-detail.component';
 
 
 
@@ -55,7 +56,8 @@ import { ContentAdminDetailComponent } from './new/content-admin-detail/content-
     PopUpProductComponent,
     ProductAdminDetailComponent,
     PopUpContentComponent,
-    ContentAdminDetailComponent
+    ContentAdminDetailComponent,
+    OrderAdminDetailComponent
   ],
   imports: [
     CommonModule,
