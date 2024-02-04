@@ -7,6 +7,7 @@ import { RoomDTO } from '../models/room.model';
 import { userData } from '../models/user.models';
 import { ContactMeDTO } from '../models/contactme.model';
 import { category, productData } from '../models/product.model';
+import { ContentDTO } from '../models/content.model';
 
 
 @Injectable({
@@ -122,7 +123,7 @@ private apiUrl = 'http://localhost:3000/api/room';
     {
       productid: '1' ,
       ImgProduct: '../assets/Game/GTA.jpg',
-      ProductName: 'GTA V',
+      ProductName: 'GTA VGTA VGTA VGTA VGTA VGTA VGTA VGTA VGTA VGTA V',
       price: 359,
       Fullprice: 559 ,
       Description: 'เกมนี้ยิงปืน แล้วสู้กัน สู้กัน',
@@ -177,6 +178,38 @@ private apiUrl = 'http://localhost:3000/api/room';
     // เพิ่มข้อมูลอื่น ๆ ตามต้องการ
   ];
 
+  content: ContentDTO[] = [
+    {
+      contentid: 1,
+      ContentName: 'ลดราคาเกม 90% พลาดไม่ได้แล้ว!!!',
+      ImgContentPath: '../assets/Content/1.jpg',
+      type: true,
+      Description: 'ลดขนาดนี้แจกฟรีเลยดีกว่าครับพรี่',
+    },
+    {
+      contentid: 2,
+      ContentName: 'Winter Sale กลับมาอีกครั้ง ลดราคาสูงสุด',
+      ImgContentPath: '../assets/Content/2.jpg',
+      type: false,
+      Description: 'หนาวเกินไปไม่เล่นเกมล่ะ',
+    },
+    {
+      contentid: 3,
+      ContentName: 'แนะนำเกมใหม่น่าเล่น เดือนสิงหาคม',
+      ImgContentPath: '../assets/Content/3.jpg',
+      type: false,
+      Description: 'ไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะ',
+    },
+    {
+      contentid: 4,
+      ContentName: 'เปิดตัวเกมใหม่ "TheFianl" เกมหมา ไม่น่าเข้าไปเล่น',
+      ImgContentPath: '../assets/Content/4.jpg',
+      type: false,
+      Description: 'เกมหมาแต่เราก็ยังเล่นกันทุกวันเลยครับ',
+    },
+
+  ];
+
   getuser() {
     return this.users;
   }
@@ -192,6 +225,10 @@ private apiUrl = 'http://localhost:3000/api/room';
   getcategory(): Observable<category[]> {
     return of(this.categoryproduct);
   }
+
+  getcontent() {
+    return this.content;
+  }
   
 
   getuserbyid(id: string): Observable<userData | undefined> {
@@ -204,13 +241,14 @@ private apiUrl = 'http://localhost:3000/api/room';
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
   }
 
-  // getproductbyid(id: string): Observable<productData | undefined> {
-  //   const product = this.product.find(p => p.productid === id);
-  //   return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
-  // }
-
   getproductbyid(id: string): Observable<productData | undefined> {
     const product = this.product.find(p => p.productid === id);
+    return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
+  }
+
+    
+  getcontentbyid(id: string): Observable<ContentDTO | undefined> {
+    const product = this.content.find(p => p.contentid === +id);
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
   }
   

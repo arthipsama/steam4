@@ -59,5 +59,20 @@ export class ProductComponent implements OnInit {
     return this.router.isActive(route + userid, true);
   }
 
+  getBackgroundImage(imgProduct: string | null): string {
+    if (imgProduct && this.isValidImageUrl(imgProduct)) {
+      return `url(${imgProduct})`;
+    } else {
+      return `url(../assets/NoUpload1.jpg)`;
+    }
+  }
+  
+  isValidImageUrl(url: string): boolean {
+    // ตรวจสอบว่า URL ถูกต้องหรือไม่
+    // คุณสามารถใช้เงื่อนไขที่เหมาะสมตามลิงก์ที่ได้รับมา
+    return true;
+  }
+  
+
   
 }

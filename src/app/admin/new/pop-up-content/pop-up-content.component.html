@@ -1,0 +1,59 @@
+<form [formGroup]="userForm">
+    <h1 mat-dialog-title style="background-color: #90EE90;">Add Content Detail</h1>
+    <div mat-dialog-content>
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <!-- Left Column: Display Image -->
+        <div style="flex: 1; margin-right: 20px; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+          <h3>แนบรูปภาพ <span style="color: red;">*</span></h3>
+          <img [src]="selectedImage || '../assets//NoUpload1.jpg'" alt="User Image" 
+          style="width: 60%; width: 200px; height: 200px;">
+          <input type="file" formControlName="Image" (change)="onImageChange($event)" style="margin-top: 10px;">
+            <mat-icon style="font-size: 14px; position: absolute; top: 25px; right: 20px;"
+            (click)="onCloseClick()">close</mat-icon>
+        </div>
+    
+    <!-- Right Column: User Information Form -->
+    <div style="flex: 2;">
+    
+          <mat-form-field style="width: 100%">
+            <mat-label style="font-size: 14px;">Content Name </mat-label>
+            <input matInput formControlName="Contentname">
+            <mat-error *ngIf="userForm.get('Contentname')?.hasError('required')">Content Name is required</mat-error>
+          </mat-form-field>
+    
+          <div style="display: flex; justify-content: space-between;">
+            <mat-form-field style="width: 49%">
+                <mat-label style="font-size: 14px;">Top Content </mat-label>
+                <mat-select formControlName="type" [(value)]="type">
+                    <mat-option [value]="true">Yes</mat-option>
+                    <mat-option [value]="false">No</mat-option>
+                </mat-select>
+                <mat-error *ngIf="userForm.get('type')?.hasError('required') && userForm.get('type')?.touched">
+                    Top Content is required
+                </mat-error>
+            </mat-form-field>
+            
+        </div>
+    
+        <mat-form-field style="width: 100%">
+            <mat-label style="font-size: 14px;">Description</mat-label>
+            <textarea matInput formControlName="Description" rows="5"></textarea>
+          </mat-form-field>    
+      
+        <div style="display: flex; justify-content: flex-end; align-items: center;">
+            <!-- Reset Button -->
+            <button mat-button color="warn" (click)="onReset()">Reset</button>
+        
+            <!-- Save Button -->
+            <button mat-button color="success" (click)="onSave()" [disabled]="userForm.invalid">
+              Save
+            </button>
+          </div>
+          
+      </div>
+      
+      
+    
+      </div>
+    </div>
+    </form>
