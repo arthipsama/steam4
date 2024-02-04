@@ -36,13 +36,21 @@ export class CartComponent {
     if (storedUserData) {
         this.userData = JSON.parse(storedUserData);
     }
+    this.calculate();
+  }
+
+  calculate(){
     this.service.cart(this.userData.userid).subscribe(x=>{
       this.userProducts = x;
       if(this.userProducts){
-        this.rowTotal = this.userProducts.map((product:productData) =>{
-          return product.price * product.quantity
-        }) 
-      }
+        this.rowTotal = this.userProducts.map((product:productData) => {
+          if(product.saleprice){
+            return product.saleprice * product.quantity;
+          } else {
+            return product.price * product.quantity;
+          }
+       });
+      } 
       if(this.userProducts){
         this.totalprice = this.rowTotal.reduce((accumulator:any, currentValue:any) => accumulator + currentValue, 0);
       }
@@ -59,13 +67,25 @@ export class CartComponent {
 
   deleteProduct(i:any){
     this.service.deleteProduct(this.userProducts[i].productid, this.userProducts[i].ordersid).subscribe(x=>{
-      if(x){
-        this.service.cart(this.userData.userid).subscribe(pd=>{
-          this.userProducts = pd;
-        })
-      }
+       if(x){
+         this.service.cart(this.userData.userid).subscribe(pd=>{
+           this.userProducts = pd;
+           console.log(this.userProducts);
+           
+           if(this.userProducts){
+             this.rowTotal = this.userProducts.map((product:productData) => {
+               if(product.saleprice){
+                 return product.saleprice * product.quantity;
+               } else {
+                 return product.price * product.quantity;
+               }
+             });
+             this.totalprice = this.rowTotal.reduce((accumulator:any, currentValue:any) => accumulator + currentValue );
+           }
+         })
+       }
     })
-  }
+   }
 
   bank1(){
     this.payto = 1;
