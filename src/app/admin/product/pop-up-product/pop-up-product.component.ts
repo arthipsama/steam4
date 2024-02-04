@@ -22,6 +22,7 @@ userForm: FormGroup = this.fb.group({
   ProductName: ['', [Validators.required]],
   categoryproductid: [undefined, [Validators.required]],
   Price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+  Fullprice: ['', [Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
   Quantity: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
   Desciption: [''],
   Image: ['', [Validators.required]],
@@ -49,6 +50,8 @@ if (this.userForm.valid) {
   const formData = this.userForm.value;
   delete formData.Image;
   formData.ImgProduct = this.selectedImage;
+
+  this.alert.withOutTranslate.onSuccessRe();
   console.log('Data to be saved:', formData);
   // ตรวจสอบข้อมูลเพิ่มเติมและดำเนินการต่อไปตามที่คุณต้องการ
 } else {

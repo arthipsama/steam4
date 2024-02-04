@@ -21,7 +21,8 @@
         <mat-error *ngIf="userForm.get('ProductName')?.hasError('required')">Product Name is required</mat-error>
       </mat-form-field>
 
-      <mat-form-field style="width: 100%">
+      <div style="display: flex; justify-content: space-between;">
+      <mat-form-field style="width: 49%">
         <mat-label style="font-size: 12px;">Category Product </mat-label>
         <mat-select formControlName="categoryproductid" [(value)]="selectedCategoryId">
           <mat-option *ngFor="let category of categoryproduct" [value]="category.categoryproductid">
@@ -30,6 +31,13 @@
         </mat-select>
         <mat-error *ngIf="userForm.get('Category')?.hasError('required')">Category is required</mat-error>
       </mat-form-field>
+
+      <mat-form-field style="width: 49%;">
+        <mat-label style="font-size: 12px;">Quantity </mat-label>
+        <input matInput formControlName="Quantity">
+        <mat-error *ngIf="userForm.get('Quantity')?.hasError('required')">Quantity is required</mat-error>
+      </mat-form-field>
+    </div>
       
   
       <div style="display: flex; justify-content: space-between;">
@@ -38,13 +46,12 @@
           <input matInput formControlName="Price">
           <mat-error *ngIf="userForm.get('Price')?.hasError('required')">Price is required</mat-error>
           <mat-error *ngIf="userForm.get('Price')?.hasError('pattern')">Invalid price format</mat-error>
-
         </mat-form-field>
       
         <mat-form-field style="width: 49%;">
-          <mat-label style="font-size: 12px;">Quantity </mat-label>
-          <input matInput formControlName="Quantity">
-          <mat-error *ngIf="userForm.get('Quantity')?.hasError('required')">Quantity is required</mat-error>
+          <mat-label style="font-size: 12px;">Full Price </mat-label>
+          <input matInput formControlName="Fullprice">
+          <mat-error *ngIf="userForm.get('Fullprice')?.hasError('pattern')">Invalid price format</mat-error>
         </mat-form-field>
       </div>
 
