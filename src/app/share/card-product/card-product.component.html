@@ -1,11 +1,50 @@
 <div class="" style="width: 1100px; height: auto; display: flex; flex-wrap: wrap;">
-    <div class="" style="color: #fff;" *ngFor="let items of product; let i = index" (click)="test(i)">
-        <div class="fullCard">
+    <div class="" style="color: #fff;" *ngFor="let items of product; let i = index" (click)="gotoDetaileProduct(i)">
+        <div class="fullCard" *ngIf="items.saleprice == null">
             <img class="img" src="{{items.ImgProduct}}" alt="Product Image">
             <p class="nameText">{{items.ProductName}}</p>
             <div class="boxPriceText">
                 <p class="priceText">${{items.price}}</p>
             </div>
+        </div>
+
+        <div class="fullCard" *ngIf="items.saleprice">
+            <div class="percent" *ngIf="percent">
+                <p style="margin: 2px 0 0 7px;">- {{percent}}%</p>
+            </div>
+            <img class="img" src="{{items.ImgProduct}}" alt="Product Image">
+            <p class="nameText">{{items.ProductName}}</p>
+            <div class="boxPriceText col-12" style="display: flex;">
+                <p class="col-4" style="padding-left: 15px; text-decoration: line-through; opacity: 0.5;">{{items.price}}</p>
+                <p class="col-8" style="font-size: 20px; display: flex; justify-content: end; padding-right: 15px;">${{items.saleprice}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 " style="display: flex; justify-content: center; margin-top: 10px;">
+        <div class="loadmore">
+            <p class="" (click)="loadMore()">LOAD MORE<br>
+                <i class="fas fa-sort-down" style="display: flex; justify-content: center;"></i>
+            </p>
+        </div>
+    </div>
+
+    <div class="col-12" style="display: flex; align-items: center; justify-content: center; margin-bottom: 30px; color: #fff; font-size: 20px;">
+        <div class="col-4 category">
+            <i class="fas fa-key iconCate"></i>
+            <p class="textCate">KEYGAME</p>
+        </div>
+        <div class="col-4 category">
+            <i class="fab fa-xbox iconCate"></i>
+            <p class="textCate">PROGRAM</p>
+        </div>
+        <div class="col-4 category">
+            <i class="fas fa-wallet iconCate"></i>
+            <p class="textCate">STEAMWALLET</p>
+        </div>
+        <div class="col-4 category">
+            <i class="fas fa-robot iconCate"></i>
+            <p class="textCate">IDGAME</p>
         </div>
     </div>
 </div>

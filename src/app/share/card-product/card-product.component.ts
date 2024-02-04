@@ -10,6 +10,8 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class CardProductComponent {
   product: any;
+  index: any;
+  percent: any;
   // @Output() productChanged = new EventEmitter<productData[]>();
 
   constructor(private service: ProductService,
@@ -18,10 +20,25 @@ export class CardProductComponent {
   ngOnInit(){
     this.service.getProduct().subscribe(x=>{
       this.product = x;
+      this.discountProduct()
     })
   }
 
-  test(index:any){
+  discountProduct(){
+    this.product.forEach((product:any) => {
+      if (product.saleprice) {
+        const discountPercentage = ((product.price - product.saleprice) / product.price) * 100;
+        this.percent = Math.round(discountPercentage);
+      }
+    });
+  }
+
+  loadMore(){
+    console.log("wdw");
+    
+  }
+
+  gotoDetaileProduct(index:any){
     // this.productChanged.emit(this.product[index]);
     localStorage.setItem('productData', JSON.stringify(this.product[index]));
     this.router.navigate(['/product-detail'+'/'+this.product[index].ProductName]);
