@@ -89,7 +89,8 @@
                             <img class="col-2" src="{{items.ImgProduct}}" style="width: 130px; height: 90px; border-radius: 14px;">
                             <div class="col-10" style="color: #ffffff; display: flex; align-items: center;">
                                 <div class="col-3" style="margin-left: 20px;">{{items.ProductName}}</div>
-                                <div class="col-3">${{items.price}}</div>
+                                <div class="col-3" *ngIf="items.saleprice">${{items.saleprice}}</div>
+                                <div class="col-3" *ngIf="items.saleprice == null">${{items.price}}</div>
                                 <div class="col-2">{{items.quantity}}</div>
                                 <div class="col-2" style="margin-left: 5px;">${{rowTotal[i]}}</div>
                                 <i class="col-1 fas fa-trash trash" (click)="deleteProduct(i)"></i>
@@ -99,10 +100,37 @@
                     </div>
                 </div>
 
-                <div class="" style="background-color: #3b3b3b; width: 740px; height: 190px; margin-left: 100px; border-radius: 14px; margin-top: 30px; color: #ffffff; ">
+                <div class="" style="background-color: #3b3b3b; width: 740px; height: auto; margin-left: 100px; border-radius: 14px; margin-top: 30px; color: #ffffff; ">
                     <h6 style="font-size: 17px; margin-left: 20px; padding-top: 15px;">Choose payment method</h6>
                     <hr class="" style="color: rgb(255, 255, 255); margin: 0 0 0 20px;"><br>
-                    <div class="pay1">ธนาคารอะไรสักอย่าง</div>
+                    <div class="" style="display: flex;">
+                        <!-- <img src="https://storage.googleapis.com/techsauce-prod/ugc/uploads/2020/4/scb.jpg" class="pay1">
+                        <img src="https://lh3.googleusercontent.com/proxy/UHbWgn33XXLy_YFi__7pCnLMptbeyIlsEu1T-n9LQHz-zLZm1b6ne7ZDSdI6oecwdS5a_qr85FQBZTNsfQHVrRHKOpF9bCcoHyssTWKp1RJ1pILUJXWV6R32me8hhLhU" class="pay1">
+                        <img src="https://image.bangkokbiznews.com/image/kt/media/image/news/2015/08/28/663116/640x390_663116_1440754940.jpg?x-image-process=style/LG" class="pay1">
+                        <img src="https://i0.wp.com/www.innwhy.com/wp-content/uploads/2017/09/184.jpg?resize=500%2C300" class="pay1"> -->
+
+                        <img src="https://cdn.discordapp.com/attachments/974891383087325254/1203647090207625236/8c7640630acfa176.png?ex=65d1dab4&is=65bf65b4&hm=4d3205bc82ec66df25545e0e13412b50c82718010ff7ae13a3d335fb2883fdd9&" class="pay1" (click)="bank1()">
+                        <img src="https://www.prachachat.net/wp-content/uploads/2020/02/kasikorn-bank.jpg" class="pay1" (click)="bank2()">
+                        <img src="https://www.siampay.com/en/images/truemoney_large_logo.jpg" class="pay1" (click)="bank3()">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/PromptPay-logo.png" class="pay1" (click)="bank4()">
+                    </div>
+                    <div class="col-12" style="display: flex; padding: 20px;">
+                        <div class="col-8" *ngIf="payto == 1" style="margin-left: 27px;">
+                            <img src="https://cdn.discordapp.com/attachments/865242552071880735/1203613789589868564/f933e41f9005b253.jpg?ex=65d1bbb1&is=65bf46b1&hm=93249c73d67e51e9029f2f5f0a661e71fda3de6c157b18fb10940215db1e77dc&" style="width: 50%; height: 100%;">
+                        </div>
+
+                        <div class="col-8" *ngIf="payto == 2" style="margin-left: 27px;">
+                            <img src="https://cdn.discordapp.com/attachments/865242552071880735/1203613759688675428/23074e877a70b1b0.jpg?ex=65d1bbaa&is=65bf46aa&hm=86353410868419b541e4dc39af8fb001e3264256c07eb6dd9c131d06ac2a77d0&" style="width: 50%; height: 100%;">
+                        </div>
+
+                        <div class="col-8" *ngIf="payto == 3" style="margin-left: 27px;">
+                            <img src="https://cdn.discordapp.com/attachments/865242552071880735/1203614105085411388/e28ce5bc-c117-441d-98b6-487a3c64dc94.png?ex=65d1bbfc&is=65bf46fc&hm=85aa1893efddd1810615b06d854eb478ee39a337a8b01680d21eb8e1096462fa&" style="width: 50%; height: 100%;">
+                        </div>
+                        <div class="col-4">
+                            <input type="file" accept=".jpg,.png,.gif" *ngIf="payto" style="margin: 0 0 10px 27px;" (change)="previewImage($event)">
+                            <img style="width: 200px; height: 200px; margin: 0 0 20px 0;" [src]="imagePreview" *ngIf="imagePreview">
+                        </div>
+                    </div>
                 </div><br>
             </div>
 

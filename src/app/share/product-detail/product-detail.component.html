@@ -32,11 +32,18 @@
             <input class="input" [(ngModel)]="quantity">
             <i class="fas fa-plus plus" (click)="increaseQuantity()"></i>
            </div>
-        <p class="textPrice">$ {{product.price}}</p>
+        <p class="textPrice" *ngIf="product.saleprice == null">$ {{product.price}}</p>
+        <div class="" *ngIf="product.saleprice" style="display: flex; justify-content: center;">
+            <p class="textPrice">$ {{product.saleprice}}</p>
+            <div class="" style="color: #fff; padding: 15px 0 0 15px;">
+                <p style="background: rgb(251, 142, 49); display: flex; justify-content: center; align-items: center; border-radius: 14px;">-{{percent}}%</p>
+                <p style="text-decoration: line-through; opacity: 0.5;">{{product.price}}</p>
+            </div>
+        </div>
         <div class="" *ngIf="quantity <= product.quantity" style="display: flex; justify-content: center;" (click)="buyProduct()">
             <h3 class="buy">ใส่ตะกร้า</h3>
         </div>
-        <div class="" style="color: #619744; display: flex; justify-content: center; margin-top: 20px;">
+        <div class="" style="color: #619744; display: flex; justify-content: center;margin-top: 20px;">
             <img src="https://cdn.discordapp.com/attachments/974891383087325254/1201070307574812692/image.png?ex=65c87ae4&is=65b605e4&hm=f8bc312d65fdc6d20fec0c8b8a74602195889041dcf6da43f32a5fe050dce233&" style="width: 20px; height: 20px;">
             YOUR TRANSACTION IS SECURE
         </div>

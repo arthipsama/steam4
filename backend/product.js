@@ -54,7 +54,7 @@ router.post('/orders', (req, res) => {
 
 router.post('/cart', (req, res) => {
   const { userid } = req.body;
-  pool.query('SELECT p.productid, p."ImgProduct" , p."ProductName", p.price, p."Description", od."quantity", od."ordersid" FROM public."Product" p left join public."OrdersDetails" od on p.productid = od.productid left join public."Orders" o on od.ordersid = o.ordersid where o."userid" = $1', [userid], (err, result) => {
+  pool.query('SELECT p.productid, p."ImgProduct" , p."ProductName", p.price, p."Description", od."quantity", od."ordersid", p."saleprice" FROM public."Product" p left join public."OrdersDetails" od on p.productid = od.productid left join public."Orders" o on od.ordersid = o.ordersid where o."userid" = $1', [userid], (err, result) => {
     if (err) {
       console.error('Error executing query', err);
       res.status(500).json({ error: 'Internal Server Error' });

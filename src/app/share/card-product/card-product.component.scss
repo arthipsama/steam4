@@ -4,6 +4,7 @@
     height: auto;
     margin: 0 10px 20px 10px;
     border-radius: 20px;
+    position: relative;
 }
 
 .fullCard:hover{
@@ -43,4 +44,56 @@
     margin-right: 15px; 
     font-size: 20px; 
     padding-bottom: 10px;
+}
+
+.percent{
+    background-color: rgb(24, 126, 24); 
+    z-index: 1; 
+    position: absolute; 
+    border-top-left-radius: 20px; 
+    border-bottom-right-radius: 14px; 
+    width: 55px; 
+    height: 25px;
+}
+
+.loadmore{
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.loadmore:hover {
+    transition: transform 0.3s ease;
+    transform: translateY(10px); 
+}
+
+.category{
+    background-color: rgb(117, 121, 121); 
+    width: 160px; 
+    height: 140px;
+    margin-left: 40px;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+.iconCate{
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 30px 0 30px 0; 
+    font-size: 40px;
+}
+
+.textCate{
+    display: flex;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px 0 10px 0;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+
+.category:hover{
+    outline: 2px solid rgb(251, 142, 49);
+    transform: scale(1.01);
+    transition: transform 0.1s ease-in-out;
 }

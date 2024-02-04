@@ -41,8 +41,8 @@ export class ProfileComponent {
 
   initForm() {
     this.profileForm = this.fb.group({
-      firstname: this.newUserData.FirstName,
-      lastname: this.newUserData.LastName,
+      firstname: [this.newUserData.FirstName, Validators.required],
+      lastname: [this.newUserData.LastName, Validators.required],
       phoneNumber: this.newUserData.PhoneNumber,
       email: [this.newUserData.Email, Validators.email],
       contact: this.newUserData.Contact
@@ -61,8 +61,13 @@ export class ProfileComponent {
     var phoneNumber = this.profileForm.value.phoneNumber;
     var email = this.profileForm.value.email;
     var contact = this.profileForm.value.contact;
-    this.service.editProfile(userid, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
-      console.log('edit สำเสร็จ');  
-    })
+    if(this.profileForm.valid){
+      this.service.editProfile(userid, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
+        console.log('edit สำเสร็จ');  
+      })
+    }
+    else{
+      console.log("ข้อมูลไม่ถูกต้อง");
+    }
   }
 }

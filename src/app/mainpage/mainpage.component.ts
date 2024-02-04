@@ -11,8 +11,10 @@ import { ColorService } from '../service/color.service';
 export class MainpageComponent implements OnInit {
 
   rooms: any[] = [];
-  
-  images = ['https://s.isanook.com/ga/0/ud/222/1112777/steamsale(5).jpg', 'https://s.isanook.com/ga/0/ud/222/1112777/steamsale(5).jpg', 'https://s.isanook.com/ga/0/ud/222/1112777/steamsale(5).jpg'];
+  img1 = 'https://cdn.discordapp.com/attachments/974891383087325254/1203287328840359986/1.png?ex=65d08ba7&is=65be16a7&hm=97b415620547378320bf96084f4bb66452792048d6c9e84fe6c673fd364cac6b&';
+  img2 = 'https://cdn.discordapp.com/attachments/974891383087325254/1203287332065906719/2.png?ex=65d08ba7&is=65be16a7&hm=019c445b130db9ce75066e1b3b8afbcc3085f778ee7d9b03741a6882836d2197&';
+  img3 = 'https://cdn.discordapp.com/attachments/974891383087325254/1203287342455070780/3.png?ex=65d08baa&is=65be16aa&hm=28b207978843b5200514dcef57ef540f5452e362b17b4250d3ed6d16542e0741&';
+  images = [this.img1, this.img2, this.img3];
   products!: productData[];
 
   constructor(private roomService: RoomService , private colorService: ColorService ,

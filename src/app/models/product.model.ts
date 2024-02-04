@@ -7,9 +7,13 @@ export interface productData {
     Description: string;
     quantity: number;
     categoryproductid: number;
+<<<<<<< HEAD
     category?:category;
 }
 export interface category {
     categoryproductid: number;
     CategoryProductName: string;
+=======
+    saleprice: number;
+>>>>>>> master
 }
