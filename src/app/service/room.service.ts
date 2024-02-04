@@ -245,7 +245,6 @@ private apiUrl = 'http://localhost:3000/api/room';
     const product = this.product.find(p => p.productid === id);
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
   }
-
     
   getcontentbyid(id: string): Observable<ContentDTO | undefined> {
     const product = this.content.find(p => p.contentid === +id);
