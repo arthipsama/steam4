@@ -17,6 +17,7 @@ import { ProductComponent } from './admin/product/product.component';
 import { SettingComponent } from './admin/setting/setting.component';
 import { QaComponent } from './qa/qa.component';
 import { AccountDetailComponent } from './admin/account/account-detail/account-detail.component';
+import { ProductAdminDetailComponent } from './admin/product/product-admin-detail/product-admin-detail.component';
 
 
 
@@ -57,7 +58,7 @@ const routes: Routes = [
       { path: 'user', component: AccountComponent },
       { path: 'user-detail/:id', component: AccountDetailComponent},
       { path: 'product', component: ProductComponent },
-      { path: 'product-detail/:id', component: ProductDetailComponent},
+      { path: 'product-admin-detail/:id', component: ProductAdminDetailComponent},
       { path: 'new', component: NewComponent },
       { path: 'order', component: OrderComponent },
       { path: 'contact', component: ContactComponent },

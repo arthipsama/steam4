@@ -73,7 +73,8 @@
                             {{ products.Description }}</td>
                           <td>
                             <div class="actions">
-                              <button class="icon-button" [routerLink]="['/admin/product-detail', products.productid]" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+                              <button class="icon-button" [routerLink]="['/admin/product-admin-detail', products.productid]" 
+                              [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
                                 <span class="las la-box-open"></span>
                               </button>
                               <button class="icon-button" (click)="handleTrashClick()">

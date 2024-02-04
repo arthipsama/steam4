@@ -124,6 +124,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       ImgProduct: '../assets/Game/GTA.jpg',
       ProductName: 'GTA V',
       price: 359,
+      Fullprice: 559 ,
       Description: 'เกมนี้ยิงปืน แล้วสู้กัน สู้กัน',
       quantity: 4,
       categoryproductid: 1,
@@ -134,6 +135,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       ImgProduct: '../assets/Game/Elden.jpg',
       ProductName: 'Elden Ring',
       price: 959,
+      Fullprice: 1259 ,
       Description: 'เกมนี้เนื้อเรื่อง แล้วสู้กัน สู้กัน',
       quantity: 2,
       categoryproductid: 2,
@@ -144,6 +146,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       ImgProduct: '../assets/Game/FC24.jpg',
       ProductName: 'FC24',
       price: 459,
+      Fullprice: 759 ,
       Description: 'เกมนี้เล่นบอล แล้วสู้กัน สู้กัน',
       quantity: 3,
       categoryproductid: 3,
@@ -154,6 +157,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       ImgProduct: '../assets/Game/Party.jpg',
       ProductName: 'Party Animal',
       price: 359,
+      Fullprice: 559 ,
       Description: 'เกมนี้สัตว์ต่อยกัน แล้วสู้กัน สู้กัน',
       quantity: 6,
       categoryproductid: 4,
@@ -164,6 +168,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       ImgProduct: '../assets/Game/ดบดล.jpg',
       ProductName: 'Dead By Daylight',
       price: 259,
+      Fullprice: 359 ,
       Description: 'เกมนี้วิ่งหนี แล้วสู้กัน สู้กัน',
       quantity: 0,
       categoryproductid: 1,
@@ -194,10 +199,16 @@ private apiUrl = 'http://localhost:3000/api/room';
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
   }
 
+  // getproductbyid(id: string): Observable<productData | undefined> {
+  //   const product = this.product.find(p => p.productid === id);
+  //   return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
+  // }
+
   getproductbyid(id: string): Observable<productData | undefined> {
     const product = this.product.find(p => p.productid === id);
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
   }
+  
 
 }
 
