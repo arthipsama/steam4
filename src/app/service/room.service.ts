@@ -231,9 +231,9 @@ private apiUrl = 'http://localhost:3000/api/room';
       user: this.users.find(user => user.userid === '5033') || {} as userData,
       totalprice: '1500',
       productcode: '00001',
-      image: '../assets/สลิป/1.jpg',
+      image: '../assets/สลิป/01.jpg',
       paymentstatus: 'wait',
-      remark: '',
+      remark: 'ไม่บอกกกกก',
       CreateBy: 'Jassa1',
       CreateDate: new Date(),
       UpdateBy: '',
@@ -245,7 +245,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       user: this.users.find(user => user.userid === '5034') || {} as userData,
       totalprice: '500',
       productcode: '00002',
-      image: '../assets/สลิป/1.jpg',
+      image: '../assets/สลิป/02.jpg',
       paymentstatus: 'checked',
       remark: '',
       CreateBy: 'Jassa2',
@@ -259,7 +259,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       user: this.users.find(user => user.userid === '5035') || {} as userData,
       totalprice: '200',
       productcode: '00003',
-      image: '../assets/สลิป/1.jpg',
+      image: '../assets/สลิป/03.jpg',
       paymentstatus: 'incorrect',
       remark: '',
       CreateBy: 'Jassa3',
@@ -293,7 +293,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       productid: 3,
       product: this.product.find(product => product.productid === '3') || {} as productData,
       quantity: '4',
-      price: '1,836',
+      price: '1836',
       CreateBy: 'Jassa1',
       CreateDate: new Date(),
       UpdateBy: '',
@@ -306,7 +306,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       productid: 4,
       product: this.product.find(product => product.productid === '4') || {} as productData,
       quantity: '3',
-      price: '1,555',
+      price: '1555',
       CreateBy: 'Jassa2',
       CreateDate: new Date(),
       UpdateBy: '',
@@ -378,7 +378,18 @@ private apiUrl = 'http://localhost:3000/api/room';
     const product = this.content.find(p => p.contentid === +id);
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
   }
-  
+
+  getOrderById(ordersid: string): Observable<OrderDTO | undefined> {
+    const order = this.Orders.find((o) => o.ordersid === +ordersid);
+    return of(order).pipe(delay(0));
+  }
+
+  // ตัวอย่างเพิ่ม method ใน RoomService
+  getOrderDetailByOrdersId(ordersId: string): Observable<OrderDetailDTO[]> {
+    const orderDetails = this.OrdersDetail.filter(od => od.ordersid === +ordersId);
+    return of(orderDetails).pipe(delay(0));
+  }
+
 
 }
 

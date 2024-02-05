@@ -92,15 +92,6 @@ isSaveButtonDisabled(): boolean {
 }
 
 
-// userForm: FormGroup = this.fb.group({
-//   FirstName: ['', Validators.required],
-//   LastName: [''],  // เพิ่ม control สำหรับ LastName
-//   Email: ['', [Validators.required, Validators.email]],  // เพิ่ม control สำหรับ Email
-//   Phone: ['', Validators.required],  // เพิ่ม control สำหรับ Phone
-//   Password: ['', Validators.required],  // เพิ่ม control สำหรับ Password
-//   Role: ['']  // เพิ่ม control สำหรับ Role
-// });
-
 onSave() {
   // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
   if (this.isValidFormData()) {
@@ -136,11 +127,5 @@ isValidFormData(): boolean {
   );
 }
 
-
-
-// navigateTo(url: string): void {
-//   this.route.navigate([url]);
-// }
-  
 
 }

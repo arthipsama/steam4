@@ -1,0 +1,34 @@
+<!-- your-dialog.component.html -->
+<ng-container *ngFor="let order of orders">
+    <h1 mat-dialog-title style="background-color: #90EE90;">Check Order</h1>
+    <div mat-dialog-content>
+      <mat-icon style="font-size: 14px; position: absolute; top: 25px; right: 20px;" (click)="onCloseClick()">close</mat-icon>
+      <form [formGroup]="userForm">
+  
+        <mat-form-field style="width: 100%">
+          <mat-label style="font-size: 16px; color: blue;">หมายเลขรหัสการสั่งซื้อ</mat-label>
+          <input matInput style="margin-top: 15px;" [readonly]="true" [value]="order.productcode">
+        </mat-form-field>
+  
+        <mat-form-field style="width: 100%">
+          <mat-label style="font-size: 16px; color: blue;">สถานะการตรวจสอบ </mat-label>
+          <mat-select formControlName="paymentstatus" style="margin-top: 15px;" required>
+            <mat-option value="checked">ผ่านการตรวจสอบ</mat-option>
+            <mat-option value="incorrect">ไม่ผ่านการตรวจสอบ</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field style="width: 100%">
+          <mat-label style="font-size: 16px; color: blue;">Remark </mat-label>
+          <textarea matInput rows="4" style="margin-top: 15px;" formControlName="remark" required></textarea>
+        </mat-form-field>
+  
+        <div style="display: flex; justify-content: flex-end; align-items: center;">
+          <!-- Save Button -->
+          <button mat-button color="success" (click)="onSave()" [disabled]="userForm.invalid">Update</button>
+        </div>
+  
+      </form>
+    </div>
+  </ng-container>
+  
