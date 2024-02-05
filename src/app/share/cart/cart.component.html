@@ -115,20 +115,20 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/PromptPay-logo.png" class="pay1" (click)="bank4()">
                     </div>
                     <div class="col-12" style="display: flex; padding: 20px;">
-                        <div class="col-8" *ngIf="payto == 1" style="margin-left: 27px;">
-                            <img src="https://cdn.discordapp.com/attachments/865242552071880735/1203613789589868564/f933e41f9005b253.jpg?ex=65d1bbb1&is=65bf46b1&hm=93249c73d67e51e9029f2f5f0a661e71fda3de6c157b18fb10940215db1e77dc&" style="width: 50%; height: 100%;">
+                        <div class="col-5" *ngIf="payto == 1" style="margin-left: 27px;">
+                            <img src="https://cdn.discordapp.com/attachments/865242552071880735/1203613789589868564/f933e41f9005b253.jpg?ex=65d1bbb1&is=65bf46b1&hm=93249c73d67e51e9029f2f5f0a661e71fda3de6c157b18fb10940215db1e77dc&" style="width: 233px; height: 316px;">
                         </div>
 
-                        <div class="col-8" *ngIf="payto == 2" style="margin-left: 27px;">
+                        <div class="col-5" *ngIf="payto == 2" style="margin-left: 27px;">
                             <img src="https://cdn.discordapp.com/attachments/865242552071880735/1203613759688675428/23074e877a70b1b0.jpg?ex=65d1bbaa&is=65bf46aa&hm=86353410868419b541e4dc39af8fb001e3264256c07eb6dd9c131d06ac2a77d0&" style="width: 50%; height: 100%;">
                         </div>
 
-                        <div class="col-8" *ngIf="payto == 3" style="margin-left: 27px;">
-                            <img src="https://cdn.discordapp.com/attachments/865242552071880735/1203614105085411388/e28ce5bc-c117-441d-98b6-487a3c64dc94.png?ex=65d1bbfc&is=65bf46fc&hm=85aa1893efddd1810615b06d854eb478ee39a337a8b01680d21eb8e1096462fa&" style="width: 50%; height: 100%;">
+                        <div class="col-5" *ngIf="payto == 3" style="margin-left: 27px;">
+                            <img src="https://cdn.discordapp.com/attachments/865242552071880735/1203614105085411388/e28ce5bc-c117-441d-98b6-487a3c64dc94.png?ex=65d1bbfc&is=65bf46fc&hm=85aa1893efddd1810615b06d854eb478ee39a337a8b01680d21eb8e1096462fa&" style="width: 233px; height: 316px;">
                         </div>
-                        <div class="col-4">
+                        <div class="col-7">
                             <input type="file" accept=".jpg,.png,.gif" *ngIf="payto" style="margin: 0 0 10px 27px;" (change)="previewImage($event)">
-                            <img style="width: 200px; height: 200px; margin: 0 0 20px 0;" [src]="imagePreview" *ngIf="imagePreview">
+                            <img style="width: 250px; height: 250px; margin: 0 0 20px 0;" [src]="imagePreview" *ngIf="imagePreview">
                         </div>
                     </div>
                 </div><br>

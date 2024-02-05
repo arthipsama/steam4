@@ -89,25 +89,18 @@ export class CartComponent {
 
   bank1(){
     this.payto = 1;
-    console.log(this.payto);
   }
 
   bank2(){
     this.payto = 2;
-    console.log(this.payto);
-
   }
 
   bank3(){
     this.payto = 3;
-    console.log(this.payto);
-
   }
 
   bank4(){
     this.payto = 4;
-    console.log(this.payto);
-
   }
 
 

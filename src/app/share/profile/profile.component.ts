@@ -63,7 +63,7 @@ export class ProfileComponent {
     var contact = this.profileForm.value.contact;
     if(this.profileForm.valid){
       this.service.editProfile(userid, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
-        console.log('edit สำเสร็จ');  
+        console.log(x);
       })
     }
     else{
