@@ -2,7 +2,7 @@ export interface productData {
     productid: string;
     ImgProduct: string;
     ProductName: string;
-    Fullprice?: number;
+    // Fullprice?: number;
     price: number;
     Description: string;
     quantity: number;

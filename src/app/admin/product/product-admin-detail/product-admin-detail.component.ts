@@ -45,7 +45,7 @@ export class ProductAdminDetailComponent implements OnInit {
       this.userForm = this.fb.group({
         ProductName: ['', Validators.required],  // เพิ่ม control นี้
         price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],  // ตรวจสอบทศนิยมไม่เกิน 2 ตำแหน่ง
-        Fullprice: ['', [Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+        saleprice: ['', [Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
         Description: ['', Validators.required],
         quantity: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
         categoryproductid: [''],
@@ -74,7 +74,7 @@ export class ProductAdminDetailComponent implements OnInit {
             ImgProduct: this.productsData?.ImgProduct,
             ProductName: this.productsData?.ProductName,
             price: this.productsData?.price,
-            Fullprice: this.productsData?.Fullprice,
+            saleprice: this.productsData?.saleprice,
             Description: this.productsData?.Description,
             quantity: this.productsData?.quantity,
             categoryproductid: this.productsData?.category?.categoryproductid,

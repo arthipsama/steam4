@@ -174,5 +174,9 @@ openUserDialog(ordersid: number): void {
   });
 }
 
+isButtonDisabled(): boolean {
+  return this.order.paymentstatus === 'checked' || this.order.paymentstatus === 'incorrect';
+}
+
 }
 

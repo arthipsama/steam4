@@ -26,7 +26,7 @@
                             <button type="button" [routerLink]="['/admin/order']" 
                             class="btn btn-secondary me-2">Cancel</button>
                             <button type="button" class="btn btn-success me-1" (click)="openUserDialog(order?.ordersid)"
-                            >Update</button>
+                            [disabled]="isButtonDisabled()">Update</button>
                         </div>
 
                       <div class="card" style="border-radius: 10px;">
@@ -52,19 +52,31 @@
                                 </div>
                                 <!-- price ต่อขิ้น -->
                                 <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                  <p class="text-muted mb-0 small">{{ orderDetails.product.price }}</p>
+                                  <p class="mb-0 small">
+                                    <span class="text-black">Price: </span>
+                                    <span class="text-muted">{{ orderDetails.product.saleprice ?? orderDetails.product.price }}</span>
+                                  </p>
                                 </div>
+
                                 <!-- ประเภทของสินค้า -->
                                 <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                  <p class="text-muted mb-0 small">{{ orderDetails.product.category.CategoryProductName }}</p>
+                                  <p class="mb-0 small">
+                                    <span class="text-black">Category: </span>
+                                    <span class="text-muted">{{ orderDetails.product.category?.CategoryProductName }}</span>
+                                  </p>
                                 </div>
+                                
                                 <!-- จำนวนที่เลือกใส่ตระกร้ามา -->
                                 <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                  <p class="text-muted mb-0 small">{{ orderDetails.product.quantity }}</p>
+                                  <p class="mb-0 small">
+                                    <span class="text-black">Qty: </span>
+                                    <span class="text-muted">{{ orderDetails.product.quantity }}</span>
+                                  </p>
                                 </div>
+
                                 <!-- price ราคารวม -->
                                 <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                                  <p class="text-muted mb-0 small">{{ orderDetails.price | currency:'THB':'symbol':'1.0-2' }}</p>
+                                  <p class="text-black mb-0">{{ orderDetails.price | currency:'THB':'symbol':'1.0-2' }}</p>
                                 </div>
                               </div>
 

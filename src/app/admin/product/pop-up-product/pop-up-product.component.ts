@@ -22,7 +22,7 @@ userForm: FormGroup = this.fb.group({
   ProductName: ['', [Validators.required]],
   categoryproductid: [undefined, [Validators.required]],
   Price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-  Fullprice: ['', [Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+  saleprice: ['', [Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
   Quantity: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
   Desciption: [''],
   Image: ['', [Validators.required]],
