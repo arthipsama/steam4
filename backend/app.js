@@ -5,6 +5,7 @@ const roomRouter = require('./room');
 const authRouter = require('./auth');
 const userRouter = require('./user');
 const productRouter = require('./product');
+const dashboardRouter = require('./dashboard');
 
 const corsOptions = {
   origin: '*',
@@ -18,6 +19,7 @@ app.use('/api', roomRouter);
 app.use('/api', authRouter);
 app.use('/api', userRouter);
 app.use('/api', productRouter);
+app.use('/api', dashboardRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
