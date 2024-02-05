@@ -83,6 +83,73 @@ router.post('/useradmin/add', (req, res) => {
 });
 
 
+// Node.js
+router.put('/useradmin/edit/:id', (req, res) => {
+  const userId = req.params.id;
+  const { FirstName, LastName, Email, PhoneNumber, Password, Role, Contact } = req.body;
+
+  // ตรวจสอบความถูกต้องของข้อมูลที่รับมาจาก Angular
+  if (!FirstName || !LastName || !Email || !PhoneNumber || !Password || !Role) {
+    res.status(400).json({ error: 'Invalid data. Please provide all required fields.' });
+    return;
+  }
+
+  // ทำการ UPDATE ข้อมูลในฐานข้อมูล
+  const updateUserQuery = `
+    UPDATE public."User"
+    SET "FirstName" = $1, "LastName" = $2, "Email" = $3, "PhoneNumber" = $4, "Password" = $5, "Role" = $6, "Contact" = $7
+    WHERE "userid" = $8
+    RETURNING *;
+  `;
+
+  pool.query(
+    updateUserQuery,
+    [FirstName, LastName, Email, PhoneNumber, Password, Role, Contact, userId],
+    (err, result) => {
+      if (err) {
+        console.error('Error executing query', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+
+      if (result.rows.length === 0) {
+        res.status(404).json({ error: 'User not found' });
+      } else {
+        res.json(result.rows[0]);
+      }
+    }
+  );
+});
+
+// Node.js
+router.delete('/useradmin/delete/:id', (req, res) => {
+  const userId = req.params.id;
+
+  // ทำการ DELETE ข้อมูลในฐานข้อมูล
+  const deleteUserQuery = `
+    DELETE FROM public."User"
+    WHERE "userid" = $1
+    RETURNING *;
+  `;
+
+  pool.query(deleteUserQuery, [userId], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+
+    if (result.rows.length === 0) {
+      res.status(404).json({ error: 'User not found' });
+    } else {
+      res.json({ message: 'User deleted successfully' });
+    }
+  });
+});
+
+
+
+
 
 
 module.exports = router;

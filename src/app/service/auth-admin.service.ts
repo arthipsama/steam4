@@ -24,6 +24,16 @@ export class AuthAdminService {
   addUser(userData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/add`, userData);
   }
+
+    // เพิ่มฟังก์ชันสำหรับแก้ไขข้อมูลผู้ใช้
+  editUser(userId: string, userData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/edit/${userId}`, userData);
+  }
+
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/delete/${userId}`);
+  }
+
   
 
 }

@@ -21,7 +21,10 @@
                     <select name="" id="">
                         <option value="">ID</option>
                     </select> -->
-
+                    <div *ngIf="deletionError">
+                      {{ deletionError }}
+                    </div>
+                    
                 </div>
 
                 <div class="browse">
@@ -79,7 +82,7 @@
                                 <button class="icon-button" [routerLink]="['/admin/user-detail', user.userid]" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
                                   <span class="las la-users-cog"></span>
                                 </button>
-                                  <button class="icon-button" (click)="handleTrashClick()">
+                                  <button class="icon-button" (click)="handleTrashClick(user.userid)">
                                     <span class="las la-trash"></span>
                                   </button>
                                   

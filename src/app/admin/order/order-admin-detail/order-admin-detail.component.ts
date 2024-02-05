@@ -175,8 +175,10 @@ openUserDialog(ordersid: number): void {
 }
 
 isButtonDisabled(): boolean {
-  return this.order.paymentstatus === 'checked' || this.order.paymentstatus === 'incorrect';
+  // ตรวจสอบว่า this.order มีค่าไม่เป็น null และไม่เป็น undefined ก่อนที่จะใช้ this.order.paymentstatus
+  return this.order && (this.order.paymentstatus === 'checked' || this.order.paymentstatus === 'incorrect');
 }
+
 
 }
 

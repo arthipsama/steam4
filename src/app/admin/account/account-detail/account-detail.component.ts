@@ -77,33 +77,6 @@ export class AccountDetailComponent implements OnInit {
       });
     }
 
-
-  // ngOnInit(): void {
-
-  //   let userid  = this.route.snapshot.paramMap.get('id');
-  //   console.log("uses id is",userid)
-
-  //   userid && this.room.getuserbyid(userid).subscribe((res) => {
-  //     this.userData = res;
-  //     this.displayEmail = res!.Email!;
-  //     console.log(res);
-    
-  //     // ตรวจสอบว่า userForm ถูกสร้างแล้ว
-  //     if (this.userForm) {
-  //       this.userForm.patchValue({
-  //         firstName: this.userData?.FirstName,
-  //         lastName: this.userData?.LastName,
-  //         email: this.userData?.Email,
-  //         phoneNumber: this.userData?.PhoneNumber,
-  //         password: this.userData?.Password,
-  //         role: this.userData?.Role,
-  //         contact: this.userData?.Contact,
-  //         // ... กำหนดค่าเริ่มต้นของฟิลด์อื่น ๆ
-  //       });
-  //     }
-  //   });
-  // }  
-
   showPassword: boolean = false;
 
   // Method to toggle password visibility
@@ -121,14 +94,30 @@ isSaveButtonDisabled(): boolean {
 
 
 onSave() {
-  // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
   if (this.isValidFormData()) {
-    // ทำบันทึกข้อมูล
-    this.animationState = this.animationState === 'start' ? 'end' : 'start';
+    const editedUserData = {
+      FirstName: this.userForm.get('firstName')?.value,
+      LastName: this.userForm.get('lastName')?.value,
+      Email: this.userForm.get('email')?.value,
+      PhoneNumber: this.userForm.get('phoneNumber')?.value,
+      Password: this.userForm.get('password')?.value,
+      Role: this.userForm.get('role')?.value,
+      Contact: this.userForm.get('contact')?.value,
+    };
 
-    console.log('Data to be saved:', this.userForm.value);
-    // ทำตามที่คุณต้องการเพิ่มเติม
-    this.alertService.onSuccess('บันทึกข้อมูลสำเร็จ', '/admin/user');
+    let userId = String(this.route.snapshot.paramMap.get('id'));
+
+    this.Auth.editUser(userId, editedUserData).subscribe(
+      (res) => {
+        this.animationState = this.animationState === 'start' ? 'end' : 'start';
+        console.log('User data updated:', res);
+        this.alertService.onSuccess('บันทึกการแก้ไขสำเร็จ', '/admin/user');
+      },
+      (error) => {
+        console.error('Error updating user data', error);
+        // ทำอะไรต่อไปในกรณีเกิด error
+      }
+    );
   } else {
     console.log('Invalid Form');
     // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
