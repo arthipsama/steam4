@@ -3,6 +3,8 @@ import { AccountComponent } from '../account.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { userData } from 'src/app/models/user.models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthAdminService } from 'src/app/service/auth-admin.service';
+import { AlertServiceService } from 'src/app/service/alert-service.service';
 
 @Component({
   selector: 'app-pop-up-user',
@@ -19,10 +21,13 @@ export class PopUpUserComponent {
     Email: ['', [Validators.required, Validators.email]],
     FirstName: [''],
     PhoneNumber: [''],
-    role: ['', [Validators.required]]
+    Role: ['', [Validators.required]]
   });
 
   constructor(private fb: FormBuilder,
+    private Auth: AuthAdminService,
+    private alertService: AlertServiceService,
+
     public dialogRef: MatDialogRef<PopUpUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
@@ -30,16 +35,37 @@ export class PopUpUserComponent {
     
   }
 
-onSave() {
-  if (this.userForm.valid) {
-    // ดำเนินการบันทึกข้อมูล หรือส่งข้อมูลไปทำงานต่อไป
-    const formData = this.userForm.value;
-    console.log('Data to be saved:', formData);
-    // ตรวจสอบข้อมูลเพิ่มเติมและดำเนินการต่อไปตามที่คุณต้องการ
-  } else {
-    console.log('Invalid Form');
+
+  onSave() {
+    // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
+    if (this.userForm.valid) {
+      // ทำ HTTP POST request เพื่อบันทึกข้อมูลผู้ใช้
+      console.log('Data to be sent:', this.userForm.value); // Log data to be sent
+      this.Auth.addUser(this.userForm.value).subscribe(
+        (res) => {
+          console.log('User added successfully:', res);
+          // ทำตามที่คุณต้องการเพิ่มเติม
+          this.alertService.withOutTranslate.onSuccessRe();
+        },
+        (error) => {
+          console.error('Error adding user:', error);
+          const userNameControl = this.userForm.get('UserName');
+          if (userNameControl) {
+            if (error.error && error.error.error === 'Username already exists') {
+              // ในกรณีที่ error เป็น 'Username already exists' แสดง mat-error ที่เกี่ยวข้อง
+              userNameControl.setErrors({ duplicate: true });
+            }
+          }
+          // ทำตามที่คุณต้องการเพิ่มเติมในกรณีที่มีข้อผิดพลาด
+        }
+      );
+    } else {
+      console.log('Invalid Form');
+      // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
+    }
   }
-}
+  
+
 
 onReset() {
   this.userForm.reset();

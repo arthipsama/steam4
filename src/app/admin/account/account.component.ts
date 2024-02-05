@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Observable, delay, of } from 'rxjs';
 import { RoomService } from 'src/app/service/room.service';
 import { AlertServiceService } from 'src/app/service/alert-service.service';
+import { AuthAdminService } from 'src/app/service/auth-admin.service';
 
 
 @Component({
@@ -20,14 +21,19 @@ export class AccountComponent implements OnInit {
     private router: Router,
     private room: RoomService,
     private alert: AlertServiceService,
+    private authAdminService: AuthAdminService,
     
     ) { }
 
   user: userData[] = [];
 
   ngOnInit(): void {
-    this.user = this.room.getuser();
+    // this.user = this.room.getuser();
     // this.recordCount = this.user.length;
+    this.authAdminService.getAllUsers().subscribe(users => {
+      this.user = users;
+      console.log(users); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+    });
     }
 
   getImagePath(Role: string): string {

@@ -17,17 +17,17 @@
         <mat-label style="font-size: 12px;">Username</mat-label>
         <input matInput formControlName="UserName">
         <mat-error *ngIf="userForm.get('UserName')?.hasError('required')">Username is required</mat-error>
+        <mat-error *ngIf="userForm.get('UserName')?.hasError('duplicate')">Username already exists</mat-error>
       </mat-form-field>
   
-<mat-form-field style="width: 100%">
-  <mat-label style="font-size: 12px;">Password</mat-label>
-  <input matInput formControlName="Password" type="{{ hidePassword ? 'password' : 'text' }}">
-  <mat-icon matSuffix (click)="togglePasswordVisibility()">
-    {{ hidePassword ? 'visibility_off' : 'visibility' }}
-  </mat-icon>
-  <mat-error *ngIf="userForm.get('Password')?.hasError('required')">Password is required</mat-error>
-</mat-form-field>
-
+      <mat-form-field style="width: 100%">
+        <mat-label style="font-size: 12px;">Password</mat-label>
+        <input matInput formControlName="Password" type="{{ hidePassword ? 'password' : 'text' }}">
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+          {{ hidePassword ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+        <mat-error *ngIf="userForm.get('Password')?.hasError('required')">Password is required</mat-error>
+      </mat-form-field>
   
       <mat-form-field style="width: 100%">
         <mat-label style="font-size: 12px;">Email</mat-label>
@@ -50,11 +50,11 @@
   
       <mat-form-field style="width: 100%">
         <mat-label style="font-size: 12px;">Role</mat-label>
-        <mat-select formControlName="role">
-          <mat-option value="admin">Admin</mat-option>
-          <mat-option value="user">User</mat-option>
+        <mat-select formControlName="Role">
+          <mat-option value="ADMIN">Admin</mat-option>
+          <mat-option value="USER">User</mat-option>
         </mat-select>
-        <mat-error *ngIf="userForm.get('role')?.hasError('required')">Role is required</mat-error>
+        <mat-error *ngIf="userForm.get('Role')?.hasError('required')">Role is required</mat-error>
     </mat-form-field>
     </form>
   

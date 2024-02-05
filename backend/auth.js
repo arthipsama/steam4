@@ -46,8 +46,8 @@ router.post('/register', (req, res) => {
          res.status(400).json({ error: 'Username already exists' });
          return;
        }
-       const insertQuery = 'INSERT INTO "public"."User" ("UserName", "Password", "FirstName", "LastName", "PhoneNumber", "Email", "Contact", roleid) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
-       pool.query(insertQuery, [username, password, firstname, lastname, phoneNumber, email, contact, '1'], (err, result) => {
+       const insertQuery = 'INSERT INTO "public"."User" ("UserName", "Password", "FirstName", "LastName", "PhoneNumber", "Email", "Contact", "Role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+       pool.query(insertQuery, [username, password, firstname, lastname, phoneNumber, email, contact, 'USER'], (err, result) => {
          if (err) {
            console.error('Error executing query', err);
            res.status(500).json({ error: 'Internal Server Error' });

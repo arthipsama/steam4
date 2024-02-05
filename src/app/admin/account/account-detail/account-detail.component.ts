@@ -7,6 +7,7 @@ import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { RoomService } from 'src/app/service/room.service';
 import { trigger, state, transition, animate, style as angularStyle } from '@angular/animations';
 import { Location } from '@angular/common';
+import { AuthAdminService } from 'src/app/service/auth-admin.service';
 
 @Component({
   selector: 'app-account-detail',
@@ -33,7 +34,9 @@ export class AccountDetailComponent implements OnInit {
     private alertService: AlertServiceService,
     private room: RoomService,
     private fb: FormBuilder,
-    private location: Location
+    private location: Location,
+    private Auth: AuthAdminService,
+
     
     ) {
 
@@ -49,32 +52,57 @@ export class AccountDetailComponent implements OnInit {
       });
      }
 
-
-  ngOnInit(): void {
-
-    let userid  = this.route.snapshot.paramMap.get('id');
-    console.log("uses id is",userid)
-
-    userid && this.room.getuserbyid(userid).subscribe((res) => {
-      this.userData = res;
-      this.displayEmail = res!.Email!;
-      console.log(res);
+     ngOnInit(): void {
+      let userid = this.route.snapshot.paramMap.get('id');
+      console.log("user id is", userid);
     
-      // ตรวจสอบว่า userForm ถูกสร้างแล้ว
-      if (this.userForm) {
-        this.userForm.patchValue({
-          firstName: this.userData?.FirstName,
-          lastName: this.userData?.LastName,
-          email: this.userData?.Email,
-          phoneNumber: this.userData?.PhoneNumber,
-          password: this.userData?.Password,
-          role: this.userData?.Role,
-          contact: this.userData?.Contact,
-          // ... กำหนดค่าเริ่มต้นของฟิลด์อื่น ๆ
-        });
-      }
-    });
-  }  
+      userid && this.Auth.getUserById(userid).subscribe((res) => {
+        this.userData = res;
+        this.displayEmail = res!.Email!;
+        console.log(res);
+    
+        // ตรวจสอบว่า userForm ถูกสร้างแล้ว
+        if (this.userForm) {
+          this.userForm.patchValue({
+            firstName: this.userData?.FirstName,
+            lastName: this.userData?.LastName,
+            email: this.userData?.Email,
+            phoneNumber: this.userData?.PhoneNumber,
+            password: this.userData?.Password,
+            role: this.userData?.Role,
+            contact: this.userData?.Contact,
+            // ... กำหนดค่าเริ่มต้นของฟิลด์อื่น ๆ
+          });
+        }
+      });
+    }
+
+
+  // ngOnInit(): void {
+
+  //   let userid  = this.route.snapshot.paramMap.get('id');
+  //   console.log("uses id is",userid)
+
+  //   userid && this.room.getuserbyid(userid).subscribe((res) => {
+  //     this.userData = res;
+  //     this.displayEmail = res!.Email!;
+  //     console.log(res);
+    
+  //     // ตรวจสอบว่า userForm ถูกสร้างแล้ว
+  //     if (this.userForm) {
+  //       this.userForm.patchValue({
+  //         firstName: this.userData?.FirstName,
+  //         lastName: this.userData?.LastName,
+  //         email: this.userData?.Email,
+  //         phoneNumber: this.userData?.PhoneNumber,
+  //         password: this.userData?.Password,
+  //         role: this.userData?.Role,
+  //         contact: this.userData?.Contact,
+  //         // ... กำหนดค่าเริ่มต้นของฟิลด์อื่น ๆ
+  //       });
+  //     }
+  //   });
+  // }  
 
   showPassword: boolean = false;
 
