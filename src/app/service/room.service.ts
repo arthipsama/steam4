@@ -137,8 +137,8 @@ private apiUrl = 'http://localhost:3000/api/room';
       productid: '1' ,
       ImgProduct: '../assets/Game/GTA.jpg',
       ProductName: 'GTA VGTA VGTA VGTA VGTA VGTA VGTA VGTA VGTA VGTA V',
-      price: 359,
-      Fullprice: 559 ,
+      price: 1359,
+      saleprice: 559 ,
       Description: 'เกมนี้ยิงปืน แล้วสู้กัน สู้กัน',
       quantity: 4,
       categoryproductid: 1,
@@ -148,8 +148,8 @@ private apiUrl = 'http://localhost:3000/api/room';
       productid: '2' ,
       ImgProduct: '../assets/Game/Elden.jpg',
       ProductName: 'Elden Ring',
-      price: 959,
-      Fullprice: 1259 ,
+      price: 1959,
+      saleprice: 1259 ,
       Description: 'เกมนี้เนื้อเรื่อง แล้วสู้กัน สู้กัน',
       quantity: 2,
       categoryproductid: 2,
@@ -159,8 +159,8 @@ private apiUrl = 'http://localhost:3000/api/room';
       productid: '3' ,
       ImgProduct: '../assets/Game/FC24.jpg',
       ProductName: 'FC24',
-      price: 459,
-      Fullprice: 759 ,
+      price: 1459,
+      saleprice: undefined ,
       Description: 'เกมนี้เล่นบอล แล้วสู้กัน สู้กัน',
       quantity: 3,
       categoryproductid: 3,
@@ -170,8 +170,8 @@ private apiUrl = 'http://localhost:3000/api/room';
       productid: '4' ,
       ImgProduct: '../assets/Game/Party.jpg',
       ProductName: 'Party Animal',
-      price: 359,
-      Fullprice: 559 ,
+      price: 1359,
+      saleprice: 559 ,
       Description: 'เกมนี้สัตว์ต่อยกัน แล้วสู้กัน สู้กัน',
       quantity: 6,
       categoryproductid: 4,
@@ -182,7 +182,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       ImgProduct: '../assets/Game/ดบดล.jpg',
       ProductName: 'Dead By Daylight',
       price: 259,
-      Fullprice: 359 ,
+      saleprice: 159 ,
       Description: 'เกมนี้วิ่งหนี แล้วสู้กัน สู้กัน',
       quantity: 0,
       categoryproductid: 1,
@@ -231,9 +231,9 @@ private apiUrl = 'http://localhost:3000/api/room';
       user: this.users.find(user => user.userid === '5033') || {} as userData,
       totalprice: '1500',
       productcode: '00001',
-      image: '../assets/สลิป/1.jpg',
+      image: '../assets/สลิป/01.jpg',
       paymentstatus: 'wait',
-      remark: '',
+      remark: 'ไม่บอกกกกก',
       CreateBy: 'Jassa1',
       CreateDate: new Date(),
       UpdateBy: '',
@@ -245,7 +245,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       user: this.users.find(user => user.userid === '5034') || {} as userData,
       totalprice: '500',
       productcode: '00002',
-      image: '../assets/สลิป/1.jpg',
+      image: '../assets/สลิป/02.jpg',
       paymentstatus: 'checked',
       remark: '',
       CreateBy: 'Jassa2',
@@ -259,7 +259,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       user: this.users.find(user => user.userid === '5035') || {} as userData,
       totalprice: '200',
       productcode: '00003',
-      image: '../assets/สลิป/1.jpg',
+      image: '../assets/สลิป/03.jpg',
       paymentstatus: 'incorrect',
       remark: '',
       CreateBy: 'Jassa3',
@@ -293,7 +293,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       productid: 3,
       product: this.product.find(product => product.productid === '3') || {} as productData,
       quantity: '4',
-      price: '1,836',
+      price: '1836',
       CreateBy: 'Jassa1',
       CreateDate: new Date(),
       UpdateBy: '',
@@ -306,7 +306,7 @@ private apiUrl = 'http://localhost:3000/api/room';
       productid: 4,
       product: this.product.find(product => product.productid === '4') || {} as productData,
       quantity: '3',
-      price: '1,555',
+      price: '1555',
       CreateBy: 'Jassa2',
       CreateDate: new Date(),
       UpdateBy: '',
@@ -378,7 +378,18 @@ private apiUrl = 'http://localhost:3000/api/room';
     const product = this.content.find(p => p.contentid === +id);
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
   }
-  
+
+  getOrderById(ordersid: string): Observable<OrderDTO | undefined> {
+    const order = this.Orders.find((o) => o.ordersid === +ordersid);
+    return of(order).pipe(delay(0));
+  }
+
+  // ตัวอย่างเพิ่ม method ใน RoomService
+  getOrderDetailByOrdersId(ordersId: string): Observable<OrderDetailDTO[]> {
+    const orderDetails = this.OrdersDetail.filter(od => od.ordersid === +ordersId);
+    return of(orderDetails).pipe(delay(0));
+  }
+
 
 }
 

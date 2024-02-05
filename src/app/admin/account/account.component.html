@@ -3,9 +3,9 @@
 <!-- page-header.component.html -->
 
 <div class="page-header">
-    <h1>User</h1>
+    <h1>User Page</h1>
     <small>
-        <span routerLink="/admin/dashboard" class="clickable">Home</span> / user
+        <span routerLink="/admin/dashboard" class="clickable">Home</span> / User
     </small>
 </div>
 
@@ -21,7 +21,10 @@
                     <select name="" id="">
                         <option value="">ID</option>
                     </select> -->
-
+                    <div *ngIf="deletionError">
+                      {{ deletionError }}
+                    </div>
+                    
                 </div>
 
                 <div class="browse">
@@ -66,7 +69,8 @@
                               </div>
                             </td>
                             <td style="max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                {{ user.FirstName + ' ' + user.LastName }}</td>
+                              {{ user.FirstName + ' ' + (user.LastName || ' ') }}
+                            </td>
                             <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 {{ user.PhoneNumber }}</td>
                             <td style="max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
@@ -78,7 +82,7 @@
                                 <button class="icon-button" [routerLink]="['/admin/user-detail', user.userid]" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
                                   <span class="las la-users-cog"></span>
                                 </button>
-                                  <button class="icon-button" (click)="handleTrashClick()">
+                                  <button class="icon-button" (click)="handleTrashClick(user.userid)">
                                     <span class="las la-trash"></span>
                                   </button>
                                   

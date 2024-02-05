@@ -164,7 +164,7 @@ export class AlertServiceService {
       }).then((result) => {
         if (result.isConfirmed) {
           // กรณีเลือก "ใช่"
-          this.onSuccess('ลบรายการข้อมูลสำเร็จ');
+
           resolve(true);
         } else {
           // กรณีเลือก "ไม่"

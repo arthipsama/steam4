@@ -3,7 +3,7 @@
     <div class="page-header">
         <h1>Dashboard</h1>
         <small>
-            <span routerLink="/admin/dashboard" class="clickable">Home</span> / dashboard
+            <span routerLink="/admin/dashboard" class="clickable">Home</span> / Dashboard
         </small>
     </div>
     
@@ -13,7 +13,7 @@
 
             <div class="card">
                 <div class="card-head">
-                    <h2>107,200</h2>
+                    <h2>{{ userCount }}</h2>
                     <span class="las la-user-friends"></span>
                 </div>
                 <div class="card-progress">
@@ -26,11 +26,11 @@
 
             <div class="card">
                 <div class="card-head">
-                    <h2>340,230</h2>
+                    <h2>{{ productSummary }}</h2>
                     <span class="las la-eye"></span>
                 </div>
                 <div class="card-progress">
-                    <small>จำนวน User ที่เข้าดูหน้าสินค้า</small>
+                    <small>จำนวน User ที่เข้าดูหน้าสินค้า (ทุก Product )</small>
                     <div class="card-indicator">
                         <div class="indicator two" style="width: 80%"></div>
                     </div>
@@ -39,7 +39,7 @@
 
             <div class="card">
                 <div class="card-head">
-                    <h2>$653,200.00</h2>
+                    <h2>{{ totalOrderPrice }}</h2>
                     <span class="las la-shopping-cart"></span>
                 </div>
                 <div class="card-progress">
@@ -52,7 +52,7 @@
 
             <div class="card">
                 <div class="card-head">
-                    <h2>47,500</h2>
+                    <h2>{{ contactCount }}</h2>
                     <span class="las la-envelope"></span>
                 </div>
                 <div class="card-progress">

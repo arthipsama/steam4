@@ -1,1 +1,181 @@
-<p>order-admin-detail works!</p>
+<main>
+        
+    <div class="page-header">
+        <h1>Order Detail</h1>
+        <!-- <small>
+            <span routerLink="/admin/dashboard" class="clickable">Home </span> /
+            <span routerLink="/admin/user" class="clickable"> User</span> 
+            / Setting
+        </small> -->
+        <small>
+            <a href="/admin/dashboard" class="clickable">Home</a> /
+            <a href="/admin/order" class="clickable">Order</a> / OrderDetail
+        </small>
+        
+    </div>
+    
+    <div class="page-content">
+        <form [formGroup]="userForm">
+            <section class="h-100 gradient-custom">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-10 col-xl-8">
+
+                          <!-- เพิ่มปุ่ม Update และ Cancel ที่นี่ -->
+                        <div class="d-flex justify-content-center mt-3 mb-3">
+                            <button type="button" [routerLink]="['/admin/order']" 
+                            class="btn btn-secondary me-2">Cancel</button>
+                            <button type="button" class="btn btn-success me-1" (click)="openUserDialog(order?.ordersid)"
+                            [disabled]="isButtonDisabled()">Update</button>
+                        </div>
+
+                      <div class="card" style="border-radius: 10px;">
+                        <div class="card-header px-4 py-5">
+                          <h4 class="text-muted mb-0">Thanks for Order, <span style="color: #a8729a;">{{ order?.CreateBy }}</span>!</h4>
+                        </div>
+                        <div class="card-body p-4">
+                          <div class="d-flex justify-content-between align-items-center mb-4">
+                            <p class="lead fw-normal mb-0" style="color: #a8729a;">Order ID : {{ order?.ordersid }} </p>
+                            <p class="small text-muted mb-0">รหัสการสั่งซื้อ : {{ order?.productcode }}</p>
+                          </div>
+
+                          <div class="card shadow-0 border mb-4">
+                            <div class="card-body">
+                              <div class="row mb-4" *ngFor="let orderDetails of orderDetail">
+                                <!-- img product -->
+                                <div class="col-md-2">
+                                    <img [src]="orderDetails.product.ImgProduct" class="img-fluid" alt="Phone">
+                                </div>
+                                <!-- product name -->
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                  <p class="text-muted mb-0">{{ orderDetails.product.ProductName }}</p>
+                                </div>
+                                <!-- price ต่อขิ้น -->
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                  <p class="mb-0 small">
+                                    <span class="text-black">Price: </span>
+                                    <span class="text-muted">{{ orderDetails.product.saleprice ?? orderDetails.product.price }}</span>
+                                  </p>
+                                </div>
+
+                                <!-- ประเภทของสินค้า -->
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                  <p class="mb-0 small">
+                                    <span class="text-black">Category: </span>
+                                    <span class="text-muted">{{ orderDetails.product.category?.CategoryProductName }}</span>
+                                  </p>
+                                </div>
+                                
+                                <!-- จำนวนที่เลือกใส่ตระกร้ามา -->
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                  <p class="mb-0 small">
+                                    <span class="text-black">Qty: </span>
+                                    <span class="text-muted">{{ orderDetails.product.quantity }}</span>
+                                  </p>
+                                </div>
+
+                                <!-- price ราคารวม -->
+                                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                  <p class="text-black mb-0">{{ orderDetails.price | currency:'THB':'symbol':'1.0-2' }}</p>
+                                </div>
+                              </div>
+
+                              <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                              <div class="row d-flex align-items-center">
+                                <div class="col-md-2">
+                                  <p class="text-muted mb-0 small">Track Order</p>
+                                </div>
+                                <div class="col-md-10">
+                                  <div class="progress" style="height: 6px; border-radius: 16px;">
+                                    <div class="progress-bar"
+                                      [ngClass]="{
+                                        'bg-gainsboro': order?.paymentstatus === 'wait',
+                                        'bg-green': order?.paymentstatus === 'checked',
+                                        'bg-red': order?.paymentstatus === 'incorrect'
+                                      }"
+                                      role="progressbar" [style.width.%]="getWidthPercentage()" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                  </div>
+                                  <div class="d-flex justify-content-around mb-1">
+                                    <p class="text-muted mt-1 mb-0 small ms-xl-5" 
+                                    *ngIf="order?.paymentstatus === 'wait' 
+                                    || order?.paymentstatus === 'incorrect' 
+                                    || order?.paymentstatus === 'checked'">กำลังตรวจสอบ</p>
+                                    <p class="text-muted mt-1 mb-0 small ms-xl-5" 
+                                    *ngIf="order?.paymentstatus === 'wait' || order?.paymentstatus === 'checked'">จัดส่งเรียบร้อย</p>
+                                    <p class="text-muted mt-1 mb-0 small ms-xl-5" 
+                                    *ngIf="order?.paymentstatus === 'incorrect'">ไม่ผ่านการตรวจสอบ</p>
+                                  </div>
+                                </div>
+                              </div>
+                              
+
+                            </div>
+                        </div>
+              
+                          <div class="d-flex justify-content-between pt-2">
+                            <p class="fw-bold mb-0">Order Details</p>
+                            <p class="text-muted mb-0"><span class="fw-bold me-2">Total :
+                            </span>{{ order?.totalprice | currency:'THB':'symbol':'1.0-2' }}</p>
+                          </div>
+              
+                          <div class="d-flex justify-content-between pt-2">
+                            <p class="text-muted mb-0">Create Date : 21 Dec,2019</p>
+                            <p class="text-muted mb-0"><span class="fw-bold me-5">Delivery :</span> Free</p>
+                          </div>
+              
+                          <div class="d-flex justify-content-between">
+                            <p class="text-muted mb-0">Update Date : 22 Dec,2019</p>
+                            <p class="text-muted mb-0"><span class="fw-bold me-5">Value tax :</span> Free</p>
+                          </div>
+
+                          <div class="d-flex justify-content-between">
+                            <p class="text-muted mb-0">
+                              Status Order: 
+                              <ng-container *ngIf="order?.paymentstatus === 'wait'; else checkedOrIncorrect">
+                                รอการตรวจสอบ
+                              </ng-container>
+                              <ng-template #checkedOrIncorrect>
+                                <ng-container *ngIf="order?.paymentstatus === 'checked'">จัดส่งสินค้าแล้ว</ng-container>
+                                <ng-container *ngIf="order?.paymentstatus === 'incorrect'">ไม่ผ่านการตรวจสอบ</ng-container>
+                              </ng-template>
+                            </p>
+                          </div>
+                          
+              
+                          <div class="d-flex justify-content-between mb-5" style="margin-top: 25px;">
+                            <p class="text-black mb-0">ข้อคิดเห็นเพิ่มเติม : {{ order?.remark }}</p>
+
+                          </div>
+                        </div>
+
+                        <div class="card-footer border-0 px-4 py-5"
+                        style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                       <h2 class="text-black text-uppercase mb-0">หลักฐานการชำระเงิน : 
+                           <img *ngIf="order?.image" [src]="order?.image" alt="Payment Image" style="width: 220px; height: 330px; margin-left: 10px;">
+                       </h2>
+                   </div>
+                   
+
+                        <div class="card-footer border-0 px-4 py-5"
+                          style="background-color: #00A86B; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+                          <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">จำนวนยอด
+                            ทั้งหมด : <span class="h3 mb-0 ms-2">{{ order?.totalprice | currency:'THB':'symbol':'1.0-2' }}</span></h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </form>
+    </div>
+    
+    <button (click)="topFunction()" class="scroll-to-top-btn">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+
+</main>
+
+<app-footer-admin></app-footer-admin>
+
+<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
