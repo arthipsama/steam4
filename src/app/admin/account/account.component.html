@@ -38,12 +38,18 @@
                 <table width="100%">
                     <thead>
                         <tr>
-                          <th style="width: 15%;"><span class="las la-sort"></span> USER ID</th>
-                          <th style="width: 25%;"><span class="las la-sort"></span> CLIENT</th>
-                          <th style="width: 25%;"><span class="las la-sort"></span> FULLNAME</th>
-                          <th style="width: 15%;"><span class="las la-sort"></span> Phone</th>
-                          <th style="width: 10%;"><span class="las la-sort"></span> ROLE</th>
-                          <th style="width: 10%;"><span class="las la-sort"></span> ACTIONS</th>
+                          <th style="width: 15%;"><i class="las la-sort"  (click)="toggleSort('userid')"></i>
+                          USER ID
+                          </th>
+                          <th style="width: 25%;"><span class="las la-user-check"></span> CLIENT</th>
+                          <th style="width: 25%;"><i class="las la-sort"  (click)="toggleSort('FirstName')"></i>
+                          FULLNAME
+                          </th>
+                          <th style="width: 15%;"><i class="las la-sort"  (click)="toggleSort('PhoneNumber')"></i>
+                          Phone
+                          </th>
+                          <th style="width: 10%;"><span class="las la-id-badge"></span> ROLE</th>
+                          <th style="width: 10%;"><span class="las la-code"></span> ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -20,7 +20,7 @@ export class PopUpUserComponent {
     Password: ['', [Validators.required]],
     Email: ['', [Validators.required, Validators.email]],
     FirstName: [''],
-    PhoneNumber: [''],
+    PhoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{1,10}$')]],
     Role: ['', [Validators.required]]
   });
 

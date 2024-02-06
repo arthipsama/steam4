@@ -87,7 +87,40 @@ export class AccountComponent implements OnInit {
         }
       );
     }
-  
+
+    // ในคลาส AccountComponent
+sortColumn: string = 'userid'; // เลือกคอลัมน์ที่คุณต้องการเรียงลำดับตาม
+sortDirection: number = 1; // 1 คือเรียงจากน้อยไปมาก, -1 คือเรียงจากมากไปน้อย
+
+sortData(): void {
+  this.user.sort((a, b) => {
+    const valA = this.getValue(a, this.sortColumn);
+    const valB = this.getValue(b, this.sortColumn);
+
+    if (typeof valA === 'string' && typeof valB === 'string') {
+      return valA.localeCompare(valB) * this.sortDirection;
+    } else {
+      return (valA - valB) * this.sortDirection;
+    }
+  });
+}
+
+
+toggleSort(column: string) {
+  if (this.sortColumn === column) {
+    this.sortDirection *= -1;
+  } else {
+    this.sortColumn = column;
+    this.sortDirection = 1;
+  }
+
+  this.sortData();
+}
+
+getValue(obj: any, column: string): any {
+  // ตรวจสอบว่า obj[column] มีค่าหรือไม่
+  return obj[column] !== undefined ? obj[column] : '';
+} 
   
 
   deletionError: string | null = null;
