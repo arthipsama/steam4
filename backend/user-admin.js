@@ -31,8 +31,8 @@ router.get('/useradmin/getall', (req, res) => {
     queryParams.push(Role);
   }
 
-  console.log('SQL Query:', sqlQuery);
-  console.log('Query Params:', queryParams);
+  // console.log('SQL Query:', sqlQuery);
+  // console.log('Query Params:', queryParams);
 
   pool.query(sqlQuery, queryParams, (err, result) => {
     if (err) {
