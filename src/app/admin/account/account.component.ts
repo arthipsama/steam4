@@ -16,7 +16,8 @@ import { AuthAdminService } from 'src/app/service/auth-admin.service';
 })
 export class AccountComponent implements OnInit {
 
-
+  searchUserName: string = '';
+  selectedRole: string = 'All';
   constructor(private dialog: MatDialog,
     private router: Router,
     private room: RoomService,
@@ -30,13 +31,28 @@ export class AccountComponent implements OnInit {
   user: userData[] = [];
 
   ngOnInit(): void {
-    // this.user = this.room.getuser();
-    // this.recordCount = this.user.length;
-    this.authAdminService.getAllUsers().subscribe(users => {
-      this.user = users;
-      console.log(users); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
-    });
+      this.onSearch();
     }
+
+    onSearch(): void {
+      console.log('Search Term:', this.searchUserName);
+      this.selectedRole = 'All';
+      this.authAdminService.getAllUsers(this.searchUserName).subscribe(users => {
+        this.user = users;
+        console.log('Users:', users);
+      });
+    }
+    
+    onRoleChange(): void {
+      this.searchUserName = '';
+      console.log('Statuc select:', this.selectedRole);
+      this.authAdminService.getAllUsers(this.searchUserName, this.selectedRole).subscribe(users => {
+        this.user = users;
+        console.log(users); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+      });
+    }
+    
+    
 
   getImagePath(Role: string): string {
     return Role === 'ADMIN' ? '../assets/role/admin.png' : '../assets/role/user.png';

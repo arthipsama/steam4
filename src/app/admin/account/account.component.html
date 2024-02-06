@@ -17,22 +17,16 @@
             <div class="record-header">
                 <div class="add">
                   <h2>User List</h2>
-                    <!-- <span>Entries</span>
-                    <select name="" id="">
-                        <option value="">ID</option>
-                    </select> -->
-                    <div *ngIf="deletionError">
-                      {{ deletionError }}
-                    </div>
+
                     
                 </div>
 
                 <div class="browse">
-                   <input type="search" placeholder="Search" class="record-search">
-                    <select name="" id="">
-                        <option value="">All</option>
-                        <option value="">Admin</option>
-                        <option value="">User</option>
+                  <input type="search" placeholder="Search" class="record-search" [(ngModel)]="searchUserName" (keyup.enter)="onSearch()">
+                  <select name="" id="" [(ngModel)]="selectedRole" (change)="onRoleChange()">
+                        <option value="All">All</option>
+                        <option value="ADMIN">Admin</option>
+                        <option value="USER">User</option>
                     </select>
                     <button style="background-color: #00A86B; margin-right: 10px" (click)="openUserDialog()">
                       <span class="las la-user-plus" style="color:whitesmoke; font-size: 16px;"></span>
