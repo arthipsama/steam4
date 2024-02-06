@@ -114,7 +114,7 @@ router.put('/useradmin/edit/:id', (req, res) => {
   const { FirstName, LastName, Email, PhoneNumber, Password, Role, Contact } = req.body;
 
   // ตรวจสอบความถูกต้องของข้อมูลที่รับมาจาก Angular
-  if (!FirstName || !LastName || !Email || !PhoneNumber || !Password || !Role) {
+  if (!FirstName || !Email || !PhoneNumber || !Password || !Role) {
     res.status(400).json({ error: 'Invalid data. Please provide all required fields.' });
     return;
   }
