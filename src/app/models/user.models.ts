@@ -9,6 +9,7 @@ export interface userData {
     Contact?: string;
     roleid?: string;
     Role: string;
+    [key: string]: any;
   }
 
   

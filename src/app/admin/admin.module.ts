@@ -37,6 +37,7 @@ import { PopUpContentComponent } from './new/pop-up-content/pop-up-content.compo
 import { ContentAdminDetailComponent } from './new/content-admin-detail/content-admin-detail.component';
 import { OrderAdminDetailComponent } from './order/order-admin-detail/order-admin-detail.component';
 import { PopUpAdminOrderComponent } from './order/pop-up-admin-order/pop-up-admin-order.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -82,7 +83,8 @@ import { PopUpAdminOrderComponent } from './order/pop-up-admin-order/pop-up-admi
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxPaginationModule,
     
   ]
 })

@@ -12,9 +12,27 @@ export class AuthAdminService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUsers(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'/getall');
+  getAllUsers(UserName?: string, Role?: string): Observable<any[]> {
+    let url = `${this.apiUrl}/getall`;
+  
+    // Build query parameters based on provided values
+    const queryParams = [];
+    if (UserName) {
+      queryParams.push(`UserName=${UserName}`);
+    }
+    if (Role) {
+      queryParams.push(`Role=${Role}`);
+    }
+  
+    // Append query parameters to the URL if there are any
+    if (queryParams.length > 0) {
+      url += '?' + queryParams.join('&');
+    }
+  
+    console.log('API URL:', url); // แสดง URL ที่ใช้สำหรับ HTTP request
+    return this.http.get<any[]>(url);
   }
+  
 
   getUserById(id: string): Observable<userData | undefined> {
     // ใช้ HTTP GET เพื่อดึงข้อมูลจาก API โดยใช้ id เป็น parameter

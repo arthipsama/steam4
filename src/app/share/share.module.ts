@@ -14,9 +14,12 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { PopUpComponent } from './pop-up/pop-up.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { PaginationComponent } from './pagination/pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { UserInventoryComponent } from './user-inventory/user-inventory.component';
 import { UserMykeyComponent } from './user-mykey/user-mykey.component';
 import { UserContactmeComponent } from './user-contactme/user-contactme.component';
+
 
 
 @NgModule({
@@ -31,9 +34,10 @@ import { UserContactmeComponent } from './user-contactme/user-contactme.componen
     ProductDetailComponent,
     PopUpComponent,
     ChatbotComponent,
+    PaginationComponent,
     UserInventoryComponent,
     UserMykeyComponent,
-    UserContactmeComponent,
+    UserContactmeComponent
   ],
   imports: [
     CommonModule,
@@ -42,13 +46,15 @@ import { UserContactmeComponent } from './user-contactme/user-contactme.componen
     MatDialogModule,
     FormsModule,
     BrowserModule,
+    NgxPaginationModule,
     
   ],
   exports:[
     HeaderComponent,
     FooterComponent,
     CardProductComponent,
-    UserContactmeComponent
+    UserContactmeComponent,
+    PaginationComponent
   ],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA]
 })

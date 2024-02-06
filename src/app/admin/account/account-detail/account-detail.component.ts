@@ -44,7 +44,7 @@ export class AccountDetailComponent implements OnInit {
         firstName: ['', Validators.required],
         lastName: [''],
         email: ['', [Validators.required, Validators.email]],
-        phoneNumber: ['', Validators.required],
+        phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{1,10}$')]],
         password:['', Validators.required],
         role:['', Validators.required],
         contact:[''],
@@ -85,12 +85,17 @@ export class AccountDetailComponent implements OnInit {
     
   }
 
-isSaveButtonDisabled(): boolean {
-  return !this.userForm.get('firstName')?.value ||
-         !this.userForm.get('email')?.value ||
-         !this.userForm.get('phoneNumber')?.value ||
-         !this.userForm.get('password')?.value;
-}
+  isSaveButtonDisabled(): boolean {
+    const phoneNumberControl = this.userForm.get('phoneNumber');
+    return (
+      !this.userForm.get('firstName')?.value ||
+      !this.userForm.get('email')?.value ||
+      !phoneNumberControl?.value ||
+      !this.userForm.get('password')?.value ||
+      (phoneNumberControl?.hasError('pattern') && phoneNumberControl?.dirty)
+    );
+  }
+  
 
 
 onSave() {
