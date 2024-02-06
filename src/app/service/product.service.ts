@@ -16,7 +16,7 @@ export class ProductService {
   }
 
   orders(userid:any){
-    var api = 'http://localhost:3000/api/orders'
+    var api = 'http://localhost:3000/api/createOrders'
     return this.http.post<any>(api, {userid:userid});
   }
 
@@ -33,5 +33,15 @@ export class ProductService {
   deleteProduct(productid:any, ordersid:any){
     var api = `http://localhost:3000/api/deleteProductInCart`
     return this.http.post<any>(api, { productid: productid, ordersid:ordersid });
+  }
+
+  payProduct(img:any, userid:any, totalprice:any, username:any, ordersid:any){
+    var api = 'http://localhost:3000/api/makePayment'
+    return this.http.post<any>(api, {img:img, userid:userid, totalprice:totalprice, username:username, ordersid:ordersid});
+  }
+
+  getInventory(userid:any){
+    var api = 'http://localhost:3000/api/inventory'
+    return this.http.post<any>(api, {userid:userid})
   }
 }

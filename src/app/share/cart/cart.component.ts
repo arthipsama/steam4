@@ -31,7 +31,6 @@ export class CartComponent {
     this.colorService.backgroundColor$.subscribe((color) => {
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
     });
-    
     let storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
         this.userData = JSON.parse(storedUserData);
@@ -54,6 +53,11 @@ export class CartComponent {
       if(this.userProducts){
         this.totalprice = this.rowTotal.reduce((accumulator:any, currentValue:any) => accumulator + currentValue, 0);
       }
+      if(this.userProducts.length > 0){
+        this.haveItems = true;
+      }else{
+        this.haveItems = false;
+      }
     })
   }
 
@@ -61,31 +65,31 @@ export class CartComponent {
     this.router.navigate(['/mainpage']);
   }
 
-  payProduct(){
-    
-  }
-
   deleteProduct(i:any){
     this.service.deleteProduct(this.userProducts[i].productid, this.userProducts[i].ordersid).subscribe(x=>{
        if(x){
-         this.service.cart(this.userData.userid).subscribe(pd=>{
-           this.userProducts = pd;
-           console.log(this.userProducts);
-           
-           if(this.userProducts){
-             this.rowTotal = this.userProducts.map((product:productData) => {
-               if(product.saleprice){
-                 return product.saleprice * product.quantity;
-               } else {
-                 return product.price * product.quantity;
-               }
-             });
-             this.totalprice = this.rowTotal.reduce((accumulator:any, currentValue:any) => accumulator + currentValue );
-           }
-         })
-       }
+        this.service.cart(this.userData.userid).subscribe(pd=>{
+          
+          this.userProducts = pd;           
+          console.log(this.userProducts);
+          
+          if(this.userProducts.length == 0){
+            this.haveItems = false;
+          }
+          if(this.userProducts){
+            this.rowTotal = this.userProducts.map((product:productData) => {
+              if(product.saleprice){
+                return product.saleprice * product.quantity;
+              } else {
+                return product.price * product.quantity;
+              }
+            });
+            this.totalprice = this.rowTotal.reduce((accumulator:any, currentValue:any) => accumulator + currentValue, 0);
+          }
+        })
+      }
     })
-   }
+  }
 
   bank1(){
     this.payto = 1;
@@ -105,11 +109,23 @@ export class CartComponent {
 
 
   previewImage(event:any){
-      var reader = new FileReader();
-      reader.onload = () => {
-          this.imagePreview = reader.result as string;
-          console.log(this.imagePreview);
-      }
-      reader.readAsDataURL(event.target.files[0]);
+    var reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
+  payProduct(){
+    if(this.imagePreview){
+      this.service.payProduct(this.imagePreview, this.userData.userid, this.totalprice, this.userData.UserName, this.userProducts[0].ordersid).subscribe(x=>{
+        if(x){
+          this.router.navigate(['/inventory']);
+        }
+      })
+    }
+    else{
+      console.log("กรุณาใส่รูปภาพ");
+    }
   }
 }
