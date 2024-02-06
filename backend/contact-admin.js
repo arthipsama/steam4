@@ -33,6 +33,10 @@ router.get('/contactme/getall', (req, res) => {
           read: row.read,
           subject: row.subject,
           textmessage: row.textmessage,
+          CreateBy: row.CreateBy,
+          CreateDate: row.CreateDate,
+          UpdateBy: row.UpdateBy,
+          UpdateDate: row.UpdateDate,
           user: {
             // Map user properties from the result
             // You might need to adjust this based on your actual User model
@@ -101,7 +105,8 @@ router.put('/contactme/update/:contactmeid', (req, res) => {
         "textname" = $1,
         "subject" = $2,
         "textmessage" = $3,
-        "read" = $4
+        "read" = $4,
+        "UpdateDate" = CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Bangkok'
       WHERE "contactmeid" = $5
       RETURNING *;
     `;
@@ -130,7 +135,38 @@ router.put('/contactme/update/:contactmeid', (req, res) => {
     });
   });
   
-  
+  // Delete API route to handle contact deletion
+router.delete('/contactme/delete/:contactmeid', (req, res) => {
+  const contactmeid = req.params.contactmeid;
+
+  // Ensure contactmeid is provided
+  if (!contactmeid) {
+    res.status(400).json({ error: 'contactmeid is required' });
+    return;
+  }
+
+  const sqlQuery = `
+    DELETE FROM "ContactMe"
+    WHERE "contactmeid" = $1
+    RETURNING *;
+  `;
+
+  pool.query(sqlQuery, [contactmeid], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+
+    if (result.rows.length === 0) {
+      res.status(404).json({ error: 'ContactMe not found' });
+      return;
+    }
+
+    res.json(result.rows[0]);
+  });
+});
+
   
   
 

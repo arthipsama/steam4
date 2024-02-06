@@ -9,4 +9,8 @@ export interface ContactMeDTO {
     subject: string;
     textmessage: string;
     user?: userData;
+    CreateBy?: string;
+    CreateDate?: Date;
+    UpdateBy?: string;
+    UpdateDate?: Date | null;
   }

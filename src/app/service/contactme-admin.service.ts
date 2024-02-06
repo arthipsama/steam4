@@ -26,4 +26,9 @@ export class ContactmeAdminService {
     return this.http.put<any>(url, updatedContact);
   }
 
+  deleteContact(contactmeid: string): Observable<any> {
+    const url = `${this.apiUrl}/delete/${contactmeid}`;
+    return this.http.delete<any>(url);
+  }
+
 }

@@ -70,7 +70,8 @@ onSave() {
       textname: this.contact[0].textname,
       subject: this.contact[0].subject,
       textmessage: this.contact[0].textmessage,
-      read: true
+      read: true,
+      UpdateDate: new Date(),
     };
 
     this.ContactService.updateContact(this.contact[0].contactmeid.toString(), updatedContact).subscribe(

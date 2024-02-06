@@ -37,7 +37,7 @@
                         <tr>
                           <th style="width: 15%;"><span class="las la-sort"></span> CONTACT ID</th>
                           <th style="width: 20%;"><span class="las la-sort"></span> CLIENT</th>
-                          <th style="width: 15%;"><span class="las la-sort"></span> NAME</th>
+                          <th style="width: 15%;"><span class="las la-sort"></span> CREATE TIME</th>
                           <th style="width: 40%;"><span class="las la-sort"></span> SUBJECT</th>
                           <th style="width: 10%;"><span class="las la-sort"></span> ACTIONS</th>
                         </tr>
@@ -59,7 +59,7 @@
                               </div>
                             </td>
                             <td style="max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                {{ contact.textname }}</td>
+                                {{ contact.CreateDate | date: 'dd MMMM yyyy HH:mm:ss' }}</td>
                             <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 {{ contact.subject }}</td>
                             <td>
@@ -69,7 +69,7 @@
                                 <button class="icon-button" (click)="openUserDialog(contact.contactmeid)">
                                   <span class="las la-eye"></span>
                                 </button>                                
-                                  <button class="icon-button" (click)="handleTrashClick()">
+                                  <button class="icon-button" (click)="handleTrashClick(contact.contactmeid)">
                                     <span class="las la-trash"></span>
                                   </button>
                                   
