@@ -90,7 +90,7 @@ export class ContactComponent implements OnInit {
     this.ContactService.deleteContact(contactmeid).subscribe(
       (res) => {
         console.log('User deleted successfully:', res);
-        this.alert.withOutTranslate.onSuccessRe();
+        this.alert.withOutTranslate.onDeleteRe();
         return;
       },
       (error) => {

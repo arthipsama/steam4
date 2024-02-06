@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { RoomService } from 'src/app/service/room.service';
 import { category } from 'src/app/models/product.model';
+import { ProductAdminService } from 'src/app/service/product-admin.service';
 
 @Component({
   selector: 'app-pop-up-product',
@@ -15,6 +16,7 @@ import { category } from 'src/app/models/product.model';
 export class PopUpProductComponent implements OnInit {
   selectedCategoryId: number | undefined;
   categoryproduct: category[] = [];
+  categories: any[] = [];
   selectedImage: string | ArrayBuffer | null = null;
 // สร้าง FormGroup พร้อมกับ Validation
 
@@ -32,32 +34,50 @@ constructor(private fb: FormBuilder,
   private router: Router,
   private room: RoomService,
   private alert: AlertServiceService,
+  private productService: ProductAdminService,
+
   public dialogRef: MatDialogRef<PopUpUserComponent>,
   @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   ngOnInit(): void {
-    this.categoryproduct = this.room.categoryproduct;
-
+    // ใช้ Type Assertion
+    this.productService.getCategoryData().subscribe(
+      (data) => {
+        // ให้ TypeScript รู้ว่า data เป็นประเภท any[]
+        this.categories = data as any[];
+        console.log('Categories:', this.categories);
+      },
+      (error) => {
+        console.error('Error fetching categories', error);
+      }
+    );
   }
 
 onNoClick(): void {
   
 }
 
+// ตัวอย่างการเรียกใช้ addNewProduct ใน Angular component
 onSave() {
-if (this.userForm.valid) {
-  // ดำเนินการบันทึกข้อมูล หรือส่งข้อมูลไปทำงานต่อไป
-  const formData = this.userForm.value;
-  delete formData.Image;
-  formData.ImgProduct = this.selectedImage;
+  if (this.userForm.valid) {
+    const formData = this.userForm.value;
+    delete formData.Image;
+    formData.ImgProduct = this.selectedImage;
 
-  this.alert.withOutTranslate.onSuccessRe();
-  console.log('Data to be saved:', formData);
-  // ตรวจสอบข้อมูลเพิ่มเติมและดำเนินการต่อไปตามที่คุณต้องการ
-} else {
-  console.log('Invalid Form');
+    // เรียกใช้ addNewProduct จาก ProductAdminService
+    this.productService.addNewProduct(formData).subscribe(response => {
+      console.log('Added new product:', response);
+      // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+    });
+
+    this.alert.withOutTranslate.onSuccessRe();
+    console.log('Data to be saved:', formData);
+    // ตรวจสอบข้อมูลเพิ่มเติมและดำเนินการต่อไปตามที่คุณต้องการ
+  } else {
+    console.log('Invalid Form');
+  }
 }
-}
+
 
 onReset() {
   this.userForm.reset();
@@ -66,14 +86,6 @@ onReset() {
   this.userForm.get('Image')?.setValue(null);
 }
 
-
-// เพิ่มในส่วน property
-hidePassword: boolean = true;
-
-// เพิ่มในส่วน methods
-togglePasswordVisibility() {
-this.hidePassword = !this.hidePassword;
-}
 
 onCloseClick(): void {
 this.dialogRef.close();

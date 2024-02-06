@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { category, productData } from 'src/app/models/product.model';
 import { AlertServiceService } from 'src/app/service/alert-service.service';
+import { ProductAdminService } from 'src/app/service/product-admin.service';
 import { RoomService } from 'src/app/service/room.service';
 
 @Component({
@@ -38,15 +39,16 @@ export class ProductAdminDetailComponent implements OnInit {
     private alertService: AlertServiceService,
     private room: RoomService,
     private fb: FormBuilder,
-    private location: Location
+    private location: Location,
+    private productService: ProductAdminService,
     
     ) {
 
       this.userForm = this.fb.group({
         ProductName: ['', Validators.required],  // เพิ่ม control นี้
         price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],  // ตรวจสอบทศนิยมไม่เกิน 2 ตำแหน่ง
-        saleprice: ['', [Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-        Description: ['', Validators.required],
+        saleprice: ['', [Validators.pattern(/^\d+(\.\d{1,2})?$/)]], // ให้สามารถเป็น null ได้
+        Description: [''],
         quantity: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
         categoryproductid: [''],
         ImgProduct: [''],
@@ -54,42 +56,47 @@ export class ProductAdminDetailComponent implements OnInit {
       });      
      }
 
-
      ngOnInit(): void {
-      let productid  = this.route.snapshot.paramMap.get('id');
-      console.log("uses id is", productid);
-    
-      productid && this.room.getproductbyid(productid).subscribe((res) => {
+      let productId = this.route.snapshot.paramMap.get('id');
+      console.log("User ID is", productId);
+  
+      productId && this.productService.getProductById(productId).subscribe((res) => {
+        // ทำอะไรกับข้อมูลสินค้าที่ได้รับ
         this.productsData = res;
-          console.log('ข้อมูลเกม' ,res);
-
-              // เก็บค่า ImgProduct ต้นฉบับ
-        this.originalImgProduct = this.productsData?.ImgProduct;
-
+        console.log('Product Data', res);
+  
+        // เก็บค่า ImgProduct ต้นฉบับ
+        this.originalImgProduct = res?.ImgProduct;
+  
         this.categoryproduct$ = this.room.getcategory();
-
+  
         // ตรวจสอบว่า userForm ถูกสร้างแล้ว
         if (this.userForm) {
           this.userForm.patchValue({
-            ImgProduct: this.productsData?.ImgProduct,
-            ProductName: this.productsData?.ProductName,
-            price: this.productsData?.price,
-            saleprice: this.productsData?.saleprice,
-            Description: this.productsData?.Description,
-            quantity: this.productsData?.quantity,
-            categoryproductid: this.productsData?.category?.categoryproductid,
+            ImgProduct: res?.ImgProduct,
+            ProductName: res?.ProductName,
+            price: res?.price,
+            saleprice: res?.saleprice,
+            Description: res?.Description,
+            quantity: res?.quantity,
+            categoryproductid: res?.categoryproductid,
             // ... กำหนดค่าเริ่มต้นของฟิลด์อื่น ๆ
           });
         }
-      });     
-
+      });
     }
+
 
 isSaveButtonDisabled(): boolean {
   return this.userForm.invalid;
 }
 
 onSave() {
+  // Assuming you're getting productId from route params
+  const productId = this.route.snapshot.params['id'];
+  console.log("User ID is", productId);
+
+
   // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
   if (this.isValidFormData()) {
     // ทำบันทึกข้อมูล
@@ -103,13 +110,27 @@ onSave() {
     
     console.log('Data to be saved:', formDataWithImage);
 
-    // ทำตามที่คุณต้องการเพิ่มเติม
-    this.alertService.onSuccess('บันทึกข้อมูลสำเร็จ', '/admin/product');
+    this.productService.editProduct(productId, formDataWithImage).subscribe(
+      (response) => {
+        // สำเร็จ
+        console.log('Successfully edited:', response);
+        this.alertService.onSuccess('แก้ไขข้อมูลสำเร็จ', '/admin/product');
+        
+        // ทำตามที่คุณต้องการเพิ่มเติม
+      },
+      (error) => {
+        // ไม่สำเร็จ
+        console.error('Error editing data:', error);
+        this.alertService.withOutTranslate.onError('เกิดข้อผิดพลาดในการแก้ไขข้อมูล');
+      }
+    );
+
   } else {
     console.log('Invalid Form');
     // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
   }
 }
+
 
 
 onCancel() {

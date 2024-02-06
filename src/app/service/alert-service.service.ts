@@ -55,16 +55,16 @@ export class AlertServiceService {
       Swal.fire({
         title: 'Error!',
         text: 'ลบรายการข้อมูลสำเร็จ',
-        icon: 'error',
+        icon: 'success',
         confirmButtonText: 'Okay',
       });
     },
 
     onDeleteRe() {
       Swal.fire({
-        title: 'Error!',
+        title: 'Delete!',
         text: 'ลบรายการข้อมูลสำเร็จ',
-        icon: 'error',
+        icon: 'success',
         confirmButtonText: 'Okay',
       }).then(() => {
         setTimeout(() => {
