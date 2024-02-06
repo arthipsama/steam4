@@ -20,6 +20,7 @@ import { DropDownButtonModule } from '@progress/kendo-angular-buttons';
 import { QaModule } from './qa/qa.module';
 import { QaComponent } from './qa/qa.component';
 import { DialogModule } from '@angular/cdk/dialog';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { DialogModule } from '@angular/cdk/dialog';
     NgxChartsModule,
     LayoutModule,
     DropDownButtonModule,
+    NgxPaginationModule,
     
   ],
   providers: [],

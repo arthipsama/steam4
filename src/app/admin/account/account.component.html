@@ -47,7 +47,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let user of user">
+                        <ng-container *ngFor="let user of user | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
                           <tr>
                             <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 # {{ user.userid }}</td>
@@ -85,14 +85,17 @@
                           </tr>
                         </ng-container>
                       </tbody>
+
                 </table>
 
-                
-                
             </div>
 
         </div>
-    
+        <app-pagination 
+        [recordCount]="recordCount" 
+        [currentPage]="currentPage"
+        (pageChange)="pageChanged($event)">
+        </app-pagination>
     </div>
     
 </main>

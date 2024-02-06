@@ -35,24 +35,26 @@ export class AccountComponent implements OnInit {
     }
 
     onSearch(): void {
+      this.currentPage = 1;
       console.log('Search Term:', this.searchUserName);
       this.selectedRole = 'All';
       this.authAdminService.getAllUsers(this.searchUserName).subscribe(users => {
         this.user = users;
+        this.recordCount = users.length;
         console.log('Users:', users);
       });
     }
     
     onRoleChange(): void {
+      this.currentPage = 1;
       this.searchUserName = '';
       console.log('Statuc select:', this.selectedRole);
       this.authAdminService.getAllUsers(this.searchUserName, this.selectedRole).subscribe(users => {
         this.user = users;
+        this.recordCount = users.length;
         console.log(users); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
       });
     }
-    
-    
 
   getImagePath(Role: string): string {
     return Role === 'ADMIN' ? '../assets/role/admin.png' : '../assets/role/user.png';
@@ -118,7 +120,18 @@ export class AccountComponent implements OnInit {
   }
   
   
-  
+  // Pagination
+  @Input() currentPage = 1;
+  @Input() recordCount : number = 0;
+  @Output() pageChange = new EventEmitter();
+  itemsPerPage: number = 5; 
+
+  pageChanged(event: any): void {
+    this.currentPage = event;
+    console.log('pageChanged ' ,event);
+    this.pageChange.emit(this.currentPage);
+  }
+// end Pagination
   
   
 }
