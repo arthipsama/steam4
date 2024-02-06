@@ -7,6 +7,8 @@ import { RoomService } from 'src/app/service/room.service';
 import { PopUpUserComponent } from '../account/pop-up-user/pop-up-user.component';
 import { ContactMeDTO } from 'src/app/models/contactme.model';
 import { PopUpContactComponent } from './pop-up-contact/pop-up-contact.component';
+import { AuthAdminService } from 'src/app/service/auth-admin.service';
+import { ContactmeAdminService } from 'src/app/service/contactme-admin.service';
 
 @Component({
   selector: 'app-contact',
@@ -20,6 +22,8 @@ export class ContactComponent implements OnInit {
     private router: Router,
     private room: RoomService,
     private alert: AlertServiceService,
+    private Auth: AuthAdminService,
+    private ContactService: ContactmeAdminService,
     
     ) { }
 
@@ -27,9 +31,19 @@ export class ContactComponent implements OnInit {
   contact: ContactMeDTO[] = [];
 
   ngOnInit(): void {
-    this.user = this.room.getuser();
-    this.contact = this.room.getcontact();
-    console.log('User:', this.user);
+    // this.user = this.room.getuser();
+    // this.contact = this.room.getcontact();
+    // this.Auth.getAllUsers().subscribe(users => {
+    //   this.user = users;
+    //   console.log(users); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+    // });
+
+    this.ContactService.getContactMeData().subscribe(contacts => {
+      this.contact = contacts;
+      console.log(contacts); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+    });
+
+    // console.log('User:', this.user);
     console.log('Contact:', this.contact);
     // this.recordCount = this.user.length;
     }

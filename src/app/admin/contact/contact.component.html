@@ -49,7 +49,8 @@
                                # {{ +contact.contactmeid }}</td>
                             <td>
                               <div class="client">
-                                <div class="client-img bg-img" [style.background-image]="contact.user ? 'url(' + getImagePath(contact.user.Role) + ')' : 'url(../assets/role/ghost.png)'"></div>                                <div class="client-info">
+                                <div class="client-img bg-img" [style.background-image]="contact.user ? 'url(' + getImagePath(contact.user.Role) + ')' : 'url(../assets/role/ghost.png)'"></div>                                
+                                <div class="client-info">
                                   <h4 style="max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                     {{ contact.user?.UserName || 'GHOST USER' }}</h4>
                                   <h5 style="max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">

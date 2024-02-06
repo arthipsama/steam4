@@ -6,6 +6,7 @@ import { ContactMeDTO } from 'src/app/models/contactme.model';
 import { Router } from '@angular/router';
 import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { RoomService } from 'src/app/service/room.service';
+import { ContactmeAdminService } from 'src/app/service/contactme-admin.service';
 
 @Component({
   selector: 'app-pop-up-contact',
@@ -18,6 +19,7 @@ export class PopUpContactComponent implements OnInit {
       private router: Router,
       private room: RoomService,
       private alert: AlertServiceService,
+      private ContactService: ContactmeAdminService,
 
     
     public dialogRef: MatDialogRef<PopUpUserComponent>,
@@ -29,8 +31,7 @@ export class PopUpContactComponent implements OnInit {
 
   ngOnInit(): void {
     const contactId = this.data.id;
-    // Call a service function to get contact details based on contactId
-    this.room.getcontactbyid(contactId).subscribe((contact) => {
+    this.ContactService.getContactMeById(contactId).subscribe((contact) => {
       if (contact) {
         this.contact = [contact]; // Convert to array if not already
         console.log('Contact:', this.contact);
@@ -72,11 +73,19 @@ onSave() {
       read: true
     };
 
-    this.alert.withOutTranslate.onSuccessRe();
-
-    console.log('Updated Contact:', updatedContact);
+    this.ContactService.updateContact(this.contact[0].contactmeid.toString(), updatedContact).subscribe(
+      (result) => {
+        console.log('Updated Contact:', result);
+        this.alert.withOutTranslate.onSuccessRe();
+      },
+      (error) => {
+        console.error('Error updating contact', error);
+        // Handle error as needed
+      }
+    );
   }
 }
+
 
 
 

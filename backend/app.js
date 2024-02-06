@@ -7,6 +7,7 @@ const userRouter = require('./user');
 const productRouter = require('./product');
 const dashboardRouter = require('./dashboard');
 const useradminRouter = require('./user-admin');
+const contactmeadminRouter = require('./contact-admin');
 
 const corsOptions = {
   origin: '*',
@@ -22,6 +23,7 @@ app.use('/api', userRouter);
 app.use('/api', productRouter);
 app.use('/api', dashboardRouter);
 app.use('/api', useradminRouter);
+app.use('/api', contactmeadminRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
