@@ -9,48 +9,75 @@ const pool = new Pool({
   password: '12345',
 });
 
-// Define API route to get all ContactMe data with associated User data
 router.get('/contactme/getall', (req, res) => {
-    const sqlQuery = `
-      SELECT "ContactMe".*, "User".*
-      FROM "ContactMe"
-      JOIN "User" ON "ContactMe"."userid" = "User"."userid";
-    `;
-  
-    pool.query(sqlQuery, (err, result) => {
-      if (err) {
-        console.error('Error executing query', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-        return;
-      }
-  
-      // Transform the result to match the new interface ContactMeWithUserDTO
-      const transformedResult = result.rows.map((row) => {
-        return {
-          contactmeid: row.contactmeid,
-          textname: row.textname,
-          email: row.email,
-          read: row.read,
-          subject: row.subject,
-          textmessage: row.textmessage,
-          CreateBy: row.CreateBy,
-          CreateDate: row.CreateDate,
-          UpdateBy: row.UpdateBy,
-          UpdateDate: row.UpdateDate,
-          user: {
-            // Map user properties from the result
-            // You might need to adjust this based on your actual User model
-            userid: row.userid,
-            UserName: row.UserName,
-            Role: row.Role,
-            // Add other user properties as needed
-          },
-        };
-      });
-  
-      res.json(transformedResult);
+  const { searchUserName, selectedRole } = req.query;
+
+  // Build the SQL query with conditions based on searchUserName and selectedRole
+  let sqlQuery = `
+    SELECT "ContactMe".*, "User".*
+    FROM "ContactMe"
+    JOIN "User" ON "ContactMe"."userid" = "User"."userid"
+  `;
+
+  const params = [];
+
+  // Check if searchUserName is provided
+  if (searchUserName) {
+    sqlQuery += ` WHERE LOWER("User"."UserName") LIKE LOWER($${params.length + 1})`;
+    params.push(`%${searchUserName}%`);
+  }
+
+  // Check if selectedRole is provided and not empty
+  if (selectedRole) {
+    // If conditions are already present, use AND, otherwise start with WHERE
+    sqlQuery += searchUserName ? ' AND' : ' WHERE';
+
+    // Check if selectedRole is 'All'
+    if (selectedRole.toUpperCase() === 'ALL') {
+      sqlQuery += ' ("ContactMe"."read" = true OR "ContactMe"."read" = false)';
+    } else if (selectedRole.toUpperCase() === 'READ') {
+      sqlQuery += ' "ContactMe"."read" = true';
+    } else if (selectedRole.toUpperCase() === 'NOT') {
+      sqlQuery += ' "ContactMe"."read" = false';
+    }
+    // If the value is not 'ALL', 'READ', or 'NOT', include both true and false in the results
+  }
+
+  // Execute the query with parameterized values
+  pool.query(sqlQuery, params, (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+
+    // Transform the result to match the new interface ContactMeWithUserDTO
+    const transformedResult = result.rows.map((row) => {
+      return {
+        contactmeid: row.contactmeid,
+        textname: row.textname,
+        email: row.email,
+        read: row.read,
+        subject: row.subject,
+        textmessage: row.textmessage,
+        CreateBy: row.CreateBy,
+        CreateDate: row.CreateDate,
+        UpdateBy: row.UpdateBy,
+        UpdateDate: row.UpdateDate,
+        user: {
+          // Map user properties from the result
+          // You might need to adjust this based on your actual User model
+          userid: row.userid,
+          UserName: row.UserName,
+          Role: row.Role,
+          // Add other user properties as needed
+        },
+      };
     });
+
+    res.json(transformedResult);
   });
+});
 
   // Define API route to get ContactMe data by contactmeid
 router.get('/contactme/:contactmeid', (req, res) => {

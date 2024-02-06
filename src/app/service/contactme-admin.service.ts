@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ContactMeDTO } from '../models/contactme.model';
@@ -12,9 +12,14 @@ export class ContactmeAdminService {
 
   constructor(private http: HttpClient) { }
 
-  getContactMeData(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl +'/getall');
+  getContactMeData(searchUserName?: string, selectedRole?: string): Observable<any[]> {
+    const params = new HttpParams()
+      .set('searchUserName', searchUserName || '')
+      .set('selectedRole', selectedRole || '');  // แก้ไขตรงนี้เพื่อให้ selectedRole ถูกต้อง
+  
+    return this.http.get<any[]>(`${this.apiUrl}/getall`, { params });
   }
+  
   
   getContactMeById(contactmeid: string): Observable<any> {
     const url = `${this.apiUrl}/${contactmeid}`;

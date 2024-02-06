@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { userData } from 'src/app/models/user.models';
@@ -17,7 +17,8 @@ import { ContactmeAdminService } from 'src/app/service/contactme-admin.service';
 })
 export class ContactComponent implements OnInit {
 
-
+  searchUserName: string = '';
+  selectedRole: string = 'All';
   constructor(private dialog: MatDialog,
     private router: Router,
     private room: RoomService,
@@ -45,13 +46,36 @@ export class ContactComponent implements OnInit {
     // console.log('User:', this.user);
     console.log('Contact:', this.contact);
     // this.recordCount = this.user.length;
+
+    this.onSearch();
+    }
+
+    onSearch(): void {
+      this.currentPage = 1;
+      console.log('Search Term:', this.searchUserName);
+      this.selectedRole = 'All';  // เปลี่ยนเป็น 'All', 'true' หรือ 'false' ตามที่ต้องการ
+      this.ContactService.getContactMeData(this.searchUserName, this.selectedRole).subscribe(contacts => {
+        this.contact = contacts;
+        this.recordCount = contacts.length;
+        console.log('Contacts:', contacts);
+      });
+    }
+    
+    onRoleChange(): void {
+      this.currentPage = 1;
+      this.searchUserName = '';
+      console.log('Status select:', this.selectedRole);
+      
+      this.ContactService.getContactMeData(this.searchUserName, this.selectedRole).subscribe(contacts => {
+        this.contact = contacts;
+        this.recordCount = contacts.length;
+        console.log(contacts);
+      });
     }
 
   getImagePath(Role: string | null): string {
     return Role === 'ADMIN' ? '../assets/role/admin.png' : (Role === 'USER' ? '../assets/role/user.png' : (Role === null ? '../assets/role/user.png' : '../assets/role/user.png'));
   }
-  
-  
 
   async handleTrashClick(contactmeid: number) {
     const confirmed = await this.alert.onDeleteWithConfirmation();
@@ -98,7 +122,60 @@ export class ContactComponent implements OnInit {
   }
 
   
+    // Pagination
+    @Input() currentPage = 1;
+    @Input() recordCount : number = 0;
+    @Output() pageChange = new EventEmitter();
+    itemsPerPage: number = 5; 
+  
+    pageChanged(event: any): void {
+      this.currentPage = event;
+      console.log('pageChanged ' ,event);
+      this.pageChange.emit(this.currentPage);
+    }
+  // end Pagination
+  
+  sortColumn: string = 'contactmeid'; // เลือกคอลัมน์ที่คุณต้องการเรียงลำดับตาม
+  sortDirection: number = 1; // 1 คือเรียงจากน้อยไปมาก, -1 คือเรียงจากมากไปน้อย
+  
+  sortData(): void {
+    this.contact.sort((a, b) => {
+      const valA = this.getValue(a, this.sortColumn);
+      const valB = this.getValue(b, this.sortColumn);
+  
+      if (typeof valA === 'string' && typeof valB === 'string') {
+        return valA.toLowerCase().localeCompare(valB.toLowerCase()) * this.sortDirection;
+      } else if (typeof valA === 'number' && typeof valB === 'number') {
+        return (valA - valB) * this.sortDirection;
+      } else {
+        return 0;
+      }
+    });
+  }
   
   
+  getDateValue(obj: any, column: string): Date {
+    const dateString = this.getValue(obj, column);
+    return new Date(dateString);
+  }
+
+  toggleSort(column: string) {
+    if (this.sortColumn === column) {
+      this.sortDirection *= -1;
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 1;
+    }
   
+    this.sortData();
+  }
+  
+  
+
+   getValue(obj: any, column: string): any {
+        // ตรวจสอบว่า obj[column] มีค่าหรือไม่
+    return obj[column] !== undefined ? obj[column] : '';
+} 
+
+
 }

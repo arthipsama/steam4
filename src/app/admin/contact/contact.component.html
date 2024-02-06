@@ -22,11 +22,11 @@
                 </div>
 
                 <div class="browse">
-                   <input type="search" placeholder="Search" class="record-search">
-                    <select name="" id="">
-                        <option value="">All</option>
-                        <option value="">Readed</option>
-                        <option value="">Not Read</option>
+                   <input type="search" placeholder="Search" class="record-search" [(ngModel)]="searchUserName" (keyup.enter)="onSearch()">
+                    <select name="" id="" [(ngModel)]="selectedRole" (change)="onRoleChange()">
+                        <option value="All">All</option>
+                        <option value="READ">Readed</option>
+                        <option value="NOT">Not Read</option>
                     </select>
                 </div>
             </div>
@@ -35,18 +35,24 @@
                 <table width="100%">
                     <thead>
                         <tr>
-                          <th style="width: 15%;"><span class="las la-sort"></span> CONTACT ID</th>
-                          <th style="width: 20%;"><span class="las la-sort"></span> CLIENT</th>
-                          <th style="width: 15%;"><span class="las la-sort"></span> CREATE TIME</th>
-                          <th style="width: 40%;"><span class="las la-sort"></span> SUBJECT</th>
-                          <th style="width: 10%;"><span class="las la-sort"></span> ACTIONS</th>
+                          <th style="width: 15%;"><i class="las la-sort"  (click)="toggleSort('contactmeid')"></i>
+                            CONTACT ID
+                            </th>
+                          <th style="width: 20%;"><span class="las la-user-check"></span> CLIENT</th>
+                          <th style="width: 15%;"><i class="las la-sort"  (click)="toggleSort('CreateDate')"></i>
+                            CREATE TIME
+                            </th>
+                          <th style="width: 40%;"><i class="las la-sort"  (click)="toggleSort('subject')"></i>
+                            SUBJECT
+                            </th>
+                          <th style="width: 10%;"><span class="las la-code"></span> ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let contact of contact">
+                        <ng-container *ngFor="let contact of contact | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
                           <tr [ngClass]="{'read-row': contact.read}">
                             <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                               # {{ +contact.contactmeid }}</td>
+                               # {{ contact.contactmeid }}</td>
                             <td>
                               <div class="client">
                                 <div class="client-img bg-img" [style.background-image]="contact.user ? 'url(' + getImagePath(contact.user.Role) + ')' : 'url(../assets/role/ghost.png)'"></div>                                
@@ -83,7 +89,11 @@
             </div>
 
         </div>
-    
+        <app-pagination 
+        [recordCount]="recordCount" 
+        [currentPage]="currentPage"
+        (pageChange)="pageChanged($event)">
+        </app-pagination>
     </div>
     <app-footer-admin></app-footer-admin>
     
