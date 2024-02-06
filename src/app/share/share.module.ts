@@ -16,6 +16,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { UserInventoryComponent } from './user-inventory/user-inventory.component';
+
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     PopUpComponent,
     ChatbotComponent,
     PaginationComponent,
+    UserInventoryComponent,
+
   ],
   imports: [
     CommonModule,

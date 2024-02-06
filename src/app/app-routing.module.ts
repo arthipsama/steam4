@@ -20,6 +20,7 @@ import { AccountDetailComponent } from './admin/account/account-detail/account-d
 import { ProductAdminDetailComponent } from './admin/product/product-admin-detail/product-admin-detail.component';
 import { ContentAdminDetailComponent } from './admin/new/content-admin-detail/content-admin-detail.component';
 import { OrderAdminDetailComponent } from './admin/order/order-admin-detail/order-admin-detail.component';
+import { UserInventoryComponent } from './share/user-inventory/user-inventory.component';
 
 
 
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'questions',
     component: QaComponent
+  },
+  {
+    path: 'inventory',
+    component: UserInventoryComponent
   },
   {
     path: 'admin',

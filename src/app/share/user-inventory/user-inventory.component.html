@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-2"></div>
+        <div class="col-2 md-2">
+            <ul class="list-group">
+                <a href="/profile" class="list-group-item">ข้อมูลส่วนตัว</a>
+                <a href="/profile" class="list-group-item">คีย์เกม/ไอเทมในเกม</a>
+                <a href="/profile" class="list-group-item" style="color: rgb(255, 96, 96);">ประวัติการสั่งซื้อ</a>
+                <li class="list-group-item" (click)="logout()">ออกจากระบบ</li>
+            </ul>
+        </div>
+        <div class="col-8">
+            <div class="col-12" style="display: flex;">
+                <div class="col-3" style="display: flex; justify-content: center;">
+                    <h4>เลขที่ใบสั่งซื้อ</h4>
+                </div>
+                <div class="col-3" style="display: flex; justify-content: center;">
+                    <h4>วันที่ทำรายการ</h4>
+                </div>
+                <div class="col-3" style="display: flex; justify-content: center;">
+                    <h4>สถานะ</h4>
+                </div>
+                <div class="col-3" style="display: flex; justify-content: center;">
+                    <h4>จำนวนเงิน</h4>
+                </div>
+            </div>
+            <hr style="color: #fff; margin: 0 0 0 0;">
+
+            <div class="col-12" style="margin-top: 20px;">
+                <div class="" style="display: flex; margin-top: 10px;" *ngFor="let items of userInventory">
+                    <div class="col-3" style="display: flex; justify-content: center;">
+                        <h4>{{items.productcode}}</h4>
+                    </div>
+                    <div class="col-3" style="display: flex; justify-content: center;">
+                        <h4>{{items.CreateDate}}</h4>
+                    </div>
+                    <div class="col-3" style="display: flex; justify-content: center;">
+                        <h4>{{items.paymentstatus}}</h4>
+                    </div>
+                    <div class="col-3" style="display: flex; justify-content: center;">
+                        <h4>{{items.totalprice}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br>
+<app-footer></app-footer>
