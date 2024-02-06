@@ -17,22 +17,14 @@
             <div class="record-header">
                 <div class="add">
                   <h2>User List</h2>
-                    <!-- <span>Entries</span>
-                    <select name="" id="">
-                        <option value="">ID</option>
-                    </select> -->
-                    <div *ngIf="deletionError">
-                      {{ deletionError }}
-                    </div>
-                    
                 </div>
 
                 <div class="browse">
-                   <input type="search" placeholder="Search" class="record-search">
-                    <select name="" id="">
-                        <option value="">All</option>
-                        <option value="">Admin</option>
-                        <option value="">User</option>
+                  <input type="search" placeholder="Search" class="record-search" [(ngModel)]="searchUserName" (keyup.enter)="onSearch()">
+                  <select name="" id="" [(ngModel)]="selectedRole" (change)="onRoleChange()">
+                        <option value="All">All</option>
+                        <option value="ADMIN">Admin</option>
+                        <option value="USER">User</option>
                     </select>
                     <button style="background-color: #00A86B; margin-right: 10px" (click)="openUserDialog()">
                       <span class="las la-user-plus" style="color:whitesmoke; font-size: 16px;"></span>
@@ -44,16 +36,22 @@
                 <table width="100%">
                     <thead>
                         <tr>
-                          <th style="width: 15%;"><span class="las la-sort"></span> USER ID</th>
-                          <th style="width: 25%;"><span class="las la-sort"></span> CLIENT</th>
-                          <th style="width: 25%;"><span class="las la-sort"></span> FULLNAME</th>
-                          <th style="width: 15%;"><span class="las la-sort"></span> Phone</th>
-                          <th style="width: 10%;"><span class="las la-sort"></span> ROLE</th>
-                          <th style="width: 10%;"><span class="las la-sort"></span> ACTIONS</th>
+                          <th style="width: 15%;"><i class="las la-sort"  (click)="toggleSort('userid')"></i>
+                          USER ID
+                          </th>
+                          <th style="width: 25%;"><span class="las la-user-check"></span> CLIENT</th>
+                          <th style="width: 25%;"><i class="las la-sort"  (click)="toggleSort('FirstName')"></i>
+                          FULLNAME
+                          </th>
+                          <th style="width: 15%;"><i class="las la-sort"  (click)="toggleSort('PhoneNumber')"></i>
+                          Phone
+                          </th>
+                          <th style="width: 10%;"><span class="las la-id-badge"></span> ROLE</th>
+                          <th style="width: 10%;"><span class="las la-code"></span> ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let user of user">
+                        <ng-container *ngFor="let user of user | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
                           <tr>
                             <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 # {{ user.userid }}</td>
@@ -91,14 +89,17 @@
                           </tr>
                         </ng-container>
                       </tbody>
+
                 </table>
 
-                
-                
             </div>
 
         </div>
-    
+        <app-pagination 
+        [recordCount]="recordCount" 
+        [currentPage]="currentPage"
+        (pageChange)="pageChanged($event)">
+        </app-pagination>
     </div>
     
 </main>

@@ -10,7 +10,31 @@ const pool = new Pool({
 });
 
 router.get('/useradmin/getall', (req, res) => {
-  pool.query('SELECT * FROM public."User"', (err, result) => {
+  const { UserName, Role } = req.query;
+
+  let sqlQuery = 'SELECT * FROM public."User"';
+  let queryParams = [];
+
+  if (UserName) {
+    // If UserName is provided, filter the results based on UserName (case-insensitive)
+    sqlQuery = 'SELECT * FROM public."User" WHERE LOWER("UserName") LIKE LOWER($1)';
+    queryParams.push(`%${UserName}%`);
+  } else {
+    // If UserName is not provided, retrieve all users
+    sqlQuery = 'SELECT * FROM public."User"';
+  }
+
+  if (Role && Role !== 'All') {
+    // If Role is provided and not 'All', filter the results based on Role
+    sqlQuery += queryParams.length > 0 ? ' AND' : ' WHERE';
+    sqlQuery += ' "Role" = $1';
+    queryParams.push(Role);
+  }
+
+  // console.log('SQL Query:', sqlQuery);
+  // console.log('Query Params:', queryParams);
+
+  pool.query(sqlQuery, queryParams, (err, result) => {
     if (err) {
       console.error('Error executing query', err);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -19,6 +43,7 @@ router.get('/useradmin/getall', (req, res) => {
     res.json(result.rows);
   });
 });
+
 
 router.get('/useradmin/getbyid/:id', (req, res) => {
   const userId = req.params.id;
@@ -89,7 +114,7 @@ router.put('/useradmin/edit/:id', (req, res) => {
   const { FirstName, LastName, Email, PhoneNumber, Password, Role, Contact } = req.body;
 
   // ตรวจสอบความถูกต้องของข้อมูลที่รับมาจาก Angular
-  if (!FirstName || !LastName || !Email || !PhoneNumber || !Password || !Role) {
+  if (!FirstName || !Email || !PhoneNumber || !Password || !Role) {
     res.status(400).json({ error: 'Invalid data. Please provide all required fields.' });
     return;
   }

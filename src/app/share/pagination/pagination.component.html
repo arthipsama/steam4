@@ -1,0 +1,16 @@
+<br>
+<div class="d-flex justify-content-between">
+    <div class="text-left fs-6 text-gray-800">
+      <div class="text-left fs-6 text-gray-800">
+        {{ customMessage || 'Showing ' + calculateStartIndex() + ' to ' + calculateEndIndex() + ' of ' + recordCount + ' entries' }}
+      </div>
+      
+    </div>
+    <div class="text-right">
+      <pagination-controls 
+      [(ngModel)]="currentPage" 
+      (pageChange)="pageChanged($event)"
+      ngDefaultControl></pagination-controls>
+    </div>
+  </div>
+  <br>

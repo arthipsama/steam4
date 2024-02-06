@@ -45,6 +45,9 @@
         <mat-form-field style="width: 100%;">
           <mat-label style="font-size: 12px;">Phone</mat-label>
           <input matInput formControlName="PhoneNumber">
+          <mat-error *ngIf="userForm.get('PhoneNumber')?.hasError('pattern') && userForm.get('PhoneNumber')?.touched">
+            Invalid Phone format
+          </mat-error>
         </mat-form-field>
       </div>
   

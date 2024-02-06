@@ -16,7 +16,8 @@ import { AuthAdminService } from 'src/app/service/auth-admin.service';
 })
 export class AccountComponent implements OnInit {
 
-
+  searchUserName: string = '';
+  selectedRole: string = 'All';
   constructor(private dialog: MatDialog,
     private router: Router,
     private room: RoomService,
@@ -30,12 +31,29 @@ export class AccountComponent implements OnInit {
   user: userData[] = [];
 
   ngOnInit(): void {
-    // this.user = this.room.getuser();
-    // this.recordCount = this.user.length;
-    this.authAdminService.getAllUsers().subscribe(users => {
-      this.user = users;
-      console.log(users); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
-    });
+      this.onSearch();
+    }
+
+    onSearch(): void {
+      this.currentPage = 1;
+      console.log('Search Term:', this.searchUserName);
+      this.selectedRole = 'All';
+      this.authAdminService.getAllUsers(this.searchUserName).subscribe(users => {
+        this.user = users;
+        this.recordCount = users.length;
+        console.log('Users:', users);
+      });
+    }
+    
+    onRoleChange(): void {
+      this.currentPage = 1;
+      this.searchUserName = '';
+      console.log('Statuc select:', this.selectedRole);
+      this.authAdminService.getAllUsers(this.searchUserName, this.selectedRole).subscribe(users => {
+        this.user = users;
+        this.recordCount = users.length;
+        console.log(users); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+      });
     }
 
   getImagePath(Role: string): string {
@@ -69,8 +87,41 @@ export class AccountComponent implements OnInit {
         }
       );
     }
-  
-  
+
+
+        sortColumn: string = 'userid'; // เลือกคอลัมน์ที่คุณต้องการเรียงลำดับตาม
+        sortDirection: number = 1; // 1 คือเรียงจากน้อยไปมาก, -1 คือเรียงจากมากไปน้อย
+
+        sortData(): void {
+          this.user.sort((a, b) => {
+            const valA = this.getValue(a, this.sortColumn);
+            const valB = this.getValue(b, this.sortColumn);
+
+            if (typeof valA === 'string' && typeof valB === 'string') {
+              return valA.localeCompare(valB) * this.sortDirection;
+            } else {
+              return (valA - valB) * this.sortDirection;
+            }
+          });
+        }
+
+
+        toggleSort(column: string) {
+          if (this.sortColumn === column) {
+            this.sortDirection *= -1;
+          } else {
+            this.sortColumn = column;
+            this.sortDirection = 1;
+          }
+
+          this.sortData();
+        }
+
+        getValue(obj: any, column: string): any {
+          // ตรวจสอบว่า obj[column] มีค่าหรือไม่
+          return obj[column] !== undefined ? obj[column] : '';
+        } 
+          
 
   deletionError: string | null = null;
 
@@ -102,7 +153,18 @@ export class AccountComponent implements OnInit {
   }
   
   
-  
+  // Pagination
+  @Input() currentPage = 1;
+  @Input() recordCount : number = 0;
+  @Output() pageChange = new EventEmitter();
+  itemsPerPage: number = 5; 
+
+  pageChanged(event: any): void {
+    this.currentPage = event;
+    console.log('pageChanged ' ,event);
+    this.pageChange.emit(this.currentPage);
+  }
+// end Pagination
   
   
 }
