@@ -25,7 +25,7 @@
       <mat-form-field style="width: 49%">
         <mat-label style="font-size: 12px;">Category Product </mat-label>
         <mat-select formControlName="categoryproductid" [(value)]="selectedCategoryId">
-          <mat-option *ngFor="let category of categoryproduct" [value]="category.categoryproductid">
+          <mat-option *ngFor="let category of categories" [value]="category.categoryproductid">
             {{ category.CategoryProductName }}
           </mat-option>
         </mat-select>
@@ -42,14 +42,14 @@
   
       <div style="display: flex; justify-content: space-between;">
         <mat-form-field style="width: 49%;">
-          <mat-label style="font-size: 12px;">Price </mat-label>
+          <mat-label style="font-size: 12px;">Full Price </mat-label>
           <input matInput formControlName="Price">
           <mat-error *ngIf="userForm.get('Price')?.hasError('required')">Price is required</mat-error>
           <mat-error *ngIf="userForm.get('Price')?.hasError('pattern')">Invalid price format</mat-error>
         </mat-form-field>
       
         <mat-form-field style="width: 49%;">
-          <mat-label style="font-size: 12px;">Full Price </mat-label>
+          <mat-label style="font-size: 12px;">Sale Price </mat-label>
           <input matInput formControlName="saleprice">
           <mat-error *ngIf="userForm.get('saleprice')?.hasError('pattern')">Invalid price format</mat-error>
         </mat-form-field>

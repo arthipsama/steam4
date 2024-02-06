@@ -60,9 +60,29 @@ export class ProductComponent implements OnInit {
   }
 
 
-  handleTrashClick(){
-    this.alert.onDeleteWithConfirmation();
+  async handleTrashClick(productid: string) {
+    const confirmed = await this.alert.onDeleteWithConfirmation();
+  
+    if (confirmed && productid) {
+      this.deleteUser(productid);
+    }
   }
+  
+  private async deleteUser(productid: string) {
+    try {
+      const res = await this.prodcutService.deleteProduct(productid).toPromise();
+      console.log('User deleted successfully:', res);
+      this.alert.withOutTranslate.onDeleteRe();
+    } catch (error) {
+      console.error('Error deleting user', error);
+      if ((error as any).status === 500) {
+        this.alert.withOutTranslate.onError('ลบไม่สำเร็จเนื่องจาก Order เชื่อมกันอยู่');
+      }
+      
+      // ทำอะไรต่อไปในกรณีเกิด error
+    }
+  }
+  
 
   handleTest(user: userData) {
     // ส่ง userid ไปยังหน้า account-detail

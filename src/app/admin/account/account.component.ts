@@ -73,7 +73,7 @@ export class AccountComponent implements OnInit {
       this.Auth.deleteUser(userId).subscribe(
         (res) => {
           console.log('User deleted successfully:', res);
-          this.alert.withOutTranslate.onSuccessRe();
+          this.alert.withOutTranslate.onDeleteRe();
           return;
         },
         (error) => {

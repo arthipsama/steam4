@@ -64,12 +64,15 @@
 
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group" >
-                              <label style="margin-bottom: 5px;" for="website">Quantity </label>
-                              <input type="text" class="form-control" id="quantity" formControlName="quantity"
+                              <label style="margin-bottom: 5px;" for="website">Quantity <span class="required">*</span></label>
+                              <input type="text" class="form-control" id="quantity" formControlName="quantity" required
                               [ngClass]="{ 'has-error': userForm.get('quantity')?.hasError('pattern') }">
                               <div *ngIf="userForm.get('quantity')?.hasError('pattern')" class="text-danger">
                                 * ต้องกรอกเป็นเลขจำนวนเต็มเท่านั้น
                               </div>
+                              <!-- <div *ngIf="userForm.get('quantity')?.hasError('required')" class="text-danger">
+                                * กรุณาใส่จำนวนสินค้า
+                              </div> -->
                             </div>
                           </div>
                           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -85,8 +88,8 @@
                           
                           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
-                              <label style="margin-bottom: 5px;" for="phone">Price (ราคาที่ขาย) <span class="required">*</span></label>
-                              <input type="text" class="form-control" id="saleprice" formControlName="saleprice" required
+                              <label style="margin-bottom: 5px;" for="phone">Price (ราคาที่ขาย) </label>
+                              <input type="text" class="form-control" id="saleprice" formControlName="saleprice"
                               [ngClass]="{ 'has-error': userForm.get('saleprice')?.hasError('pattern') }">
                               <div *ngIf="userForm.get('saleprice')?.hasError('pattern')" class="text-danger">
                                 * ต้องกรอกเป็นเลขจำนวนเต็ม หรือ มีทศนิยมได้สองตำแหน่งเท่านั้น
@@ -97,7 +100,7 @@
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group" style="margin-bottom: 15px;">
                                 <label style="margin-bottom: 5px;" for="phone">Description </label>
-                                <input type="text" class="form-control" id="Description" formControlName="Description" required>
+                                <input type="text" class="form-control" id="Description" formControlName="Description">
                             </div>
                         </div>
                     </div>
@@ -110,7 +113,7 @@
                         <div class="mb-4 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group" style="margin-bottom: 15px;">
                                 <label style="margin-bottom: 5px;" for="ciTy">Category Product </label>
-                                <select class="form-control" id="" formControlName="categoryproductid">
+                                <select class="form-control" id="categoryproductid" formControlName="categoryproductid">
                                     <option *ngFor="let category of categoryproduct$ | async" [value]="category.categoryproductid">
                                       {{ category.CategoryProductName }}
                                     </option>
