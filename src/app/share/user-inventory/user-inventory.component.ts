@@ -25,7 +25,6 @@ export class UserInventoryComponent {
     this.getuserDataFromLocal();
     if(this.userData){
       this.serviceProduct.getInventory(this.userData.userid).subscribe(x=>{
-        console.log(x);
         this.userInventory = x;
       })
     }

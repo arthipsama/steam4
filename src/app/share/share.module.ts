@@ -17,6 +17,8 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { UserInventoryComponent } from './user-inventory/user-inventory.component';
+import { UserMykeyComponent } from './user-mykey/user-mykey.component';
+import { UserContactmeComponent } from './user-contactme/user-contactme.component';
 
 
 
@@ -34,7 +36,8 @@ import { UserInventoryComponent } from './user-inventory/user-inventory.componen
     ChatbotComponent,
     PaginationComponent,
     UserInventoryComponent,
-
+    UserMykeyComponent,
+    UserContactmeComponent
   ],
   imports: [
     CommonModule,
@@ -50,6 +53,7 @@ import { UserInventoryComponent } from './user-inventory/user-inventory.componen
     HeaderComponent,
     FooterComponent,
     CardProductComponent,
+    UserContactmeComponent,
     PaginationComponent
   ],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA]

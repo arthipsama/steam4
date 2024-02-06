@@ -1,0 +1,67 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row mt-5">
+
+
+        <div class="col row">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <div class="row">
+                    <!-- <h1>How Context</h1> -->
+
+                    <!-- contact.component.html -->
+                    <div class="contact-form" style="margin-bottom: 50px;">
+                        <div class="layout">
+                            <div class="image-column">
+                                <!-- รูปภาพที่ต้องการเป็นพื้นหลัง -->
+                                <img src="../assets/BG.png" alt="Description of image">
+                            </div>
+                            <div class="content-column">
+
+                                <h2>Contact Us</h2>
+
+                                <form [formGroup]="contactmeForm">
+                                    <div class="content-column"
+                                        style="flex: 2; padding: 0 12px; display: flex; flex-direction: column;">
+                                        <div class="input-wrapper" style="display: flex; flex-direction: column;">
+                                            <input class="email form-control" type="email" style="padding: 8px; width: 100%; box-sizing: border-box; 
+            background-color: gainsboro;" placeholder="Your Email" formControlName="email">
+                                        </div>
+
+                                        <div class="input-wrapper" style="display: flex; flex-direction: column;">
+                                            <input class="name form-control" type="text" style="padding: 8px; width: 100%; box-sizing: border-box; 
+            background-color: gainsboro;" placeholder="Your Name" formControlName="name">
+                                        </div>
+
+                                        <div class="input-wrapper" style="display: flex; flex-direction: column;">
+                                            <input class="subject form-control" type="text" style="padding: 8px; width: 100%; box-sizing: border-box; 
+            background-color: gainsboro;" placeholder="Your Subject" formControlName="subject">
+                                        </div>
+
+                                        <div class="input-wrapper" style="display: flex; flex-direction: column;">
+                                            <textarea class="message form-control" style="padding: 8px; width: 100%; box-sizing: border-box; height: 150px; 
+            background-color: gainsboro;" placeholder="Message Detail" formControlName="message"></textarea>
+                                        </div>
+
+                                        <button type="button" (click)="Sand()"
+                                            style="background-color: rgb(251, 142, 49); color: white; padding: 10px 15px; border: none; cursor: pointer;">
+                                            ส่งข้อมูล
+                                        </button>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+<app-footer></app-footer>
