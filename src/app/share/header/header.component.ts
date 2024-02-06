@@ -25,8 +25,6 @@ export class HeaderComponent implements OnInit{
     let storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
         this.userData = JSON.parse(storedUserData);
-        console.log(this.userData);
-        
         this.loging = true;
     }
     this.chackProductNum();

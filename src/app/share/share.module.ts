@@ -14,6 +14,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { PopUpComponent } from './pop-up/pop-up.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { UserInventoryComponent } from './user-inventory/user-inventory.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
     ProductDetailComponent,
     PopUpComponent,
     ChatbotComponent,
+    UserInventoryComponent,
   ],
   imports: [
     CommonModule,
