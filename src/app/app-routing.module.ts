@@ -21,6 +21,8 @@ import { ProductAdminDetailComponent } from './admin/product/product-admin-detai
 import { ContentAdminDetailComponent } from './admin/new/content-admin-detail/content-admin-detail.component';
 import { OrderAdminDetailComponent } from './admin/order/order-admin-detail/order-admin-detail.component';
 import { UserInventoryComponent } from './share/user-inventory/user-inventory.component';
+import { UserMykeyComponent } from './share/user-mykey/user-mykey.component';
+import { UserContactmeComponent } from './share/user-contactme/user-contactme.component';
 
 
 
@@ -56,6 +58,14 @@ const routes: Routes = [
   {
     path: 'inventory',
     component: UserInventoryComponent
+  },
+  {
+    path: 'mykey',
+    component: UserMykeyComponent
+  },
+  {
+    path: 'contactme',
+    component: UserContactmeComponent
   },
   {
     path: 'admin',

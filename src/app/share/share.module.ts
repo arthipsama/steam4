@@ -15,6 +15,8 @@ import { PopUpComponent } from './pop-up/pop-up.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { UserInventoryComponent } from './user-inventory/user-inventory.component';
+import { UserMykeyComponent } from './user-mykey/user-mykey.component';
+import { UserContactmeComponent } from './user-contactme/user-contactme.component';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { UserInventoryComponent } from './user-inventory/user-inventory.componen
     PopUpComponent,
     ChatbotComponent,
     UserInventoryComponent,
+    UserMykeyComponent,
+    UserContactmeComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +47,8 @@ import { UserInventoryComponent } from './user-inventory/user-inventory.componen
   exports:[
     HeaderComponent,
     FooterComponent,
-    CardProductComponent
+    CardProductComponent,
+    UserContactmeComponent
   ],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA]
 })
