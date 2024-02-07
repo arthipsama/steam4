@@ -26,6 +26,16 @@
                 </div>
             </form>
             <button type="button" class="button btn btn" (click)="save()">submit</button>
+
+            <hr style="width: 55%;">
+            <div class="" >
+                <h3>Edit Password</h3>
+                <p class="p" style="margin-left: 20px; width: 50%;">Old Password</p>
+                <input style="margin-left: 20px; width: 50%;" class="form-control" type="password" [(ngModel)]="oldPassword" placeholder="Enter your old password"><br>
+                <p class="p" style="margin-left: 20px; width: 50%;">New Password</p>
+                <input style="margin-left: 20px; width: 50%;" class="form-control" type="password" [(ngModel)]="newPassword" placeholder="Enter your new password"><br>
+                <button type="button" class="button btn btn" (click)="updatePassword(oldPassword, newPassword)" style="width: 50%;">Update Password</button><br><br>
+            </div>
         </div>
     </div>
 </div>

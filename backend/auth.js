@@ -61,3 +61,26 @@ router.post('/register', (req, res) => {
      return;
   }
  });
+
+
+ router.post('/newpassword', (req, res) => {
+  const { oldPassword, newPassword, userid } = req.body;
+
+  const query = 'SELECT * FROM "public"."User" WHERE "userid" = $1 AND "Password" = $2';
+  pool.query(query, [userid, oldPassword], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    if (result.rowCount > 0) {
+      const existingOrderDetail = pool.query('update public."User" set "Password" = $1 where userid = $2', [newPassword, userid]); 
+      res.json({ message: 'User registered successfully' });
+      return;
+    } else {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+  });
+});

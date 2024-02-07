@@ -1,5 +1,5 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { userData } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/service/auth.service';
@@ -14,6 +14,8 @@ export class ProfileComponent {
   userData: any;
   profileForm!: FormGroup;
   newUserData!: userData;
+  newPassword: string = '';
+  oldPassword: string = '';
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -35,23 +37,33 @@ export class ProfileComponent {
 
     this.service.UserData(this.userData.userid).subscribe(x=>{
       this.newUserData = x[0];
-      this.initForm()
+      this.initForm();
     })
   }
 
   initForm() {
     this.profileForm = this.fb.group({
-      firstname: [this.newUserData.FirstName, Validators.required],
-      lastname: [this.newUserData.LastName, Validators.required],
-      phoneNumber: this.newUserData.PhoneNumber,
-      email: [this.newUserData.Email, Validators.email],
-      contact: this.newUserData.Contact
+      firstname: [this.newUserData.FirstName || '', Validators.required],
+      lastname: [this.newUserData.LastName || '', Validators.required],
+      phoneNumber: this.newUserData.PhoneNumber || '',
+      email: [this.newUserData.Email || '', Validators.email],
+      contact: this.newUserData.Contact || ''
     })
   }
 
   logout() {
     localStorage.removeItem('userData');
     this.router.navigate(['/mainpage']);
+  }
+
+  updatePassword(oldPassword:string, newPassword: string) {
+    this.service.updatePassword(oldPassword, newPassword, this.userData.userid).subscribe(x=>{
+      if(x){
+        this.router.navigate(['/mainpage']);
+      }else{
+        console.log('การแก้ไขรหัสผ่านผิดพลาด โปรดลองใหม่อีกครั้ง');
+      }
+    })
   }
 
   save() {
