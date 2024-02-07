@@ -11,6 +11,7 @@ const contactMeRouter = require('./contact-me');
 const contactmeadminRouter = require('./contact-admin');
 const productadminRouter = require('./product-admin');
 const contentadminRouter = require('./content-admin');
+const orderadminRouter = require('./order-admin');
 
 
 const corsOptions = {
@@ -34,6 +35,7 @@ app.use('/api', contactMeRouter);
 app.use('/api', contactmeadminRouter);
 app.use('/api', productadminRouter);
 app.use('/api', contentadminRouter);
+app.use('/api', orderadminRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');

@@ -15,6 +15,8 @@ export class DashboardComponent implements OnInit {
   orderCount: number = 0;
   contactCount: number = 0;
   totalOrderPrice: string = '';
+  most5ProductsBySaleCount: any[] = [];
+  most5ProductsByView: any[] = [];
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -36,6 +38,14 @@ export class DashboardComponent implements OnInit {
 
     this.dashboardService.CallViewContact().subscribe((contactCount: number) => {
       this.contactCount = contactCount;
+    });
+
+    this.dashboardService.getMost5ProductsBySaleCount().subscribe(most5 => {
+      this.most5ProductsBySaleCount = most5;
+    });
+
+    this.dashboardService.getMost5ProductsByView().subscribe(view5 => {
+      this.most5ProductsByView = view5;
     });
 
     

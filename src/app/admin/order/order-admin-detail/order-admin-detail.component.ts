@@ -9,6 +9,7 @@ import { trigger, state, transition, animate, style as angularStyle } from '@ang
 import { OrderDTO, OrderDetailDTO } from 'src/app/models/order.model';
 import { PopUpAdminOrderComponent } from '../pop-up-admin-order/pop-up-admin-order.component';
 import { MatDialog } from '@angular/material/dialog';
+import { OrderDetailService } from 'src/app/service/order-detail.service';
 
 
 @Component({
@@ -29,7 +30,10 @@ export class OrderAdminDetailComponent implements OnInit {
   animationState: string = 'start';
   userForm!: FormGroup;
   order: any | OrderDTO;
+  orderss: any | OrderDTO;
   orderDetail: any |  OrderDetailDTO;
+  ordersid: string | null = null; // Initialize with null or handle null appropriately
+
 
   constructor( 
     private route: ActivatedRoute , 
@@ -39,6 +43,7 @@ export class OrderAdminDetailComponent implements OnInit {
     private fb: FormBuilder,
     private location: Location,
     private dialog: MatDialog,
+    private orderService: OrderDetailService,
     
     ) {
 
@@ -54,23 +59,72 @@ export class OrderAdminDetailComponent implements OnInit {
       });
      }
 
-     ngOnInit(): void {
-      let ordersid = this.route.snapshot.paramMap.get('id');
+    //  ngOnInit(): void {
+    //   let ordersid = this.route.snapshot.paramMap.get('id');
      
-      ordersid && this.room.getOrderById(ordersid).subscribe((res) => {
-        this.order = res;
-        console.log("Order Main:", res);
-      });
+    //   ordersid && this.room.getOrderById(ordersid).subscribe((res) => {
+    //     this.order = res;
+    //     console.log("Order Main:", res);
+    //   });
      
-      // เรียกใช้ method เพื่อดึง OrderDetailDTO ตาม ordersid
-      ordersid && this.room.getOrderDetailByOrdersId(ordersid).subscribe((res) => {
-        this.orderDetail = res;
-        console.log("Order Details:", res);
-        this.updateUserFormValues();
+    //   // เรียกใช้ method เพื่อดึง OrderDetailDTO ตาม ordersid
+    //   ordersid && this.room.getOrderDetailByOrdersId(ordersid).subscribe((res) => {
+    //     this.orderDetail = res;
+    //     console.log("Order Details:", res);
+    //     this.updateUserFormValues();
+    //   });
+
+    ngOnInit(): void {
+      this.route.paramMap.subscribe(params => {
+        this.ordersid = params.get('id');
+  
+        if (this.ordersid !== null) {
+          this.orderService.getOrderById(this.ordersid).subscribe(data1 => {
+            this.orderss = data1;
+            console.log('Order Main:', data1);
+          });
+  
+          this.orderService.getOrderDetails(this.ordersid).subscribe(data2 => {
+            this.orderDetail = data2;
+            console.log('Order Details:', data2);
+            this.updateUserFormValues();
+          });
+        } else {
+          console.error('Invalid ordersid:', this.ordersid);
+        }
       });
+    }
+
+      
   
       // ... (existing code)
-    }
+    
+
+    // ngOnInit(): void {
+    //   // Get the 'ordersid' parameter from the route
+    //   this.route.paramMap.subscribe(params => {
+    //     this.ordersid = params.get('id');
+    //     console.log('id :', this.ordersid);
+  
+    //     // Check if 'ordersid' is not null before making API calls
+    //     if (this.ordersid !== null) {
+    //       this.orderService.getOrderById(this.ordersid).subscribe(orders => {
+    //         this.order = orders;
+    //         console.log('Orders:', orders);
+    //         // Assign 'data' to your class variable if needed
+    //       });
+  
+    //       this.orderService.getOrderDetails(this.ordersid).subscribe(orderdetail => {
+    //         this.orderDetail = orderdetail;
+    //         console.log('Order Details:', orderdetail);
+    //         // Assign 'data' to your class variable if needed
+    //       });
+    //     } else {
+    //       console.error('Invalid ordersid:', this.ordersid);
+    //     }
+    //   });
+    // }
+  
 
     updateUserFormValues() {
       if (this.userForm) {
@@ -143,11 +197,11 @@ isValidFormData(): boolean {
 }
 
 getWidthPercentage(): string {
-  if (this.order?.paymentstatus === 'wait') {
+  if (this.orderss?.paymentstatus === 'wait') {
     return '45'; // หรือค่าที่ต้องการสำหรับ wait
-  } else if (this.order?.paymentstatus === 'checked') {
+  } else if (this.orderss?.paymentstatus === 'checked') {
     return '100'; // หรือค่าที่ต้องการสำหรับ checked
-  } else if (this.order?.paymentstatus === 'incorrect') {
+  } else if (this.orderss?.paymentstatus === 'incorrect') {
     return '100'; // หรือค่าที่ต้องการสำหรับ incorrect
   }
   return '0'; // หรือค่าที่ต้องการเมื่อไม่ตรงกับทุกเงื่อนไข
@@ -176,7 +230,7 @@ openUserDialog(ordersid: number): void {
 
 isButtonDisabled(): boolean {
   // ตรวจสอบว่า this.order มีค่าไม่เป็น null และไม่เป็น undefined ก่อนที่จะใช้ this.order.paymentstatus
-  return this.order && (this.order.paymentstatus === 'checked' || this.order.paymentstatus === 'incorrect');
+  return this.orderss && (this.orderss?.paymentstatus === 'checked' || this.orderss?.paymentstatus === 'incorrect');
 }
 
 

@@ -9,11 +9,12 @@ export interface OrderDTO {
     productcode: string;
     image: string;
     paymentstatus: string;
-    remark?: string;
+    remark: string;
     CreateBy: string;
     CreateDate: Date;
     UpdateBy: string;
     UpdateDate: Date | null;
+    [key: string]: any;
   }
 
   export interface OrderDetailDTO {
@@ -28,4 +29,5 @@ export interface OrderDTO {
     CreateDate: Date;
     UpdateBy: string;
     UpdateDate: Date | null;
+    [key: string]: any;
   }

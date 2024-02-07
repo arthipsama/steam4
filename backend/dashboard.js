@@ -55,8 +55,53 @@ router.get('/dashboard/user', (req, res) => {
       res.json(result.rows);
     });
   });
+
+
+  router.get('/dashboard/product/most5', (req, res) => {
+    // สร้าง SQL query สำหรับการดึงข้อมูล product และ salecount
+    const sqlQuery = `
+      SELECT *
+      FROM
+        "Product"
+      ORDER BY
+        "salecount" DESC,
+        "productid" ASC
+      LIMIT 5
+    `;
   
+    pool.query(sqlQuery, (err, result) => {
+      if (err) {
+        console.error('Error executing query Product', err);
+        res.status(500).json({ error: 'Internal Server Error Product' });
+        return;
+      }
+
+      res.json(result.rows);
+    });
+  });
+
+  router.get('/dashboard/product/view5', (req, res) => {
+    // สร้าง SQL query สำหรับการดึงข้อมูล product และ view
+    const sqlQuery = `
+      SELECT *
+      FROM
+        "Product"
+      ORDER BY
+        "view" DESC,
+        "productid" ASC
+      LIMIT 5
+    `;
   
+    pool.query(sqlQuery, (err, result) => {
+      if (err) {
+        console.error('Error executing query Product', err);
+        res.status(500).json({ error: 'Internal Server Error Product' });
+        return;
+      }
+
+      res.json(result.rows);
+    });
+  });
 
 // Other room-related routes go here...
 
