@@ -193,28 +193,28 @@ private apiUrl = 'http://localhost:3000/api/room';
 
   content: ContentDTO[] = [
     {
-      contentid: 1,
+      contentid: '1',
       ContentName: 'ลดราคาเกม 90% พลาดไม่ได้แล้ว!!!',
       ImgContentPath: '../assets/Content/1.jpg',
       type: true,
       Description: 'ลดขนาดนี้แจกฟรีเลยดีกว่าครับพรี่',
     },
     {
-      contentid: 2,
+      contentid: '2',
       ContentName: 'Winter Sale กลับมาอีกครั้ง ลดราคาสูงสุด',
       ImgContentPath: '../assets/Content/2.jpg',
       type: false,
       Description: 'หนาวเกินไปไม่เล่นเกมล่ะ',
     },
     {
-      contentid: 3,
+      contentid: '3',
       ContentName: 'แนะนำเกมใหม่น่าเล่น เดือนสิงหาคม',
       ImgContentPath: '../assets/Content/3.jpg',
       type: false,
       Description: 'ไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะไม่เล่นจะเล่นแต่เกม Valorant สนุกกว่าเยอะ',
     },
     {
-      contentid: 4,
+      contentid: '4',
       ContentName: 'เปิดตัวเกมใหม่ "TheFianl" เกมหมา ไม่น่าเข้าไปเล่น',
       ImgContentPath: '../assets/Content/4.jpg',
       type: false,
@@ -375,7 +375,7 @@ private apiUrl = 'http://localhost:3000/api/room';
   }
     
   getcontentbyid(id: string): Observable<ContentDTO | undefined> {
-    const product = this.content.find(p => p.contentid === +id);
+    const product = this.content.find(p => p.contentid === id);
     return of(product).pipe(delay(0)); // delay 500 milliseconds to simulate an API call
   }
 

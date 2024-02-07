@@ -21,7 +21,8 @@
                 </div>
 
                 <div class="browse">
-                   <input type="search" placeholder="Search" class="record-search">
+                  <input type="search" placeholder="Search" class="record-search" [(ngModel)]="contentName" (keyup.enter)="onSearch()">
+                   <!-- <input type="search" placeholder="Search" class="record-search"> -->
                    <!-- <select name="" id="">
                     <option value="">All</option>
                     <option value="">Key</option>
@@ -39,14 +40,17 @@
                 <table width="100%">
                     <thead>
                         <tr>
-                          <th style="width: 15%;"><span class="las la-sort"></span> CONTENT ID</th>
-                          <th style="width: 25%;"><span class="las la-sort"></span> CONTENT IMAGE</th>
-                          <th style="width: 50%;"><span class="las la-sort"></span> DESCRIPTION</th>
-                          <th style="width: 10%;"><span class="las la-sort"></span> ACTIONS</th>
+                          <th style="width: 15%;"><i class="las la-sort"  (click)="toggleSort('contentid')"></i>
+                            CONTENT ID
+                            </th>
+                          <!-- <th style="width: 15%;"><span class="las la-sort"></span> CONTENT ID</th> -->
+                          <th style="width: 25%;"><span class="las la-images"></span> CONTENT IMAGE</th>
+                          <th style="width: 50%;"><span class="las la-newspaper"></span> DESCRIPTION</th>
+                          <th style="width: 10%;"><span class="las la-code"></span> ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
-                      <ng-container *ngFor="let content of content">
+                      <ng-container *ngFor="let content of content | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage} ">
                         <tr>
                           <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                               # {{ content.contentid }}</td>
@@ -69,7 +73,7 @@
                               [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
                                 <span class="las la-edit"></span>
                               </button>
-                              <button class="icon-button" (click)="handleTrashClick()">
+                              <button class="icon-button" (click)="handleTrashClick(content.contentid)">
                                 <span class="las la-trash"></span>
                               </button>
                             </div>
@@ -82,8 +86,15 @@
             </div>
 
         </div>
+
+        <app-pagination 
+        [recordCount]="recordCount" 
+        [currentPage]="currentPage"
+        (pageChange)="pageChanged($event)">
+        </app-pagination>
     
     </div>
+    
 
     <app-footer-admin></app-footer-admin>
     
