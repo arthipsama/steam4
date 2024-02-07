@@ -23,6 +23,11 @@ import { OrderAdminDetailComponent } from './admin/order/order-admin-detail/orde
 import { UserInventoryComponent } from './share/user-inventory/user-inventory.component';
 import { UserMykeyComponent } from './share/user-mykey/user-mykey.component';
 import { UserContactmeComponent } from './share/user-contactme/user-contactme.component';
+import { UserAllproductComponent } from './share/user-category/user-allproduct/user-allproduct.component';
+import { UserIdgameComponent } from './share/user-category/user-idgame/user-idgame.component';
+import { UserKeygameComponent } from './share/user-category/user-keygame/user-keygame.component';
+import { UserProgramComponent } from './share/user-category/user-program/user-program.component';
+import { UserSteamwalletComponent } from './share/user-category/user-steamwallet/user-steamwallet.component';
 
 
 
@@ -66,6 +71,26 @@ const routes: Routes = [
   {
     path: 'contactme',
     component: UserContactmeComponent
+  },
+  {
+    path: 'allproduct',
+    component: UserAllproductComponent
+  },
+  {
+    path: 'idgame',
+    component: UserIdgameComponent
+  },
+  {
+    path: 'keygame',
+    component: UserKeygameComponent
+  },
+  {
+    path: 'program',
+    component: UserProgramComponent
+  },
+  {
+    path: 'steamwallet',
+    component: UserSteamwalletComponent
   },
   {
     path: 'admin',

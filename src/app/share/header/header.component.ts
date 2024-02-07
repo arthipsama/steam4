@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { userData } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/service/auth.service';
 import { ProductService } from 'src/app/service/product.service';
@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit{
   loging:boolean = false;
   userData!: userData;
   productnum:number = 0;
+  dataSearch!:string;
 
   constructor(private serviceProduct: ProductService) {
   }
@@ -42,7 +43,10 @@ export class HeaderComponent implements OnInit{
     }
   }
 
-  searchProducts() {
+  searchProducts(dataSearch:string) {
+    this.serviceProduct.search(dataSearch).subscribe(x=>{
+      this.serviceProduct.sendSearchResults(x);
+    })
   }
 
   nextProducts() {

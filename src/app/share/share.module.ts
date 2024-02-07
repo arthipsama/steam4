@@ -19,6 +19,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { UserInventoryComponent } from './user-inventory/user-inventory.component';
 import { UserMykeyComponent } from './user-mykey/user-mykey.component';
 import { UserContactmeComponent } from './user-contactme/user-contactme.component';
+import { UserKeygameComponent } from './user-category/user-keygame/user-keygame.component';
+import { UserProgramComponent } from './user-category/user-program/user-program.component';
+import { UserSteamwalletComponent } from './user-category/user-steamwallet/user-steamwallet.component';
+import { UserIdgameComponent } from './user-category/user-idgame/user-idgame.component';
+import { UserAllproductComponent } from './user-category/user-allproduct/user-allproduct.component';
 
 
 
@@ -37,7 +42,12 @@ import { UserContactmeComponent } from './user-contactme/user-contactme.componen
     PaginationComponent,
     UserInventoryComponent,
     UserMykeyComponent,
-    UserContactmeComponent
+    UserContactmeComponent,
+    UserKeygameComponent,
+    UserProgramComponent,
+    UserSteamwalletComponent,
+    UserIdgameComponent,
+    UserAllproductComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,53 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-1"></div>
+        <div class="col-2 md-2">
+            <ul class="list-group">
+                <a href="/allproduct" class="list-group-item">ALLPRODUCT</a>
+                <a href="/keygame" class="list-group-item">KEYGAME</a>
+                <a href="/program" class="list-group-item">PROGRAM</a>
+                <a href="/steamwallet" class="list-group-item">STEAMWALLET</a>
+                <a href="/idgame" class="list-group-item"  style="color: rgb(255, 96, 96);">IDGAME</a>
+            </ul>
+        </div>
+
+        <div class="col-9" style="width: 905px; height: auto; background-color: #2b2b2b; margin-bottom: 20px; border-radius: 14px;">
+            <div class="headKeygame">
+                <h2 style="margin-left: 40px;">Id Game</h2>
+            </div>
+            <div class="" style="display: flex; flex-wrap: wrap; padding-top: 20px; border-radius: 14px;">
+                <div class="" style="color: #fff;" *ngFor="let items of product; let i = index" (click)="gotoDetaileProduct(i)">
+                    <div class="fullCard" *ngIf="items.saleprice == null">
+                        <img class="img" src="{{items.ImgProduct}}" alt="Product Image">
+                        <p class="nameText">{{items.ProductName}}</p>
+                        <div class="boxPriceText" *ngIf="items.quantity > 0">
+                            <p class="priceText">${{items.price}}</p>
+                        </div>
+            
+                        <div class="boxPriceText col-12" style="display: flex; justify-content: center;" *ngIf="items.quantity == 0">
+                            <p class="col-8" style="font-size: 20px; display: flex; color: red; justify-content: center;">สินค้าหมด</p>
+                        </div>
+                    </div>
+            
+                    <div class="fullCard" *ngIf="items.saleprice">
+                        <div class="percent" *ngIf="items.percent">
+                            <p style="margin: 2px 0 0 7px;">- {{items.percent}}%</p>
+                        </div>
+                        <img class="img" src="{{items.ImgProduct}}" alt="Product Image">
+                        <p class="nameText">{{items.ProductName}}</p>
+                        <div class="boxPriceText col-12" style="display: flex;" *ngIf="items.quantity > 0">
+                            <p class="col-4" style="padding-left: 15px; text-decoration: line-through; opacity: 0.5;">{{items.price}}</p>
+                            <p class="col-8" style="font-size: 20px; display: flex; justify-content: end; padding-right: 15px;">${{items.saleprice}}</p>
+                        </div>
+            
+                        <div class="boxPriceText col-12" style="display: flex; justify-content: center;" *ngIf="items.quantity == 0">
+                            <p class="col-8" style="font-size: 20px; display: flex; color: red; justify-content: center;">สินค้าหมด</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -25,10 +25,10 @@ export class CardProductComponent {
   }
 
   discountProduct(){
-    this.product.forEach((product:any) => {
+    this.product.forEach((product: any) => {
       if (product.saleprice) {
-        const discountPercentage = ((product.price - product.saleprice) / product.price) * 100;
-        this.percent = Math.round(discountPercentage);
+        const discountPercentage = ((product.price - product.saleprice) / product.price) *  100;
+        product.percent = Math.round(discountPercentage);
       }
     });
   }
