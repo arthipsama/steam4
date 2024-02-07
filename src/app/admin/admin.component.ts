@@ -96,6 +96,7 @@ export class AdminComponent implements OnInit {
     this.alertService.onConfirmRoute('ต้องการออกจากระบบ', '/mainpage')
       .then((confirmed) => {
         if (confirmed) {
+          localStorage.removeItem('userData');
           this.alertService.onSuccess('ออกจากระบบสำเร็จ')
         } else {
           // กรณีผู้ใช้กด "Cancel" ไม่ต้องทำอะไร
