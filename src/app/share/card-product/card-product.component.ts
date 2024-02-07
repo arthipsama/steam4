@@ -34,7 +34,7 @@ export class CardProductComponent {
   }
 
   loadMore(){
-    console.log("wdw");
+    console.log("wait");
     
   }
 
