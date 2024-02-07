@@ -12,7 +12,7 @@ const pool = new Pool({
 
 router.post('/contactme', (req, res) => {
     const { email, name, subject, message, userid } = req.body;
-    pool.query('INSERT INTO public."ContactMe" (userid, textname, email, textmessage,  "CreateDate",  "read", "subject")VALUES ($5, $2, $1, $4,  CURRENT_TIMESTAMP,  false, $3);',[email, name, subject, message, userid], (err, result) => {
+    pool.query(`INSERT INTO public."ContactMe" (userid, textname, email, textmessage,  "CreateDate",  "read", "subject")VALUES ($5, $2, $1, $4,  CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Bangkok',  false, $3);`,[email, name, subject, message, userid], (err, result) => {
       if (err) {
         console.error('Error executing query', err);
         res.status(500).json({ error: 'Internal Server Error' });

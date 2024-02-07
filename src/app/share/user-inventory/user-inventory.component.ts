@@ -1,8 +1,10 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { userData } from 'src/app/models/user.models';
 import { ColorService } from 'src/app/service/color.service';
 import { ProductService } from 'src/app/service/product.service';
+import { PopUpComponent } from '../pop-up/pop-up.component';
 
 @Component({
   selector: 'app-user-inventory',
@@ -12,11 +14,14 @@ import { ProductService } from 'src/app/service/product.service';
 export class UserInventoryComponent {
   userData!:userData;
   userInventory:any;
+  dropdown: boolean = false;
+
   constructor(private router: Router,
               private serviceProduct: ProductService,
               private colorService: ColorService,
               private renderer: Renderer2, 
-              private el: ElementRef){}
+              private el: ElementRef,
+              private dialog: MatDialog){}
 
   ngOnInit(){
     this.colorService.backgroundColor$.subscribe((color) => {
@@ -40,5 +45,9 @@ export class UserInventoryComponent {
   logout() {
     localStorage.removeItem('userData');
     this.router.navigate(['/mainpage']);
+  }
+  
+  popup(i:any) {
+    this.dialog.open(PopUpComponent, {width: '650px', data: { index: i }});
   }
 }
