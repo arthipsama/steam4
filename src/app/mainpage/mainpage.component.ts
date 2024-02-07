@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { RoomService } from '../service/room.service';
 import { productData } from '../models/product.model';
 import { ColorService } from '../service/color.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mainpage',
@@ -17,16 +18,36 @@ export class MainpageComponent implements OnInit {
   images = [this.img1, this.img2, this.img3];
   products!: productData[];
 
-  constructor(private roomService: RoomService , private colorService: ColorService ,
-    private renderer: Renderer2 , private el: ElementRef) {}
+  constructor(private roomService: RoomService , 
+    private colorService: ColorService ,
+    private renderer: Renderer2 , 
+    private el: ElementRef, 
+    private router: Router) {}
 
   ngOnInit() {
     this.colorService.backgroundColor$.subscribe((color) => {
       // ใช้ Renderer2 เพื่อตั้งค่าสีพื้นหลังของ body
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
     });
-    
   }
-  
 
+  gotoKeygame(){
+    this.router.navigate(['keygame']);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  gotoProgram(){
+    this.router.navigate(['program']);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  gotoSteamwallet(){
+    this.router.navigate(['steamwallet']);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  gotoIdgame(){
+    this.router.navigate(['idgame']);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }

@@ -1,12 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { productData } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  private searchResults = new Subject<any>();
+  searchResults$ = this.searchResults.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -43,5 +45,34 @@ export class ProductService {
   getInventory(userid:any){
     var api = 'http://localhost:3000/api/inventory'
     return this.http.post<any>(api, {userid:userid})
+  }
+
+  getProductKeygame(){
+    var api = 'http://localhost:3000/api/keygame'
+    return this.http.get<any>(api)
+  }
+
+  getProductProgram(){
+    var api = 'http://localhost:3000/api/program'
+    return this.http.get<any>(api)
+  }
+
+  getProductSteamwallet(){
+    var api = 'http://localhost:3000/api/steamwallet'
+    return this.http.get<any>(api)
+  }
+
+  getProductIdgame(){
+    var api = 'http://localhost:3000/api/idgame'
+    return this.http.get<any>(api)
+  }
+
+  search(data:any){
+    var api = 'http://localhost:3000/api/searchproduct'
+    return this.http.post<any>(api, {data:data})
+  }
+
+  sendSearchResults(results: any) {
+    this.searchResults.next(results);
   }
 }
