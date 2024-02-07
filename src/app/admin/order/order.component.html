@@ -21,13 +21,21 @@
                 </div>
 
                 <div class="browse">
-                   <input type="search" placeholder="Search" class="record-search">
+                   <!-- <input type="search" placeholder="Search" class="record-search">
                    <select name="" id="">
                     <option value="">All</option>
                     <option value="">Waiting to Check</option>
                     <option value="">Passed</option>
                     <option value="">Incorrect</option>
-                </select>
+                </select> -->
+
+                <input type="search" placeholder="Search" class="record-search" [(ngModel)]="searchUserName" (keyup.enter)="onSearch()">
+                <select name="" id="" [(ngModel)]="selectedRole" (change)="onRoleChange()">
+                  <option value="All">All</option>
+                  <option value="WAIT">Waiting to Check</option>
+                  <option value="checked">Passed</option>
+                  <option value="Incorrect">Incorrect</option>
+                  </select>
                     <!-- <button style="background-color: #00A86B; margin-right: 10px" (click)="openUserDialog()">
                       <span class="las la-box" style="color:whitesmoke; font-size: 16px;"></span>
                       Add Product</button> -->
@@ -38,27 +46,37 @@
                 <table width="100%">
                     <thead>
                         <tr>
-                          <th style="width: 15%;"><span class="las la-sort"></span> ORDER ID</th>
-                          <th style="width: 25%;"><span class="las la-sort"></span> CLIENT</th>
-                          <th style="width: 15%;"><span class="las la-sort"></span> DATE ORDER</th>
-                          <th style="width: 20%;"><span class="las la-sort"></span> TOTAL PRICE</th>
-                          <th style="width: 15%;"><span class="las la-sort"></span> STATUS</th>
-                          <th style="width: 10%;"><span class="las la-sort"></span> ACTIONS</th>
+                          <th style="width: 15%;"><i class="las la-sort"  (click)="toggleSort('ordersid')"></i>
+                            ORDER ID
+                            </th>
+                          <!-- <th style="width: 15%;"><span class="las la-sort"></span> ORDER ID</th> -->
+                          <th style="width: 25%;"><span class="las la-user-check"></span> CLIENT</th>
+                          <th style="width: 15%;"><i class="las la-sort"  (click)="toggleSort('CreateDate')"></i>
+                            DATE ORDER
+                            </th>
+                          <!-- <th style="width: 15%;"><span class="las la-sort"></span> DATE ORDER</th> -->
+                          <th style="width: 20%;"><i class="las la-sort"  (click)="toggleSort('totalprice')"></i>
+                            TOTAL PRICE
+                            </th>
+                          <!-- <th style="width: 20%;"><span class="las la-sort"></span> TOTAL PRICE</th> -->
+                          <th style="width: 15%;"><span class="las la-comment"></span> STATUS</th>
+                          <th style="width: 10%;"><span class="las la-code"></span> ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
-                      <ng-container *ngFor="let order of orders">
+                      <ng-container *ngFor="let order of orders  | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+                        <ng-container *ngIf="order.paymentstatus !== null; else noPaymentStatus">
                         <tr>
                           <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                               # {{ order.ordersid }}</td>
                           <td>
                             <div class="client">
-                              <div class="client-img bg-img" [style.background-image]="'url(' + getImagePath(order.user.Role) + ')'"></div>
+                              <div class="client-img bg-img" [style.background-image]="'url(' + getImagePath(order.Role) + ')'"></div>
                               <div class="client-info">
                                 <h4 style="max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                  {{ order.user.UserName }}</h4>
+                                  {{ order.UserName }}</h4>
                                 <h5 style="max-width: 330px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                  {{ order.user.Email }}</h5>
+                                  {{ order.Email }}</h5>
                               </div>
                             </div>
                           </td>
@@ -96,15 +114,23 @@
                               </button> -->
                             </div>
                           </td>
-                        </tr>
+                        </tr></ng-container>
                       </ng-container>
                       
+                      <ng-template #noPaymentStatus>
+                        <!-- null ปล่อยว่าง -->
+                      </ng-template>
+
                       </tbody>
                 </table>
             </div>
 
         </div>
-    
+        <app-pagination 
+        [recordCount]="recordCount" 
+        [currentPage]="currentPage"
+        (pageChange)="pageChanged($event)">
+        </app-pagination>
     </div>
 
     <app-footer-admin></app-footer-admin>
