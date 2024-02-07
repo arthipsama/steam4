@@ -35,6 +35,21 @@ export class AlertServiceService {
         }, 500); // 0.5 second delay
       });
     },
+
+    // onSuccessLogout() {
+    //   Swal.fire({
+    //     title: 'Success!',
+    //     text: 'บันทึกรายการข้อมูลสำเร็จ',
+    //     icon: 'success',
+    //     confirmButtonText: 'Okay',
+    //   }).then(() => {
+    //     setTimeout(() => {
+    //       // Navigate to mainpage
+    //       this.router.navigate(['mainpage']);
+    //       localStorage.removeItem('userData');
+    //     }, 500); // 0.5 second delay
+    //   });
+    // },
     
 
     onProducts() {
@@ -107,6 +122,21 @@ export class AlertServiceService {
       confirmButtonText: 'Okay',
     }).then(() => {
       this.router.navigate([navigateTo]); //path
+    });
+  }
+
+  onSuccessLogout() {
+    Swal.fire({
+      title: 'Success!',
+      text: 'บันทึกรายการข้อมูลสำเร็จ',
+      icon: 'success',
+      confirmButtonText: 'Okay',
+    }).then(() => {
+      setTimeout(() => {
+        // Navigate to mainpage
+        this.router.navigate(['mainpage']);
+        localStorage.removeItem('userData');
+      }, 500); // 0.5 second delay
     });
   }
 

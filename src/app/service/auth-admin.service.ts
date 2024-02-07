@@ -52,6 +52,11 @@ export class AuthAdminService {
     return this.http.delete<any>(`${this.apiUrl}/delete/${userId}`);
   }
 
+  editProfile(userid:string, firstname:string, lastname:string, phoneNumber:string, email:string, contact:string, password:string){
+    var api = `${this.apiUrl}/editProfile`
+    return this.http.put(api, {userid:userid, firstname:firstname, lastname:lastname, phoneNumber:phoneNumber, email:email, contact:contact , password:password})
+  }
+
   
 
 }

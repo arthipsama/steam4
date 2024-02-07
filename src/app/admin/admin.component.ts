@@ -5,6 +5,7 @@ import { AlertServiceService } from '../service/alert-service.service';
 import { RoomService } from '../service/room.service';
 import { userData } from '../models/user.models';
 import * as moment from 'moment-timezone';
+import { ProductService } from '../service/product.service';
 
 
 @Component({
@@ -15,12 +16,23 @@ import * as moment from 'moment-timezone';
 export class AdminComponent implements OnInit {
   currentDateTime: any;
   user: userData[] = [];
+  products: any[] = [];
+  searchTerm: string = '';
+  public totalItem : number = 0;
+  cartItemsCount: number = 0;
+  loging:boolean = false;
+  userData!: userData;
+  productnum:number = 0;
+  dataSearch!:string;
 
   constructor(private el:ElementRef , 
     private colorService: ColorService,
     private router: Router,
     private alertService: AlertServiceService,
     private room: RoomService,
+    private serviceProduct: ProductService,
+
+    
     ){
 
     this.router.events.subscribe(event => {
@@ -34,14 +46,33 @@ export class AdminComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    this.user = this.room.getuser();
+    // this.user = this.room.getuser();
 
-    this.updateDateTime(); // อัปเดตค่าเวลาเริ่มต้น
+    // this.updateDateTime(); // อัปเดตค่าเวลาเริ่มต้น
 
-    // ใช้ setInterval เพื่ออัปเดตค่าทุก 2 นาที
-    setInterval(() => {
-      this.updateDateTime();
-    }, 120000); // 2 นาที = 120000 มิลลิวินาที
+    // // ใช้ setInterval เพื่ออัปเดตค่าทุก 2 นาที
+    // setInterval(() => {
+    //   this.updateDateTime();
+    // }, 120000); // 2 นาที = 120000 มิลลิวินาที
+
+    let storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+        this.userData = JSON.parse(storedUserData);
+        this.loging = true;
+    }
+    this.chackProductNum();
+  }
+
+  chackProductNum(){
+    if(this.loging == true){
+      this.serviceProduct.orders(this.userData.userid).subscribe(x=>{
+        if (x && x.length > 0) {
+          x.forEach((num:any) => {
+            this.productnum++
+          });
+         }
+      })
+    }
   }
 
   updateDateTime() {

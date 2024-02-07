@@ -173,7 +173,19 @@ router.delete('/useradmin/delete/:id', (req, res) => {
 });
 
 
+router.put('/useradmin/editProfile', (req, res) => {
+  const { userid, firstname, lastname, phoneNumber, email, contact, password } = req.body;
 
+  const query = 'UPDATE "public"."User" SET "FirstName" = $2, "LastName" = $3, "PhoneNumber" = $4, "Email" = $5, "Contact" = $6, "Password" = $7 WHERE "userid" = $1 RETURNING *';
+  pool.query(query, [userid, firstname, lastname, phoneNumber, email, contact , password], (err, result) => {
+     if (err) {
+       console.error('Error executing query', err);
+       res.status(500).json({ error: 'Internal Server Error' });
+       return;
+     }
+     res.json({ message: 'Update successful' });
+  });
+});
 
 
 
