@@ -58,8 +58,8 @@ router.post('/productadmin/add', (req, res) => {
   }
 
   const sqlQuery = `
-    INSERT INTO "Product" ("ProductName", "categoryproductid", "price", "saleprice", "quantity", "Description", "ImgProduct")
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    INSERT INTO "Product" ("ProductName", "categoryproductid", "price", "saleprice", "quantity", "Description", "ImgProduct" , "CreateDate")
+    VALUES ($1, $2, $3, $4, $5, $6, $7, current_timestamp AT TIME ZONE 'Asia/Bangkok')
     RETURNING *;
   `;
 
