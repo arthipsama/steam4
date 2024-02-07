@@ -66,190 +66,52 @@
         </div>
     </div>
 
-    <div class="page-content1">
 
-      <div style="margin-top: 50px;">
-
-      </div>
-
-            <mat-toolbar color="warn" style="margin-bottom: 20px;"
-            > Game ยอดขายได้มากที่สุด (TOP 5)</mat-toolbar>
-            <div class="content">
-            <mat-card class="mat-elevation-z4">
-                <mat-card-header>
-                    <mat-card-title style="margin-bottom: 8px;">Product1</mat-card-title>
-                    </mat-card-header>
-                    <img
-                    mat-card-image
-                    src="../assets/Game/FC24.jpg" style="width: 280px; height: 180px;
-                    display: block; margin: 0 auto;"
-                    />
-                    <mat-card-content>
-                    <p></p>
-                    <p>The Himalayas is a mountain range in Asia.</p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                    </mat-card-actions>
-            </mat-card>
-            <mat-card class="mat-elevation-z4">
-                <mat-card-header>
-                    <mat-card-title style="margin-bottom: 8px;">Product2</mat-card-title>
-                    </mat-card-header>
-                    <img
-                    mat-card-image
-                    src="../assets/Game/Elden.jpg" style="width: 280px; height: 180px;
-                    display: block; margin: 0 auto;"
-                    />
-                    <mat-card-content>
-                        <p></p>
-                    <p>The Himalayas is a mountain range in Asia.</p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                    </mat-card-actions>
-            </mat-card>
-            <mat-card class="mat-elevation-z4">
-                <mat-card-header>
-                    <mat-card-title style="margin-bottom: 8px;">Product3</mat-card-title>
-                    </mat-card-header>
-                    <img
-                    mat-card-image
-                    src="../assets/Game/FC24.jpg" style="width: 280px; height: 180px;
-                    display: block; margin: 0 auto;"
-                    />
-                    <mat-card-content>
-                        <p></p>
-                    <p>The Himalayas is a mountain range in Asia.</p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                    </mat-card-actions>
-            </mat-card>
-            <mat-card class="mat-elevation-z4">
-                <mat-card-header>
-                    <mat-card-title style="margin-bottom: 8px;">Product4</mat-card-title>
-                    </mat-card-header>
-                    <img
-                    mat-card-image
-                    src="../assets/Game/FC24.jpg" style="width: 280px; height: 180px;
-                    display: block; margin: 0 auto;"
-                    />
-                    <mat-card-content>
-                        <p></p>
-                    <p>The Himalayas is a mountain range in Asia.</p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                    </mat-card-actions>
-            </mat-card>
-            <mat-card class="mat-elevation-z4">
-                <mat-card-header>
-                    <mat-card-title style="margin-bottom: 8px;">Product5</mat-card-title>
-                    </mat-card-header>
-                    <img
-                    mat-card-image
-                    src="../assets/Game/FC24.jpg" style="width: 280px; height: 180px;
-                    display: block; margin: 0 auto;"
-                    />
-                    <mat-card-content>
-                        <p></p>
-                    <p>The Himalayas is a mountain range in Asia.</p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                    </mat-card-actions>
-            </mat-card>
-
+    <div class="page-content">
+        <h2 style="color: #DC143C ; text-align: center; margin-top: 15px;">Game ยอดขายมากที่สุด (TOP 5)</h2>
+        <ul class="cards">
+            <ng-container *ngFor="let pdmost of most5ProductsBySaleCount">
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="https://picsum.photos/500/300/?image=10"></div>
+              <div class="card_content1">
+                <h2 class="card_title">{{ pdmost.ProductName }}</h2>
+                <p class="card_text">{{ pdmost.Description.length > 25 ? (pdmost.Description | slice:0:25) + '...' : pdmost.Description || '---' }}</p>
+                <button class="btn card_btn" [routerLink]="['/admin/product-admin-detail', pdmost.productid]" 
+                [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+                Read More</button>
+              </div>
             </div>
+          </li>
+        </ng-container>
+    </ul>
+
+      
+      <!-- <h3 class="made_by">Made with SamaShop ♡</h3> -->
+
     </div>
 
     <div class="page-content1">
 
-        <div style="margin-top: 50px;">
-  
-        </div>
-  
-              <mat-toolbar color="primary" style="margin-bottom: 20px;"
-              > Game ยอดคนเข้าดูมากที่สุด (TOP 5)</mat-toolbar>
-              <div class="content">
-              <mat-card class="mat-elevation-z4">
-                  <mat-card-header>
-                      <mat-card-title style="margin-bottom: 8px;">Product1</mat-card-title>
-                      </mat-card-header>
-                      <img
-                      mat-card-image
-                      src="../assets/Game/FC24.jpg" style="width: 280px; height: 180px;
-                      display: block; margin: 0 auto;"
-                      />
-                      <mat-card-content>
-                      <p></p>
-                      <p>The Himalayas is a mountain range in Asia.</p>
-                      </mat-card-content>
-                      <mat-card-actions>
-                      </mat-card-actions>
-              </mat-card>
-              <mat-card class="mat-elevation-z4">
-                  <mat-card-header>
-                      <mat-card-title style="margin-bottom: 8px;">Product2</mat-card-title>
-                      </mat-card-header>
-                      <img
-                      mat-card-image
-                      src="../assets/Game/Elden.jpg" style="width: 280px; height: 180px;
-                      display: block; margin: 0 auto;"
-                      />
-                      <mat-card-content>
-                          <p></p>
-                      <p>The Himalayas is a mountain range in Asia.</p>
-                      </mat-card-content>
-                      <mat-card-actions>
-                      </mat-card-actions>
-              </mat-card>
-              <mat-card class="mat-elevation-z4">
-                  <mat-card-header>
-                      <mat-card-title style="margin-bottom: 8px;">Product3</mat-card-title>
-                      </mat-card-header>
-                      <img
-                      mat-card-image
-                      src="../assets/Game/FC24.jpg" style="width: 280px; height: 180px;
-                      display: block; margin: 0 auto;"
-                      />
-                      <mat-card-content>
-                          <p></p>
-                      <p>The Himalayas is a mountain range in Asia.</p>
-                      </mat-card-content>
-                      <mat-card-actions>
-                      </mat-card-actions>
-              </mat-card>
-              <mat-card class="mat-elevation-z4">
-                  <mat-card-header>
-                      <mat-card-title style="margin-bottom: 8px;">Product4</mat-card-title>
-                      </mat-card-header>
-                      <img
-                      mat-card-image
-                      src="../assets/Game/FC24.jpg" style="width: 280px; height: 180px;
-                      display: block; margin: 0 auto;"
-                      />
-                      <mat-card-content>
-                          <p></p>
-                      <p>The Himalayas is a mountain range in Asia.</p>
-                      </mat-card-content>
-                      <mat-card-actions>
-                      </mat-card-actions>
-              </mat-card>
-              <mat-card class="mat-elevation-z4">
-                  <mat-card-header>
-                      <mat-card-title style="margin-bottom: 8px;">Product5</mat-card-title>
-                      </mat-card-header>
-                      <img
-                      mat-card-image
-                      src="../assets/Game/FC24.jpg" style="width: 280px; height: 180px;
-                      display: block; margin: 0 auto;"
-                      />
-                      <mat-card-content>
-                          <p></p>
-                      <p>The Himalayas is a mountain range in Asia.</p>
-                      </mat-card-content>
-                      <mat-card-actions>
-                      </mat-card-actions>
-              </mat-card>
-  
+        <h2 style="color: blueviolet; text-align: center; margin-top: 15px;">Game ยอดเข้าชมมากที่สุด (TOP 5)</h2>
+        <ul class="cards">
+            <ng-container *ngFor="let pdview of most5ProductsByView">
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="https://picsum.photos/500/300/?image=10"></div>
+              <div class="card_content2">
+                <h2 class="card_title">{{ pdview.ProductName }}</h2>
+                <p class="card_text">{{ pdview.Description.length > 25 ? (pdview.Description | slice:0:25) + '...' : pdview.Description || '---' }}</p>
+                <button class="btn card_btn" [routerLink]="['/admin/product-admin-detail', pdview.productid]" 
+                [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
+                Read More</button>
               </div>
+            </div>
+          </li>
+        </ng-container>
+    </ul>
+
+    <h3 class="made_by">Made with SamaShop ♡</h3>
       </div>
       
 <app-footer-admin></app-footer-admin>

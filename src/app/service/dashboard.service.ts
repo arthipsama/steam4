@@ -6,7 +6,7 @@ import { Observable, map } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-
+  private apiUrl = 'http://localhost:3000/api/dashboard';
   constructor(private http: HttpClient,
     
     ) { }
@@ -50,6 +50,14 @@ export class DashboardService {
           return contactCount;
         })
       );
+    }
+
+    getMost5ProductsBySaleCount(): Observable<any[]> {
+      return this.http.get<any[]>(`${this.apiUrl}/product/most5`);
+    }
+  
+    getMost5ProductsByView(): Observable<any[]> {
+      return this.http.get<any[]>(`${this.apiUrl}/product/view5`);
     }
 
 }
