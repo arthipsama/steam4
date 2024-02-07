@@ -1,5 +1,5 @@
 export interface ContentDTO {
-    contentid: number;
+    contentid: string;
     ContentName: string;
     ImgContentPath: string;
     type: boolean;

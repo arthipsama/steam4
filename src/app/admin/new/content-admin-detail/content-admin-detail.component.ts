@@ -8,6 +8,8 @@ import { RoomService } from 'src/app/service/room.service';
 import { trigger, state, transition, animate , style as angularAnimationStyle } from '@angular/animations';
 import { Location } from '@angular/common';
 import { ContentDTO } from 'src/app/models/content.model';
+import { ContentAdminService } from 'src/app/service/content-admin.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -39,7 +41,8 @@ export class ContentAdminDetailComponent implements OnInit {
     private alertService: AlertServiceService,
     private room: RoomService,
     private fb: FormBuilder,
-    private location: Location
+    private location: Location,
+    private contentService: ContentAdminService,
     
     ) {
 
@@ -52,31 +55,29 @@ export class ContentAdminDetailComponent implements OnInit {
       });      
      }
 
-
      ngOnInit(): void {
-      let contentid  = this.route.snapshot.paramMap.get('id');
+      let contentid = this.route.snapshot.paramMap.get('id');
       console.log("uses id is", contentid);
-    
-      contentid && this.room.getcontentbyid(contentid).subscribe((res) => {
-        this.contentsData = res;
-          console.log('ข้อมูลข่าวเกม' ,res);
-
-              // เก็บค่า ImgProduct ต้นฉบับ
-        this.originalImgProduct = this.contentsData?.ImgContentPath;
-
-
-        // ตรวจสอบว่า userForm ถูกสร้างแล้ว
-        if (this.userForm) {
-          this.userForm.patchValue({
-            ImgContentPath: this.contentsData?.ImgContentPath,
-            ContentName: this.contentsData?.ContentName,
-            type: this.contentsData?.type,
-            Description: this.contentsData?.Description,
-            // ... กำหนดค่าเริ่มต้นของฟิลด์อื่น ๆ
-          });
-        }
-      });     
-
+  
+      contentid &&
+        this.contentService.getContentById(contentid).subscribe((res) => {
+          this.contentsData = res;
+          console.log('ข้อมูลข่าวเกม', res);
+  
+          // เก็บค่า ImgProduct ต้นฉบับ
+          this.originalImgProduct = this.contentsData?.ImgContentPath;
+  
+          // ตรวจสอบว่า userForm ถูกสร้างแล้ว
+          if (this.userForm) {
+            this.userForm.patchValue({
+              ImgContentPath: this.contentsData?.ImgContentPath,
+              ContentName: this.contentsData?.ContentName,
+              type: this.contentsData?.type,
+              Description: this.contentsData?.Description,
+              // ... กำหนดค่าเริ่มต้นของฟิลด์อื่น ๆ
+            });
+          }
+        });
     }
 
 isSaveButtonDisabled(): boolean {
@@ -85,6 +86,9 @@ isSaveButtonDisabled(): boolean {
 
 onSave() {
   // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
+  const contentid = this.route.snapshot.params['id'];
+  console.log("User ID is", contentid);
+  
   if (this.isValidFormData()) {
     // ทำบันทึกข้อมูล
     this.animationState = this.animationState === 'start' ? 'end' : 'start';
@@ -97,13 +101,30 @@ onSave() {
     
     console.log('Data to be saved:', formDataWithImage);
 
-    // ทำตามที่คุณต้องการเพิ่มเติม
-    this.alertService.onSuccess('บันทึกข้อมูลสำเร็จ', '/admin/new');
+    // เรียกใช้ editContent ของ contentService
+    this.contentService.editContent(contentid, formDataWithImage).subscribe(
+      (response) => {
+        // ดำเนินการหลังจากแก้ไขข้อมูลเสร็จสิ้น
+        console.log('Data edited successfully:', response);
+        this.alertService.onSuccess('แก้ไขข้อมูลสำเร็จ', '/admin/new');
+      },
+      (error) => {
+        // แสดงข้อผิดพลาดหรือทำสิ่งที่ต้องการในกรณีที่เกิดข้อผิดพลาด
+        console.error('Error editing data:', error);
+        if (error instanceof HttpErrorResponse) {
+          console.log('Status:', error.status);
+          console.log('Status Text:', error.statusText);
+          console.log('Error Object:', error.error);
+        }
+      }
+    );
+
   } else {
     console.log('Invalid Form');
     // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
   }
 }
+
 
 
 onCancel() {

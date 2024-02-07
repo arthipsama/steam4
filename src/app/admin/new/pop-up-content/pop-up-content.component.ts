@@ -7,6 +7,8 @@ import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { RoomService } from 'src/app/service/room.service';
 import { PopUpUserComponent } from '../../account/pop-up-user/pop-up-user.component';
 import { ContentDTO } from 'src/app/models/content.model';
+import { ContentAdminService } from 'src/app/service/content-admin.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-pop-up-content',
@@ -26,6 +28,9 @@ export class PopUpContentComponent implements OnInit {
     private router: Router,
     private room: RoomService,
     private alert: AlertServiceService,
+    private contentService: ContentAdminService,
+
+    
     public dialogRef: MatDialogRef<PopUpUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -34,7 +39,7 @@ export class PopUpContentComponent implements OnInit {
   
     // สร้าง FormGroup
     this.userForm = this.fb.group({
-      Contentname: ['', [Validators.required]],
+      ContentName: ['', [Validators.required]],
       type: [''],
       Description: [''],
       Image: ['', [Validators.required]],
@@ -45,26 +50,51 @@ export class PopUpContentComponent implements OnInit {
     this.content = this.room.content;
     this.userForm.get('type')?.setValidators([Validators.required]);
   }
-  
 
 onNoClick(): void {
   
 }
 
 onSave() {
-if (this.userForm.valid) {
-  // ดำเนินการบันทึกข้อมูล หรือส่งข้อมูลไปทำงานต่อไป
-  const formData = this.userForm.value;
-  delete formData.Image;
-  formData.ImgProduct = this.selectedImage;
+  if (this.userForm.valid) {
+    const formData = this.userForm.value;
+    // delete formData.Image;
+    formData.Image = null;
+    delete formData.Image;
+    formData.ImgContentPath = this.selectedImage;
+    console.log('ส่งออก' , formData);
 
-  this.alert.withOutTranslate.onSuccessRe();
-  console.log('Data to be saved:', formData);
-  // ตรวจสอบข้อมูลเพิ่มเติมและดำเนินการต่อไปตามที่คุณต้องการ
-} else {
-  console.log('Invalid Form');
+    // เรียกใช้ addContent และ subscribe ตาม
+    this.contentService.addContent(formData).subscribe(
+      (response) => {
+        // ดำเนินการหลังจากบันทึกข้อมูลเสร็จสิ้น
+        console.log('Data saved successfully:', response);
+        this.alert.withOutTranslate.onSuccessRe();
+
+        // ทำสิ่งที่คุณต้องการต่อไป
+        this.additionalOperationAfterSave();
+      },
+      (error) => {
+        // แสดงข้อผิดพลาดหรือทำสิ่งที่ต้องการในกรณีที่เกิดข้อผิดพลาด
+        console.error('Error saving data:', error);
+        if (error instanceof HttpErrorResponse) {
+          console.log('Status:', error.status);
+          console.log('Status Text:', error.statusText);
+          console.log('Error Object:', error.error);
+        }
+      }
+    );
+
+  } else {
+    console.log('Invalid Form');
+  }
 }
+
+additionalOperationAfterSave() {
+  // เพิ่มโค้ดที่ต้องการทำเพิ่มเติมหลังจากบันทึกข้อมูล
+  console.log('Additional operation after save');
 }
+
 
 onReset() {
   this.userForm.reset();
