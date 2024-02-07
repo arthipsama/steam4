@@ -104,7 +104,7 @@ router.post('/deleteProductInCart', (req, res) => {
 
 router.post('/makePayment', (req, res) => {
   const { img, userid, totalprice, username, ordersid } = req.body;
-  pool.query('UPDATE public."Orders" SET totalprice = $3, image = $1, paymentstatus = $4, "CreateBy" = $5, "CreateDate" = CURRENT_TIMESTAMP WHERE userid = $2 AND ordersid = $6', [img, userid, totalprice, 'wait', username, ordersid], (err, result) => {
+  pool.query(`UPDATE public."Orders" SET totalprice = $3, image = $1, paymentstatus = $4, "CreateBy" = $5, "CreateDate" = CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Bangkok' WHERE userid = $2 AND ordersid = $6`, [img, userid, totalprice, 'wait', username, ordersid], (err, result) => {
     if (err) {
       console.error('Error executing query', err);
       res.status(500).json({ error: 'Internal Server Error' });

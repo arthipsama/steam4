@@ -1,8 +1,9 @@
-<h2 mat-dialog-title>Error</h2>
-<div mat-dialog-content>
- <p>Register failed. Please try again.</p>
+<div class="" style="background-color: #333333;">
+    <h2 mat-dialog-title style="color: white;">Remark</h2>
+    <div mat-dialog-content>
+        <p style="color: white; margin-left: 10px;" *ngIf="inventory">{{inventory[data.index].remark}}</p>
+    </div>
+    <div mat-dialog-actions style="display: flex; justify-content: end;">
+        <button class="button" mat-button mat-dialog-close>Close</button>
+    </div>
 </div>
-<div mat-dialog-actions>
- <button mat-button mat-dialog-close>Close</button>
-</div>
-
