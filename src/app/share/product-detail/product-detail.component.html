@@ -19,14 +19,13 @@
         </div>
     </div>
 
-    <div class="col-5" style="background-color: rgb(51, 51, 51); width: 360px; height: 380px; border-radius: 14px;">
+    <div class="col-5" style="background-color: rgb(51, 51, 51); width: 360px; height: 360px; border-radius: 14px;">
         <div class="leftSite">
             <img src="https://cdn.discordapp.com/attachments/974891383087325254/1201068064377163786/image.png?ex=65c878cd&is=65b603cd&hm=ea01430aac4d16a32b0b31f189a0fd29e0a938d8a3456eebf7d9151935ec13fc&" style="width: 30px; height: 30px;">
             CAN BE ACTIVATED IN: THAILAND
         </div>
         <div class="" style="border-style: solid; border-width: 1px; color: #707070;"></div>
         <p class="textNameProduct">{{product.ProductName}}</p>
-        <p class="textDes">{{product.Description}}</p>
         <div class="head">
             <i class="fas fa-minus minus" (click)="decreaseQuantity()"></i>
             <input class="input" [(ngModel)]="quantity">
@@ -43,11 +42,21 @@
         <div class="" *ngIf="quantity <= product.quantity" style="display: flex; justify-content: center;" (click)="buyProduct()">
             <h3 class="buy">ใส่ตะกร้า</h3>
         </div>
+
+        <div class="" *ngIf="product.quantity == 0 || product.quantity == null" style="display: flex; justify-content: center;">
+            <h2 class="" style="color: red; margin-top: 20px;">สินค้าหมด</h2>
+        </div>
+
         <div class="" style="color: #619744; display: flex; justify-content: center;margin-top: 20px;">
             <img src="https://cdn.discordapp.com/attachments/974891383087325254/1201070307574812692/image.png?ex=65c87ae4&is=65b605e4&hm=f8bc312d65fdc6d20fec0c8b8a74602195889041dcf6da43f32a5fe050dce233&" style="width: 20px; height: 20px;">
             YOUR TRANSACTION IS SECURE
         </div>
     </div>
+</div>
+
+<div class="col-12 container" style="width: 1170px; height: auto; border-radius: 14px; background-color: #333333; color: rgb(130, 130, 130);; padding-top: 20px;">
+    <h2 style="margin: 0 20px 0 20px;">วันที่วางจำหน่าย: {{product.CreateDate}}</h2>
+    <p style="margin: 10px 20px 0 20px; padding-bottom: 20px; word-wrap: break-word;">{{product.Description}}<p>
 </div>
 
 <app-footer></app-footer>
