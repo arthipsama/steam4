@@ -7,6 +7,7 @@ import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { RoomService } from 'src/app/service/room.service';
 import { PopUpUserComponent } from '../../account/pop-up-user/pop-up-user.component';
 import { OrderDTO } from 'src/app/models/order.model';
+import { OrderDetailService } from 'src/app/service/order-detail.service';
 
 @Component({
   selector: 'app-pop-up-admin-order',
@@ -19,7 +20,7 @@ export class PopUpAdminOrderComponent implements OnInit {
       private router: Router,
       private room: RoomService,
       private alert: AlertServiceService,
-
+      private orderService: OrderDetailService,
     
     public dialogRef: MatDialogRef<PopUpUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
@@ -27,27 +28,26 @@ export class PopUpAdminOrderComponent implements OnInit {
 
 
   contact: ContactMeDTO[] = [];
-  orders: OrderDTO[] = [];
+  orders: any | OrderDTO;
 
   ngOnInit(): void {
     const ordersid = this.data.id;
     // Call a service function to get contact details based on contactId
-    this.room.getOrderById(ordersid).subscribe((order) => {
+    this.orderService.getOrderById(ordersid).subscribe((order) => {
       if (order) {
-        this.orders = [order]; // Convert to array if not already
+        this.orders = order; // Update the orders property
         console.log('Order Show:', this.orders);
-
+  
         this.userForm.patchValue({
           paymentstatus: null,
           remark: null
         });
-
       } else {
-        // Handle the case where contact is undefined
-        console.error('Contact not found');
+        console.error('Order not found');
       }
     });
   }
+  
   
 
   // สร้าง FormGroup พร้อมกับ Validation
@@ -62,30 +62,26 @@ export class PopUpAdminOrderComponent implements OnInit {
     
   }
 
-
   onSave() {
-    if (this.orders) {
-      const updatedContact: OrderDTO = {
-        ordersid: this.orders[0].ordersid,
-        userid: this.orders[0].userid,
-        totalprice: this.orders[0].totalprice,
-        productcode: this.orders[0].productcode,
-        image: this.orders[0].image,
-        CreateBy: this.orders[0].CreateBy,
-        CreateDate: this.orders[0].CreateDate,
-        UpdateBy: this.orders[0].UpdateBy,
-        UpdateDate: this.orders[0].UpdateDate,
-        paymentstatus: this.userForm.get('paymentstatus')?.value,
-        remark: this.userForm.get('remark')?.value,
-        user: this.orders[0].user,
-      };
-      
+    const updatedContact: OrderDTO = {
+      ...this.orders,
+      paymentstatus: this.userForm.get('paymentstatus')?.value,
+      remark: this.userForm.get('remark')?.value,
+    };
   
-      console.log('Updated Contact:', updatedContact);
+    console.log('Updated Contact:', updatedContact);
   
-      this.alert.withOutTranslate.onSuccessRe();
-    }
+    // ใช้ ternary operator เพื่อตรวจสอบ this.orders.ordersid ไม่เป็น undefined ก่อนที่จะเรียก updateOrder
+    this.orders && this.orders.ordersid
+      ? this.orderService.updateOrder(this.orders.ordersid, updatedContact.paymentstatus, updatedContact.remark)
+          .subscribe(response => {
+            console.log('Update Response:', response);
+            // ทำตามที่คุณต้องการทำต่อไป
+            this.alert.withOutTranslate.onSuccessRe();
+          })
+      : console.error('orders.ordersid is undefined');
   }
+  
   
   
 isSaveButtonDisabled(): boolean {

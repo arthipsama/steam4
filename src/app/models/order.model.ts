@@ -9,7 +9,7 @@ export interface OrderDTO {
     productcode: string;
     image: string;
     paymentstatus: string;
-    remark?: string;
+    remark: string;
     CreateBy: string;
     CreateDate: Date;
     UpdateBy: string;

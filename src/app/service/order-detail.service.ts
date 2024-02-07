@@ -26,4 +26,20 @@ export class OrderDetailService {
   }
 
   
+  getOrderById(ordersid: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/getbyid/${ordersid}`);
+  }
+
+  getOrderDetails(ordersid: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/details/${ordersid}`);
+  }
+
+  updateOrder(ordersid: string, paymentstatus: string, remark: string): Observable<any> {
+    const updateUrl = `${this.apiUrl}/update/${ordersid}`;
+    const body = { paymentstatus, remark };
+
+    return this.http.put(updateUrl, body);
+  }
+
+  
 }
