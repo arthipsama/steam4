@@ -125,3 +125,59 @@ router.post('/inventory', (req, res) => {
     res.json(result.rows);
   });
 });
+
+router.get('/keygame', (req, res) => {
+  pool.query('SELECT * FROM public."Product" WHERE categoryproductid = $1', [ 1 ], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});
+
+router.get('/program', (req, res) => {
+  pool.query('SELECT * FROM public."Product" WHERE categoryproductid = $1', [ 4 ], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});
+
+router.get('/steamwallet', (req, res) => {
+  pool.query('SELECT * FROM public."Product" WHERE categoryproductid = $1', [ 2 ], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});
+
+router.get('/idgame', (req, res) => {
+  pool.query('SELECT * FROM public."Product" WHERE categoryproductid = $1', [ 3 ], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});
+
+router.post('/searchproduct', (req, res) => {
+  const { data } = req.body;
+  pool.query(`SELECT * FROM public."Product" WHERE "ProductName" LIKE $1;`, [`%${data}%`], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});
