@@ -7,9 +7,6 @@ import { productData } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  // private searchResults = new Subject<any>();
-  // searchResults$ = this.searchResults.asObservable();
-
   constructor(private http: HttpClient) { }
 
   getProduct(){
@@ -72,7 +69,8 @@ export class ProductService {
     return this.http.post<any>(api, {data:data})
   }
 
-  // sendSearchResults(results: any) {
-  //   this.searchResults.next(results);
-  // }
+  addView(productid:any, newview:any){
+    var api = `http://localhost:3000/api/addview`
+    return this.http.post<any>(api, { productid:productid, newview:newview })
+  }
 }
