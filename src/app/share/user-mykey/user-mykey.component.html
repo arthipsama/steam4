@@ -13,7 +13,7 @@
         <div class="col-8">
             <div class="" *ngFor="let items of myKeyData">
                 <div class="col-12" style="width: 80%; background-color: #333333; padding: 20px 20px 20px 20px; border-radius: 14px; margin-bottom: 20px;" *ngIf="items.paymentstatus == 'checked'">
-                    <h2>ใบสั่งซื้อเลขที่ {{items.productcode}} / <span style="font-size: 12px;">{{items.CreateDate}}</span></h2>
+                    <h2>ใบสั่งซื้อเลขที่ {{items.productcode}} / <span style="font-size: 12px;">{{items.CreateDate| date:'short'}}</span></h2>
                     <hr style="width: 100%;">
                     <h4>{{items.remark}}</h4>
                 </div>
