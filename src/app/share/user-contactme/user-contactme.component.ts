@@ -1,6 +1,7 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { userData } from 'src/app/models/user.models';
+import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { ColorService } from 'src/app/service/color.service';
 import { ContactMeService } from 'src/app/service/contact-me.service';
 
@@ -17,7 +18,9 @@ export class UserContactmeComponent {
               private renderer: Renderer2, 
               private el: ElementRef,
               private fb: FormBuilder,
-              private serviceContact: ContactMeService){}
+              private serviceContact: ContactMeService,
+              private alertService: AlertServiceService,
+              ){}
 
   ngOnInit(){
     this.colorService.backgroundColor$.subscribe((color) => {
@@ -33,7 +36,7 @@ export class UserContactmeComponent {
 
   initForm(){
     this.contactmeForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       name: ['',  Validators.required],
       subject: ['',  Validators.required],
       message: ['',  Validators.required]
@@ -46,6 +49,7 @@ export class UserContactmeComponent {
     var subject = this.contactmeForm.value.subject;
     var message = this.contactmeForm.value.message;
     if(this.contactmeForm.valid){
+      this.alertService.withOutTranslate.onSuccessRe();
       this.serviceContact.postContactme(email, name, subject, message, this.userData.userid).subscribe(x=>{
         console.log("ส่งข้อมูลสำเร็จ");
       })
