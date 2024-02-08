@@ -30,8 +30,6 @@ export class UserMykeyComponent {
 
     this.serviceProduct.getInventory(this.userData.userid).subscribe(x=>{
       this.myKeyData = x;
-      console.log(this.myKeyData);
-      
     })
   }
 

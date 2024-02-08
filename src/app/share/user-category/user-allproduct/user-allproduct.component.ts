@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ColorService } from 'src/app/service/color.service';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -17,21 +17,28 @@ export class UserAllproductComponent {
               private el: ElementRef,
               private fb: FormBuilder,
               private serviceProduct: ProductService,
-              private router: Router){}
+              private router: Router,
+              private route: ActivatedRoute){}
 
   ngOnInit(){
     this.colorService.backgroundColor$.subscribe((color) => {
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
     });
-    this.serviceProduct.getProduct().subscribe(x=>{
-      this.product = x;
-    })
-    this.fromSearch();
+    this.getDataProduct();
   }
 
-  fromSearch(){
-    this.serviceProduct.searchResults$.subscribe((results) => {
-      this.product = results;
+  getDataProduct(){
+    this.route.queryParams.subscribe(params => {
+      const searchParam = params['search'];
+      if(searchParam){
+        this.serviceProduct.search(searchParam).subscribe(x=>{
+          this.product = x;
+        })
+      }else{
+        this.serviceProduct.getProduct().subscribe(x=>{
+          this.product = x;
+        })
+      }
     });
   }
 

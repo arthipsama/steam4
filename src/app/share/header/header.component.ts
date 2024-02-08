@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { userData } from 'src/app/models/user.models';
 import { AuthService } from 'src/app/service/auth.service';
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit{
   productnum:number = 0;
   dataSearch!:string;
 
-  constructor(private serviceProduct: ProductService) {
+  constructor(private serviceProduct: ProductService,
+              private router: Router) {
   }
 
   ngOnInit(): void {      
@@ -44,9 +46,19 @@ export class HeaderComponent implements OnInit{
   }
 
   searchProducts(dataSearch:string) {
-    this.serviceProduct.search(dataSearch).subscribe(x=>{
-      this.serviceProduct.sendSearchResults(x);
-    })
+    // this.serviceProduct.search(dataSearch).subscribe(getSearch=>{
+    //   this.serviceProduct.sendSearchResults(getSearch);
+    //   this.router.navigate(['/allproduct'+'/'+dataSearch]);
+    //   window.scrollTo({ top: 0, behavior: 'smooth' });
+    // })
+
+      // this.serviceProduct.sendSearchResults(dataSearch);
+      if(dataSearch){
+        this.router.navigate(['/allproduct'+'/'+dataSearch], { queryParams: { search: dataSearch } });
+      }else{
+        this.router.navigate(['/allproduct/:id'])
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   nextProducts() {

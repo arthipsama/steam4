@@ -7,7 +7,7 @@
   </div>
 
   <div class="search-bar" style="width: 500px; height: 40px; margin-top: 25px;">
-    <input [(ngModel)]="dataSearch" type="text" placeholder="ค้นหา..." style="margin-left: 8px; background-color: #262626; color: #fff;">
+    <input [(ngModel)]="dataSearch" type="text" placeholder="ค้นหา..." (keyup.enter)="searchProducts(dataSearch)" style="margin-left: 8px; background-color: #262626; color: #fff;">
     <button class="search-button" (click)="searchProducts(dataSearch)">
       <i class="fas fa-search iconSearch" style="margin-right: 8px;"></i>
     </button>
@@ -38,14 +38,10 @@
       </div>
 
       <div class="dropdown" *ngIf="loging == false">
-        <i class="dropbtn fas fa-bars" style="margin-left: 15px; font-size: 26px;">
-          <div class="dropdown-content">
-            <a href="login">ข้อมูลส่วนตัว</a>
-            <a href="login">คีย์เกม/ไอเทมในเกม</a>
-            <a href="login">ประวัติการสั่งซื้อ</a>
-            <a href="mainpage" (click)="logout()">ออกจากระบบ</a>
-          </div>
-        </i>
+        <a href="login">
+          <i class="dropbtn fas fa-bars" style="margin-left: 15px; font-size: 26px;">
+          </i>
+        </a>
       </div>
 
       <div class="dropdown" *ngIf="loging">
