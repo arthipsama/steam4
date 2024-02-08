@@ -181,3 +181,15 @@ router.post('/searchproduct', (req, res) => {
     res.json(result.rows);
   });
 });
+
+router.post('/addview', (req, res) => {
+  const { productid, newview } = req.body;
+  pool.query('update public."Product" set "view" = $2 where productid = $1', [ productid, newview ], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.status(200).json({ message: 'Successfully Update Product view' });
+  });
+});

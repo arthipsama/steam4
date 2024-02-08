@@ -15,6 +15,7 @@ export class ProductDetailComponent {
   product!: productData;
   quantity: number = 1;
   percent!: number;
+  newview!: number;
 
   constructor(private service: ProductService,
               private router: Router,
@@ -32,6 +33,11 @@ export class ProductDetailComponent {
     if (storedProduct) {
       this.product = JSON.parse(storedProduct);
       this.discountProduct();
+      if(this.product.view){
+        this.newview = this.product.view++;
+        this.service.addView(this.product.productid, this.product.view).subscribe(x=>{
+        })
+      }
     }
     let storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
@@ -46,7 +52,6 @@ export class ProductDetailComponent {
     }
   };
   
-
   decreaseQuantity(): void {
     if (this.quantity > 1) {
       this.quantity--;
