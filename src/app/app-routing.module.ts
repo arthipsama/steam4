@@ -28,8 +28,23 @@ import { UserIdgameComponent } from './share/user-category/user-idgame/user-idga
 import { UserKeygameComponent } from './share/user-category/user-keygame/user-keygame.component';
 import { UserProgramComponent } from './share/user-category/user-program/user-program.component';
 import { UserSteamwalletComponent } from './share/user-category/user-steamwallet/user-steamwallet.component';
+import { RoleGuard } from './service/role.guard';
+import { AuthorizedComponent } from './share/authorized/authorized.component';
 
-
+const adminRoutes: Routes = [
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'user', component: AccountComponent },
+  { path: 'user-detail/:id', component: AccountDetailComponent },
+  { path: 'product', component: ProductComponent },
+  { path: 'product-admin-detail/:id', component: ProductAdminDetailComponent },
+  { path: 'new', component: NewComponent },
+  { path: 'new-admin-detail/:id', component: ContentAdminDetailComponent },
+  { path: 'order', component: OrderComponent },
+  { path: 'order-admin-detail/:id', component: OrderAdminDetailComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'setting', component: SettingComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
+];
 
 const routes: Routes = [
   {
@@ -38,77 +53,98 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: '' }
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ''}
   },
   {
     path: 'cart',
-    component: CartComponent
+    component: CartComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: 'USER' }
   },
   {
     path: 'product-detail/:id',
-    component: ProductDetailComponent
+    component: ProductDetailComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
   },
   {
     path: 'questions',
-    component: QaComponent
+    component: QaComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
   },
   {
     path: 'inventory',
-    component: UserInventoryComponent
+    component: UserInventoryComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: 'USER' }
   },
   {
     path: 'mykey',
-    component: UserMykeyComponent
+    component: UserMykeyComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: 'USER' }
   },
   {
     path: 'contactme',
-    component: UserContactmeComponent
+    component: UserContactmeComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
   },
   {
     path: 'allproduct',
-    component: UserAllproductComponent
+    component: UserAllproductComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
   },
   {
     path: 'idgame',
-    component: UserIdgameComponent
+    component: UserIdgameComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
   },
   {
     path: 'keygame',
-    component: UserKeygameComponent
+    component: UserKeygameComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
   },
   {
     path: 'program',
-    component: UserProgramComponent
+    component: UserProgramComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
   },
   {
     path: 'steamwallet',
-    component: UserSteamwalletComponent
+    component: UserSteamwalletComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
+  },
+  {
+    path: 'rolepage',
+    component: AuthorizedComponent
   },
   {
     path: 'admin',
     component: AdminComponent,
-    children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'user', component: AccountComponent },
-      { path: 'user-detail/:id', component: AccountDetailComponent},
-      { path: 'product', component: ProductComponent },
-      { path: 'product-admin-detail/:id', component: ProductAdminDetailComponent},
-      { path: 'new', component: NewComponent },
-      { path: 'new-admin-detail/:id', component: ContentAdminDetailComponent },
-      { path: 'order', component: OrderComponent },
-      { path: 'order-admin-detail/:id', component: OrderAdminDetailComponent },
-      { path: 'contact', component: ContactComponent },
-      { path: 'setting', component: SettingComponent },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
-    ]
+    canActivate: [RoleGuard],
+    data: { requiredRole: 'ADMIN' },
+    children: adminRoutes
   },
   {
     path: '', redirectTo: 'mainpage', pathMatch: 'full'

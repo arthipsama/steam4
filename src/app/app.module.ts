@@ -21,6 +21,7 @@ import { QaModule } from './qa/qa.module';
 import { QaComponent } from './qa/qa.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { RoleGuard } from './service/role.guard';
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
     
   ],
-  providers: [],
+  providers: [RoleGuard],
   bootstrap: [AppComponent],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA]
 })

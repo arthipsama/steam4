@@ -43,4 +43,21 @@ export class AuthService {
   outputUserData(userData: userData){
     this.userData.next(userData);
   }
+
+  getUserRole(): string {
+    // ตัวอย่าง: สมมติว่าข้อมูลผู้ใช้เก็บใน userData
+    return this.userData.value ? this.userData.value.Role : '';
+  }
+
+  checkUserRole(): string | undefined {
+    // โค้ดตรวจสอบ Role และ return ค่า
+    let storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+      const userData = JSON.parse(storedUserData);
+      return userData.Role;
+    }
+    // หรือ return undefined หรือค่าที่เหมาะสมในกรณีที่ไม่พบข้อมูลผู้ใช้
+    return '';
+  }
+  
 }

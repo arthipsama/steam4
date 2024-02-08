@@ -73,7 +73,10 @@
             <ng-container *ngFor="let pdmost of most5ProductsBySaleCount">
           <li class="cards_item">
             <div class="card">
-              <div class="card_image"><img src="https://picsum.photos/500/300/?image=10"></div>
+              <!-- <div class="card_image"><img src="https://picsum.photos/500/300/?image=10" style=""></div> -->
+              <div class="card_image">
+                <img [src]="pdmost.ImgProduct" class="product-image">
+              </div>
               <div class="card_content1">
                 <h2 class="card_title">{{ pdmost.ProductName }}</h2>
                 <p class="card_text">{{ pdmost.Description.length > 25 ? (pdmost.Description | slice:0:25) + '...' : pdmost.Description || '---' }}</p>
@@ -85,7 +88,6 @@
           </li>
         </ng-container>
     </ul>
-
       
       <!-- <h3 class="made_by">Made with SamaShop ♡</h3> -->
 
@@ -98,7 +100,9 @@
             <ng-container *ngFor="let pdview of most5ProductsByView">
           <li class="cards_item">
             <div class="card">
-              <div class="card_image"><img src="https://picsum.photos/500/300/?image=10"></div>
+                <div class="card_image">
+                    <img [src]="pdview.ImgProduct" class="product-image">
+                  </div>
               <div class="card_content2">
                 <h2 class="card_title">{{ pdview.ProductName }}</h2>
                 <p class="card_text">{{ pdview.Description.length > 25 ? (pdview.Description | slice:0:25) + '...' : pdview.Description || '---' }}</p>
