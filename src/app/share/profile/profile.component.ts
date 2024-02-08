@@ -46,7 +46,7 @@ export class ProfileComponent {
       firstname: [this.newUserData.FirstName || '', Validators.required],
       lastname: [this.newUserData.LastName || '', Validators.required],
       phoneNumber: this.newUserData.PhoneNumber || '',
-      email: [this.newUserData.Email || '', Validators.email],
+      email: [this.newUserData.Email || '', [Validators.email, Validators.required]],
       contact: this.newUserData.Contact || ''
     })
   }
