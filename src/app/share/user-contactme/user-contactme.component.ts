@@ -33,10 +33,10 @@ export class UserContactmeComponent {
 
   initForm(){
     this.contactmeForm = this.fb.group({
-      email: '',
-      name: '',
-      subject: ['', Validators.email],
-      message: ''
+      email: ['', Validators.required],
+      name: ['',  Validators.required],
+      subject: ['',  Validators.required],
+      message: ['',  Validators.required]
     })
   }
 
@@ -44,11 +44,11 @@ export class UserContactmeComponent {
     var email = this.contactmeForm.value.email;
     var name = this.contactmeForm.value.name;
     var subject = this.contactmeForm.value.subject;
-    var message = this.contactmeForm.value.subject;
-    this.serviceContact.postContactme(email, name, subject, message, this.userData.userid).subscribe(x=>{
-      console.log(x);
-      
-    })
-    
+    var message = this.contactmeForm.value.message;
+    if(this.contactmeForm.valid){
+      this.serviceContact.postContactme(email, name, subject, message, this.userData.userid).subscribe(x=>{
+        console.log("ส่งข้อมูลสำเร็จ");
+      })
+    }
   }
 }

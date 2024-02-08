@@ -106,7 +106,7 @@ const routes: Routes = [
     data: { requiredRole: ['' , 'USER'] }
   },
   {
-    path: 'allproduct',
+    path: 'allproduct/:id',
     component: UserAllproductComponent,
     canActivate: [RoleGuard],
     data: { requiredRole: ['' , 'USER'] }

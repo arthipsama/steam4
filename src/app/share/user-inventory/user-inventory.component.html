@@ -10,7 +10,7 @@
                 <li class="list-group-item" (click)="logout()">ออกจากระบบ</li>
             </ul>
         </div>
-        <div class="col-8" style="height: 400px;">
+        <div class="col-8" style="height: 500px;">
             <div class="col-12" style="display: flex;">
                 <div class="col-3" style="display: flex; justify-content: center;">
                     <h4>เลขที่ใบสั่งซื้อ</h4>
@@ -28,7 +28,7 @@
             <hr style="color: #fff; margin: 0 0 0 0;">
 
             <div class="col-12" style="margin-top: 20px;">
-                <div class="" style="display: flex; margin-top: 10px;" *ngFor="let items of userInventory">
+                <div class="" style="display: flex; margin-top: 10px;" *ngFor="let items of userInventory; let i = index" >
                     <div class="col-3" style="display: flex; justify-content: center;">
                         <h4>{{items.productcode}}</h4>
                     </div>
@@ -40,6 +40,9 @@
                     </div>
                     <div class="col-3" style="display: flex; justify-content: center;">
                         <h4>{{items.totalprice}}</h4>
+                    </div>
+                    <div class="" *ngIf="items.paymentstatus == 'incorrect'" (click)="popup(i)">
+                        <i class="far fa-eye eye" ></i>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { userData } from 'src/app/models/user.models';
 import { ColorService } from 'src/app/service/color.service';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -9,6 +10,8 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./user-mykey.component.scss']
 })
 export class UserMykeyComponent {
+  userData!: userData;
+  myKeyData: any;
 
   constructor(private router: Router,
     private serviceProduct: ProductService,
@@ -20,6 +23,14 @@ export class UserMykeyComponent {
     this.colorService.backgroundColor$.subscribe((color) => {
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
     });
+    let storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+        this.userData = JSON.parse(storedUserData);
+    }
+
+    this.serviceProduct.getInventory(this.userData.userid).subscribe(x=>{
+      this.myKeyData = x;
+    })
   }
 
   logout() {

@@ -8,8 +8,8 @@
             <h4 class="text">Log In</h4>
             <div class="">
                 <form [formGroup]="loginForm">
-                    <input class="username form-control" type="text" formControlName="username" placeholder="username"><br>
-                    <input class="password form-control" type="password" formControlName="password" placeholder="password">
+                    <input class="username form-control" type="text" formControlName="username" placeholder="username"  (keyup.enter)="submit()"><br>
+                    <input class="password form-control" type="password" formControlName="password" placeholder="password"  (keyup.enter)="submit()">
                 </form>
                 <div class="bottom">
                     <a href="register" class="goRegister">Need an account?</a>
