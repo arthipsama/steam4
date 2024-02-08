@@ -22,9 +22,13 @@
                                 <form [formGroup]="contactmeForm">
                                     <div class="content-column"
                                         style="flex: 2; padding: 0 12px; display: flex; flex-direction: column;">
+                                        <div *ngIf="contactmeForm.get('email')?.hasError('email') && contactmeForm.get('email')?.touched">
+                                            Invalid email format.
+                                          </div>
                                         <div class="input-wrapper" style="display: flex; flex-direction: column;">
                                             <input class="email form-control" type="email" style="padding: 8px; width: 100%; box-sizing: border-box; 
             background-color: gainsboro;" placeholder="Your Email" formControlName="email">
+
                                         </div>
 
                                         <div class="input-wrapper" style="display: flex; flex-direction: column;">

@@ -64,7 +64,7 @@ router.get('/dashboard/user', (req, res) => {
       FROM
         "Product"
       ORDER BY
-        "salecount" DESC,
+        COALESCE("salecount", 0) DESC,
         "productid" ASC
       LIMIT 5
     `;
@@ -87,7 +87,7 @@ router.get('/dashboard/user', (req, res) => {
       FROM
         "Product"
       ORDER BY
-        "view" DESC,
+        COALESCE("view", 0) DESC,
         "productid" ASC
       LIMIT 5
     `;
