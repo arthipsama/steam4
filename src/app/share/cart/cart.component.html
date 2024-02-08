@@ -89,10 +89,10 @@
                             <img class="col-2" src="{{items.ImgProduct}}" style="width: 130px; height: 90px; border-radius: 14px;">
                             <div class="col-10" style="color: #ffffff; display: flex; align-items: center;">
                                 <div class="col-3" style="margin-left: 20px;">{{items.ProductName}}</div>
-                                <div class="col-3" *ngIf="items.saleprice">${{items.saleprice}}</div>
-                                <div class="col-3" *ngIf="items.saleprice == null">${{items.price}}</div>
+                                <div class="col-3" *ngIf="items.saleprice">฿{{items.saleprice}}</div>
+                                <div class="col-3" *ngIf="items.saleprice == null">฿{{items.price}}</div>
                                 <div class="col-2">{{items.quantity}}</div>
-                                <div class="col-2" style="margin-left: 5px;">${{rowTotal[i]}}</div>
+                                <div class="col-2" style="margin-left: 5px;">฿{{rowTotal[i]}}</div>
                                 <i class="col-1 fas fa-trash trash" (click)="deleteProduct(i)"></i>
                             </div>
                         </div>
@@ -138,16 +138,16 @@
                 <h6 style="font-size: 17px; display: flex; justify-content: center;">Order summary</h6>
                 <div class="" style="display: flex; align-items: center; justify-content: space-between; margin: 0 15px 0 15px;">
                     <h6 style="font-size: 14px">Subtotal</h6>
-                    <h6 style="font-size: 14px">${{totalprice}}</h6>
+                    <h6 style="font-size: 14px">฿{{totalprice}}</h6>
                 </div>
                 <div class="" style="display: flex; align-items: center; justify-content: space-between; margin: 0 15px 0 15px;">
                     <h6 style="font-size: 14px">Tax included</h6>
-                    <h6 style="font-size: 14px">$0.00</h6>
+                    <h6 style="font-size: 14px">฿0.00</h6>
                 </div>
                 <hr class="" style="color: rgb(255, 255, 255); margin: 0 15px 0 15px;"><br>
                 <div class="" style="display: flex; align-items: center; justify-content: space-between; margin: 0 15px 0 15px;">
                     <h6 style="font-size: 14px">Grand total</h6>
-                    <h6 style="font-size: 14px">${{totalprice}}</h6>
+                    <h6 style="font-size: 14px">฿{{totalprice}}</h6>
                 </div>
                 <div class="" style="display: flex; justify-content: center;" (click)="payProduct()">
                     <h4 class="pay">Pay product</h4>

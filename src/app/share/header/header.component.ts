@@ -46,13 +46,6 @@ export class HeaderComponent implements OnInit{
   }
 
   searchProducts(dataSearch:string) {
-    // this.serviceProduct.search(dataSearch).subscribe(getSearch=>{
-    //   this.serviceProduct.sendSearchResults(getSearch);
-    //   this.router.navigate(['/allproduct'+'/'+dataSearch]);
-    //   window.scrollTo({ top: 0, behavior: 'smooth' });
-    // })
-
-      // this.serviceProduct.sendSearchResults(dataSearch);
       if(dataSearch){
         this.router.navigate(['/allproduct'+'/'+dataSearch], { queryParams: { search: dataSearch } });
       }else{
