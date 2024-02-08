@@ -33,10 +33,22 @@ export class UserAllproductComponent {
       if(searchParam){
         this.serviceProduct.search(searchParam).subscribe(x=>{
           this.product = x;
+          this.product.forEach((product: any) => {
+            if (product.saleprice) {
+              const discountPercentage = ((product.price - product.saleprice) / product.price) *  100;
+              product.percent = Math.round(discountPercentage);
+            }
+          });
         })
       }else{
         this.serviceProduct.getProduct().subscribe(x=>{
           this.product = x;
+          this.product.forEach((product: any) => {
+            if (product.saleprice) {
+              const discountPercentage = ((product.price - product.saleprice) / product.price) *  100;
+              product.percent = Math.round(discountPercentage);
+            }
+          });
         })
       }
     });

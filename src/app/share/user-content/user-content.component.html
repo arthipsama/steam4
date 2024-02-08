@@ -1,0 +1,8 @@
+<app-header></app-header>
+<div *ngIf="content != null" class="col-12 container" style="width: 1170px; height: auto; border-radius: 14px; background-color: #333333; color: rgb(130, 130, 130); margin-top: 20px; margin-bottom: 20px;">
+    <img src="{{content.ImgContentPath}}" style="width: 100%; height: 100%; display: flex; justify-content: center; padding: 40px 30px 30px 30px;">
+    <h1 style="padding: 10px 10px 10px 30px; word-wrap: break-word;">{{content.ContentName}}</h1>
+    <p style="padding: 0 10px 30px 30px; word-wrap: break-word;">{{content.Description}}</p>
+</div>
+
+<app-footer></app-footer>

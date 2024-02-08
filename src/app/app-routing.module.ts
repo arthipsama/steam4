@@ -30,6 +30,7 @@ import { UserProgramComponent } from './share/user-category/user-program/user-pr
 import { UserSteamwalletComponent } from './share/user-category/user-steamwallet/user-steamwallet.component';
 import { RoleGuard } from './service/role.guard';
 import { AuthorizedComponent } from './share/authorized/authorized.component';
+import { UserContentComponent } from './share/user-content/user-content.component';
 
 const adminRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -132,6 +133,12 @@ const routes: Routes = [
   {
     path: 'steamwallet',
     component: UserSteamwalletComponent,
+    canActivate: [RoleGuard],
+    data: { requiredRole: ['' , 'USER'] }
+  },
+  {
+    path: 'content',
+    component: UserContentComponent,
     canActivate: [RoleGuard],
     data: { requiredRole: ['' , 'USER'] }
   },

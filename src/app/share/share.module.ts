@@ -25,6 +25,7 @@ import { UserSteamwalletComponent } from './user-category/user-steamwallet/user-
 import { UserIdgameComponent } from './user-category/user-idgame/user-idgame.component';
 import { UserAllproductComponent } from './user-category/user-allproduct/user-allproduct.component';
 import { AuthorizedComponent } from './authorized/authorized.component';
+import { UserContentComponent } from './user-content/user-content.component';
 
 
 
@@ -49,7 +50,8 @@ import { AuthorizedComponent } from './authorized/authorized.component';
     UserSteamwalletComponent,
     UserIdgameComponent,
     UserAllproductComponent,
-    AuthorizedComponent
+    AuthorizedComponent,
+    UserContentComponent
   ],
   imports: [
     CommonModule,

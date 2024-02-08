@@ -3,6 +3,8 @@ import { RoomService } from '../service/room.service';
 import { productData } from '../models/product.model';
 import { ColorService } from '../service/color.service';
 import { Router } from '@angular/router';
+import { ContenUserService } from '../service/content-user.service';
+import { ContentDTO } from '../models/content.model';
 
 @Component({
   selector: 'app-mainpage',
@@ -16,19 +18,25 @@ export class MainpageComponent implements OnInit {
   img2 = 'https://cdn.discordapp.com/attachments/974891383087325254/1203287332065906719/2.png?ex=65d08ba7&is=65be16a7&hm=019c445b130db9ce75066e1b3b8afbcc3085f778ee7d9b03741a6882836d2197&';
   img3 = 'https://cdn.discordapp.com/attachments/974891383087325254/1203287342455070780/3.png?ex=65d08baa&is=65be16aa&hm=28b207978843b5200514dcef57ef540f5452e362b17b4250d3ed6d16542e0741&';
   images = [this.img1, this.img2, this.img3];
+
+  imgShow: ContentDTO[] = [];
   products!: productData[];
 
   constructor(private roomService: RoomService , 
     private colorService: ColorService ,
     private renderer: Renderer2 , 
     private el: ElementRef, 
-    private router: Router) {}
+    private router: Router,
+    private serviceContent: ContenUserService) {}
 
   ngOnInit() {
     this.colorService.backgroundColor$.subscribe((color) => {
       // ใช้ Renderer2 เพื่อตั้งค่าสีพื้นหลังของ body
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
     });
+    this.serviceContent.getContent().subscribe(x=>{
+      this.imgShow = x;
+    })
   }
 
   gotoKeygame(){
@@ -49,5 +57,9 @@ export class MainpageComponent implements OnInit {
   gotoIdgame(){
     this.router.navigate(['idgame']);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  content(index:number){
+    this.router.navigate(['content'], { queryParams: { number: index } });
   }
 }

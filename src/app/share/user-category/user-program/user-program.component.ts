@@ -25,6 +25,12 @@ export class UserProgramComponent {
     });
     this.serviceKeygame.getProductProgram().subscribe(x=>{
       this.product = x;
+      this.product.forEach((product: any) => {
+        if (product.saleprice) {
+          const discountPercentage = ((product.price - product.saleprice) / product.price) *  100;
+          product.percent = Math.round(discountPercentage);
+        }
+      });
     })
   }
 
