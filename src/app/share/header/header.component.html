@@ -38,10 +38,15 @@
       </div>
 
       <div class="dropdown" *ngIf="loging == false">
-        <a href="login">
-          <i class="dropbtn fas fa-bars" style="margin-left: 15px; font-size: 26px;">
-          </i>
-        </a>
+        <i class="dropbtn fas fa-bars" style="margin-left: 15px; font-size: 26px;">
+          <div class="dropdown-content">
+            <a href="login">ข้อมูลส่วนตัว</a>
+            <a href="login">คีย์เกม/ไอเทมในเกม</a>
+            <a href="login">ประวัติการสั่งซื้อ</a>
+            <!-- <a href="mainpage" (click)="logout()">ออกจากระบบ</a> -->
+            <a href="questions">คำถาม/ปัญหาทั่วไป</a>
+          </div>
+        </i>
       </div>
 
       <div class="dropdown" *ngIf="loging">
@@ -50,6 +55,7 @@
             <a href="profile">ข้อมูลส่วนตัว</a>
             <a href="mykey">คีย์เกม/ไอเทมในเกม</a>
             <a href="inventory">ประวัติการสั่งซื้อ</a>
+            <a href="questions">คำถาม/ปัญหาทั่วไป</a>
             <a href="mainpage" (click)="logout()">ออกจากระบบ</a>
           </div>
         </i>

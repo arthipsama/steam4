@@ -8,7 +8,7 @@
     </div>
     
     <div class="page-content">
-        <form [formGroup]="userForm">
+        <form *ngIf="profileForm" [formGroup]="profileForm">
         <div class="container">
             <div class="row gutters">
             <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
@@ -19,18 +19,17 @@
                             <div class="user-avatar">
                                 <img src="../assets/role/admin.png" alt="User Avatar">
                             </div>
-                            <h5 class="user-name">Arthip</h5>
-                            <h6 class="user-email">arthipsra@gmail.com</h6>
+                            <h5 class="user-name">{{userData.UserName}}</h5>
+                            <h6 class="user-email">{{userData.Email}}</h6>
                         </div>
                         <div class="about">
                             <h5>About Contact</h5>
-                            <p>1852 บ้านสินธร หมุ่3 จะมาไหม หรือไม่มา?</p>
+                            <p>{{userData.Contact}}</p>
                         </div>
                     </div>
                 </div>
             </div>
             </div>
-
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
                 <div class="card-body">
@@ -41,13 +40,13 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group" style="margin-bottom: 10px;">
                                 <label style="margin-bottom: 5px;" for="fullName">Firstname <span class="required">*</span></label>
-                                <input type="text" class="form-control" id="firstName" formControlName="firstName" required>
+                                <input type="text" class="form-control" id="firstName" formControlName="firstname" required>
                               </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label style="margin-bottom: 5px;" for="website">Lastname </label>
-                                <input type="text" class="form-control" id="lastName" formControlName="lastName">
+                                <input type="text" class="form-control" id="lastName" formControlName="lastname">
                             </div>
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">

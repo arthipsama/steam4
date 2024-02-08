@@ -1,22 +1,39 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { userData } from 'src/app/models/user.models';
 import { AlertServiceService } from 'src/app/service/alert-service.service';
+import { AuthService } from 'src/app/service/auth.service';
+import { ColorService } from 'src/app/service/color.service';
 import { RoomService } from 'src/app/service/room.service';
+import { trigger, state, transition, animate , style as angularAnimationStyle } from '@angular/animations';
+import { AuthAdminService } from 'src/app/service/auth-admin.service';
+
 
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
-  styleUrls: ['./setting.component.scss']
+  styleUrls: ['./setting.component.scss'],
+  animations: [
+    trigger('rotateAnimation', [
+      state('start', angularAnimationStyle({ transform: 'rotate(0deg)' })),
+      state('end', angularAnimationStyle({ transform: 'rotate(360deg)' })),
+      transition('start <=> end', animate('1s ease-in-out')),
+    ]),
+  ],
 })
 export class SettingComponent implements OnInit {
 
-  userData:any | userData;
+  // userData:any | userData;
   displayEmail!: string;
   animationState: string = 'start';
   userForm!: FormGroup;
+  userData: any;
+  profileForm!: FormGroup;
+  newUserData!: userData;
+  newPassword: string = '';
+  oldPassword: string = '';
 
   constructor( 
     private route: ActivatedRoute , 
@@ -24,7 +41,12 @@ export class SettingComponent implements OnInit {
     private alertService: AlertServiceService,
     private room: RoomService,
     private fb: FormBuilder,
-    private location: Location
+    private location: Location,
+    private service: AuthService,
+    private colorService: ColorService ,
+    private renderer: Renderer2, 
+    private el: ElementRef,
+    private authService: AuthAdminService,
     
     ) {
 
@@ -42,8 +64,28 @@ export class SettingComponent implements OnInit {
 
   ngOnInit(): void {
 
+    let storedUserData = localStorage.getItem('userData');
+    if (storedUserData) {
+      this.userData = JSON.parse(storedUserData);
+    }
+
+    this.service.UserData(this.userData.userid).subscribe(x=>{
+      this.newUserData = x[0];
+      this.initForm();
+    })
 
   }  
+
+  initForm() {
+    this.profileForm = this.fb.group({
+      firstname: [this.newUserData.FirstName || '', Validators.required],
+      lastname: [this.newUserData.LastName || '', Validators.required],
+      phoneNumber: this.newUserData.PhoneNumber || '',
+      email: [this.newUserData.Email || '', Validators.email],
+      contact: this.newUserData.Contact || '',
+      password: this.newUserData.Password
+    })
+  }
 
   showPassword: boolean = false;
 
@@ -54,24 +96,30 @@ export class SettingComponent implements OnInit {
   }
 
 isSaveButtonDisabled(): boolean {
-  return !this.userForm.get('firstName')?.value ||
-         !this.userForm.get('email')?.value ||
-         !this.userForm.get('phoneNumber')?.value ||
-         !this.userForm.get('password')?.value;
+  return !this.profileForm.get('firstname')?.value ||
+         !this.profileForm.get('email')?.value ||
+         !this.profileForm.get('phoneNumber')?.value ||
+         !this.profileForm.get('password')?.value;
 }
 
 onSave() {
-  // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
-  if (this.isValidFormData()) {
-    // ทำบันทึกข้อมูล
-    this.animationState = this.animationState === 'start' ? 'end' : 'start';
+  this.animationState = this.animationState === 'start' ? 'end' : 'start';
+  var userid = this.userData.userid;
+  var firstname = this.profileForm.value.firstname;
+  var lastname = this.profileForm.value.lastname;
+  var phoneNumber = this.profileForm.value.phoneNumber;
+  var email = this.profileForm.value.email;
+  var contact = this.profileForm.value.contact;
+  var password = this.profileForm.value.password;
+  if(this.profileForm.valid){
+    this.alertService.onSuccessLogout();
+    this.authService.editProfile(userid, firstname, lastname, phoneNumber, email, contact, password).subscribe(x => {
+      console.log(x);
 
-    console.log('Data to be saved:', this.userForm.value);
-    // ทำตามที่คุณต้องการเพิ่มเติม
-    this.alertService.onSuccess('บันทึกข้อมูลสำเร็จ', '/admin/dashboard');
-  } else {
-    console.log('Invalid Form');
-    // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
+    })
+  }
+  else{
+    console.log("ข้อมูลไม่ถูกต้อง");
   }
 }
 
@@ -87,11 +135,10 @@ getImagePath(Role: string): string {
 // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
 isValidFormData(): boolean {
   return (
-    this.userData.FirstName &&
-    this.userData.Email &&
-    this.userData.PhoneNumber &&
-    this.userData.Password &&
-    this.userData.Role
+    this.newUserData.FirstName!== undefined &&
+    this.newUserData.Email!== undefined &&
+    this.newUserData.PhoneNumber!== undefined &&
+    this.newUserData.Password!== undefined
   );
 }
 
