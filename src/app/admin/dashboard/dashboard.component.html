@@ -78,7 +78,7 @@
                 <img [src]="pdmost.ImgProduct" class="product-image">
               </div>
               <div class="card_content1">
-                <h2 class="card_title">{{ pdmost.ProductName }}</h2>
+                <h2 class="card_title">{{ pdmost.ProductName.length > 23 ? (pdmost.ProductName | slice:0:23) + '...' : pdmost.ProductName  }}</h2>
                 <p class="card_text">{{ pdmost.Description.length > 25 ? (pdmost.Description | slice:0:25) + '...' : pdmost.Description || '---' }}</p>
                 <button class="btn card_btn" [routerLink]="['/admin/product-admin-detail', pdmost.productid]" 
                 [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
@@ -104,7 +104,7 @@
                     <img [src]="pdview.ImgProduct" class="product-image">
                   </div>
               <div class="card_content2">
-                <h2 class="card_title">{{ pdview.ProductName }}</h2>
+                <h2 class="card_title">{{ pdview.ProductName.length > 23 ? (pdview.ProductName | slice:0:23) + '...' : pdview.ProductName  }}</h2>
                 <p class="card_text">{{ pdview.Description.length > 25 ? (pdview.Description | slice:0:25) + '...' : pdview.Description || '---' }}</p>
                 <button class="btn card_btn" [routerLink]="['/admin/product-admin-detail', pdview.productid]" 
                 [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
