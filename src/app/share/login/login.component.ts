@@ -54,15 +54,15 @@ export class LoginComponent {
         this.service.outputUserData(this.userData)
         localStorage.setItem('userData', JSON.stringify(this.userData));
         // console.log('ข้อมูล' ,this.userData );
-      }      
+      } else{
+        this.login = true;
+      }   
       if (this.userData.Role === 'ADMIN') {
         this.router.navigate(['/admin']);
       } else if (this.userData.Role === 'USER') {
         this.router.navigate(['/mainpage']);
       }
-      else{
-        this.login = true;
-      }
+
     })
   }
 }
