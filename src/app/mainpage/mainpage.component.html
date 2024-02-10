@@ -52,39 +52,42 @@
         </div>
       </div>
 
-      <div style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-top: 50px;">
+      <div
+        style="display: flex; justify-content: center; flex-direction: column; align-items: center; margin-top: 50px;">
         <div style="margin-bottom: 10px; font-size: 20px;">BESTSELLERS</div><br>
         <app-card-product></app-card-product>
-
-        <div class="col-12" style="background-color: #333333; height: 300px; width: 153%; margin: 10px 0 30px 0; display: flex; justify-content: center; align-items: center; ">
-          <img class="" src="https://spo.moph.go.th/web/dprom/images/kisspng-computer.png" style="width: 230px; height: 230px;">
-          <div class="" style="margin-left: 60px;">
-            <h2>Contact Me</h2>
-            <h3>What would you like to tell us?</h3>
-            <a href="/contactme" class="tellme">Tell me</a>
-          </div>
-        </div>
-        <div class="col-12" style="display: flex; align-items: center; justify-content: center; margin-bottom: 30px; color: #fff; font-size: 20px; gap: 30px;">
-          <div class="col-4 category" (click)="gotoKeygame()">
-              <i class="fas fa-key iconCate"></i>
-              <p class="textCate">KEYGAME</p>
-          </div>
-          <div class="col-4 category" (click)="gotoProgram()">
-              <i class="fab fa-xbox iconCate"></i>
-              <p class="textCate">PROGRAM</p>
-          </div>
-          <div class="col-4 category" (click)="gotoSteamwallet()">
-              <i class="fas fa-wallet iconCate"></i>
-              <p class="textCate">STEAMWALLET</p>
-          </div>
-          <div class="col-4 category" (click)="gotoIdgame()">
-              <i class="fas fa-robot iconCate"></i>
-              <p class="textCate">IDGAME</p>
-          </div>
-      </div>
       </div>
     </div>
-    
   </div>
 </div>
+
+<div class="col-12"
+  style="color: #fff; background-color: #333333; height: 300px; width: 100%; margin: 10px 0 30px 0; display: flex; justify-content: center; align-items: center; ">
+  <img class="" src="https://spo.moph.go.th/web/dprom/images/kisspng-computer.png" style="width: 230px; height: 230px;">
+  <div class="" style="margin-left: 60px;">
+    <h2>Contact Me</h2>
+    <h3>What would you like to tell us?</h3>
+    <a href="/contactme" class="tellme">Tell me</a>
+  </div>
+</div>
+<div class="col-12"
+  style="display: flex; align-items: center; justify-content: center; margin-bottom: 30px; color: #fff; font-size: 20px; gap: 30px;">
+  <div class="col-4 category" (click)="gotoKeygame()">
+    <i class="fas fa-key iconCate"></i>
+    <p class="textCate">KEYGAME</p>
+  </div>
+  <div class="col-4 category" (click)="gotoProgram()">
+    <i class="fab fa-xbox iconCate"></i>
+    <p class="textCate">PROGRAM</p>
+  </div>
+  <div class="col-4 category" (click)="gotoSteamwallet()">
+    <i class="fas fa-wallet iconCate"></i>
+    <p class="textCate">STEAMWALLET</p>
+  </div>
+  <div class="col-4 category" (click)="gotoIdgame()">
+    <i class="fas fa-robot iconCate"></i>
+    <p class="textCate">IDGAME</p>
+  </div>
+</div>
+
 <app-footer></app-footer>

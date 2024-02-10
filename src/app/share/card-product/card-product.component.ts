@@ -12,13 +12,15 @@ export class CardProductComponent {
   product: any;
   index: any;
   percent: any;
+  offset =  10;
+  limit =  10;
   // @Output() productChanged = new EventEmitter<productData[]>();
 
   constructor(private service: ProductService,
               private router: Router) {}
 
   ngOnInit(){
-    this.service.getProduct().subscribe(x=>{
+    this.service.getTenProduct(0, 10).subscribe(x=>{
       this.product = x;
       this.discountProduct()
     })
@@ -34,8 +36,10 @@ export class CardProductComponent {
   }
 
   loadMore(){
-    console.log("wait");
-    
+    this.service.getTenProduct(this.offset, this.limit).subscribe(newproduct => {
+      this.product = [...this.product, ...newproduct];
+      this.offset += this.limit;
+    });
   }
 
   gotoDetaileProduct(index:any){
