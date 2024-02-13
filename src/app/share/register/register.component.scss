@@ -38,3 +38,15 @@
 .goRegister{
     text-decoration: none;
 }
+
+.registerFalse{
+    margin: 25px 0 0 0;
+    width: 800px;
+    height: 60px;
+    background: rgba(255,89,89,.2117647059);
+    color: rgb(172, 73, 73);
+    border: 1px solid rgb(172, 73, 73);
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}

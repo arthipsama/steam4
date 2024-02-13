@@ -16,7 +16,7 @@ import { PopUpComponent } from '../pop-up/pop-up.component';
 export class LoginComponent {
   loginForm!: FormGroup;
   userData: any;
-  login: boolean = false;
+  loginValid: boolean = false;
   constructor(private fb: FormBuilder,
               private service: AuthService,
               private router: Router,
@@ -55,7 +55,7 @@ export class LoginComponent {
         localStorage.setItem('userData', JSON.stringify(this.userData));
         // console.log('ข้อมูล' ,this.userData );
       } else{
-        this.login = true;
+        this.loginValid = true;
       }   
       if (this.userData.Role === 'ADMIN') {
         this.router.navigate(['/admin']);

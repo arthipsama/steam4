@@ -2,6 +2,7 @@ import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { userData } from 'src/app/models/user.models';
+import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { ColorService } from 'src/app/service/color.service';
 
@@ -22,7 +23,9 @@ export class ProfileComponent {
               private service: AuthService,
               private colorService: ColorService ,
               private renderer: Renderer2, 
-              private el: ElementRef) {
+              private el: ElementRef,
+              private alert: AlertServiceService
+              ) {
   }
 
   ngOnInit() {
@@ -57,13 +60,13 @@ export class ProfileComponent {
   }
 
   updatePassword(oldPassword:string, newPassword: string) {
-    this.service.updatePassword(oldPassword, newPassword, this.userData.userid).subscribe(x=>{
-      if(x){
-        this.router.navigate(['/mainpage']);
-      }else{
-        console.log('การแก้ไขรหัสผ่านผิดพลาด โปรดลองใหม่อีกครั้ง');
+    this.service.updatePassword(oldPassword, newPassword, this.userData.userid).subscribe(x => {
+      if (x.body) {
+        this.alert.withOutTranslate.onSuccessRe();
+      } else{
+        this.alert.withOutTranslate.onError('รหัสผ่านไม่ถูกต้อง.');
       }
-    })
+    });
   }
 
   save() {
@@ -74,12 +77,12 @@ export class ProfileComponent {
     var email = this.profileForm.value.email;
     var contact = this.profileForm.value.contact;
     if(this.profileForm.valid){
+      this.alert.withOutTranslate.onSuccessRe();
       this.service.editProfile(userid, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
-        console.log(x);
       })
     }
     else{
-      console.log("ข้อมูลไม่ถูกต้อง");
+      this.alert.withOutTranslate.onError('ข้อมูลไม่ถูกต้อง.');
     }
   }
 }
