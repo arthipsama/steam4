@@ -193,3 +193,17 @@ router.post('/addview', (req, res) => {
     res.status(200).json({ message: 'Successfully Update Product view' });
   });
 });
+
+router.post('/tenproduct', (req, res) => {
+  const { offset, limit } = req.body;
+  pool.query(`SELECT * FROM public."Product" p
+              ORDER BY CASE WHEN salecount IS NULL THEN  1 ELSE  0 END, salecount DESC
+              LIMIT  $2 OFFSET  $1;`, [ offset, limit ], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});

@@ -102,9 +102,9 @@
     font-weight: 600;
 }
 
-.sidebar {
-    /*overflow-y: auto;*/
-}
+// .sidebar {
+//     overflow-y: auto;
+// }
 
 .side-menu ul {
     text-align: center;
@@ -704,4 +704,13 @@ img {
     width: 500px;
     height: 200px;
   }
+
+
   
+@media (max-width: 1400px ) and (min-width: 895px){
+    .cards_item {
+        display: flex;
+        padding: 1rem;
+        width: 33.3%;
+    }
+}

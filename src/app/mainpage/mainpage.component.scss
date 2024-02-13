@@ -3,6 +3,7 @@
 .container {
     // background-color: #2a36b1; // กำหนดสีพื้นหลังของ container
     color: #fff; // กำหนดสีของตัวอักษร
+    overflow-x:hidden;
   }
   
   .list-group-item {
@@ -117,3 +118,4 @@
   background-color: rgb(177, 100, 33);
   transition: background-color  0.3s ease;
 }
+
