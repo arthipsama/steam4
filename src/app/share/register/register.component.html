@@ -1,7 +1,8 @@
 <app-header></app-header>
 <div class="fullpage">
     <div class="body row">
-        <p></p>
+        <div class="registerFalse" *ngIf="registerValid==false">Register failed. Please try again.</div>
+        <p *ngIf="registerValid"></p>
         <div class="cardregister col-12">
             <h4 class="text">Register</h4><br>
             <div class="" style="border: 1px solid rgb(202, 202, 202); width: 700px; margin-left: 30px;"></div><br>

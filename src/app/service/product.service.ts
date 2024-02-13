@@ -76,8 +76,6 @@ export class ProductService {
 
   getTenProduct(offset:number, limit:number){
     var api = 'http://localhost:3000/api/tenproduct'
-    console.log(offset, limit);
-    
     return this.http.post<any>(api, {offset:offset,limit:limit});
   }
 }

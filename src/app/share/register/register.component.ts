@@ -1,6 +1,7 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { ColorService } from 'src/app/service/color.service';
 
@@ -12,13 +13,15 @@ import { ColorService } from 'src/app/service/color.service';
 export class RegisterComponent {
   registerForm!: FormGroup;
   user: any[] = [];
+  registerValid: boolean = true;
 
   constructor(private fb: FormBuilder,
               private service: AuthService,
               private colorService: ColorService ,
               private renderer: Renderer2 , 
               private el: ElementRef,
-              private router: Router) {
+              private router: Router,
+              private alert: AlertServiceService) {
 
   }
 
@@ -53,12 +56,12 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.service.postregister(username, password, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
         if (x) {
+          this.alert.withOutTranslate.onSuccessRe();
           this.router.navigate(['/login']);
-          console.log(x, "register สำเร็จ");
         }
       })
     } else {
-      console.log('ข้อมูลไม่ถูกต้อง');
+      this.registerValid = false;
     }
   }
 }
