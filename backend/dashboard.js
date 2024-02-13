@@ -34,16 +34,17 @@ router.get('/dashboard/user', (req, res) => {
 });
 
 
-  router.get('/dashboard/order', (req, res) => {
-    pool.query('SELECT totalprice FROM "Orders"', (err, result) => {
-      if (err) {
-        console.error('Error executing query Orders', err);
-        res.status(500).json({ error: 'Internal Server Error Orders' });
-        return;
-      }
-      res.json(result.rows);
-    });
+router.get('/dashboard/order', (req, res) => {
+  pool.query('SELECT ordersid FROM "Orders"', (err, result) => {
+    if (err) {
+      console.error('Error executing query Orders', err);
+      res.status(500).json({ error: 'Internal Server Error Orders' });
+      return;
+    }
+    res.json(result.rows);
   });
+});
+
 
   router.get('/dashboard/contact', (req, res) => {
     pool.query('SELECT "contactmeid" FROM "ContactMe"', (err, result) => {

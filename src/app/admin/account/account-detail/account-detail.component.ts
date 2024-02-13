@@ -141,11 +141,11 @@ onCancel() {
 // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
 isValidFormData(): boolean {
   return (
-    this.userData.FirstName &&
-    this.userData.Email &&
-    this.userData.PhoneNumber &&
-    this.userData.Password &&
-    this.userData.Role
+    !!this.userForm.get('firstName')?.value &&
+    !!this.userForm.get('email')?.value &&
+    !!this.userForm.get('phoneNumber')?.value &&
+    !!this.userForm.get('password')?.value &&
+    !!this.userForm.get('role')?.value
   );
 }
 

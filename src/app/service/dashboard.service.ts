@@ -32,15 +32,22 @@ export class DashboardService {
         })
       );
     }
-
-    CallViewOrder(): Observable<number> {
-      return this.http.get<{ totalprice: string }[]>('http://localhost:3000/api/dashboard/order').pipe(
-        map(data => {
-          const totalOrderPrices = data.map(item => parseFloat(item.totalprice) || 0);
-          return totalOrderPrices.reduce((sum, price) => sum + price, 0);
-        })
+    
+    CallViewOrder(): Observable<number[]> {
+      return this.http.get<{ orderid: string }[]>('http://localhost:3000/api/dashboard/order').pipe(
+        map(data => data.map(item => parseInt(item.orderid) || 0))
       );
-    }    
+    }
+    
+
+    // CallViewOrder(): Observable<number> {
+    //   return this.http.get<{ totalprice: string }[]>('http://localhost:3000/api/dashboard/order').pipe(
+    //     map(data => {
+    //       const totalOrderPrices = data.map(item => parseFloat(item.totalprice) || 0);
+    //       return totalOrderPrices.reduce((sum, price) => sum + price, 0);
+    //     })
+    //   );
+    // }    
 
     CallViewContact(): Observable<number> {
       return this.http.get('http://localhost:3000/api/dashboard/contact').pipe(
