@@ -30,10 +30,16 @@ export class DashboardComponent implements OnInit {
     });
 
 
-    this.dashboardService.CallViewOrder().subscribe(totalOrderPrice => {
-      console.log('Total Order Price:', totalOrderPrice);
-      this.totalOrderPrice = totalOrderPrice.toString();
+    // this.dashboardService.CallViewOrder().subscribe(totalOrderPrice => {
+    //   console.log('Total Order Price:', totalOrderPrice);
+    //   this.totalOrderPrice = totalOrderPrice.toString();
+    // });
+
+    this.dashboardService.CallViewOrder().subscribe(totalOrderIds => {
+      console.log('Total Order Ids:', totalOrderIds);
+      this.totalOrderPrice = totalOrderIds.length.toString();
     });
+    
     
 
     this.dashboardService.CallViewContact().subscribe((contactCount: number) => {
