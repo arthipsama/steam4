@@ -116,7 +116,7 @@ router.post('/makePayment', (req, res) => {
 
 router.post('/inventory', (req, res) => {
   const { userid } = req.body;
-  pool.query('SELECT * FROM public."Orders" WHERE userid = $1 AND paymentstatus IS NOT NULL', [ userid ], (err, result) => {
+  pool.query('SELECT * FROM public."Orders" WHERE userid = $1 AND paymentstatus IS NOT NULL ORDER BY "CreateDate" DESC', [ userid ], (err, result) => {
     if (err) {
       console.error('Error executing query', err);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -172,7 +172,7 @@ router.get('/idgame', (req, res) => {
 
 router.post('/searchproduct', (req, res) => {
   const { data } = req.body;
-  pool.query(`SELECT * FROM public."Product" WHERE "ProductName" LIKE $1;`, [`%${data}%`], (err, result) => {
+  pool.query(`SELECT * FROM public."Product" WHERE "ProductName" ILIKE $1;`, [`%${data}%`], (err, result) => {
     if (err) {
       console.error('Error executing query', err);
       res.status(500).json({ error: 'Internal Server Error' });

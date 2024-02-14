@@ -68,11 +68,9 @@ export class CartComponent {
   deleteProduct(i:any){
     this.service.deleteProduct(this.userProducts[i].productid, this.userProducts[i].ordersid).subscribe(x=>{
        if(x){
+        location.reload();
         this.service.cart(this.userData.userid).subscribe(pd=>{
-          
           this.userProducts = pd;           
-          console.log(this.userProducts);
-          
           if(this.userProducts.length == 0){
             this.haveItems = false;
           }
