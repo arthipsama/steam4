@@ -51,7 +51,6 @@ export class UserContactmeComponent {
     if(this.contactmeForm.valid){
       this.alertService.withOutTranslate.onSuccessRe();
       this.serviceContact.postContactme(email, name, subject, message, this.userData.userid).subscribe(x=>{
-        console.log("ส่งข้อมูลสำเร็จ");
       })
     }
   }

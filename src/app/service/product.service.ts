@@ -44,6 +44,11 @@ export class ProductService {
     return this.http.post<any>(api, {userid:userid})
   }
 
+  getMykey(userid:any){
+    var api = 'http://localhost:3000/api/mykey'
+    return this.http.post<any>(api, {userid:userid})
+  }
+
   getProductKeygame(){
     var api = 'http://localhost:3000/api/keygame'
     return this.http.get<any>(api)
@@ -76,8 +81,6 @@ export class ProductService {
 
   getTenProduct(offset:number, limit:number){
     var api = 'http://localhost:3000/api/tenproduct'
-    console.log(offset, limit);
-    
     return this.http.post<any>(api, {offset:offset,limit:limit});
   }
 }

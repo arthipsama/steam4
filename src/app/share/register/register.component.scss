@@ -38,3 +38,44 @@
 .goRegister{
     text-decoration: none;
 }
+
+.registerFalse{
+    margin: 25px 0 0 0;
+    width: 800px;
+    height: 60px;
+    background: rgba(255,89,89,.2117647059);
+    color: rgb(172, 73, 73);
+    border: 1px solid rgb(172, 73, 73);
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+
+::ng-deep .mat-dialog-container {
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0;
+}
+
+::ng-deep .mat-dialog-content {
+  overflow-y: auto;
+  max-height: calc(100vh - 64px); /* ลบส่วนความสูงของ header ออก */
+}
+
+::ng-deep .mat-dialog-title {
+  font-size: 18px;
+  padding: 16px;
+}
+
+::ng-deep .mat-dialog-actions {
+  padding: 16px;
+}
+
+/* ปรับแต่งสีของปุ่มปิด Dialog */
+::ng-deep .mat-dialog-container button[mat-dialog-close] {
+  background-color: transparent;
+  font-size: 20px;
+  color: green;
+}

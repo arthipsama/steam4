@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div class="fullpage">
     <div class="body row">
-        <div class="loginFalse" *ngIf="login">Login failed. Please try again.
+        <div class="loginFalse" *ngIf="loginValid">Login failed. Please try again.
         </div>
-        <p *ngIf="login == false"></p>
+        <p *ngIf="loginValid == false"></p>
         <div class="cardlogin col">
             <h4 class="text">Log In</h4>
             <div class="">

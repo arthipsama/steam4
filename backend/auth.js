@@ -75,11 +75,11 @@ router.post('/register', (req, res) => {
     }
     if (result.rowCount > 0) {
       const existingOrderDetail = pool.query('update public."User" set "Password" = $1 where userid = $2', [newPassword, userid]); 
-      res.json({ message: 'User registered successfully' });
+      res.json(true);
       return;
     } else {
       console.error('Error executing query', err);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.json(false);
       return;
     }
   });

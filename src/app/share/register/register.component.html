@@ -1,22 +1,42 @@
 <app-header></app-header>
 <div class="fullpage">
     <div class="body row">
-        <p></p>
+        <div class="registerFalse" *ngIf="registerValid==false">Register failed. Please try again.</div>
+        <p *ngIf="registerValid"></p>
         <div class="cardregister col-12">
             <h4 class="text">Register</h4><br>
-            <div class="" style="border: 1px solid rgb(202, 202, 202); width: 700px; margin-left: 30px;"></div><br>
+            <div class="" style="border: 1px solid rgb(202, 202, 202); width: auto; margin-left: 30px;"></div><br>
             <div class="">
                 <form [formGroup]="registerForm">
                     <div class="" style="display: flex;">
                         <div class="col-6" style="margin-left: 20px; width: 45%;">
+                            <div *ngIf="registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched" style="color: rgb(189, 50, 50);">
+                                Username is required.
+                            </div>
                             <input class="username form-control" type="text" formControlName="username" placeholder="username"><br>
+
+                            <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched" style="color: rgb(189, 50, 50);">
+                                Password is required.
+                            </div>
                             <input class="password form-control" type="password" formControlName="password" placeholder="password"><br>
+
+                            <div *ngIf="registerForm.get('firstname')?.hasError('required') && registerForm.get('firstname')?.touched" style="color: rgb(189, 50, 50);">
+                                Firstname is required.
+                            </div>
                             <input class="firstname form-control" type="text" formControlName="firstname" placeholder="firstname"><br>
+
+                            <div *ngIf="registerForm.get('lastname')?.hasError('required') && registerForm.get('lastname')?.touched" style="color: rgb(189, 50, 50);">
+                                Lastname is required.
+                            </div>
                             <input class="lastname form-control" type="text" formControlName="lastname" placeholder="lastname"><br>
                         </div>
     
                         <div class="col-6" style="margin-left: 20px; width: 45%;">
                             <input class="phoneNumber form-control" type="text" formControlName="phoneNumber" placeholder="phoneNumber"><br>
+
+                            <div *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched" style="color: rgb(189, 50, 50);">
+                                Invalid email format.
+                            </div>
                             <input class="email form-control" type="text" formControlName="email" placeholder="email"><br>
                             <input class="contact form-control" type="text" formControlName="contact" placeholder="contact">
                         </div>
