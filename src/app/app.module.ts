@@ -22,6 +22,7 @@ import { QaComponent } from './qa/qa.component';
 import { DialogModule } from '@angular/cdk/dialog';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RoleGuard } from './service/role.guard';
+import { ChartModule } from 'angular2-chartjs';
 
 
 @NgModule({
@@ -47,6 +48,8 @@ import { RoleGuard } from './service/role.guard';
     LayoutModule,
     DropDownButtonModule,
     NgxPaginationModule,
+    ChartModule,
+    NgxChartsModule
     
   ],
   providers: [RoleGuard],

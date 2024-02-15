@@ -56,4 +56,64 @@ export class DashboardComponent implements OnInit {
 
     
   }
+
+  generateColors(labels: string[], baseColor: string): string[] {
+    return labels.map((label, index) => baseColor);
+  }
+  
+status = false;
+addToggle()
+{
+  this.status = !this.status;       
+}
+//Bar Chart
+type = 'line';
+type2 = 'bar';
+dataa = {
+  labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],  
+  datasets: [{
+    label: "จำนวนออเดอร์ทั้งหมด",
+    data: [65, 59, 45, 81, 56, 55, 40],
+    backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#f38b4a"),
+    yAxisID: 'quantity-axis',
+  },{
+      label: "จำนวนยอดเงินทั้งหมด",
+      data: [800, 5900, 750, 8100, 850, 550, 40000],
+      backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#6970d5"),
+      yAxisID: 'money-axis',
+    }]
+};
+
+options = {
+  maintainAspectRatio: true,
+  scales: {
+    yAxes: [
+      {
+        id: 'quantity-axis',
+        ticks: {
+          // stepSize: 10,
+          max: 200,
+          min: 0,
+        },
+      },
+      {
+        id: 'money-axis',
+        position: 'right',
+        ticks: {
+          // stepSize: 500,
+          max: 100000,
+          min: 0,
+          callback: function (value: number, index: number, values: number[]) {
+            return new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: 'THB',
+            }).format(value);
+          },
+        },
+      },
+    ],
+  },
+};
+
+
 }
