@@ -765,7 +765,7 @@ img {
   }
 
 
-  @media only screen and (max-width: 1496px) and (max-width: 1208px) and (min-width: 977) and (min-width: 768) and (min-width: 755) {
+  @media only screen and (max-width: 1496px) and (max-width: 1208px) {
     .main-cards {
       grid-template-columns: 0.3fr;
       gap: 10px;
@@ -793,7 +793,7 @@ img {
     
   }
 
-  @media only screen  and (max-width: 540px) and (min-width: 412px) and (min-width: 390px) and (min-width: 260px) {
+  @media only screen  and (max-width: 540px) {
     .main-cards {
       grid-template-columns: 0.1fr;
       gap: 10px;

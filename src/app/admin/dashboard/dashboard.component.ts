@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
+import { Observable, map } from 'rxjs';
 import { DashboardService } from 'src/app/service/dashboard.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit {
     
     ) 
     
-    {  this.dataa3 = { ...this.dataa1 };
+    {  this.dataa3 = { ...this.dataa3 };
 
   }
 
@@ -36,12 +37,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.CallViewProduct().subscribe((summary: number) => {
       this.productSummary = summary;
     });
-
-
-    // this.dashboardService.CallViewOrder().subscribe(totalOrderPrice => {
-    //   console.log('Total Order Price:', totalOrderPrice);
-    //   this.totalOrderPrice = totalOrderPrice.toString();
-    // });
 
     this.dashboardService.CallViewOrder().subscribe(totalOrderIds => {
       console.log('Total Order Ids:', totalOrderIds);
@@ -62,6 +57,15 @@ export class DashboardComponent implements OnInit {
       this.most5ProductsByView = view5;
     });
 
+    const year1 = 2024;
+    this.loadDataForYear(year1, this.dataa3).subscribe((data: any) => {
+      this.currentData = data;
+    });
+  
+    const year2 = 2025;
+    this.loadDataForYear(year2, this.dataa2).subscribe((data: any) => {
+      // สามารถทำอะไรก็ตามที่ต้องการกับ data ของ year2 ได้ที่นี่
+    });
     
   }
 
@@ -70,46 +74,62 @@ export class DashboardComponent implements OnInit {
     return labels.map((label, index) => baseColor);
   }
   
-status = false;
-addToggle()
-{
-  this.status = !this.status;       
-}
-//Bar Chart
-// type = 'line';
+  loadDataForYear(year: number, dataContainer: any): Observable<any> {
+    return this.dashboardService.getOrderSummary(year).pipe(
+      map((orderSummary: any[]) => {
+        dataContainer.labels = orderSummary.map(item => this.getMonthName(item.month));
+        dataContainer.datasets[0].data = orderSummary.map(item => item.order_count);
+        dataContainer.datasets[0].backgroundColor = this.generateColors(dataContainer.labels, "#f38b4a");
+        dataContainer.datasets[1].data = orderSummary.map(item => item.total_price);
+        dataContainer.datasets[1].backgroundColor = this.generateColors(dataContainer.labels, "#6970d5");
+  
+        return dataContainer;
+      })
+    );
+  }
+  
+  getMonthName(monthNumber: number): string {
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+  
+    // monthNumber ต้องอยู่ในช่วง 1-12
+    if (monthNumber >= 1 && monthNumber <= 12) {
+      return monthNames[monthNumber - 1];
+    } else {
+      return '';
+    }
+  }
+  
+
 type2 = 'bar';
 chartTitle = 'Chart with Data from API 2024';
-public dataa1 = {
-  labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],  
+public dataa3: any = {
   datasets: [{
-    label: "จำนวนออเดอร์ทั้งหมด2024",
-    data: [65, 59, 45, 81, 56, 55, 40 ,65, 59, 45, 81, 56],
-    backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#f38b4a"),
+    label: "จำนวนออเดอร์ทั้งหมด 2024",
+    data: [],
     yAxisID: 'quantity-axis',
-  },{
-      label: "จำนวนยอดเงินทั้งหมด2024",
-      data: [800, 5900, 750, 8100, 850, 550, 4000,800, 5900, 750, 8100, 850],
-      backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#6970d5"),
-      yAxisID: 'money-axis',
-    }]
+  }, {
+    label: "จำนวนยอดเงินทั้งหมด 2024",
+    data: [],
+    yAxisID: 'money-axis',
+  }]
 };
 
-public dataa2 = {
-  labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],  
+public dataa2: any = {
   datasets: [{
-    label: "จำนวนออเดอร์ทั้งหมด2025",
-    data: [65, 59, 45, 81, 56, 55, 40,65, 59, 45, 81, 56],
-    backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#f38b4a"),
+    label: "จำนวนออเดอร์ทั้งหมด 2025",
+    data: [],
     yAxisID: 'quantity-axis',
-  },{
-      label: "จำนวนยอดเงินทั้งหมด2025",
-      data: [800, 5900, 750, 8100, 850, 550, 4000,800, 5900, 750, 8100, 8500],
-      backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#6970d5"),
-      yAxisID: 'money-axis',
-    }]
+  }, {
+    label: "จำนวนยอดเงินทั้งหมด 2025",
+    data: [],
+    yAxisID: 'money-axis',
+  }]
 };
 
-public dataa3: any;
+// public dataa3: any;
 
 options = {
   maintainAspectRatio: true,
@@ -118,7 +138,7 @@ options = {
       {
         id: 'quantity-axis',
         ticks: {
-          // stepSize: 10,
+          stepSize: 10,
           max: 200,
           min: 0,
         },
@@ -146,7 +166,7 @@ options = {
 };
 
 
-currentData = this.dataa1;
+currentData: any;
 newData: any[] = [];
 
 toggleChartData(year: string) {
@@ -161,6 +181,9 @@ toggleChartData(year: string) {
     newData = this.dataa3;
     newTitle = 'Chart with Data from API 2024';
     console.log('New Data:', newData);
+
+    // เรียกใช้ loadDataForYear เพื่อให้โค้ดทำงานอัตโนมัติสำหรับปี 2024
+    this.loadDataForYear(2024, this.dataa3);
   }
 
   this.currentData = newData;
@@ -170,6 +193,7 @@ toggleChartData(year: string) {
     this.cdr.detectChanges();
   });
 }
+
 
 
 
