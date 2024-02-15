@@ -540,16 +540,6 @@ table tbody tr {
     table {
         width: 900px;
     }
-    
-    .main-cards {
-        grid-template-columns: 0.2fr;
-        gap: 10px;
-        margin-bottom: 0;
-      }
-      .charts {
-        grid-template-columns: 0.2fr;
-        margin-top: 30px;
-      }
 }
 
 .clickable {
@@ -775,7 +765,7 @@ img {
   }
 
 
-  @media screen and (max-width: 1496px) and (max-width: 1208px) and (min-width: 977) and (min-width: 768) and (min-width: 755) {
+  @media only screen and (max-width: 1496px) and (max-width: 1208px) and (min-width: 977) and (min-width: 768) and (min-width: 755) {
     .main-cards {
       grid-template-columns: 0.3fr;
       gap: 10px;
@@ -789,7 +779,7 @@ img {
     
   }
 
-  @media screen and (max-width: 1510) {
+  @media only screen and (max-width: 1510) {
     .main-cards {
       grid-template-columns: 0.4fr;
       gap: 10px;
@@ -803,7 +793,7 @@ img {
     
   }
 
-  @media screen and (max-width: 540px) and (min-width: 412px) and (min-width: 390px) and (min-width: 260px) {
+  @media only screen  and (max-width: 540px) and (min-width: 412px) and (min-width: 390px) and (min-width: 260px) {
     .main-cards {
       grid-template-columns: 0.1fr;
       gap: 10px;
