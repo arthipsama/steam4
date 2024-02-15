@@ -54,12 +54,12 @@ export class AccountDetailComponent implements OnInit {
 
      ngOnInit(): void {
       let userid = this.route.snapshot.paramMap.get('id');
-      console.log("user id is", userid);
+      // console.log("user id is", userid);
     
       userid && this.Auth.getUserById(userid).subscribe((res) => {
         this.userData = res;
         this.displayEmail = res!.Email!;
-        console.log(res);
+        // console.log(res);
     
         // ตรวจสอบว่า userForm ถูกสร้างแล้ว
         if (this.userForm) {
@@ -115,16 +115,16 @@ onSave() {
     this.Auth.editUser(userId, editedUserData).subscribe(
       (res) => {
         this.animationState = this.animationState === 'start' ? 'end' : 'start';
-        console.log('User data updated:', res);
+        // console.log('User data updated:', res);
         this.alertService.onSuccess('บันทึกการแก้ไขสำเร็จ', '/admin/user');
       },
       (error) => {
-        console.error('Error updating user data', error);
+        // console.error('Error updating user data', error);
         // ทำอะไรต่อไปในกรณีเกิด error
       }
     );
   } else {
-    console.log('Invalid Form');
+    // console.log('Invalid Form');
     // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
   }
 }

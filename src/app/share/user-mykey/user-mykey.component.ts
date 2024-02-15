@@ -47,7 +47,7 @@ export class UserMykeyComponent {
 
   pageChanged(event: any): void {
     this.currentPage = event;
-    console.log('pageChanged ' ,event);
+    // console.log('pageChanged ' ,event);
     this.pageChange.emit(this.currentPage);
   }
 }

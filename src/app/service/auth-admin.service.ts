@@ -29,7 +29,7 @@ export class AuthAdminService {
       url += '?' + queryParams.join('&');
     }
   
-    console.log('API URL:', url); // แสดง URL ที่ใช้สำหรับ HTTP request
+    // console.log('API URL:', url); // แสดง URL ที่ใช้สำหรับ HTTP request
     return this.http.get<any[]>(url);
   }
   

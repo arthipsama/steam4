@@ -36,23 +36,23 @@ export class AccountComponent implements OnInit {
 
     onSearch(): void {
       this.currentPage = 1;
-      console.log('Search Term:', this.searchUserName);
+      // console.log('Search Term:', this.searchUserName);
       this.selectedRole = 'All';
       this.authAdminService.getAllUsers(this.searchUserName).subscribe(users => {
         this.user = users;
         this.recordCount = users.length;
-        console.log('Users:', users);
+        // console.log('Users:', users);
       });
     }
     
     onRoleChange(): void {
       this.currentPage = 1;
       this.searchUserName = '';
-      console.log('Statuc select:', this.selectedRole);
+      // console.log('Statuc select:', this.selectedRole);
       this.authAdminService.getAllUsers(this.searchUserName, this.selectedRole).subscribe(users => {
         this.user = users;
         this.recordCount = users.length;
-        console.log(users); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+        // console.log(users); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
       });
     }
 
@@ -72,12 +72,12 @@ export class AccountComponent implements OnInit {
   private async deleteUser(userId: string) {
       this.Auth.deleteUser(userId).subscribe(
         (res) => {
-          console.log('User deleted successfully:', res);
+          // console.log('User deleted successfully:', res);
           this.alert.withOutTranslate.onDeleteRe();
           return;
         },
         (error) => {
-          console.error('Error deleting user', error);
+          // console.error('Error deleting user', error);
           if (error.status === 500) {
             // แสดงข้อความให้ผู้ใช้ทราบว่าไม่สามารถลบได้เนื่องจากข้อมูลถูกเชื่อมโยง
             this.alert.withOutTranslate.onError('ลบไม่สำเร็จเนื่องจาก Order เชื่อมกันอยู่');
@@ -143,8 +143,8 @@ export class AccountComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
+      // console.log('The dialog was closed');
+      // console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
     });
   }
 
@@ -161,7 +161,7 @@ export class AccountComponent implements OnInit {
 
   pageChanged(event: any): void {
     this.currentPage = event;
-    console.log('pageChanged ' ,event);
+    // console.log('pageChanged ' ,event);
     this.pageChange.emit(this.currentPage);
   }
 // end Pagination

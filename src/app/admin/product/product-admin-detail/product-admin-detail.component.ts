@@ -58,12 +58,12 @@ export class ProductAdminDetailComponent implements OnInit {
 
      ngOnInit(): void {
       let productId = this.route.snapshot.paramMap.get('id');
-      console.log("User ID is", productId);
+      // console.log("User ID is", productId);
   
       productId && this.productService.getProductById(productId).subscribe((res) => {
         // ทำอะไรกับข้อมูลสินค้าที่ได้รับ
         this.productsData = res;
-        console.log('Product Data', res);
+        // console.log('Product Data', res);
   
         // เก็บค่า ImgProduct ต้นฉบับ
         this.originalImgProduct = res?.ImgProduct;
@@ -94,7 +94,7 @@ isSaveButtonDisabled(): boolean {
 onSave() {
   // Assuming you're getting productId from route params
   const productId = this.route.snapshot.params['id'];
-  console.log("User ID is", productId);
+  // console.log("User ID is", productId);
 
 
   // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
@@ -108,25 +108,25 @@ onSave() {
       ImgProduct: this.selectedFile || this.originalImgProduct,
     };
     
-    console.log('Data to be saved:', formDataWithImage);
+    // console.log('Data to be saved:', formDataWithImage);
 
     this.productService.editProduct(productId, formDataWithImage).subscribe(
       (response) => {
         // สำเร็จ
-        console.log('Successfully edited:', response);
+        // console.log('Successfully edited:', response);
         this.alertService.onSuccess('แก้ไขข้อมูลสำเร็จ', '/admin/product');
         
         // ทำตามที่คุณต้องการเพิ่มเติม
       },
       (error) => {
         // ไม่สำเร็จ
-        console.error('Error editing data:', error);
+        // console.error('Error editing data:', error);
         this.alertService.withOutTranslate.onError('เกิดข้อผิดพลาดในการแก้ไขข้อมูล');
       }
     );
 
   } else {
-    console.log('Invalid Form');
+    // console.log('Invalid Form');
     // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
   }
 }

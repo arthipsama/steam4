@@ -104,6 +104,52 @@ router.get('/dashboard/order', (req, res) => {
     });
   });
 
+  router.get('/dashboard/order-summary', (req, res) => {
+    // รับค่า year จาก query parameters
+    const year = req.query.year;
+  
+    // ตรวจสอบว่า year ถูกส่งมาหรือไม่
+    if (!year) {
+      res.status(400).json({ error: 'Year parameter is missing' });
+      return;
+    }
+  
+    const sqlQuery = `
+      WITH months AS (
+        SELECT generate_series(1, 12) AS month
+      )
+  
+      SELECT
+        months.month,
+        COALESCE(SUM("totalprice"), 0) AS total_price,
+        COALESCE(COUNT("ordersid"), 0) AS order_count
+      FROM
+        months
+      LEFT JOIN
+        "Orders" ON EXTRACT(MONTH FROM "CreateDate"::timestamp) = months.month
+                  AND EXTRACT(YEAR FROM "CreateDate"::timestamp) = $1
+                  AND "paymentstatus" = 'checked'
+      GROUP BY
+        months.month
+      ORDER BY
+        months.month ASC
+    `;
+  
+    // ส่งค่า year ไปยัง query
+    pool.query(sqlQuery, [year], (err, result) => {
+      if (err) {
+        console.error('Error executing query Orders', err);
+        res.status(500).json({ error: 'Internal Server Error Orders' });
+        return;
+      }
+  
+      res.json(result.rows);
+    });
+  });
+  
+  
+
+
 // Other room-related routes go here...
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 
@@ -67,4 +67,10 @@ export class DashboardService {
       return this.http.get<any[]>(`${this.apiUrl}/product/view5`);
     }
 
+      // เพิ่มฟังก์ชันเพื่อเรียก API /dashboard/order-summary
+      getOrderSummary(year: number): Observable<any[]> {
+        const params = new HttpParams().set('year', year.toString());
+        return this.http.get<any[]>(`${this.apiUrl}/order-summary`, { params });
+      }
+      
 }

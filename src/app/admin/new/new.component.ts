@@ -46,18 +46,18 @@ export class NewComponent implements OnInit {
         },
         (error) => {
           // กรณีเกิด error ในการดึงข้อมูล
-          console.error('Error fetching content data:', error);
+          // console.error('Error fetching content data:', error);
         }
       );
     }
 
     onSearch(): void {
       this.currentPage = 1;
-      console.log('Search Term:', this.contentName);
+      // console.log('Search Term:', this.contentName);
       this.contentService.getAllContent(this.contentName).subscribe(contents => {
         this.content = contents;
         this.recordCount = contents.length;
-        console.log('Users:', contents);
+        // console.log('Users:', contents);
       });
     }
 
@@ -77,10 +77,10 @@ export class NewComponent implements OnInit {
   private async deleteUser(contentid: string) {
     try {
       const res = await this.contentService.deleteContent(contentid).toPromise();
-      console.log('Content deleted successfully:', res);
+      // console.log('Content deleted successfully:', res);
       this.alert.withOutTranslate.onDeleteRe();
     } catch (error) {
-      console.error('Error deleting user', error);
+      // console.error('Error deleting user', error);
       if ((error as any).status === 500) {
         this.alert.withOutTranslate.onError('ลบไม่สำเร็จเนื่องจากเป็น Content หลักอยู่');
       }
@@ -101,8 +101,8 @@ export class NewComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
+      // console.log('The dialog was closed');
+      // console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
     });
   }
 
@@ -151,7 +151,7 @@ export class NewComponent implements OnInit {
   
     pageChanged(event: any): void {
       this.currentPage = event;
-      console.log('pageChanged ' ,event);
+      // console.log('pageChanged ' ,event);
       this.pageChange.emit(this.currentPage);
     }
   // end Pagination

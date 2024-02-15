@@ -22,6 +22,9 @@
                         <div class="indicator one" style="width: 60%"></div>
                     </div>
                 </div>
+                <div class="view-detail">
+                    <a routerLink="/admin/user">View Details</a>
+                </div>
             </div>
 
             <div class="card">
@@ -34,6 +37,9 @@
                     <div class="card-indicator">
                         <div class="indicator two" style="width: 80%"></div>
                     </div>
+                </div>
+                <div class="view-detail">
+                    <a routerLink="/admin/product">View Details</a>
                 </div>
             </div>
 
@@ -48,6 +54,9 @@
                         <div class="indicator three" style="width: 65%"></div>
                     </div>
                 </div>
+                <div class="view-detail">
+                    <a routerLink="/admin/order">View Details</a>
+                </div>
             </div>
 
             <div class="card">
@@ -61,6 +70,9 @@
                         <div class="indicator four" style="width: 90%"></div>
                     </div>
                 </div>
+                <div class="view-detail">
+                    <a routerLink="/admin/contact">View Details</a>
+                </div>
             </div>
 
         </div>
@@ -68,14 +80,23 @@
 
     <div class="page-content">
     <div class="charts">
-        <!-- <div class="charts-card">
-          <h2 class="chart-title">Top 5 Products</h2>
-          <chart [type]="type" [data]="dataa" [options]="options"></chart>
-        </div> -->
+        <div class="example-button-row">
+            <button mat-stroked-button color="primary" (click)="toggleChartData('2024')">ปี 2024</button>
+            <button mat-stroked-button color="primary" (click)="toggleChartData('2025')">ปี 2025</button>
+          </div>
         <div class="charts-card">
-          <h2 class="chart-title">Purchase and Quantity Orders</h2>
-          <chart [type]="type2" [data]="dataa" [options]="options"></chart>
+            <div class="title-container">
+                <div style="width:100%;">
+                    <h2 class="chart-title">{{ chartTitle }}</h2>
+                </div>
+              </div>   
+          <div class="flex-container">
+            <h5>จำนวนออเดอร์</h5>
+            <h5>จำนวนยอดเงิน</h5>
+          </div>
+          <chart [type]="type2" [data]="currentData" [options]="options"></chart>
         </div>
+
         </div>
     </div>
 

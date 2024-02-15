@@ -35,7 +35,7 @@ export class OrderComponent implements OnInit {
 
   onSearch(): void {
     this.currentPage = 1;
-    console.log('Search Term:', this.searchUserName);
+    // console.log('Search Term:', this.searchUserName);
     this.selectedRole = 'All';
     this.orderService.getAllOrders(this.searchUserName).subscribe(ordersS => {
       this.orders = ordersS;
@@ -47,11 +47,11 @@ export class OrderComponent implements OnInit {
   onRoleChange(): void {
     this.currentPage = 1;
     this.searchUserName = '';
-    console.log('Statuc select:', this.selectedRole);
+    // console.log('Statuc select:', this.selectedRole);
     this.orderService.getAllOrders(this.searchUserName, this.selectedRole).subscribe(ordersS => {
       this.orders = ordersS;
       this.recordCount = ordersS.length;
-      console.log(ordersS); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+      // console.log(ordersS); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
     });
   }
 
@@ -76,8 +76,8 @@ export class OrderComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
+      // console.log('The dialog was closed');
+      // console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
     });
   }
 
@@ -101,7 +101,7 @@ export class OrderComponent implements OnInit {
   
     pageChanged(event: any): void {
       this.currentPage = event;
-      console.log('pageChanged ' ,event);
+      // console.log('pageChanged ' ,event);
       this.pageChange.emit(this.currentPage);
     }
   // end Pagination

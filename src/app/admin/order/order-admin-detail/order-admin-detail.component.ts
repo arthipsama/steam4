@@ -81,16 +81,16 @@ export class OrderAdminDetailComponent implements OnInit {
         if (this.ordersid !== null) {
           this.orderService.getOrderById(this.ordersid).subscribe(data1 => {
             this.orderss = data1;
-            console.log('Order Main:', data1);
+            // console.log('Order Main:', data1);
           });
   
           this.orderService.getOrderDetails(this.ordersid).subscribe(data2 => {
             this.orderDetail = data2;
-            console.log('Order Details:', data2);
+            // console.log('Order Details:', data2);
             this.updateUserFormValues();
           });
         } else {
-          console.error('Invalid ordersid:', this.ordersid);
+          // console.error('Invalid ordersid:', this.ordersid);
         }
       });
     }
@@ -167,11 +167,11 @@ onSave() {
     // ทำบันทึกข้อมูล
     this.animationState = this.animationState === 'start' ? 'end' : 'start';
 
-    console.log('Data to be saved:', this.userForm.value);
+    // console.log('Data to be saved:', this.userForm.value);
     // ทำตามที่คุณต้องการเพิ่มเติม
     this.alertService.onSuccess('บันทึกข้อมูลสำเร็จ', '/admin/user');
   } else {
-    console.log('Invalid Form');
+    // console.log('Invalid Form');
     // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
   }
 }
@@ -223,8 +223,8 @@ openUserDialog(ordersid: number): void {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-    console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
+    // console.log('The dialog was closed');
+    // console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
   });
 }
 
