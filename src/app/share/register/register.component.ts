@@ -39,8 +39,8 @@ export class RegisterComponent {
       password: ["", [Validators.required]],
       firstname: ["", [Validators.required]],
       lastname: "",
-      phoneNumber: "",
-      email: ["", [Validators.email]],
+      phoneNumber: ["", [Validators.required, Validators.pattern('^[0-9]{1,10}$')]],
+      email: ['', [Validators.required, Validators.email]],
       contact: ""
     })
   }

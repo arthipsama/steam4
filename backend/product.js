@@ -114,6 +114,18 @@ router.post('/makePayment', (req, res) => {
   });
 });
 
+router.post('/mykey', (req, res) => {
+  const { userid } = req.body;
+  pool.query(`SELECT * FROM public."Orders" WHERE userid = $1 AND paymentstatus IS NOT NULL AND paymentstatus = 'checked' ORDER BY "CreateDate" DESC`, [ userid ], (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});
+
 router.post('/inventory', (req, res) => {
   const { userid } = req.body;
   pool.query('SELECT * FROM public."Orders" WHERE userid = $1 AND paymentstatus IS NOT NULL ORDER BY "CreateDate" DESC', [ userid ], (err, result) => {
