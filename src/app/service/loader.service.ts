@@ -20,7 +20,7 @@ export class LoaderService {
 
   public startLoader(url: string = 'app') {
     //if (this.reqs.length === 0) {
-      console.log('startLoader');
+      // console.log('startLoader');
       
       this. start();
      // localStorage.setItem('isLoading', 'true');

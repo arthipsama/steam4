@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
     });
 
     this.dashboardService.CallViewOrder().subscribe(totalOrderIds => {
-      console.log('Total Order Ids:', totalOrderIds);
+      // console.log('Total Order Ids:', totalOrderIds);
       this.totalOrderPrice = totalOrderIds.length.toString();
     });
     
@@ -176,11 +176,11 @@ toggleChartData(year: string) {
   if (year === '2025') {
     newData = this.dataa2;
     newTitle = 'Chart with Data from API 2025';
-    console.log('New Data:', newData);
+    // console.log('New Data:', newData);
   } else if (year === '2024') {
     newData = this.dataa3;
     newTitle = 'Chart with Data from API 2024';
-    console.log('New Data:', newData);
+    // console.log('New Data:', newData);
 
     // เรียกใช้ loadDataForYear เพื่อให้โค้ดทำงานอัตโนมัติสำหรับปี 2024
     this.loadDataForYear(2024, this.dataa3);

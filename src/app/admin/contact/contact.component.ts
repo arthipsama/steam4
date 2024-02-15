@@ -40,11 +40,11 @@ export class ContactComponent implements OnInit {
 
     this.ContactService.getContactMeData().subscribe(contacts => {
       this.contact = contacts;
-      console.log(contacts); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+      // console.log(contacts); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
     });
 
     // console.log('User:', this.user);
-    console.log('Contact:', this.contact);
+    // console.log('Contact:', this.contact);
     // this.recordCount = this.user.length;
 
     this.onSearch();
@@ -52,24 +52,24 @@ export class ContactComponent implements OnInit {
 
     onSearch(): void {
       this.currentPage = 1;
-      console.log('Search Term:', this.searchUserName);
+      // console.log('Search Term:', this.searchUserName);
       this.selectedRole = 'All';  // เปลี่ยนเป็น 'All', 'true' หรือ 'false' ตามที่ต้องการ
       this.ContactService.getContactMeData(this.searchUserName, this.selectedRole).subscribe(contacts => {
         this.contact = contacts;
         this.recordCount = contacts.length;
-        console.log('Contacts:', contacts);
+        // console.log('Contacts:', contacts);
       });
     }
     
     onRoleChange(): void {
       this.currentPage = 1;
       this.searchUserName = '';
-      console.log('Status select:', this.selectedRole);
+      // console.log('Status select:', this.selectedRole);
       
       this.ContactService.getContactMeData(this.searchUserName, this.selectedRole).subscribe(contacts => {
         this.contact = contacts;
         this.recordCount = contacts.length;
-        console.log(contacts);
+        // console.log(contacts);
       });
     }
 
@@ -89,12 +89,12 @@ export class ContactComponent implements OnInit {
   private async deleteContect(contactmeid: string) {
     this.ContactService.deleteContact(contactmeid).subscribe(
       (res) => {
-        console.log('User deleted successfully:', res);
+        // console.log('User deleted successfully:', res);
         this.alert.withOutTranslate.onDeleteRe();
         return;
       },
       (error) => {
-        console.error('Error deleting user', error);
+        // console.error('Error deleting user', error);
         if (error.status === 500) {
           // แสดงข้อความให้ผู้ใช้ทราบว่าไม่สามารถลบได้เนื่องจากข้อมูลถูกเชื่อมโยง
           this.alert.withOutTranslate.onError('ลบไม่สำเร็จเนื่องจาก Order เชื่อมกันอยู่');
@@ -112,8 +112,8 @@ export class ContactComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
+      // console.log('The dialog was closed');
+      // console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
     });
   }
 
@@ -130,7 +130,7 @@ export class ContactComponent implements OnInit {
   
     pageChanged(event: any): void {
       this.currentPage = event;
-      console.log('pageChanged ' ,event);
+      // console.log('pageChanged ' ,event);
       this.pageChange.emit(this.currentPage);
     }
   // end Pagination

@@ -57,12 +57,12 @@ export class ContentAdminDetailComponent implements OnInit {
 
      ngOnInit(): void {
       let contentid = this.route.snapshot.paramMap.get('id');
-      console.log("uses id is", contentid);
+      // console.log("uses id is", contentid);
   
       contentid &&
         this.contentService.getContentById(contentid).subscribe((res) => {
           this.contentsData = res;
-          console.log('ข้อมูลข่าวเกม', res);
+          // console.log('ข้อมูลข่าวเกม', res);
   
           // เก็บค่า ImgProduct ต้นฉบับ
           this.originalImgProduct = this.contentsData?.ImgContentPath;
@@ -87,7 +87,7 @@ isSaveButtonDisabled(): boolean {
 onSave() {
   // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
   const contentid = this.route.snapshot.params['id'];
-  console.log("User ID is", contentid);
+  // console.log("User ID is", contentid);
   
   if (this.isValidFormData()) {
     // ทำบันทึกข้อมูล
@@ -99,28 +99,28 @@ onSave() {
       ImgContentPath: this.selectedFile || this.originalImgProduct,
     };
     
-    console.log('Data to be saved:', formDataWithImage);
+    // console.log('Data to be saved:', formDataWithImage);
 
     // เรียกใช้ editContent ของ contentService
     this.contentService.editContent(contentid, formDataWithImage).subscribe(
       (response) => {
         // ดำเนินการหลังจากแก้ไขข้อมูลเสร็จสิ้น
-        console.log('Data edited successfully:', response);
+        // console.log('Data edited successfully:', response);
         this.alertService.onSuccess('แก้ไขข้อมูลสำเร็จ', '/admin/new');
       },
       (error) => {
         // แสดงข้อผิดพลาดหรือทำสิ่งที่ต้องการในกรณีที่เกิดข้อผิดพลาด
-        console.error('Error editing data:', error);
+        // console.error('Error editing data:', error);
         if (error instanceof HttpErrorResponse) {
-          console.log('Status:', error.status);
-          console.log('Status Text:', error.statusText);
-          console.log('Error Object:', error.error);
+          // console.log('Status:', error.status);
+          // console.log('Status Text:', error.statusText);
+          // console.log('Error Object:', error.error);
         }
       }
     );
 
   } else {
-    console.log('Invalid Form');
+    // console.log('Invalid Form');
     // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
   }
 }

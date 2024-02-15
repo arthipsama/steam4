@@ -123,7 +123,7 @@ export class CartComponent {
       })
     }
     else{
-      console.log("กรุณาใส่รูปภาพ");
+      // console.log("กรุณาใส่รูปภาพ");
     }
   }
 }

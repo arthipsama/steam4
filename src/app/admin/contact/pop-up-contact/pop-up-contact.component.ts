@@ -34,10 +34,10 @@ export class PopUpContactComponent implements OnInit {
     this.ContactService.getContactMeById(contactId).subscribe((contact) => {
       if (contact) {
         this.contact = [contact]; // Convert to array if not already
-        console.log('Contact:', this.contact);
+        // console.log('Contact:', this.contact);
       } else {
         // Handle the case where contact is undefined
-        console.error('Contact not found');
+        // console.error('Contact not found');
       }
     });
   }
@@ -76,11 +76,11 @@ onSave() {
 
     this.ContactService.updateContact(this.contact[0].contactmeid.toString(), updatedContact).subscribe(
       (result) => {
-        console.log('Updated Contact:', result);
+        // console.log('Updated Contact:', result);
         this.alert.withOutTranslate.onSuccessRe();
       },
       (error) => {
-        console.error('Error updating contact', error);
+        // console.error('Error updating contact', error);
         // Handle error as needed
       }
     );

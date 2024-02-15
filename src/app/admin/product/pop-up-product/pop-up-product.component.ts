@@ -45,10 +45,10 @@ constructor(private fb: FormBuilder,
       (data) => {
         // ให้ TypeScript รู้ว่า data เป็นประเภท any[]
         this.categories = data as any[];
-        console.log('Categories:', this.categories);
+        // console.log('Categories:', this.categories);
       },
       (error) => {
-        console.error('Error fetching categories', error);
+        // console.error('Error fetching categories', error);
       }
     );
   }
@@ -66,15 +66,15 @@ onSave() {
 
     // เรียกใช้ addNewProduct จาก ProductAdminService
     this.productService.addNewProduct(formData).subscribe(response => {
-      console.log('Added new product:', response);
+      // console.log('Added new product:', response);
       // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
     });
 
     this.alert.withOutTranslate.onSuccessRe();
-    console.log('Data to be saved:', formData);
+    // console.log('Data to be saved:', formData);
     // ตรวจสอบข้อมูลเพิ่มเติมและดำเนินการต่อไปตามที่คุณต้องการ
   } else {
-    console.log('Invalid Form');
+    // console.log('Invalid Form');
   }
 }
 

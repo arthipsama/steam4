@@ -62,13 +62,13 @@ onSave() {
     formData.Image = null;
     delete formData.Image;
     formData.ImgContentPath = this.selectedImage;
-    console.log('ส่งออก' , formData);
+    // console.log('ส่งออก' , formData);
 
     // เรียกใช้ addContent และ subscribe ตาม
     this.contentService.addContent(formData).subscribe(
       (response) => {
         // ดำเนินการหลังจากบันทึกข้อมูลเสร็จสิ้น
-        console.log('Data saved successfully:', response);
+        // console.log('Data saved successfully:', response);
         this.alert.withOutTranslate.onSuccessRe();
 
         // ทำสิ่งที่คุณต้องการต่อไป
@@ -76,23 +76,23 @@ onSave() {
       },
       (error) => {
         // แสดงข้อผิดพลาดหรือทำสิ่งที่ต้องการในกรณีที่เกิดข้อผิดพลาด
-        console.error('Error saving data:', error);
+        // console.error('Error saving data:', error);
         if (error instanceof HttpErrorResponse) {
-          console.log('Status:', error.status);
-          console.log('Status Text:', error.statusText);
-          console.log('Error Object:', error.error);
+          // console.log('Status:', error.status);
+          // console.log('Status Text:', error.statusText);
+          // console.log('Error Object:', error.error);
         }
       }
     );
 
   } else {
-    console.log('Invalid Form');
+    // console.log('Invalid Form');
   }
 }
 
 additionalOperationAfterSave() {
   // เพิ่มโค้ดที่ต้องการทำเพิ่มเติมหลังจากบันทึกข้อมูล
-  console.log('Additional operation after save');
+  // console.log('Additional operation after save');
 }
 
 

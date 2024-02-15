@@ -36,14 +36,14 @@ export class PopUpAdminOrderComponent implements OnInit {
     this.orderService.getOrderById(ordersid).subscribe((order) => {
       if (order) {
         this.orders = order; // Update the orders property
-        console.log('Order Show:', this.orders);
+        // console.log('Order Show:', this.orders);
   
         this.userForm.patchValue({
           paymentstatus: null,
           remark: null
         });
       } else {
-        console.error('Order not found');
+        // console.error('Order not found');
       }
     });
   }
@@ -69,13 +69,13 @@ export class PopUpAdminOrderComponent implements OnInit {
       remark: this.userForm.get('remark')?.value,
     };
   
-    console.log('Updated Contact:', updatedContact);
+    // console.log('Updated Contact:', updatedContact);
   
     // ใช้ ternary operator เพื่อตรวจสอบ this.orders.ordersid ไม่เป็น undefined ก่อนที่จะเรียก updateOrder
     this.orders && this.orders.ordersid
       ? this.orderService.updateOrder(this.orders.ordersid, updatedContact.paymentstatus, updatedContact.remark)
           .subscribe(response => {
-            console.log('Update Response:', response);
+            // console.log('Update Response:', response);
             // ทำตามที่คุณต้องการทำต่อไป
             this.alert.withOutTranslate.onSuccessRe();
           })

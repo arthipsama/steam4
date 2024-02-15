@@ -40,15 +40,15 @@ export class PopUpUserComponent {
     // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
     if (this.userForm.valid) {
       // ทำ HTTP POST request เพื่อบันทึกข้อมูลผู้ใช้
-      console.log('Data to be sent:', this.userForm.value); // Log data to be sent
+      // console.log('Data to be sent:', this.userForm.value); // Log data to be sent
       this.Auth.addUser(this.userForm.value).subscribe(
         (res) => {
-          console.log('User added successfully:', res);
+          // console.log('User added successfully:', res);
           // ทำตามที่คุณต้องการเพิ่มเติม
           this.alertService.withOutTranslate.onSuccessRe();
         },
         (error) => {
-          console.error('Error adding user:', error);
+          // console.error('Error adding user:', error);
           const userNameControl = this.userForm.get('UserName');
           if (userNameControl) {
             if (error.error && error.error.error === 'Username already exists') {
@@ -60,7 +60,7 @@ export class PopUpUserComponent {
         }
       );
     } else {
-      console.log('Invalid Form');
+      // console.log('Invalid Form');
       // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
     }
   }

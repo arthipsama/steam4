@@ -35,23 +35,23 @@ export class ProductComponent implements OnInit {
 
     onSearch(): void {
       this.currentPage = 1;
-      console.log('Search Term:', this.searchProductName);
+      // console.log('Search Term:', this.searchProductName);
       this.selectedStatus = 'All';
       this.prodcutService.getProductData(this.searchProductName).subscribe(products => {
         this.product = products;
         this.recordCount = products.length;
-        console.log('Users:', products);
+        // console.log('Users:', products);
       });
     }
     
     onRoleChange(): void {
       this.currentPage = 1;
       this.searchProductName = '';
-      console.log('Statuc select:', this.selectedStatus);
+      // console.log('Statuc select:', this.selectedStatus);
       this.prodcutService.getProductData(this.searchProductName, this.selectedStatus).subscribe(products => {
         this.product = products;
         this.recordCount = products.length;
-        console.log(products); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
+        // console.log(products); // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
       });
     }
 
@@ -71,10 +71,10 @@ export class ProductComponent implements OnInit {
   private async deleteUser(productid: string) {
     try {
       const res = await this.prodcutService.deleteProduct(productid).toPromise();
-      console.log('User deleted successfully:', res);
+      // console.log('User deleted successfully:', res);
       this.alert.withOutTranslate.onDeleteRe();
     } catch (error) {
-      console.error('Error deleting user', error);
+      // console.error('Error deleting user', error);
       if ((error as any).status === 500) {
         this.alert.withOutTranslate.onError('ลบไม่สำเร็จเนื่องจาก Order เชื่อมกันอยู่');
       }
@@ -96,8 +96,8 @@ export class ProductComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
+      // console.log('The dialog was closed');
+      // console.log('Result:', result); // ข้อมูลที่ได้จาก Dialog
     });
   }
 
@@ -127,7 +127,7 @@ export class ProductComponent implements OnInit {
   
     pageChanged(event: any): void {
       this.currentPage = event;
-      console.log('pageChanged ' ,event);
+      // console.log('pageChanged ' ,event);
       this.pageChange.emit(this.currentPage);
     }
   // end Pagination

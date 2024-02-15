@@ -114,12 +114,12 @@ onSave() {
   if(this.profileForm.valid){
     this.alertService.onSuccessLogout();
     this.authService.editProfile(userid, firstname, lastname, phoneNumber, email, contact, password).subscribe(x => {
-      console.log(x);
+      // console.log(x);
 
     })
   }
   else{
-    console.log("ข้อมูลไม่ถูกต้อง");
+    // console.log("ข้อมูลไม่ถูกต้อง");
   }
 }
 
