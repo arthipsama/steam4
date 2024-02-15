@@ -92,14 +92,10 @@ const pool = new Pool({
   router.put('/orderadmin/update/:ordersid', (req, res) => {
     const ordersid = req.params.ordersid;
     const { paymentstatus, remark } = req.body;
-  
-    // ตรวจสอบว่ามี ordersid ที่ระบุหรือไม่
     if (!ordersid) {
       res.status(400).json({ error: 'ordersid is required' });
       return;
     }
-  
-    // สร้าง SQL query สำหรับการอัปเดต paymentstatus และ remark
     const sqlUpdateQuery = `
       UPDATE "Orders"
       SET
@@ -107,19 +103,44 @@ const pool = new Pool({
         "remark" = $2,
         "UpdateDate" = CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Bangkok'
       WHERE
-        "ordersid" = $3
+        "ordersid" = $3 RETURNING *
     `;
-  
+   
     pool.query(sqlUpdateQuery, [paymentstatus, remark, ordersid], (err, result) => {
       if (err) {
         console.error('Error executing update query', err);
         res.status(500).json({ error: 'Internal Server Error' });
         return;
       }
-  
-      res.json({ message: 'Order updated successfully' });
+      if(paymentstatus == 'checked'){
+        const sqlUpdateSaleCountAndQuantity = `
+          WITH order_summary AS (
+            SELECT od.productid, SUM(od.quantity) AS TotalQuantity
+            FROM public."OrdersDetails" od
+            INNER JOIN "Orders" o ON od.ordersid = o.ordersid
+            WHERE o.ordersid = $1
+            GROUP BY od.productid
+          )
+          UPDATE public."Product" p
+          SET salecount = p.salecount + os.TotalQuantity,
+              quantity = p.quantity - os.TotalQuantity
+          FROM order_summary os
+          WHERE p.productid = os.productid;
+        `;
+        
+        pool.query(sqlUpdateSaleCountAndQuantity, [ordersid], (err, result) => {
+          if (err) {
+            console.error('Error updating salecount and quantity', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+            return;
+          }
+          res.json({ message: 'Order and inventory updated successfully' });
+        });
+      } else {
+        res.json({ message: 'Order updated successfully' });
+      }
     });
-  });
+});
   
   
 
