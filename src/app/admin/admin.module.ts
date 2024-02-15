@@ -38,6 +38,7 @@ import { ContentAdminDetailComponent } from './new/content-admin-detail/content-
 import { OrderAdminDetailComponent } from './order/order-admin-detail/order-admin-detail.component';
 import { PopUpAdminOrderComponent } from './order/pop-up-admin-order/pop-up-admin-order.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ChartModule } from 'angular2-chartjs';
 
 
 
@@ -85,6 +86,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatIconModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
+    ChartModule,
+    NgxChartsModule
     
   ]
 })
