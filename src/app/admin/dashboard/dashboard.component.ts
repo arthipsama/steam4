@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { DashboardService } from 'src/app/service/dashboard.service';
 
@@ -18,7 +18,15 @@ export class DashboardComponent implements OnInit {
   most5ProductsBySaleCount: any[] = [];
   most5ProductsByView: any[] = [];
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService,
+    private cdr: ChangeDetectorRef,
+    private zone: NgZone,
+    
+    ) 
+    
+    {  this.dataa3 = { ...this.dataa1 };
+
+  }
 
   ngOnInit() {
     this.dashboardService.CallViewUser().subscribe((count: number) => {
@@ -57,6 +65,7 @@ export class DashboardComponent implements OnInit {
     
   }
 
+
   generateColors(labels: string[], baseColor: string): string[] {
     return labels.map((label, index) => baseColor);
   }
@@ -67,22 +76,40 @@ addToggle()
   this.status = !this.status;       
 }
 //Bar Chart
-type = 'line';
+// type = 'line';
 type2 = 'bar';
-dataa = {
+chartTitle = 'Chart with Data from API 2024';
+public dataa1 = {
   labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],  
   datasets: [{
-    label: "จำนวนออเดอร์ทั้งหมด",
-    data: [65, 59, 45, 81, 56, 55, 40],
+    label: "จำนวนออเดอร์ทั้งหมด2024",
+    data: [65, 59, 45, 81, 56, 55, 40 ,65, 59, 45, 81, 56],
     backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#f38b4a"),
     yAxisID: 'quantity-axis',
   },{
-      label: "จำนวนยอดเงินทั้งหมด",
-      data: [800, 5900, 750, 8100, 850, 550, 40000],
+      label: "จำนวนยอดเงินทั้งหมด2024",
+      data: [800, 5900, 750, 8100, 850, 550, 4000,800, 5900, 750, 8100, 850],
       backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#6970d5"),
       yAxisID: 'money-axis',
     }]
 };
+
+public dataa2 = {
+  labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],  
+  datasets: [{
+    label: "จำนวนออเดอร์ทั้งหมด2025",
+    data: [65, 59, 45, 81, 56, 55, 40,65, 59, 45, 81, 56],
+    backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#f38b4a"),
+    yAxisID: 'quantity-axis',
+  },{
+      label: "จำนวนยอดเงินทั้งหมด2025",
+      data: [800, 5900, 750, 8100, 850, 550, 4000,800, 5900, 750, 8100, 8500],
+      backgroundColor: this.generateColors(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "#6970d5"),
+      yAxisID: 'money-axis',
+    }]
+};
+
+public dataa3: any;
 
 options = {
   maintainAspectRatio: true,
@@ -100,8 +127,8 @@ options = {
         id: 'money-axis',
         position: 'right',
         ticks: {
-          // stepSize: 500,
-          max: 100000,
+          stepSize: 5000,
+          max: 50000,
           min: 0,
           callback: function (value: number, index: number, values: number[]) {
             return new Intl.NumberFormat('en-US', {
@@ -113,7 +140,38 @@ options = {
       },
     ],
   },
+  legend: {
+    display: true, // ซ่อน legend
+  },
 };
+
+
+currentData = this.dataa1;
+newData: any[] = [];
+
+toggleChartData(year: string) {
+  let newData: any = null;
+  let newTitle: string = '';
+
+  if (year === '2025') {
+    newData = this.dataa2;
+    newTitle = 'Chart with Data from API 2025';
+    console.log('New Data:', newData);
+  } else if (year === '2024') {
+    newData = this.dataa3;
+    newTitle = 'Chart with Data from API 2024';
+    console.log('New Data:', newData);
+  }
+
+  this.currentData = newData;
+  this.chartTitle = newTitle;
+  
+  this.zone.run(() => {
+    this.cdr.detectChanges();
+  });
+}
+
+
 
 
 }
