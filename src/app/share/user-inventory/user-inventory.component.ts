@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { userData } from 'src/app/models/user.models';
@@ -24,6 +24,7 @@ export class UserInventoryComponent {
               private dialog: MatDialog){}
 
   ngOnInit(){
+    this.currentPage = 1;
     this.colorService.backgroundColor$.subscribe((color) => {
       this.renderer.setStyle(this.el.nativeElement.ownerDocument.body, 'background-color', color);
     });
@@ -31,6 +32,7 @@ export class UserInventoryComponent {
     if(this.userData){
       this.serviceProduct.getInventory(this.userData.userid).subscribe(x=>{
         this.userInventory = x;
+        this.recordCount = this.userInventory.length;
       })
     }
   }
@@ -49,5 +51,16 @@ export class UserInventoryComponent {
   
   popup(i:any) {
     this.dialog.open(PopUpComponent, {width: '650px', data: { index: i }});
+  }
+
+  @Input() currentPage = 1;
+  @Input() recordCount : number = 0;
+  @Output() pageChange = new EventEmitter();
+  itemsPerPage: number = 5; 
+
+  pageChanged(event: any): void {
+    this.currentPage = event;
+    console.log('pageChanged ' ,event);
+    this.pageChange.emit(this.currentPage);
   }
 }
