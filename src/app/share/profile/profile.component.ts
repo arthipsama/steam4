@@ -52,6 +52,7 @@ export class ProfileComponent {
       email: [this.newUserData.Email || '', [Validators.email, Validators.required]],
       contact: this.newUserData.Contact || ''
     })
+    this.profileForm.controls['email'].disable();
   }
 
   logout() {

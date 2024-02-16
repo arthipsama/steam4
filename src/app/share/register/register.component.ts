@@ -55,9 +55,15 @@ export class RegisterComponent {
     var contact = this.registerForm.value.contact;
     if (this.registerForm.valid) {
       this.service.postregister(username, password, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
-        if (x) {
-          this.alert.withOutTranslate.onSuccessRe();
-          this.router.navigate(['/login']);
+        if (x == 1) {
+          this.alert.withOutTranslate.onError('Username already exists');
+          this.registerValid = false;
+        }else if(x == 2){
+          this.alert.withOutTranslate.onError('Email already exists');
+          this.registerValid = false;
+        }else if(x == 3){
+          this.alert.withOutTranslate.onSuccess();
+          this.router.navigate(['login']);
         }
       })
     } else {
