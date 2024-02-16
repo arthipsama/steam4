@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { userData } from '../models/user.models';
 
 @Injectable({
@@ -55,6 +55,13 @@ export class AuthAdminService {
   editProfile(userid:string, firstname:string, lastname:string, phoneNumber:string, email:string, contact:string, password:string){
     var api = `${this.apiUrl}/editProfile`
     return this.http.put(api, {userid:userid, firstname:firstname, lastname:lastname, phoneNumber:phoneNumber, email:email, contact:contact , password:password})
+  }
+
+  checkDuplicateEmail(userId: string, editedEmail: string): Observable<boolean> {
+    return this.getAllUsers().pipe(
+      map(users => users.filter(user => user.id !== userId && user.email === editedEmail)),
+      map(filteredUsers => filteredUsers.length > 0)
+    );
   }
 
   

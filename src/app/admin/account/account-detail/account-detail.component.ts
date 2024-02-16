@@ -44,7 +44,7 @@ export class AccountDetailComponent implements OnInit {
         firstName: ['', Validators.required],
         lastName: [''],
         email: ['', [Validators.required, Validators.email]],
-        phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{1,10}$')]],
+        phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{8,10}$')]],
         password:['', Validators.required],
         role:['', Validators.required],
         contact:[''],
@@ -86,48 +86,59 @@ export class AccountDetailComponent implements OnInit {
   }
 
   isSaveButtonDisabled(): boolean {
+    const emailControl = this.userForm.get('email');
     const phoneNumberControl = this.userForm.get('phoneNumber');
+    
     return (
       !this.userForm.get('firstName')?.value ||
-      !this.userForm.get('email')?.value ||
+      !emailControl?.value ||
       !phoneNumberControl?.value ||
       !this.userForm.get('password')?.value ||
-      (phoneNumberControl?.hasError('pattern') && phoneNumberControl?.dirty)
+      (emailControl?.hasError('email') && emailControl?.dirty) ||
+      (phoneNumberControl?.hasError('pattern') && phoneNumberControl?.dirty) ||
+      (phoneNumberControl?.hasError('required') && phoneNumberControl?.dirty) ||
+      this.userForm.hasError('duplicateEmail') ||
+      this.userForm.hasError('duplicate')
     );
   }
   
-
-
-onSave() {
-  if (this.isValidFormData()) {
-    const editedUserData = {
-      FirstName: this.userForm.get('firstName')?.value,
-      LastName: this.userForm.get('lastName')?.value,
-      Email: this.userForm.get('email')?.value,
-      PhoneNumber: this.userForm.get('phoneNumber')?.value,
-      Password: this.userForm.get('password')?.value,
-      Role: this.userForm.get('role')?.value,
-      Contact: this.userForm.get('contact')?.value,
-    };
-
-    let userId = String(this.route.snapshot.paramMap.get('id'));
-
-    this.Auth.editUser(userId, editedUserData).subscribe(
-      (res) => {
-        this.animationState = this.animationState === 'start' ? 'end' : 'start';
-        // console.log('User data updated:', res);
-        this.alertService.onSuccess('บันทึกการแก้ไขสำเร็จ', '/admin/user');
-      },
-      (error) => {
-        // console.error('Error updating user data', error);
-        // ทำอะไรต่อไปในกรณีเกิด error
-      }
-    );
-  } else {
-    // console.log('Invalid Form');
-    // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
+  
+  onSave() {
+    if (this.isValidFormData()) {
+      // ทำ HTTP PUT request เพื่อแก้ไขข้อมูลผู้ใช้
+      const editedUserData = {
+        FirstName: this.userForm.get('firstName')?.value,
+        LastName: this.userForm.get('lastName')?.value,
+        Email: this.userForm.get('email')?.value,
+        PhoneNumber: this.userForm.get('phoneNumber')?.value,
+        Password: this.userForm.get('password')?.value,
+        Role: this.userForm.get('role')?.value,
+        Contact: this.userForm.get('contact')?.value,
+      };
+  
+      let userId = String(this.route.snapshot.paramMap.get('id'));
+  
+      this.Auth.editUser(userId, editedUserData).subscribe(
+        (res) => {
+          this.animationState = this.animationState === 'start' ? 'end' : 'start';
+          this.alertService.onSuccess('บันทึกการแก้ไขสำเร็จ', '/admin/user');
+        },
+        (error) => {
+          // กรณี error จากการแก้ไขข้อมูลผู้ใช้ Email ซ้ำ
+          this.userForm.get('email')?.setErrors({ duplicateEmail: true });
+          // console.error('Error updating user data', error);
+          // this.alertService.withOutTranslate.onError('Email มีการซ้ำ');
+  
+          // ทำอะไรต่อไปในกรณีเกิด error
+        }
+      );
+    } else {
+      // console.log('Invalid Form');
+      // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
+    }
   }
-}
+  
+  
 
 getImagePath(Role: string): string {
   return Role === 'ADMIN' ? '../assets/role/admin.png' : '../assets/role/user.png';
