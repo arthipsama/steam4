@@ -282,7 +282,7 @@ main {
     .view-detail {
         margin-top: 15px;
         text-align: center;
-        border-top: 1px solid #ccc;
+        border-top: 2px solid #ccc;
         padding-top: 10px;
 
         a {
@@ -349,6 +349,27 @@ main {
 .indicator.four {
     background: #f25656;
 }
+
+.card-one {
+  background-color: #ff9999; /* สีของ Card 1 */
+  border: 2px solid #ff6666; /* สีขอบของ Card 1 */
+}
+
+.card-two {
+  background-color: #99ff99; /* สีของ Card 2 */
+  border: 2px solid #66ff66; /* สีขอบของ Card 2 */
+}
+
+.card-three {
+  background-color: #9999ff; /* สีของ Card 3 */
+  border: 2px solid #6666ff; /* สีขอบของ Card 3 */
+}
+
+.card-four {
+  background-color: #ffcc66; /* สีของ Card 4 */
+  border: 2px solid #ff9933; /* สีขอบของ Card 4 */
+}
+
 
 .records {
     box-shadow: 0px 5px 5px -5px rgb(0 0 0 / 10%);
