@@ -55,10 +55,13 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <h5 class="mb-6 text-primary">Content Details</h5>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group" style="margin-bottom: 15px;">
                                 <label style="margin-bottom: 5px;" for="fullName">Content Name <span class="required">*</span></label>
                                 <input type="text" class="form-control" id="ContentName" formControlName="ContentName" required>
+                                <div *ngIf="userForm.get('ContentName')?.hasError('required') && userForm.get('ContentName')?.touched" class="text-danger">
+                                    ContentName is required.
+                                </div>
                               </div>
                         </div>
                           
@@ -66,6 +69,9 @@
                             <div class="form-group" style="margin-bottom: 15px;">
                                 <label style="margin-bottom: 5px;" for="phone">Description <span class="required">*</span> </label>
                                 <textarea type="text" class="form-control" id="Description" formControlName="Description" required style="height: 150px"></textarea>
+                                <div *ngIf="userForm.get('Description')?.hasError('required') && userForm.get('Description')?.touched" class="text-danger">
+                                    Description is required.
+                                </div>
                             </div>
                         </div>
                     </div>

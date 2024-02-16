@@ -41,7 +41,7 @@ export class PopUpContentComponent implements OnInit {
     this.userForm = this.fb.group({
       ContentName: ['', [Validators.required]],
       type: [''],
-      Description: [''],
+      Description: ['', [Validators.required]],
       Image: ['', [Validators.required]],
     });
   }
