@@ -28,6 +28,8 @@ const pool = new Pool({
   if (selectedStatus && selectedStatus.toLowerCase() !== 'all') {
     sqlQuery += ` AND LOWER("Orders"."paymentstatus") LIKE LOWER('%${selectedStatus}%')`;
   }
+
+  sqlQuery += ' ORDER BY "Orders"."CreateDate" DESC';
   
     pool.query(sqlQuery, (err, result) => {
       if (err) {
