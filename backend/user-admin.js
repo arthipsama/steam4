@@ -74,7 +74,8 @@ router.post('/useradmin/add', (req, res) => {
   }
 
   // ตรวจสอบว่า Username ที่รับมาซ้ำกับในฐานข้อมูลหรือไม่
-  const checkUsernameQuery = 'SELECT * FROM public."User" WHERE "UserName" = $1';
+  // const checkUsernameQuery = 'SELECT * FROM public."User" WHERE "UserName" = $1';  
+  const checkUsernameQuery = 'SELECT * FROM public."User" WHERE UPPER("UserName") = UPPER($1)';
   pool.query(checkUsernameQuery, [UserName], (err, result) => {
     if (err) {
       console.error('Error checking username', err);
