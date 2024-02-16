@@ -34,33 +34,53 @@ module.exports = router;
 
 router.post('/register', (req, res) => {
   const { username, password, firstname, lastname, phoneNumber, email, contact } = req.body;
-  if (username.length > 0 && password.length > 0 && firstname.length > 0 && lastname.length > 0) {
-     const checkQuery = 'SELECT * FROM "public"."User" WHERE "UserName" = $1';
-     pool.query(checkQuery, [username], (err, result) => {
-       if (err) {
-         console.error('Error executing query', err);
-         res.status(500).json({ error: 'Internal Server Error' });
-         return;
-       }
-       if (result.rows.length > 0) {
-         res.status(400).json({ error: 'Username already exists' });
-         return;
-       }
-       const insertQuery = 'INSERT INTO "public"."User" ("UserName", "Password", "FirstName", "LastName", "PhoneNumber", "Email", "Contact", "Role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
-       pool.query(insertQuery, [username, password, firstname, lastname, phoneNumber, email, contact, 'USER'], (err, result) => {
-         if (err) {
-           console.error('Error executing query', err);
-           res.status(500).json({ error: 'Internal Server Error' });
-           return;
-         }
-         res.json({ message: 'User registered successfully' });
-       });
-     });
-  } else {
-     res.status(400).json({ error: 'Username cannot be null' });
-     return;
+  const lowerCaseUsername = username.toLowerCase();
+  const lowerCaseEmail = email.toLowerCase();
+
+  if (username.length >  0 && password.length >  0 && firstname.length >  0) {
+    const checkUsernameQuery = 'SELECT * FROM "public"."User" WHERE LOWER("UserName") = $1';
+    pool.query(checkUsernameQuery, [lowerCaseUsername], (err, resultUser) => {
+      if (err) {
+        console.error('Error executing query', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+      if (resultUser.rows.length >  0) {
+        // Username already exists (case-insensitive), send response  1
+        res.json(1);
+        return;
+      }
+
+      const checkEmailQuery = 'SELECT * FROM "public"."User" WHERE LOWER("Email") = $1';
+      pool.query(checkEmailQuery, [lowerCaseEmail], (err, resultEmail) => {
+        if (err) {
+          console.error('Error executing query', err);
+          res.status(500).json({ error: 'Internal Server Error' });
+          return;
+        }
+        if (resultEmail.rows.length >  0) {
+          // Email already exists (case-insensitive), send response  2
+          res.json(2);
+          return;
+        }
+
+        if(resultEmail.rows.length == 0 && resultUser.rows.length == 0){
+          const insertQuery = 'INSERT INTO "public"."User" ("UserName", "Password", "FirstName", "LastName", "PhoneNumber", "Email", "Contact", "Role") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)';
+          pool.query(insertQuery, [lowerCaseUsername, password, firstname, lastname, phoneNumber, lowerCaseEmail, contact, 'USER'], (err, result) => {
+            if (err) {
+              console.error('Error executing query', err);
+              res.status(500).json({ error: 'Internal Server Error' });
+              return;
+            }
+            res.json(3);
+            return;
+          });
+        }
+      });
+    });
   }
- });
+});
+
 
 
  router.post('/newpassword', (req, res) => {
