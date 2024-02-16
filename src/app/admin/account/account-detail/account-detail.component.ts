@@ -45,7 +45,7 @@ export class AccountDetailComponent implements OnInit {
         lastName: [''],
         email: ['', [Validators.required, Validators.email]],
         phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{8,10}$')]],
-        password:['', Validators.required],
+        password: ['', [Validators.required, Validators.pattern(/^.{8,24}$/)]],
         role:['', Validators.required],
         contact:[''],
         // ... เพิ่มฟิลด์อื่น ๆ ตามต้องการ
@@ -88,6 +88,7 @@ export class AccountDetailComponent implements OnInit {
   isSaveButtonDisabled(): boolean {
     const emailControl = this.userForm.get('email');
     const phoneNumberControl = this.userForm.get('phoneNumber');
+    const passwordControl = this.userForm.get('password');
     
     return (
       !this.userForm.get('firstName')?.value ||
@@ -97,6 +98,7 @@ export class AccountDetailComponent implements OnInit {
       (emailControl?.hasError('email') && emailControl?.dirty) ||
       (phoneNumberControl?.hasError('pattern') && phoneNumberControl?.dirty) ||
       (phoneNumberControl?.hasError('required') && phoneNumberControl?.dirty) ||
+      (passwordControl?.hasError('pattern') && passwordControl?.dirty) ||
       this.userForm.hasError('duplicateEmail') ||
       this.userForm.hasError('duplicate')
     );

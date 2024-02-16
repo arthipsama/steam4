@@ -124,6 +124,9 @@
                             <div *ngIf="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched" class="text-danger">
                                 Password is required.
                             </div>
+                            <div *ngIf="userForm.get('password')?.hasError('pattern') && userForm.get('password')?.touched" class="text-danger">
+                                Password is 8-24 characters
+                            </div>
                               </div>
                               
                         </div>
