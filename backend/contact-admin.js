@@ -43,6 +43,8 @@ router.get('/contactme/getall', (req, res) => {
     // If the value is not 'ALL', 'READ', or 'NOT', include both true and false in the results
   }
 
+  sqlQuery += ' ORDER BY "ContactMe"."CreateDate" DESC';
+
   // Execute the query with parameterized values
   pool.query(sqlQuery, params, (err, result) => {
     if (err) {

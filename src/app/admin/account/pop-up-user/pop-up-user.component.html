@@ -17,6 +17,7 @@
         <mat-label style="font-size: 12px;">Username</mat-label>
         <input matInput formControlName="UserName">
         <mat-error *ngIf="userForm.get('UserName')?.hasError('required')">Username is required</mat-error>
+        <mat-error *ngIf="userForm.get('UserName')?.hasError('pattern')">Invalid Username format</mat-error>
         <mat-error *ngIf="userForm.get('UserName')?.hasError('duplicate')">Username already exists</mat-error>
       </mat-form-field>
   
@@ -27,6 +28,8 @@
           {{ hidePassword ? 'visibility_off' : 'visibility' }}
         </mat-icon>
         <mat-error *ngIf="userForm.get('Password')?.hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="userForm.get('Password')?.hasError('pattern')">Password is 8-24 characters</mat-error>
+        
       </mat-form-field>
   
       <mat-form-field style="width: 100%">
@@ -34,6 +37,7 @@
         <input matInput formControlName="Email">
         <mat-error *ngIf="userForm.get('Email')?.hasError('required')">Email is required</mat-error>
         <mat-error *ngIf="userForm.get('Email')?.hasError('email')">Invalid email format</mat-error>
+        <mat-error *ngIf="userForm.get('Email')?.hasError('duplicate')">Email already exists</mat-error>
       </mat-form-field>
   
       <div>
@@ -45,6 +49,9 @@
         <mat-form-field style="width: 100%;">
           <mat-label style="font-size: 12px;">Phone</mat-label>
           <input matInput formControlName="PhoneNumber">
+          <mat-error *ngIf="userForm.get('PhoneNumber')?.hasError('required') && userForm.get('PhoneNumber')?.touched">
+            Phone is required
+          </mat-error>
           <mat-error *ngIf="userForm.get('PhoneNumber')?.hasError('pattern') && userForm.get('PhoneNumber')?.touched">
             Invalid Phone format
           </mat-error>

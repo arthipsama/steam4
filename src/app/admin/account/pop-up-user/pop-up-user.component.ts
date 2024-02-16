@@ -16,11 +16,11 @@ export class PopUpUserComponent {
 
   // สร้าง FormGroup พร้อมกับ Validation
   userForm: FormGroup = this.fb.group({
-    UserName: ['', [Validators.required]],
-    Password: ['', [Validators.required]],
+    UserName: ['', [Validators.required, Validators.pattern(/^.{6,20}$/)]],
+    Password: ['', [Validators.required, Validators.pattern(/^.{8,24}$/)]],
     Email: ['', [Validators.required, Validators.email]],
     FirstName: [''],
-    PhoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{1,10}$')]],
+    PhoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{8,10}$')]],
     Role: ['', [Validators.required]]
   });
 
@@ -40,32 +40,35 @@ export class PopUpUserComponent {
     // ตรวจสอบว่าข้อมูลทั้งหมดถูกกรอกให้ถูกต้องหรือไม่
     if (this.userForm.valid) {
       // ทำ HTTP POST request เพื่อบันทึกข้อมูลผู้ใช้
-      // console.log('Data to be sent:', this.userForm.value); // Log data to be sent
       this.Auth.addUser(this.userForm.value).subscribe(
         (res) => {
-          // console.log('User added successfully:', res);
-          // ทำตามที่คุณต้องการเพิ่มเติม
           this.alertService.withOutTranslate.onSuccessRe();
         },
         (error) => {
-          // console.error('Error adding user:', error);
           const userNameControl = this.userForm.get('UserName');
+          const emailControl = this.userForm.get('Email');
+          
           if (userNameControl) {
             if (error.error && error.error.error === 'Username already exists') {
               // ในกรณีที่ error เป็น 'Username already exists' แสดง mat-error ที่เกี่ยวข้อง
               userNameControl.setErrors({ duplicate: true });
             }
           }
+          
+          if (emailControl) {
+            if (error.error && error.error.error === 'Email already exists') {
+              // ในกรณีที่ error เป็น 'Email already exists' แสดง mat-error ที่เกี่ยวข้อง
+              emailControl.setErrors({ duplicate: true });
+            }
+          }
           // ทำตามที่คุณต้องการเพิ่มเติมในกรณีที่มีข้อผิดพลาด
         }
       );
     } else {
-      // console.log('Invalid Form');
       // แสดงข้อความหรือทำอะไรต่อไปในกรณีที่ฟอร์มไม่ถูกต้อง
     }
   }
   
-
 
 onReset() {
   this.userForm.reset();

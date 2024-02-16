@@ -36,8 +36,9 @@
         </div>
     
         <mat-form-field style="width: 100%">
-            <mat-label style="font-size: 14px;">Description</mat-label>
+            <mat-label style="font-size: 14px;">Description </mat-label>
             <textarea matInput formControlName="Description" rows="5"></textarea>
+            <mat-error *ngIf="userForm.get('Description')?.hasError('required')">Description is required</mat-error>
           </mat-form-field>    
       
         <div style="display: flex; justify-content: flex-end; align-items: center;">

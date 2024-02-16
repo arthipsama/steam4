@@ -74,7 +74,8 @@ router.post('/useradmin/add', (req, res) => {
   }
 
   // ตรวจสอบว่า Username ที่รับมาซ้ำกับในฐานข้อมูลหรือไม่
-  const checkUsernameQuery = 'SELECT * FROM public."User" WHERE "UserName" = $1';
+  // const checkUsernameQuery = 'SELECT * FROM public."User" WHERE "UserName" = $1';  
+  const checkUsernameQuery = 'SELECT * FROM public."User" WHERE UPPER("UserName") = UPPER($1)';
   pool.query(checkUsernameQuery, [UserName], (err, result) => {
     if (err) {
       console.error('Error checking username', err);
@@ -87,26 +88,40 @@ router.post('/useradmin/add', (req, res) => {
       return;
     }
 
-    // ถ้า Username ไม่ซ้ำกันก็ทำการ INSERT
-    const addUserQuery = `
-      INSERT INTO public."User" ("FirstName", "UserName", "Email", "PhoneNumber", "Password", "Role")
-      VALUES ($1, $2, $3, $4, $5, $6)
-      RETURNING *;
-    `;
-
-    // ทำการ execute คำสั่ง SQL
-    pool.query(addUserQuery, [FirstName, UserName, Email, PhoneNumber, Password, Role], (err, result) => {
+    // ตรวจสอบว่า Email ที่รับมาซ้ำกับในฐานข้อมูลหรือไม่
+    const checkEmailQuery = 'SELECT * FROM public."User" WHERE "Email" = $1';
+    pool.query(checkEmailQuery, [Email], (err, result) => {
       if (err) {
-        console.error('Error executing query', err);
+        console.error('Error checking email', err);
         res.status(500).json({ error: 'Internal Server Error' });
         return;
       }
 
-      res.json(result.rows[0]); // ส่งข้อมูลผู้ใช้ที่ถูกเพิ่มกลับไปยัง Angular
+      if (result.rows.length > 0) {
+        res.status(400).json({ error: 'Email already exists' });
+        return;
+      }
+
+      // ถ้า Username และ Email ไม่ซ้ำกันก็ทำการ INSERT
+      const addUserQuery = `
+        INSERT INTO public."User" ("FirstName", "UserName", "Email", "PhoneNumber", "Password", "Role")
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING *;
+      `;
+
+      // ทำการ execute คำสั่ง SQL
+      pool.query(addUserQuery, [FirstName, UserName, Email, PhoneNumber, Password, Role], (err, result) => {
+        if (err) {
+          console.error('Error executing query', err);
+          res.status(500).json({ error: 'Internal Server Error' });
+          return;
+        }
+
+        res.json(result.rows[0]); // ส่งข้อมูลผู้ใช้ที่ถูกเพิ่มกลับไปยัง Angular
+      });
     });
   });
 });
-
 
 // Node.js
 router.put('/useradmin/edit/:id', (req, res) => {
@@ -119,31 +134,46 @@ router.put('/useradmin/edit/:id', (req, res) => {
     return;
   }
 
-  // ทำการ UPDATE ข้อมูลในฐานข้อมูล
-  const updateUserQuery = `
-    UPDATE public."User"
-    SET "FirstName" = $1, "LastName" = $2, "Email" = $3, "PhoneNumber" = $4, "Password" = $5, "Role" = $6, "Contact" = $7
-    WHERE "userid" = $8
-    RETURNING *;
-  `;
-
-  pool.query(
-    updateUserQuery,
-    [FirstName, LastName, Email, PhoneNumber, Password, Role, Contact, userId],
-    (err, result) => {
-      if (err) {
-        console.error('Error executing query', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-        return;
-      }
-
-      if (result.rows.length === 0) {
-        res.status(404).json({ error: 'User not found' });
-      } else {
-        res.json(result.rows[0]);
-      }
+  // ตรวจสอบว่า Email ที่รับมาไม่ซ้ำกับข้อมูลชุดอื่นในฐานข้อมูล
+  const checkEmailQuery = 'SELECT * FROM public."User" WHERE "Email" = $1 AND "userid" <> $2';
+  pool.query(checkEmailQuery, [Email, userId], (checkEmailErr, checkEmailResult) => {
+    if (checkEmailErr) {
+      console.error('Error checking email', checkEmailErr);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
     }
-  );
+
+    if (checkEmailResult.rows.length > 0) {
+      res.status(400).json({ error: 'Email already exists in the database.' });
+      return;
+    }
+
+    // ทำการ UPDATE ข้อมูลในฐานข้อมูล
+    const updateUserQuery = `
+      UPDATE public."User"
+      SET "FirstName" = $1, "LastName" = $2, "Email" = $3, "PhoneNumber" = $4, "Password" = $5, "Role" = $6, "Contact" = $7
+      WHERE "userid" = $8
+      RETURNING *;
+    `;
+
+    pool.query(
+      updateUserQuery,
+      [FirstName, LastName, Email, PhoneNumber, Password, Role, Contact, userId],
+      (updateErr, result) => {
+        if (updateErr) {
+          console.error('Error executing query', updateErr);
+          res.status(500).json({ error: 'Internal Server Error' });
+          return;
+        }
+
+        if (result.rows.length === 0) {
+          res.status(404).json({ error: 'User not found' });
+        } else {
+          res.json(result.rows[0]);
+        }
+      }
+    );
+  });
 });
 
 // Node.js

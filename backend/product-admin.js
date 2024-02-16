@@ -28,6 +28,8 @@ router.get('/productadmin/getall', (req, res) => {
     sqlQuery += ` AND LOWER("CategoryProduct"."CategoryProductName") LIKE LOWER('%${selectedStatus}%')`;
   }
 
+  sqlQuery += ' ORDER BY "Product"."CreateDate" DESC';
+
   pool.query(sqlQuery, (err, result) => {
     if (err) {
       console.error('Error executing query', err);

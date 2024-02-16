@@ -24,6 +24,8 @@ router.get('/content/getall', (req, res) => {
       // If ContentName is not provided, retrieve all content
       sqlQuery = 'SELECT * FROM "Content"';
     }
+
+    sqlQuery += ' ORDER BY "CreateDate" DESC';
   
     pool.query(sqlQuery, queryParams, (err, result) => {
       if (err) {

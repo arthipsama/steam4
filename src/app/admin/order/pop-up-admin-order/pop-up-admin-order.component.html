@@ -13,12 +13,15 @@
       <mat-select formControlName="paymentstatus" style="margin-top: 15px;" required>
         <mat-option value="checked">ผ่านการตรวจสอบ</mat-option>
         <mat-option value="incorrect">ไม่ผ่านการตรวจสอบ</mat-option>
+
       </mat-select>
+      <mat-error *ngIf="userForm.get('paymentstatus')?.hasError('required')">Status is required</mat-error>
     </mat-form-field>
     
     <mat-form-field style="width: 100%">
       <mat-label style="font-size: 16px; color: blue;">Remark </mat-label>
       <textarea matInput rows="4" style="margin-top: 15px;" formControlName="remark" required></textarea>
+      <mat-error *ngIf="userForm.get('remark')?.hasError('required')">Remark is required</mat-error>
     </mat-form-field>
 
     <div style="display: flex; justify-content: flex-end; align-items: center;">

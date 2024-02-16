@@ -59,6 +59,9 @@
                             <div class="form-group" style="margin-bottom: 15px;">
                                 <label style="margin-bottom: 5px;" for="fullName">Product Name <span class="required">*</span></label>
                                 <input type="text" class="form-control" id="ProductName" formControlName="ProductName" required>
+                                <div *ngIf="userForm.get('ProductName')?.hasError('required') && userForm.get('ProductName')?.touched" class="text-danger">
+                                    Produc Name is required.
+                                </div>
                               </div>
                         </div>
 
@@ -73,6 +76,9 @@
                               <!-- <div *ngIf="userForm.get('quantity')?.hasError('required')" class="text-danger">
                                 * กรุณาใส่จำนวนสินค้า
                               </div> -->
+                              <div *ngIf="userForm.get('quantity')?.hasError('required') && userForm.get('quantity')?.touched" class="text-danger">
+                                    Quantity is required.
+                            </div>
                             </div>
                           </div>
                           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -83,6 +89,9 @@
                               <div *ngIf="userForm.get('price')?.hasError('pattern')" class="text-danger">
                                 * ต้องกรอกเป็นเลขจำนวนเต็ม หรือ มีทศนิยมได้สองตำแหน่งเท่านั้น
                               </div>
+                              <div *ngIf="userForm.get('price')?.hasError('required') && userForm.get('price')?.touched" class="text-danger">
+                                Full Price is required.
+                        </div>
                             </div>
                           </div>
                           
