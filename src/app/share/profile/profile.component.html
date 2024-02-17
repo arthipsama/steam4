@@ -13,16 +13,36 @@
         <div class="col-8">
             <form *ngIf="profileForm" [formGroup]="profileForm">
                 <div class="" style="margin-left: 20px; width: 50%;">
-                    <p class="p">Firstname</p>
-                    <input class="firstname form-control" type="text" formControlName="firstname"><br>
-                    <p class="p">Lastname</p>
-                    <input class="lastname form-control" type="text" formControlName="lastname"><br>
-                    <p class="p">PhoneNumber</p>
-                    <input class="phoneNumber form-control" type="text" formControlName="phoneNumber"><br>
-                    <p class="p">Email</p>
-                    <input class="email form-control" type="text" formControlName="email"><br>
-                    <p class="p">Contact</p>
-                    <input class="contact form-control" type="text" formControlName="contact"><br>
+                    <mat-form-field style="width: 100%;">
+                        <mat-label style="font-size: 12px;">First Name</mat-label>
+                        <input matInput formControlName="firstname">
+                        <mat-error *ngIf="profileForm.get('firstname')?.hasError('required')">Firstname is required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field style="width: 100%;">
+                        <mat-label style="font-size: 12px;">Last Name</mat-label>
+                        <input matInput formControlName="lastname">
+                    </mat-form-field>
+
+                    <mat-form-field style="width: 100%;">
+                        <mat-label style="font-size: 12px;">Phone</mat-label>
+                        <input matInput formControlName="phoneNumber">
+                        <mat-error *ngIf="profileForm.get('phoneNumber')?.hasError('required') && profileForm.get('phoneNumber')?.touched">
+                          Phone is required
+                        </mat-error>
+                        <mat-error *ngIf="profileForm.get('phoneNumber')?.hasError('pattern') && profileForm.get('phoneNumber')?.touched">
+                          Invalid Phone format
+                        </mat-error>
+                      </mat-form-field>
+                      <mat-form-field style="width: 100%">
+                        <mat-label style="font-size: 12px;">Email</mat-label>
+                        <input matInput formControlName="email">
+                      </mat-form-field>
+
+                      <mat-form-field style="width: 100%;">
+                        <mat-label style="font-size: 12px;">Contact</mat-label>
+                        <input matInput formControlName="contact">
+                      </mat-form-field>
                 </div>
             </form>
             <button type="button" class="button btn btn" (click)="save()">submit</button>

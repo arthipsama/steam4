@@ -26,6 +26,9 @@ import { UserIdgameComponent } from './user-category/user-idgame/user-idgame.com
 import { UserAllproductComponent } from './user-category/user-allproduct/user-allproduct.component';
 import { AuthorizedComponent } from './authorized/authorized.component';
 import { UserContentComponent } from './user-content/user-content.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { DiscoveryQueueComponent } from './discovery-queue/discovery-queue.component';
 
 
 
@@ -51,7 +54,8 @@ import { UserContentComponent } from './user-content/user-content.component';
     UserIdgameComponent,
     UserAllproductComponent,
     AuthorizedComponent,
-    UserContentComponent
+    UserContentComponent,
+    DiscoveryQueueComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +65,8 @@ import { UserContentComponent } from './user-content/user-content.component';
     FormsModule,
     BrowserModule,
     NgxPaginationModule,
-    
+    MatInputModule,
+    MatFormFieldModule
   ],
   exports:[
     HeaderComponent,
