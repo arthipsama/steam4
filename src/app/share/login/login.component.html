@@ -8,8 +8,21 @@
             <h4 class="text">Log In</h4>
             <div class="">
                 <form [formGroup]="loginForm">
-                    <input class="username form-control" type="text" formControlName="username" placeholder="username"  (keyup.enter)="submit()"><br>
-                    <input class="password form-control" type="password" formControlName="password" placeholder="password"  (keyup.enter)="submit()">
+                    <mat-form-field class="username">
+                        <mat-label style="font-size: 12px;">Username</mat-label>
+                        <input matInput formControlName="username" (keyup.enter)="submit()">
+                        <mat-error *ngIf="loginForm.get('username')?.hasError('required')">Username is required</mat-error>
+                        <mat-error *ngIf="loginForm.get('username')?.hasError('pattern')">Invalid Username format</mat-error>
+                        <mat-error *ngIf="loginForm.get('username')?.hasError('duplicate')">Username already exists</mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field class="password">
+                        <mat-label style="font-size: 12px;">Password</mat-label>
+                        <input matInput formControlName="password" type="password" (keyup.enter)="submit()">
+                        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
+                        <mat-error *ngIf="loginForm.get('password')?.hasError('pattern')">Password is 8-24 characters</mat-error>
+                        
+                      </mat-form-field>
                 </form>
                 <div class="bottom">
                     <a href="register" class="goRegister">Need an account?</a>

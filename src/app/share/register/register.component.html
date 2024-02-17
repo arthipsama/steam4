@@ -10,35 +10,58 @@
                 <form [formGroup]="registerForm">
                     <div class="" style="display: flex;">
                         <div class="col-6" style="margin-left: 20px; width: 45%;">
-                            <div *ngIf="registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched" style="color: rgb(189, 50, 50);">
-                                Username is required.
-                            </div>
-                            <input class="username form-control" type="text" formControlName="username" placeholder="username"><br>
+                            <mat-form-field style="width: 100%">
+                                <mat-label style="font-size: 12px;">Username</mat-label>
+                                <input matInput formControlName="username">
+                                <mat-error *ngIf="registerForm.get('username')?.hasError('required')">Username is required</mat-error>
+                                <mat-error *ngIf="registerForm.get('username')?.hasError('pattern')">Invalid Username format</mat-error>
+                                <mat-error *ngIf="registerForm.get('username')?.hasError('duplicate')">Username already exists</mat-error>
+                              </mat-form-field>
 
-                            <div *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched" style="color: rgb(189, 50, 50);">
-                                Password is required.
-                            </div>
-                            <input class="password form-control" type="password" formControlName="password" placeholder="password"><br>
+                            <mat-form-field style="width: 100%;">
+                              <mat-label style="font-size: 12px;">Password</mat-label>
+                              <input matInput formControlName="password" type="password">
+                              <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Password is required</mat-error>
+                              <mat-error *ngIf="registerForm.get('password')?.hasError('pattern')">Password is 8-24 characters</mat-error>
+                            </mat-form-field>
 
-                            <div *ngIf="registerForm.get('firstname')?.hasError('required') && registerForm.get('firstname')?.touched" style="color: rgb(189, 50, 50);">
-                                Firstname is required.
-                            </div>
-                            <input class="firstname form-control" type="text" formControlName="firstname" placeholder="firstname"><br>
+                            <mat-form-field style="width: 100%;">
+                                <mat-label style="font-size: 12px;">First Name</mat-label>
+                                <input matInput formControlName="firstname">
+                                <mat-error *ngIf="registerForm.get('firstname')?.hasError('required')">Firstname is required</mat-error>
+                              </mat-form-field>
 
-                            <div *ngIf="registerForm.get('lastname')?.hasError('required') && registerForm.get('lastname')?.touched" style="color: rgb(189, 50, 50);">
-                                Lastname is required.
-                            </div>
-                            <input class="lastname form-control" type="text" formControlName="lastname" placeholder="lastname"><br>
+                              <mat-form-field style="width: 100%;">
+                                <mat-label style="font-size: 12px;">Last Name</mat-label>
+                                <input matInput formControlName="lastname">
+                              </mat-form-field>
                         </div>
     
                         <div class="col-6" style="margin-left: 20px; width: 45%;">
-                            <input class="phoneNumber form-control" type="text" formControlName="phoneNumber" placeholder="phoneNumber"><br>
+                            <mat-form-field style="width: 100%;">
+                                <mat-label style="font-size: 12px;">Phone</mat-label>
+                                <input matInput formControlName="phoneNumber">
+                                <mat-error *ngIf="registerForm.get('phoneNumber')?.hasError('required') && registerForm.get('phoneNumber')?.touched">
+                                  Phone is required
+                                </mat-error>
+                                <mat-error *ngIf="registerForm.get('phoneNumber')?.hasError('pattern') && registerForm.get('phoneNumber')?.touched">
+                                  Invalid Phone format
+                                </mat-error>
+                              </mat-form-field>
 
-                            <div *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched" style="color: rgb(189, 50, 50);">
-                                Invalid email format.
-                            </div>
-                            <input class="email form-control" type="text" formControlName="email" placeholder="email"><br>
-                            <input class="contact form-control" type="text" formControlName="contact" placeholder="contact">
+
+                              <mat-form-field style="width: 100%">
+                                <mat-label style="font-size: 12px;">Email</mat-label>
+                                <input matInput formControlName="email">
+                                <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email is required</mat-error>
+                                <mat-error *ngIf="registerForm.get('email')?.hasError('email')">Invalid email format</mat-error>
+                                <mat-error *ngIf="registerForm.get('email')?.hasError('duplicate')">Email already exists</mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field style="width: 100%;">
+                                <mat-label style="font-size: 12px;">Contact</mat-label>
+                                <input matInput formControlName="contact">
+                              </mat-form-field>
                         </div>
                     </div>
                 </form>

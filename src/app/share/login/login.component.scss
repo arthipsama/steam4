@@ -17,24 +17,23 @@
 
 .body{
     height: 450px;
-    width: 500px;
+    width: 600px;
 }
 
 .username{
-
-    margin: 20px 0 0 60px; 
-    width: 70%;
+    margin: 20px 0 0 70px; 
+    width: 75%;
 }
 
 .password{
-    margin: 0 0 20px 60px; 
-    width: 70%;
+    margin: 0 0 20px 70px; 
+    width: 75%;
 }
 
 .bottom{
     display: flex;
     justify-content: space-between;
-    padding: 0 80px 0 60px;
+    padding: 0 70px 0 70px;
 }
 
 .button{
@@ -49,7 +48,7 @@
 }
 
 .loginFalse{
-    margin: 25px 0 0 0;
+    margin: 10px 0 0 0;
     width: 500px;
     height: 60px;
     background: rgba(255,89,89,.2117647059);

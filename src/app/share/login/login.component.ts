@@ -38,8 +38,8 @@ export class LoginComponent {
 
   initForm(){
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', [Validators.required, Validators.pattern(/^.{6,20}$/)]],
+      password: ['', [Validators.required, Validators.pattern(/^.{8,24}$/)]]
     })
   }
 

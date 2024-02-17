@@ -47,8 +47,8 @@ export class ProfileComponent {
   initForm() {
     this.profileForm = this.fb.group({
       firstname: [this.newUserData.FirstName || '', Validators.required],
-      lastname: [this.newUserData.LastName || '', Validators.required],
-      phoneNumber: this.newUserData.PhoneNumber || '',
+      lastname: [this.newUserData.LastName || ''],
+      phoneNumber: [this.newUserData.PhoneNumber || '', [Validators.required, Validators.pattern('^[0-9]{1,10}$')]],
       email: [this.newUserData.Email || '', [Validators.email, Validators.required]],
       contact: this.newUserData.Contact || ''
     })
@@ -61,13 +61,17 @@ export class ProfileComponent {
   }
 
   updatePassword(oldPassword:string, newPassword: string) {
-    this.service.updatePassword(oldPassword, newPassword, this.userData.userid).subscribe(x => {
-      if (x.body) {
-        this.alert.withOutTranslate.onSuccessRe();
-      } else{
-        this.alert.withOutTranslate.onError('รหัสผ่านไม่ถูกต้อง.');
-      }
-    });
+    if(newPassword.length >= 8 && newPassword.length <= 25){
+      this.service.updatePassword(oldPassword, newPassword, this.userData.userid).subscribe(x => {
+        if (x.body) {
+          this.alert.withOutTranslate.onSuccessRe();
+        } else{
+          this.alert.withOutTranslate.onError('รหัสผ่านไม่ถูกต้อง.');
+        }
+      });
+    }else{
+      this.alert.withOutTranslate.onError('รหัสผ่านใหม่ต้องมีความยาว8-25 ตัวอักษร.');
+    }
   }
 
   save() {
