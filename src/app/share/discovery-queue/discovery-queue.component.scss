@@ -1,0 +1,46 @@
+.pHeader{
+    font-size: 20px;
+    color: #999999;
+    cursor: pointer;
+    transition: color  0.3s ease;
+}
+
+.pHeader:hover{
+    color: white;
+    font-weight: bolder;
+}
+
+.text-white{
+    color: white;
+    font-weight: bolder;
+}
+
+.cardNoCount{
+    cursor: pointer; 
+    border-radius: 14px; 
+    background-color: #333333; 
+    margin-bottom: 20px; 
+    padding: 0; 
+    display: flex;
+}
+
+.cardNoCount:hover{
+    outline: 2px solid rgb(251, 142, 49);
+    transform: scale(1.01);
+    transition: transform 0.1s ease-in-out;
+}
+
+.cardHaveCount{
+    cursor: pointer; 
+    border-radius: 14px; 
+    background-color: #333333; 
+    margin-bottom: 20px; 
+    padding: 0; 
+    display: flex;
+}
+
+.cardHaveCount:hover{
+    outline: 2px solid rgb(251, 142, 49);
+    transform: scale(1.01);
+    transition: transform 0.1s ease-in-out;
+}

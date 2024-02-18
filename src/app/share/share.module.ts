@@ -73,7 +73,8 @@ import { DiscoveryQueueComponent } from './discovery-queue/discovery-queue.compo
     FooterComponent,
     CardProductComponent,
     UserContactmeComponent,
-    PaginationComponent
+    PaginationComponent,
+    DiscoveryQueueComponent
   ],
   schemas:[ CUSTOM_ELEMENTS_SCHEMA]
 })

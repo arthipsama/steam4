@@ -83,4 +83,19 @@ export class ProductService {
     var api = 'http://localhost:3000/api/tenproduct'
     return this.http.post<any>(api, {offset:offset,limit:limit});
   }
+
+  getNewProduct(){
+    var api = `http://localhost:3000/api/getNewProduct`
+    return this.http.get<any>(api);
+  }
+
+  getProductLess200(){
+    var api = `http://localhost:3000/api/getProductLess200`
+    return this.http.get<any>(api);
+  }
+
+  getProductLess500(){
+    var api = `http://localhost:3000/api/getProductLess500`
+    return this.http.get<any>(api);
+  }
 }
