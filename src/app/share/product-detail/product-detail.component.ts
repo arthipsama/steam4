@@ -16,6 +16,7 @@ export class ProductDetailComponent {
   quantity: number = 1;
   percent!: number;
   newview!: number;
+  loging:boolean = false;
 
   constructor(private service: ProductService,
               private router: Router,
@@ -42,6 +43,7 @@ export class ProductDetailComponent {
     let storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
       this.userData = JSON.parse(storedUserData);
+      this.loging = true;
     }
   }
 
@@ -62,6 +64,10 @@ export class ProductDetailComponent {
     if(this.product.quantity > this.quantity){
       this.quantity++;
     }
+  }
+
+  rount(){
+    this.router.navigate(['/login']);
   }
 
   buyProduct() {

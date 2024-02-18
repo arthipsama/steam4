@@ -39,7 +39,11 @@
                 <p style="text-decoration: line-through; opacity: 0.5;">{{product.price}}</p>
             </div>
         </div>
-        <div class="" *ngIf="quantity <= product.quantity" style="display: flex; justify-content: center;" (click)="buyProduct()">
+        <div class="" *ngIf="quantity <= product.quantity && loging" style="display: flex; justify-content: center;" (click)="buyProduct()">
+            <h3 class="buy">ใส่ตะกร้า</h3>
+        </div>
+
+        <div class="" *ngIf="quantity <= product.quantity && loging == false" style="display: flex; justify-content: center;" (click)="rount()">
             <h3 class="buy">ใส่ตะกร้า</h3>
         </div>
 
