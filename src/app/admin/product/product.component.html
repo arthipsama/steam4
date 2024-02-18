@@ -71,7 +71,8 @@
                             </div>
                           </td>
                           <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                            {{ products.price | currency:'THB':'symbol':'1.2-2' }}
+                            <!-- {{ products.price | currency:'THB':'symbol':'1.2-2' }} -->
+                            {{ (products.saleprice ? products.saleprice : products.price) | currency:'THB':'symbol':'1.2-2' }}
                           </td>                          
                           <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                             {{ products.quantity <= 0 ? 'Out of Stock' : 'In Stock' }}

@@ -17,8 +17,8 @@ export class RoleGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const userRole = this.authService.checkUserRole();
     const requiredRoles = route.data['requiredRole'] as string[];
-    // console.log('Required Roles:', requiredRoles);
-    // console.log('User Role:', userRole);
+    console.log('Required Roles:', requiredRoles);
+    console.log('User Role:', userRole);
     if (!requiredRoles || requiredRoles.length === 0) {
       // ถ้าไม่มี requiredRoles หรือ requiredRoles มีค่าว่าง
       
@@ -26,8 +26,8 @@ export class RoleGuard implements CanActivate {
       
     }
 
-    // console.log('Required Roles:', requiredRoles);
-    // console.log('User Role:', userRole);
+    console.log('Required Roles:', requiredRoles);
+    console.log('User Role:', userRole);
 
     const isAdmin = requiredRoles.includes('ADMIN');
     const isUserRoleDefined = userRole !== undefined;
