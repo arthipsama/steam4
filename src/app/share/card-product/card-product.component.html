@@ -2,7 +2,9 @@
     <div class="" style="color: #fff;" *ngFor="let items of product; let i = index" (click)="gotoDetaileProduct(i)">
         <div class="fullCard" *ngIf="items.saleprice == null">
             <img class="img" src="{{items.ImgProduct}}" alt="Product Image">
-            <p class="nameText">{{items.ProductName}}</p>
+            <div class="" style="display: flex; justify-content: center;">
+              <p class="nameText">{{items.ProductName}}</p>
+            </div>
             <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
                 <ng-container *ngIf="items.categoryproductid === 1; else category2">
                   <i class="lab la-steam" style="font-size: 35px; margin-right: 5px;"></i>
@@ -42,7 +44,9 @@
                 <p style="margin: 2px 0 0 7px;">- {{items.percent}}%</p>
             </div>
             <img class="img" src="{{items.ImgProduct}}" alt="Product Image">
-            <p class="nameText">{{items.ProductName}}</p>
+            <div class="" style="display: flex; justify-content: center;">
+              <p class="nameText">{{items.ProductName}}</p>
+            </div>
             <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
                 <ng-container *ngIf="items.categoryproductid === 1; else category2">
                   <i class="lab la-steam" style="font-size: 35px; margin-right: 5px;"></i>
@@ -78,7 +82,7 @@
         </div>
     </div>
 
-    <div class="col-12 " style="display: flex; justify-content: center; margin-top: 10px; padding-bottom: 10px;">
+    <div class="col-12 " style="display: flex; justify-content: center; margin-top: 10px; padding-bottom: 20px;">
         <div class="loadmore">
             <p class="" (click)="loadMore()">LOAD MORE<br>
                 <i class="fas fa-sort-down" style="display: flex; justify-content: center;"></i>
