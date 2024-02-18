@@ -54,10 +54,10 @@ export class AuthService {
     let storedUserData = localStorage.getItem('userData');
     if (storedUserData) {
       const userData = JSON.parse(storedUserData);
-      return userData.Role;
+      return userData.Role || null;
     }
     // หรือ return undefined หรือค่าที่เหมาะสมในกรณีที่ไม่พบข้อมูลผู้ใช้
-    return '';
+    return 'ghost';
   }
   
 }

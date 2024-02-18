@@ -56,19 +56,19 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: '' }
+    data: { requiredRole: 'ghost' }
   },
   {
     path: 'register',
     component: RegisterComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ''}
+    data: { requiredRole: 'ghost'}
   },
   {
     path: 'cart',
     component: CartComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: ['ghost' , 'USER'] }
   },
   {
     path: 'profile',
@@ -80,13 +80,13 @@ const routes: Routes = [
     path: 'product-detail/:id',
     component: ProductDetailComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: ['ghost' , 'USER'] }
   },
   {
     path: 'questions',
     component: QaComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: ['ghost' , 'USER'] }
   },
   {
     path: 'inventory',
@@ -110,37 +110,37 @@ const routes: Routes = [
     path: 'allproduct/:id',
     component: UserAllproductComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: ['ghost' , 'USER'] }
   },
   {
     path: 'idgame',
     component: UserIdgameComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: ['ghost' , 'USER'] }
   },
   {
     path: 'keygame',
     component: UserKeygameComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: ['ghost' , 'USER'] }
   },
   {
     path: 'program',
     component: UserProgramComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: ['ghost' , 'USER'] }
   },
   {
     path: 'steamwallet',
     component: UserSteamwalletComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: ['ghost' , 'USER'] }
   },
   {
     path: 'content',
     component: UserContentComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: ['ghost' , 'USER'] }
   },
   {
     path: 'rolepage',
