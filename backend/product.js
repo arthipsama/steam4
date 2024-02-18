@@ -219,3 +219,36 @@ router.post('/tenproduct', (req, res) => {
     res.json(result.rows);
   });
 });
+
+router.get('/getNewProduct', (req, res) => {
+  pool.query(`SELECT * FROM public."Product" ORDER BY "CreateDate" DESC`, (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});
+
+router.get('/getProductLess200', (req, res) => {
+  pool.query(`SELECT * FROM public."Product" WHERE price <  200 OR (saleprice IS NOT NULL AND saleprice <  200)`, (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});
+
+router.get('/getProductLess500', (req, res) => {
+  pool.query(`SELECT * FROM public."Product" WHERE price <  500 OR (saleprice IS NOT NULL AND saleprice <  500)`, (err, result) => {
+    if (err) {
+      console.error('Error executing query', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+    res.json(result.rows);
+  });
+});

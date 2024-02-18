@@ -18,7 +18,7 @@
                     <h4>{{items.remark}}</h4>
                 </div>
             </ng-container>
-            <app-pagination       
+            <app-pagination *ngIf="myKeyData.length > 0"      
             [recordCount]="recordCount" 
             [currentPage]="currentPage"
             (pageChange)="pageChanged($event)"></app-pagination>

@@ -1,1 +1,47 @@
-<p>discovery-queue works!</p>
+<div class="">
+    <div class="" style="display: flex; margin-bottom: 30px;">
+        <p class="pHeader" style="margin-left: 30px;" (click)="onClick(1)" [ngClass]="{'text-white': selectNo == 1}">NEW ON SAMASHOP</p>
+        <p class="pHeader" style="margin-left: 30px;" (click)="onClick(2)" [ngClass]="{'text-white': selectNo == 2}">< 200 ฿</p>
+        <p class="pHeader" style="margin-left: 30px;" (click)="onClick(3)" [ngClass]="{'text-white': selectNo == 3}">< 500 ฿</p>
+    </div>
+
+    <div class="row">
+        <ng-container class="" *ngFor="let items of product | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+            <div class="" (click)="gotoDetaileProduct(i + (currentPage -  1) * itemsPerPage)">
+            <div class="cardNoCount col-12" *ngIf="items.saleprice == null">
+                <img src="{{items.ImgProduct}}" class="col-3"
+                    style="width: 200px; height: 150px; border-top-left-radius: 14px; border-bottom-left-radius: 14px;">
+                <div class="col col-xxl-8" style="color: white; margin: 20px 20px 0 20px;">
+                    <div class="" style="font-size: 30px;">{{items.ProductName}}</div><br>
+                    <div class="" style="font-size: 14px;">{{items.Description}}</div>
+                </div>
+                <div class="col-2" style="display: flex; align-items: center;">
+                    <div class=""
+                        style="border-radius: 12px; width: 170px; height: 40px; border: 2px solid #FB8E31; display: flex; justify-content: center; align-items: center; font-weight: bolder;">
+                        {{items.price}}</div>
+                </div>
+            </div>
+
+            <div class="cardHaveCount col-12" *ngIf="items.saleprice">
+                <img src="{{items.ImgProduct}}" class="col-3"style="width: 200px; height: 150px; border-top-left-radius: 14px; border-bottom-left-radius: 14px;">
+                <div class="col col-xxl-8" style="color: white; margin: 20px 20px 0 20px;">
+                    <div class="" style="font-size: 30px;">{{items.ProductName}}</div><br>
+                    <div class="" style="font-size: 14px; display: -webkit-box; -webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden; text-overflow: ellipsis;">{{items.Description}}</div>
+                </div>
+                <div class="col-2" style="display: flex; align-items: center;">
+                    <div class="col-12" style="border-radius: 14px; width: 160px; height: 40px; border: 2px solid #FB8E31; display: flex; justify-content: space-between; align-items: center; font-weight: bolder; ">
+                        <div class="col-8" style="display: flex; justify-content: center;">{{items.saleprice}}</div>
+                        <div class="col-5"
+                            style="background-color: rgb(65, 203, 114); height: 40px; border-top-right-radius: 14px; display: flex; justify-content: center; align-items: center; border-bottom-right-radius: 14px;"
+                            *ngIf="items.percent">
+                            <p style="margin: 0; ">- {{items.percent}}%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </ng-container>
+        <app-pagination [recordCount]="recordCount" [currentPage]="currentPage"
+            (pageChange)="pageChanged($event)"></app-pagination>
+    </div>
+</div>
