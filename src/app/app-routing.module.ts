@@ -104,7 +104,7 @@ const routes: Routes = [
     path: 'contactme',
     component: UserContactmeComponent,
     canActivate: [RoleGuard],
-    data: { requiredRole: ['' , 'USER'] }
+    data: { requiredRole: 'USER' }
   },
   {
     path: 'allproduct/:id',
