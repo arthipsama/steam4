@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, Renderer2 } from '@angular/co
 import { Router } from '@angular/router';
 import { productData } from 'src/app/models/product.model';
 import { userData } from 'src/app/models/user.models';
+import { AlertServiceService } from 'src/app/service/alert-service.service';
 import { ColorService } from 'src/app/service/color.service';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -23,7 +24,8 @@ export class CartComponent {
               private service: ProductService,
               private colorService: ColorService ,
               private renderer: Renderer2, 
-              private el: ElementRef){
+              private el: ElementRef,
+              private alert: AlertServiceService){
 
   }
 
@@ -123,7 +125,7 @@ export class CartComponent {
       })
     }
     else{
-      // console.log("กรุณาใส่รูปภาพ");
+      this.alert.withOutTranslate.onError('กรุณาใส่รูปภาพสคริปต์การโอนเงิน');
     }
   }
 }
