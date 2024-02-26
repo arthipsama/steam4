@@ -21,7 +21,7 @@
 
     <div class="col-5" style="background-color: rgb(51, 51, 51); width: 360px; height: 360px; border-radius: 14px;">
         <div class="leftSite">
-            <img src="https://cdn.discordapp.com/attachments/974891383087325254/1201068064377163786/image.png?ex=65c878cd&is=65b603cd&hm=ea01430aac4d16a32b0b31f189a0fd29e0a938d8a3456eebf7d9151935ec13fc&" style="width: 30px; height: 30px;">
+            <img src="assets/icon_yes.png" style="width: 30px; height: 30px;">
             CAN BE ACTIVATED IN: THAILAND
         </div>
         <div class="" style="border-style: solid; border-width: 1px; color: #707070;"></div>
@@ -35,8 +35,8 @@
         <div class="" *ngIf="product.saleprice" style="display: flex; justify-content: center;">
             <p class="textPrice">฿{{product.saleprice}}</p>
             <div class="" style="color: #fff; padding: 15px 0 0 15px;">
-                <p style="background: rgb(251, 142, 49); display: flex; justify-content: center; align-items: center; border-radius: 14px;">-{{percent}}%</p>
-                <p style="text-decoration: line-through; opacity: 0.5;">{{product.price}}</p>
+                <p style="background: rgb(251, 142, 49); display: flex; justify-content: center; align-items: center; border-radius: 14px; font-size: 18px;">-{{percent}}%</p>
+                <p style="text-decoration: line-through; opacity: 0.5; font-size: 18px;">{{product.price}}</p>
             </div>
         </div>
         <div class="" *ngIf="quantity <= product.quantity && loging" style="display: flex; justify-content: center;" (click)="buyProduct()">
@@ -52,7 +52,7 @@
         </div>
 
         <div class="" style="color: #619744; display: flex; justify-content: center;margin-top: 20px;">
-            <img src="https://cdn.discordapp.com/attachments/974891383087325254/1201070307574812692/image.png?ex=65c87ae4&is=65b605e4&hm=f8bc312d65fdc6d20fec0c8b8a74602195889041dcf6da43f32a5fe050dce233&" style="width: 20px; height: 20px;">
+            <img src="assets/icon_lock.png" style="width: 20px; height: 20px; margin-right: 5px;">
             YOUR TRANSACTION IS SECURE
         </div>
     </div>
