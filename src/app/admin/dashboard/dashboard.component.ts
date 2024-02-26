@@ -194,7 +194,22 @@ toggleChartData(year: string) {
   });
 }
 
+  showInfoText: boolean = false;
+  infoText: string = '';
 
+  showInfoSale(salecount: string): void {
+    this.showInfoText = true;
+    this.infoText = `จำนวนที่ขายแล้ว: ${salecount} ชิ้น`;
+  }
+
+  showInfoView(view: string): void {
+    this.showInfoText = true;
+    this.infoText = `จำนวนที่เข้าดู: ${view} ครั้ง`;
+  }
+
+  hideInfo(): void {
+    this.showInfoText = false;
+  }
 
 
 

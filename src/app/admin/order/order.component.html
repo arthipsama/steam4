@@ -26,15 +26,15 @@
                     <option value="">All</option>
                     <option value="">Waiting to Check</option>
                     <option value="">Passed</option>
-                    <option value="">Incorrect</option>
+                    <option value="">Rejected</option>
                 </select> -->
 
                 <input type="search" placeholder="Search" class="record-search" [(ngModel)]="searchUserName" (keyup.enter)="onSearch()">
                 <select name="" id="" [(ngModel)]="selectedRole" (change)="onRoleChange()">
                   <option value="All">All</option>
-                  <option value="WAIT">Waiting to Check</option>
-                  <option value="checked">Passed</option>
-                  <option value="Incorrect">Incorrect</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Approved">Approved</option>
+                  <option value="Rejected">Rejected</option>
                   </select>
                     <!-- <button style="background-color: #00A86B; margin-right: 10px" (click)="openUserDialog()">
                       <span class="las la-box" style="color:whitesmoke; font-size: 16px;"></span>
@@ -87,15 +87,15 @@
                           </td>    
                                                                           
                           <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                            <ng-container *ngIf="order.paymentstatus === 'checked'; else waitOrIncorrect">
-                              <i class="las la-check-square rounded-icon" style="background-color: #ADFF2F; color: black;" > checked</i>
+                            <ng-container *ngIf="order.paymentstatus === 'Approved'; else waitOrIncorrect">
+                              <i class="las la-check-square rounded-icon" style="background-color: #ADFF2F; color: black;" > Approved</i>
                             </ng-container>
                             <ng-template #waitOrIncorrect>
-                              <ng-container *ngIf="order.paymentstatus === 'wait'; else incorrect">
-                                <i class="las la-sync-alt rounded-icon" style="background-color: #A9A9A9; color: whitesmoke;"> wait</i>
+                              <ng-container *ngIf="order.paymentstatus === 'Pending'; else incorrect">
+                                <i class="las la-sync-alt rounded-icon" style="background-color: #A9A9A9; color: whitesmoke;"> Pending</i>
                               </ng-container>
                               <ng-template #incorrect>
-                                <i class="las la-window-close rounded-icon" style="background-color: #DC143C; color: whitesmoke;"> incorrect</i>
+                                <i class="las la-window-close rounded-icon" style="background-color: #DC143C; color: whitesmoke;"> Rejected</i>
                               </ng-template>
                             </ng-template>
                           </td>

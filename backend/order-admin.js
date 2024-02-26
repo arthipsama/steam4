@@ -114,7 +114,7 @@ const pool = new Pool({
         res.status(500).json({ error: 'Internal Server Error' });
         return;
       }
-      if(paymentstatus == 'checked'){
+      if(paymentstatus == 'Approved'){
         const sqlUpdateSaleCountAndQuantity = `
           WITH order_summary AS (
             SELECT od.productid, SUM(od.quantity) AS TotalQuantity
