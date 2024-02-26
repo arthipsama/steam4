@@ -128,7 +128,7 @@ router.get('/dashboard/order', (req, res) => {
       LEFT JOIN
         "Orders" ON EXTRACT(MONTH FROM "CreateDate"::timestamp) = months.month
                   AND EXTRACT(YEAR FROM "CreateDate"::timestamp) = $1
-                  AND "paymentstatus" = 'checked'
+                  AND "paymentstatus" = 'Approved'
       GROUP BY
         months.month
       ORDER BY
