@@ -197,12 +197,12 @@ isValidFormData(): boolean {
 }
 
 getWidthPercentage(): string {
-  if (this.orderss?.paymentstatus === 'wait') {
-    return '45'; // หรือค่าที่ต้องการสำหรับ wait
-  } else if (this.orderss?.paymentstatus === 'checked') {
-    return '100'; // หรือค่าที่ต้องการสำหรับ checked
-  } else if (this.orderss?.paymentstatus === 'incorrect') {
-    return '100'; // หรือค่าที่ต้องการสำหรับ incorrect
+  if (this.orderss?.paymentstatus === 'Pending') {
+    return '45'; // หรือค่าที่ต้องการสำหรับ Pending
+  } else if (this.orderss?.paymentstatus === 'Approved') {
+    return '100'; // หรือค่าที่ต้องการสำหรับ Approved
+  } else if (this.orderss?.paymentstatus === 'Rejected') {
+    return '100'; // หรือค่าที่ต้องการสำหรับ Rejected
   }
   return '0'; // หรือค่าที่ต้องการเมื่อไม่ตรงกับทุกเงื่อนไข
 }
@@ -230,7 +230,7 @@ openUserDialog(ordersid: number): void {
 
 isButtonDisabled(): boolean {
   // ตรวจสอบว่า this.order มีค่าไม่เป็น null และไม่เป็น undefined ก่อนที่จะใช้ this.order.paymentstatus
-  return this.orderss && (this.orderss?.paymentstatus === 'checked' || this.orderss?.paymentstatus === 'incorrect');
+  return this.orderss && (this.orderss?.paymentstatus === 'Approved' || this.orderss?.paymentstatus === 'Rejected');
 }
 
 

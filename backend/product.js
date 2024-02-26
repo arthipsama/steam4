@@ -104,7 +104,7 @@ router.post('/deleteProductInCart', (req, res) => {
 
 router.post('/makePayment', (req, res) => {
   const { img, userid, totalprice, username, ordersid } = req.body;
-  pool.query(`UPDATE public."Orders" SET totalprice = $3, image = $1, paymentstatus = $4, "CreateBy" = $5, "CreateDate" = CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Bangkok' WHERE userid = $2 AND ordersid = $6`, [img, userid, totalprice, 'wait', username, ordersid], (err, result) => {
+  pool.query(`UPDATE public."Orders" SET totalprice = $3, image = $1, paymentstatus = $4, "CreateBy" = $5, "CreateDate" = CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Bangkok' WHERE userid = $2 AND ordersid = $6`, [img, userid, totalprice, 'Pending', username, ordersid], (err, result) => {
     if (err) {
       console.error('Error executing query', err);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -116,7 +116,7 @@ router.post('/makePayment', (req, res) => {
 
 router.post('/mykey', (req, res) => {
   const { userid } = req.body;
-  pool.query(`SELECT * FROM public."Orders" WHERE userid = $1 AND paymentstatus IS NOT NULL AND paymentstatus = 'checked' ORDER BY "CreateDate" DESC`, [ userid ], (err, result) => {
+  pool.query(`SELECT * FROM public."Orders" WHERE userid = $1 AND paymentstatus IS NOT NULL AND paymentstatus = 'Approved' ORDER BY "CreateDate" DESC`, [ userid ], (err, result) => {
     if (err) {
       console.error('Error executing query', err);
       res.status(500).json({ error: 'Internal Server Error' });
