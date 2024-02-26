@@ -17,6 +17,7 @@ export class ProfileComponent {
   newUserData!: userData;
   newPassword: string = '';
   oldPassword: string = '';
+  chacknewPassword: string = '';
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -60,15 +61,19 @@ export class ProfileComponent {
     this.router.navigate(['/mainpage']);
   }
 
-  updatePassword(oldPassword:string, newPassword: string) {
+  updatePassword(oldPassword:string, newPassword: string, chacknewPassword: string) {
     if(newPassword.length >= 8 && newPassword.length <= 25){
-      this.service.updatePassword(oldPassword, newPassword, this.userData.userid).subscribe(x => {
-        if (x.body) {
-          this.alert.withOutTranslate.onSuccessRe();
-        } else{
-          this.alert.withOutTranslate.onError('รหัสผ่านไม่ถูกต้อง.');
-        }
-      });
+      if(newPassword == chacknewPassword){
+        this.service.updatePassword(oldPassword, newPassword, this.userData.userid).subscribe(x => {
+          if (x.body) {
+            this.alert.withOutTranslate.onSuccessRe();
+          } else{
+            this.alert.withOutTranslate.onError('รหัสผ่านปัจจุบันไม่ถูกต้อง.');
+          }
+        });
+      }else{
+        this.alert.withOutTranslate.onError('กรุณายืนยันรหัสผ่านให้ถูกต้อง.');
+      }
     }else{
       this.alert.withOutTranslate.onError('รหัสผ่านใหม่ต้องมีความยาว8-25 ตัวอักษร.');
     }
