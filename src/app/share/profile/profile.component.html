@@ -26,7 +26,7 @@
                         Phone is required
                     </mat-error>
                     <mat-error *ngIf="profileForm.get('phoneNumber')?.hasError('pattern') && profileForm.get('phoneNumber')?.touched">
-                        Invalid Phone format
+                        Phone Number 0-9 Only
                     </mat-error><br>
 
                     <p class="p">Email</p>
