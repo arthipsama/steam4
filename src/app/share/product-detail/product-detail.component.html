@@ -35,8 +35,8 @@
         <div class="" *ngIf="product.saleprice" style="display: flex; justify-content: center;">
             <p class="textPrice">฿{{product.saleprice}}</p>
             <div class="" style="color: #fff; padding: 15px 0 0 15px;">
-                <p style="background: rgb(251, 142, 49); display: flex; justify-content: center; align-items: center; border-radius: 14px; font-size: 18px;">-{{percent}}%</p>
-                <p style="text-decoration: line-through; opacity: 0.5; font-size: 18px;">{{product.price}}</p>
+                <p style="background: rgb(251, 142, 49); display: flex; justify-content: center; align-items: center; border-radius: 14px; font-size: 25px; padding: 2px 0 2px 0;">-{{percent}}%</p>
+                <p style="text-decoration: line-through; opacity: 0.5; font-size: 25px;">{{product.price}}</p>
             </div>
         </div>
         <div class="" *ngIf="quantity <= product.quantity && loging" style="display: flex; justify-content: center;" (click)="buyProduct()">
