@@ -65,17 +65,21 @@ export class ProfileComponent {
     if(newPassword.length >= 8 && newPassword.length <= 25){
       if(newPassword == chacknewPassword){
         this.service.updatePassword(oldPassword, newPassword, this.userData.userid).subscribe(x => {
-          if (x.body) {
-            this.alert.withOutTranslate.onSuccessRe();
+          if (oldPassword != newPassword){
+            if (x.body) {
+              this.alert.withOutTranslate.onSuccessRe();
+            } else{
+              this.alert.withOutTranslate.onErrorRe('รหัสผ่านปัจจุบันไม่ถูกต้อง.');
+            }
           } else{
-            this.alert.withOutTranslate.onError('รหัสผ่านปัจจุบันไม่ถูกต้อง.');
+            this.alert.withOutTranslate.onErrorRe('รหัสผ่านซ้ำกับปัจจุบัน. กรุณาลองใหม่');
           }
         });
       }else{
-        this.alert.withOutTranslate.onError('กรุณายืนยันรหัสผ่านให้ถูกต้อง.');
+        this.alert.withOutTranslate.onErrorRe('กรุณายืนยันรหัสผ่านให้ถูกต้อง.');
       }
     }else{
-      this.alert.withOutTranslate.onError('รหัสผ่านใหม่ต้องมีความยาว8-25 ตัวอักษร.');
+      this.alert.withOutTranslate.onErrorRe('รหัสผ่านใหม่ต้องมีความยาว8-25 ตัวอักษร.');
     }
   }
 
