@@ -53,7 +53,6 @@ export class LoginComponent {
         this.router.navigate(['/mainpage']);
         this.service.outputUserData(this.userData)
         localStorage.setItem('userData', JSON.stringify(this.userData));
-        // console.log('ข้อมูล' ,this.userData );
       } else{
         this.loginValid = true;
       }   
@@ -62,7 +61,6 @@ export class LoginComponent {
       } else if (this.userData.Role === 'USER') {
         this.router.navigate(['/mainpage']);
       }
-
     })
   }
 }
