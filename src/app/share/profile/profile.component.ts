@@ -49,7 +49,7 @@ export class ProfileComponent {
     this.profileForm = this.fb.group({
       firstname: [this.newUserData.FirstName || '', Validators.required],
       lastname: [this.newUserData.LastName || ''],
-      phoneNumber: [this.newUserData.PhoneNumber || '', [Validators.required, Validators.pattern('^[0-9]{1,10}$')]],
+      phoneNumber: [this.newUserData.PhoneNumber || '', [Validators.required, Validators.pattern('^[0-9]{9,10}$')]],
       email: [this.newUserData.Email || '', [Validators.email, Validators.required]],
       contact: this.newUserData.Contact || ''
     })
