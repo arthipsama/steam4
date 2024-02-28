@@ -55,6 +55,8 @@ export class RegisterComponent {
     var contact = this.registerForm.value.contact;
     if (this.registerForm.valid) {
       this.service.postregister(username, password, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
+        console.log(x);
+        
         if (x == 1) {
           this.alert.withOutTranslate.onError('Username already exists');
           this.registerValid = false;
