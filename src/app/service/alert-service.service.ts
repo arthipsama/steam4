@@ -98,6 +98,20 @@ export class AlertServiceService {
       });
     },
 
+    onErrorRe(message: string) {
+      Swal.fire({
+        title: 'Error!',
+        text: message,
+        icon: 'error',
+        confirmButtonText: 'Okay',
+      }).then(() => {
+        setTimeout(() => {
+          // Reload the page after a delay
+          window.location.reload();
+        }, 500); // 0.5 second delay
+      });
+    },
+
     // onWarning(message: string) {},
   };
 

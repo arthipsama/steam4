@@ -14,7 +14,7 @@
                                 <mat-label style="font-size: 12px;">Username</mat-label>
                                 <input matInput formControlName="username">
                                 <mat-error *ngIf="registerForm.get('username')?.hasError('required')">Username is required</mat-error>
-                                <mat-error *ngIf="registerForm.get('username')?.hasError('pattern')">Invalid Username format</mat-error>
+                                <mat-error *ngIf="registerForm.get('username')?.hasError('pattern')">Username is 6-20 characters</mat-error>
                                 <mat-error *ngIf="registerForm.get('username')?.hasError('duplicate')">Username already exists</mat-error>
                               </mat-form-field>
 
@@ -45,7 +45,7 @@
                                   Phone is required
                                 </mat-error>
                                 <mat-error *ngIf="registerForm.get('phoneNumber')?.hasError('pattern') && registerForm.get('phoneNumber')?.touched">
-                                  Invalid Phone format
+                                  Phone Number 0-9 Only
                                 </mat-error>
                               </mat-form-field>
 

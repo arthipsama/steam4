@@ -37,6 +37,7 @@ export class AuthService {
 
   updatePassword(oldPassword:string, newPassword:string, userid:any){
     var api = 'http://localhost:3000/api/newpassword'
+    
     return this.http.post<any>(api, {oldPassword:oldPassword, newPassword:newPassword, userid:userid}, { observe: 'response' })
   }
 

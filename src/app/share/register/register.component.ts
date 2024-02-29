@@ -39,7 +39,7 @@ export class RegisterComponent {
       password: ["", [Validators.required, Validators.pattern(/^.{8,24}$/)]],
       firstname: ["", [Validators.required]],
       lastname: "",
-      phoneNumber: ["", [Validators.required, Validators.pattern('^[0-9]{1,10}$')]],
+      phoneNumber: ["", [Validators.required, Validators.pattern('^[0-9]{9,10}$')]],
       email: ["", [Validators.required, Validators.email]],
       contact: ""
     })
@@ -55,6 +55,8 @@ export class RegisterComponent {
     var contact = this.registerForm.value.contact;
     if (this.registerForm.valid) {
       this.service.postregister(username, password, firstname, lastname, phoneNumber, email, contact).subscribe(x => {
+        console.log(x);
+        
         if (x == 1) {
           this.alert.withOutTranslate.onError('Username already exists');
           this.registerValid = false;

@@ -875,4 +875,45 @@ img {
     width: 120px;
   }
   
+  .card_content_wrapper {
+    position: relative;
+  }
   
+  .info_game {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px; // ปรับระยะห่างตามที่ต้องการ
+    display: flex;
+    align-items: center;
+  }
+  
+  .info_game svg {
+    transition: transform 0.3s ease; // เพิ่ม transition เพื่อทำให้การขยายเสร็จสิ้นอย่างนุ่มนวล
+    pointer-events: none;
+  }
+  
+  .info_game svg:hover {
+    transform: scale(1.5); // เปลี่ยนขนาดเมื่อมีการชี้
+  }
+  
+  
+  .card_image {
+    position: relative;
+  }
+  
+  .info_text {
+    position: relative;
+    top: 100%;
+    left: 0; // เลื่อนไปทางซ้าย
+    white-space: nowrap; // ป้องกันข้อความขึ้นบรรทัดใหม่
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    display: none;
+  }
+  
+  .info_game:hover .info_text {
+    display: block;
+  }

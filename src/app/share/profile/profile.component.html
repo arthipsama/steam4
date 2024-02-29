@@ -26,7 +26,7 @@
                         Phone is required
                     </mat-error>
                     <mat-error *ngIf="profileForm.get('phoneNumber')?.hasError('pattern') && profileForm.get('phoneNumber')?.touched">
-                        Invalid Phone format
+                        Phone Number 0-9 Only
                     </mat-error><br>
 
                     <p class="p">Email</p>
@@ -36,16 +36,19 @@
                     <input class="contact form-control" type="text" formControlName="contact"><br>
                 </div>
             </form>
-            <button type="button" class="button btn btn" [disabled]="profileForm.valid == false" (click)="save()">submit</button>
+            <button type="button" class="button btn btn" [disabled]="profileForm.valid == false" (click)="save()">Submit</button>
 
             <hr style="width: 55%;">
             <div class="" >
                 <h3>Edit Password</h3>
-                <p class="p" style="margin-left: 20px; width: 50%;">Old Password</p>
-                <input style="margin-left: 20px; width: 50%;" class="form-control" type="password" [(ngModel)]="oldPassword" placeholder="Enter your old password"><br>
+                <p class="p" style="margin-left: 20px; width: 50%;">Current Password</p>
+                <input style="margin-left: 20px; width: 50%;" class="form-control" type="password" [(ngModel)]="oldPassword" placeholder="Enter your old password" (keyup.enter)="updatePassword(oldPassword, newPassword, chacknewPassword)"><br>
                 <p class="p" style="margin-left: 20px; width: 50%;">New Password</p>
-                <input style="margin-left: 20px; width: 50%;" class="form-control" type="password" [(ngModel)]="newPassword" placeholder="Enter your new password"><br>
-                <button type="button" class="button btn btn" (click)="updatePassword(oldPassword, newPassword)" style="width: 50%;">Update Password</button><br><br>
+                <input style="margin-left: 20px; width: 50%;" class="form-control" type="password" [(ngModel)]="newPassword" placeholder="Enter your new password" (keyup.enter)="updatePassword(oldPassword, newPassword, chacknewPassword)"><br>
+                <p class="p" style="margin-left: 20px; width: 50%;">Confirm Password</p>
+                <input style="margin-left: 20px; width: 50%;" class="form-control" type="password" [(ngModel)]="chacknewPassword" placeholder="Enter your confirm new password" (keyup.enter)="updatePassword(oldPassword, newPassword, chacknewPassword)"><br>
+
+                <button type="button" class="button btn btn" (click)="updatePassword(oldPassword, newPassword, chacknewPassword)" style="width: 50%;">Update Password</button><br><br>
             </div>
         </div>
     </div>

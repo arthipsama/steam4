@@ -89,22 +89,22 @@
                                   <div class="progress" style="height: 6px; border-radius: 16px;">
                                     <div class="progress-bar"
                                       [ngClass]="{
-                                        'bg-gainsboro': orderss?.paymentstatus === 'wait',
-                                        'bg-green': orderss?.paymentstatus === 'checked',
-                                        'bg-red': orderss?.paymentstatus === 'incorrect'
+                                        'bg-gainsboro': orderss?.paymentstatus === 'Pending',
+                                        'bg-green': orderss?.paymentstatus === 'Approved',
+                                        'bg-red': orderss?.paymentstatus === 'Rejected'
                                       }"
                                       role="progressbar" [style.width.%]="getWidthPercentage()" aria-valuemin="0" aria-valuemax="100">
                                     </div>
                                   </div>
                                   <div class="d-flex justify-content-around mb-1">
                                     <p class="text-muted mt-1 mb-0 small ms-xl-5" 
-                                    *ngIf="orderss?.paymentstatus === 'wait' 
-                                    || orderss?.paymentstatus === 'incorrect' 
-                                    || orderss?.paymentstatus === 'checked'">กำลังตรวจสอบ</p>
+                                    *ngIf="orderss?.paymentstatus === 'Pending' 
+                                    || orderss?.paymentstatus === 'Rejected' 
+                                    || orderss?.paymentstatus === 'Approved'">กำลังตรวจสอบ</p>
                                     <p class="text-muted mt-1 mb-0 small ms-xl-5" 
-                                    *ngIf="orderss?.paymentstatus === 'wait' || orderss?.paymentstatus === 'checked'">จัดส่งเรียบร้อย</p>
+                                    *ngIf="orderss?.paymentstatus === 'Pending' || orderss?.paymentstatus === 'Approved'">จัดส่งเรียบร้อย</p>
                                     <p class="text-muted mt-1 mb-0 small ms-xl-5" 
-                                    *ngIf="orderss?.paymentstatus === 'incorrect'">ไม่ผ่านการตรวจสอบ</p>
+                                    *ngIf="orderss?.paymentstatus === 'Rejected'">ไม่ผ่านการตรวจสอบ</p>
                                   </div>
                                 </div>
                               </div>
@@ -132,12 +132,12 @@
                           <div class="d-flex justify-content-between">
                             <p class="text-muted mb-0">
                               Status Order: 
-                              <ng-container *ngIf="orderss?.paymentstatus === 'wait'; else checkedOrIncorrect">
+                              <ng-container *ngIf="orderss?.paymentstatus === 'Pending'; else checkedOrIncorrect">
                                 รอการตรวจสอบ
                               </ng-container>
                               <ng-template #checkedOrIncorrect>
-                                <ng-container *ngIf="orderss?.paymentstatus === 'checked'">จัดส่งสินค้าแล้ว</ng-container>
-                                <ng-container *ngIf="orderss?.paymentstatus === 'incorrect'">ไม่ผ่านการตรวจสอบ</ng-container>
+                                <ng-container *ngIf="orderss?.paymentstatus === 'Approved'">จัดส่งสินค้าแล้ว</ng-container>
+                                <ng-container *ngIf="orderss?.paymentstatus === 'Rejected'">ไม่ผ่านการตรวจสอบ</ng-container>
                               </ng-template>
                             </p>
                           </div>

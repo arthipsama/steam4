@@ -1,4 +1,4 @@
-<div class="" style="width: 1100px; height: auto; display: flex; flex-wrap: wrap;">
+<div class="allfullpage">
     <div class="" style="color: #fff;" *ngFor="let items of product; let i = index" (click)="gotoDetaileProduct(i)">
         <div class="fullCard" *ngIf="items.saleprice == null">
             <img class="img" src="{{items.ImgProduct}}" alt="Product Image">
@@ -72,7 +72,7 @@
                 </ng-template>
               </div>
             <div class="boxPriceText col-12" style="display: flex;" *ngIf="items.quantity > 0">
-                <p class="col-4" style="padding-left: 15px; text-decoration: line-through; opacity: 0.5;">{{items.price}}</p>
+                <p class="col-4" style="padding-left: 15px; text-decoration: line-through; opacity: 0.5; font-size: 16px;">{{items.price}}</p>
                 <p class="col-8" style="font-size: 20px; display: flex; justify-content: flex-end; padding-right: 15px;">฿{{items.saleprice}}</p>
             </div>
 
