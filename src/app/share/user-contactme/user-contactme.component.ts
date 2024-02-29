@@ -49,8 +49,8 @@ export class UserContactmeComponent {
     var subject = this.contactmeForm.value.subject;
     var message = this.contactmeForm.value.message;
     if(this.contactmeForm.valid){
-      this.alertService.withOutTranslate.onSuccessRe();
       this.serviceContact.postContactme(email, name, subject, message, this.userData.userid).subscribe(x=>{
+        this.alertService.withOutTranslate.onSuccessRe();
       })
     }
   }
